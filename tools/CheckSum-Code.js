@@ -37,7 +37,7 @@ var N_files = Files_app.length+Files_com.length+Files_evt.length+Files_spt.lengt
  ** Create ProgresBar
  */
 const b1 = new cliProgress.SingleBar({
-    format: '[ '+color.yellow('WAIT')+'  ] Progress Check Files |'+'{bar}'+'| {percentage}% || {value}/{total} Files',
+    format: '[ '+color.yellow('WAIT')+'  ] Progress Check Files |'+color.green('{bar}')+'| {percentage}% || {value}/{total} Files',
     barCompleteChar: '\u2588',
     barIncompleteChar: '\u2591',
     hideCursor: true

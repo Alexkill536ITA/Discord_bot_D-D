@@ -14,13 +14,13 @@ const client = new Discord.Client();
 //------------------------------------------------------//
 /*                    Check Files                       */
 //------------------------------------------------------//
-// const CheckSum = require('./tools/CheckSum-Code');
-// var pass = CheckSum.CheckSum_file();
-// if (pass == 1) {
-//     process.exit(0);
-// } else {
-//     console.log("\n#---------------- Start Service ----------------#");
-// }
+const CheckSum = require('./tools/CheckSum-Code');
+var pass = CheckSum.CheckSum_file();
+if (pass == 1) {
+    process.exit(0);
+} else {
+    console.log("\n#---------------- Start Service ----------------#");
+}
 
 //------------------------------------------------------//
 /*                       Config                         */
