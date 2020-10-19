@@ -43,8 +43,6 @@ const b1 = new cliProgress.SingleBar({
     hideCursor: true
 });
 
-
-
 /**
  ** Calculate SHA512
  */
