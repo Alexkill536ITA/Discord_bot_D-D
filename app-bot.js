@@ -5,6 +5,7 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
+const color = require('ansi-colors');
 const Discord = require("discord.js");
 const dotenv = require('dotenv');
 const Event_time = require('./event/clock_timer_event');
@@ -41,8 +42,8 @@ const cmd_fs = require('fs');  //Declaration File Commands
 
 // Start Bot
 client.once('ready', () => {
-    console.info('[ INFO  ] Service Online');
-    console.info(`[ INFO  ] Logged in as [${client.user.tag}]`);
+    console.info('[ '+color.blue('INFO')+'  ] Service Online');
+    console.info('[ '+color.blue('INFO')+'  ] Logged in as ['+color.cyan(client.user.tag)+']');
     Event_time.timer(client);
 });
 

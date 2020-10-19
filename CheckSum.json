@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "7fcf20094025cd4c453d4f8abad593e14d45b875486d8a10823f16f1bda38763025a7e60f51f12fb60333888bf6ba5c1ec916622ca63db53e591c1907a46895a"
+        "SHA512": "cacd0366fd32a8dadf3bed51b950d8477175f432adc0780780821b7c7f6360de7831097d8d66a2de8b299387a6691d1aa61a33f26fecff9460b0941933a17e10"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -70,7 +70,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.13",
-        "Date Check": "16/10/2020 01:16"
+        "Version": "1.0.15",
+        "Date Check": "19/10/2020 18:25"
     }
 }

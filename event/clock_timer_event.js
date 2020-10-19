@@ -5,6 +5,7 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
+const color = require('ansi-colors');
 const meteo = require('../script/set_meteo.js');
 const globals_var = require('../script/globals_var.js');
 const config = require("../config.json");
@@ -49,7 +50,7 @@ function check_date(client) {
     var ss = Math.floor(msec / 1000);
     msec -= ss * 1000;
     var result ="";
-    result += "[ INFO  ] Prossimo evento tra: ";
+    result += "Prossimo evento tra: ";
     if(hh != 0) {
         result += hh;
         result += ":";
@@ -60,13 +61,13 @@ function check_date(client) {
     }
     result += ss;
     
-    if (result == '[ INFO  ] Prossimo evento tra: 0') {
+    if (result == 'Prossimo evento tra: 0') {
         let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
         out = meteo.set_meteo_out();
         out.setThumbnail(botavatar.displayAvatarURL());
         client.channels.cache.get(config.event_chat_meteo).send(out);
     } else {
-        console.log(result);
+        console.log('[ '+color.magenta('EVENT')+' ] '+result);
     }
     return diff;
 }
