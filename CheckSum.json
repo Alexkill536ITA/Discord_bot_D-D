@@ -1,11 +1,11 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "cacd0366fd32a8dadf3bed51b950d8477175f432adc0780780821b7c7f6360de7831097d8d66a2de8b299387a6691d1aa61a33f26fecff9460b0941933a17e10"
+        "SHA512": "bae8661920ac0d793865ceea4360deed0988603b19ccbe716849887231986f5b5ef460b462a6da614539c454e0d92509cd83e1b9e6da3789548b3e18c6ed4ea8"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "44c51c0d27303c2873f80adf9794a8f77df41340c173ffa3687cc226c30c2004b24ec72ad58c161100765ccd42b5fc6f713f3d3a10a62a220d19d989f76fb669"
+        "SHA512": "de7caa59f087efaff3c1cab8d77240c6ec2a912ffb1a6e1124ecc4e8fc4a8f87f188505e5fa3b721d53479e61e092173324adc7e6502d7e652156f3a635b97e3"
     },
     "mysql.js": {
         "name": "mysql.js",
@@ -13,7 +13,7 @@
     },
     "add_sub_item.js": {
         "name": "add_sub_item.js",
-        "SHA512": "c51c47ca9d249f9432aad088c08bdccd9d685a99198cf3633173d6919da55e02496dc9b8b49a2ce52b73f8a7427a4f713bc3ef1dbb8666496267c508b2cb18bc"
+        "SHA512": "7c48b232856795f312a01dc693be786c54722b92438ef8070a6a364e026ea0b01b4c3891ace61da2bb482878972dfc849c77e46e1fb63acdaaaf87653933f2f9"
     },
     "avatar.js": {
         "name": "avatar.js",
@@ -33,7 +33,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "726c76580da719e8637da7f82d31191f2d1bca578452299b148d557c78bb681335bfdbb4cbc865342cd6396772b90bcd3cb401ab0c7d3ccc1bbc88d15b5334c6"
+        "SHA512": "cb68272091565165b98afa7034027c8734012e684bc02cf55a72216b0ed5df3f4f638d2a9e8b141ddb61198198a5bd3d980aa947f89174335c11f0133a4029d4"
     },
     "id.js": {
         "name": "id.js",
@@ -57,7 +57,7 @@
     },
     "clock_timer_event.js": {
         "name": "clock_timer_event.js",
-        "SHA512": "2a8d5e1fdf51bb2ffe45273a3ce88cbf9012f495155e4fa6bda3e9c3bc903a72996737546be1dc01f5bd447f360d8d2ec3250f189a8dfba772eea7d5c860d1e0"
+        "SHA512": "2ed3fed1fd3963d51f388e82f48a8e4b66ca7312b456a9621e6c73b3a0dcc170c49db1a8e2c68476fecb93da487442d35a5a97dbcd285e29ceea99b0995c07ad"
     },
     "globals_var.js": {
         "name": "globals_var.js",
@@ -70,7 +70,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.15",
-        "Date Check": "19/10/2020 18:25"
+        "Version": "1.0.23",
+        "Date Check": "21/10/2020 13:29"
     }
 }

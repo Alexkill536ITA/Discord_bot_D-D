@@ -57,7 +57,7 @@ function Calculate_SHA512(fiele_byte) {
 /**
  ** Verify Hash Files 
  */
-exports.CheckSum_file= function() {
+exports.CheckSum_file= async function() {
     console.log("[ "+color.blue('INFO')+"  ] Start CheckSum files");
     b1.start(N_files, 0, {
         speed: "N/A"
@@ -72,6 +72,7 @@ exports.CheckSum_file= function() {
             File_error += ", "+file;
         }
         b1.increment(1);
+        await sleep(250);
     }
     for (let file of Files_com) {
         var Hash_File = Calculate_SHA512('./commands/'+file);
@@ -83,6 +84,7 @@ exports.CheckSum_file= function() {
             File_error += ", "+file;
         }
         b1.increment(1);
+        await sleep(250);
     }
     for (let file of Files_evt) {
         var Hash_File = Calculate_SHA512('./event/'+file);
@@ -94,6 +96,7 @@ exports.CheckSum_file= function() {
             File_error += ", "+file;
         }
         b1.increment(1);
+        await sleep(250);
     }
     for (let file of Files_spt) {
         var Hash_File = Calculate_SHA512('./script/'+file);
@@ -105,6 +108,7 @@ exports.CheckSum_file= function() {
             File_error += ", "+file;
         }
         b1.increment(1);
+        await sleep(250);
     }
     if (File_error_count == 0) {
         b1.stop();
@@ -122,4 +126,8 @@ exports.CheckSum_file= function() {
         console.log("[ "+color.blue('INFO')+"  ] Files need to be restored or updated. Please check Update");
         return 1;
     }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
