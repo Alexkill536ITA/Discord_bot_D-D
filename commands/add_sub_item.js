@@ -70,7 +70,8 @@ module.exports = {
             }
             
             // add sub items Scheda PG
-            if (args[0] == "add" || args[0] == "-a") {
+            if (!isNaN(parseInt(args[3]))) {
+                if (args[0] == "add" || args[0] == "-a") {
                 var nome_var = oggetto_mysql['Nome'];
                 var inventory = Scheda_PG['Inventory'];
                 var check_nam = inventory[nome_var];
@@ -84,26 +85,51 @@ module.exports = {
                     oggetto[nome_var] = oggetto_mysql
                     Object.assign(inventory, oggetto);
                 }
-                methodDB.inventory_update(args[1], inventory);  
-            } else if (args[0] == "sub" || args[0] == "-s") {
-                var nome_var = oggetto_mysql['Nome'];
-                var inventory = Scheda_PG['Inventory'];
-                var check_nam = inventory[nome_var];
-                if (check_nam !== undefined) {
-                    var num = inventory[nome_var]['Quantita'];
-                    num = num-parseInt(args[2]);
-                    if (num <= 0) {
-                        delete inventory[nome_var];
+                methodDB.inventory_update(args[1], inventory);
+                Container = new Discord.MessageEmbed();
+                Container.setColor([255, 0, 0])
+                    .setTitle('Schada: '+ message.author.username)
+                    .setThumbnail(message.author.displayAvatarURL(),true)
+                    .addField("Nome", oggetto_mysql['Nome'])
+                    .addField("Quantità", inventory[nome_var]['Quantita'])
+                    .addField("Sincronia", oggetto_mysql['Sincronia'])
+                    .setTimestamp()
+                    .setFooter("Data", message.author.displayAvatarURL());
+                message.channel.send(Container);
+                } else if (args[0] == "sub" || args[0] == "-s") {
+                    var nome_var = oggetto_mysql['Nome'];
+                    var inventory = Scheda_PG['Inventory'];
+                    var check_nam = inventory[nome_var];
+                    if (check_nam !== undefined) {
+                        var num = inventory[nome_var]['Quantita'];
+                        num = num-parseInt(args[2]);
+                        if (num <= 0) {
+                            delete inventory[nome_var];
+                            var num_memory = "Non possiede più l'oggetto";
+                        } else {
+                            inventory[nome_var]['Quantita'] = num;
+                            var num_memory = inventory[nome_var]['Quantita'];
+                        }
+                        methodDB.inventory_update(args[1], inventory);
+                        Container.setColor([255, 0, 0])
+                            .setTitle('Schada: '+ message.author.username)
+                            .setThumbnail(message.author.displayAvatarURL(),true)
+                            .addField("Nome", oggetto_mysql['Nome'])
+                            .addField("Quantità", num_memory)
+                            .addField("Sincronia", oggetto_mysql['Sincronia'])
+                            .setTimestamp()
+                            .setFooter("Data", message.author.displayAvatarURL());
+                        message.channel.send(Container);
                     } else {
-                        inventory[nome_var]['Quantita'] = num;
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Ogetto non rovato: `+message.author.username)
+                            .setTitle('Ogetto non è prensente nel\'inventario');
+                        message.channel.send(Container);
                     }
-                    methodDB.inventory_update(args[1], inventory);
                 } else {
-                    Container.setColor([255, 0, 0])
-                        .setAuthor(`Ogetto non rovato: `+message.author.username)
-                        .setTitle('Ogetto non è prensente nel\'inventario');
-                    message.channel.send(Container);
-                }
+                    emit_print(message);
+                    return 1;
+                }    
             } else {
                 emit_print(message);
                 return 1;
@@ -145,7 +171,7 @@ async function get_obj_By_Id_Mysql(id_serach, name_file) {
             ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
             
         }
-        fs.appendFile('./temp/'+name_file+'.txt', ogetto_selct_new, function(err) {
+        fs.appendFile('./temp/'+name_file+'.temp', ogetto_selct_new, function(err) {
             if (err) {
                 console.log(err);
             }
@@ -171,7 +197,7 @@ async function get_obj_By_Nome_Mysql(Name_search, name_file) {
             ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
             
         }
-        fs.appendFile('./temp/'+name_file+'.txt', ogetto_selct_new, function(err) {
+        fs.appendFile('./temp/'+name_file+'.temp', ogetto_selct_new, function(err) {
             if (err) {
                 console.log(err);
             }
@@ -191,18 +217,18 @@ async function get_Scheda_pg(id_serach) {
 
 async function get_itmes_temp(name_file) { 
     var oggetto;
-    var path = './temp/'+name_file+'.txt';
+    var path = './temp/'+name_file+'.temp';
     const data = fs.readFileSync(path, 'utf8');
     oggetto = JSON.parse(data);
     return oggetto;
 }
 
 async function delete_itmes_temp(name_file) {
-    var path = './temp/'+name_file+'.txt';
+    var path = './temp/'+name_file+'.temp';
     try {
         fs.unlinkSync(path);
     } catch(err) {
-        console.log("[ "+color.red('ERROR')+" ] Imposibile eliminare il File Temp: "+name_file+".txt\n"+err);
+        console.log("[ "+color.red('ERROR')+" ] Imposibile eliminare il File Temp: "+name_file+".temp\n"+err);
     }
 }
 
