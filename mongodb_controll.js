@@ -5,6 +5,7 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
+const color = require("ansi-colors");
 const mongo = require("mongodb");
 const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(process.env.DATABASE_MONGDB, { useUnifiedTopology: true });
@@ -28,7 +29,7 @@ var connect_up = false;
 async function set_db_collection() {
     database = client.db("Piccolo_Grande_Mondo");
     collection = database.collection("Schede_PG");
-    console.log("[ INFO  ] Connect MongoDB success");
+    console.log("[ "+color.blue('INFO')+"  ] Connect MongoDB success");
 }
 
 exports.open_db = async function() {
@@ -39,7 +40,7 @@ exports.open_db = async function() {
             await set_db_collection();
         }
     } catch (e) {
-        console.log("[ ERROR ] Connect MongoDB Faill \n");
+        console.log("[ "+color.red('ERROR')+" ] Connect MongoDB Faill \n");
         connect_up = false;
         return 1;
     }
@@ -53,13 +54,13 @@ exports.close_db = function() {
 // MongoDB Find/Search
 exports.serachbyid = async function(id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
-    let cursor = await collection.findOne({ '_id': id_scheda });
+    var cursor = await collection.find({ '_id': id_scheda }).toArray(); 
     return cursor;
 }
 
 exports.load_pg = async function(id_discord, id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
-    let cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
+    var cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
     return cursor;
 }
 

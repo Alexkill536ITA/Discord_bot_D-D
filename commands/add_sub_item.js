@@ -5,8 +5,11 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
+const fs = require('fs');
+const color = require('ansi-colors');
+const { v4: uuidv4 } = require('uuid');
 const { DiscordAPIError } = require("discord.js");
-const { MongoClient } = require("mongodb");
+const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const db = require('../mysql');
@@ -19,202 +22,93 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-            if (args[0] == "add" || args[0] == "-a") {
-                if (args[1].length == 24) {
-                    if (args[3]) {
-                        if (!isNaN(parseInt(args[2]))) {
-                            var ogetto_selct;
-                            var ogetto_selct_new = {};
-                            var nome_var; 
-                            db.query('SELECT * FROM `ogetti` WHERE `id`=? LIMIT 1', [args[3]], (error, results) => {
-                                if (!results || results.length == 0) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    ogetto_selct = results[0];
-                                    nome_var = ogetto_selct['nome'];
-                                    if (ogetto_selct['sincronia'] == 1) {
-                                        var sinc = 'Si';
-                                    } else {
-                                        var sinc = 'No';
-                                    }
-                                    ogetto_selct_new[nome_var] = { 'Nome': nome_var, 'Quantita': 0, 'Sincronia': sinc };
-                                }
-                            });
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {    
-                                var cursor = methodDB.serachbyid(args[1]);
-                                cursor.then(function(result) {
-                                    if (result != null) {
-                                        var scheda_pg = result;
-                                        var inventory = scheda_pg['Inventory'];
-                                        var check_nam = inventory[nome_var];
-                                        // console.log(result);
-                                        if (check_nam !== undefined) {
-                                            var num = parseInt(inventory[nome_var]['Quantita']);
-                                            num = num+parseInt(args[2]);
-                                            inventory[nome_var]['Quantita'] = num;
-                                            methodDB.inventory_update(args[1], inventory);
-                                        } else {
-                                            console.log(ogetto_selct_new);
-                                            ogetto_selct_new[nome_var]['Quantita'] = parseInt(args[2]);
-                                            Object.assign(inventory, ogetto_selct_new);
-                                            methodDB.inventory_update(args[1], inventory);
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
-                            var nome = args[3];
-                            for (let index = 4; index < args.length; index++) {
-                                nome += " "+args[index];
-                            }
-                            var ogetto_selct;
-                            var ogetto_selct_new = {};
-                            var nome_var; 
-                            db.query('SELECT * FROM `ogetti` WHERE `nome`=? LIMIT 1',[nome], (error, results) => {
-                                if (!results || results.length == 0) {
-                                    Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    ogetto_selct = results[0];
-                                    nome_var = ogetto_selct['nome'];
-                                    if (ogetto_selct['sincronia'] == 1) {
-                                        var sinc = 'Si'
-                                    } else {
-                                        var sinc = 'No'
-                                    }
-                                    ogetto_selct_new[nome_var] = {'Nome':nome_var, 'Quantita':0, 'Sincronia':sinc};
-                                }
-                            });
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {    
-                                var cursor = methodDB.serachbyid(args[1]);
-                                cursor.then(function(result) {
-                                    if (result != null) {
-                                        var scheda_pg = result;
-                                        var inventory = scheda_pg['Inventory'];
-                                        var check_nam = inventory[nome_var];
-                                        if (check_nam !== undefined) {
-                                            var num = parseInt(inventory[nome_var]['Quantita']);
-                                            num = num+parseInt(args[2]);
-                                            inventory[nome_var]['Quantita'] = num;
-                                            methodDB.inventory_update(args[1], inventory);
-                                        } else {
-                                            ogetto_selct_new[nome_var]['Quantita'] = parseInt(args[2]);
-                                            Object.assign(inventory, ogetto_selct_new);
-                                            methodDB.inventory_update(args[1], inventory);
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    } else {
-                        emit_print(message);
+            // get itemes 
+            if (args[3]) {
+                var file_name = uuidv4();
+                if (isNaN(parseInt(args[3]))) {
+                    var oggetto_mysql;
+                    var nome = args[3];
+                    for (let index = 4; index < args.length; index++) {
+                        nome += " "+args[index];
                     }
+                    await get_obj_By_Nome_Mysql(nome, file_name);
+                    await sleep(500);
+                    oggetto_mysql = await get_itmes_temp(file_name);
                 } else {
-                    emit_print(message);
+                    await get_obj_By_Id_Mysql(args[3], file_name);
+                    await sleep(500);
+                    oggetto_mysql = await get_itmes_temp(file_name);
                 }
-            } else if (args[0] == "sub" || args[0] == "-s") {
-                if (args[1].length == 24) {
-                    if (args[3]) {
-                        if (!isNaN(parseInt(args[2]))) {
-                            db.query('SELECT * FROM `ogetti` WHERE `id`=? LIMIT 1',[args[3]], async (error, results) => {
-                                if (!results || results.length == 0) {
-                                    Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    ogetto_selct = results[0];
-                                    nome_var = ogetto_selct['nome'];
-                                }
-                            });
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {    
-                                var cursor = new methodDB.serachbyid(args[1]);
-                                cursor.then(function(result) {
-                                    if (result != null) {
-                                        var scheda_pg = result;
-                                        var inventory = scheda_pg['Inventory'];
-                                        var check_nam = inventory[nome_var];
-                                        if (check_nam !== undefined) {
-                                            console.log(inventory[nome_var]['Quantita']);
-                                            var num = inventory[nome_var]['Quantita'];
-                                            num = num-parseInt(args[2]);
-                                            if (num <= 0) {
-                                                delete inventory[nome_var];
-                                            } else {
-                                                inventory[nome_var]['Quantita'] = num;
-                                            }
-                                            methodDB.inventory_update(args[1], inventory);
-                                        } else {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`[ ERROR ] Ogetto non rovato: `+message.author.username)
-                                                .setTitle('Ogetto non è prensente nel\'inventario');
-                                            message.channel.send(Container);
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
-                            var nome = args[3];
-                            for (let index = 4; index < args.length; index++) {
-                                nome += " "+args[index];
-                            }
-                            var ogetto_selct;
-                            var nome_var; 
-                            db.query('SELECT * FROM `ogetti` WHERE `nome`=? LIMIT 1',[nome], async (error, results) => {
-                                if (!results || results.length == 0) {
-                                    Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    ogetto_selct = results[0];
-                                    nome_var = ogetto_selct['nome'];
-                                }
-                            });
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {    
-                                var cursor = methodDB.serachbyid(args[1]);
-                                cursor.then(function(result) {
-                                    if (result != null) {
-                                        var scheda_pg = result;
-                                        var inventory = scheda_pg['Inventory'];
-                                        var check_nam = inventory[nome_var];
-                                        if (check_nam !== undefined) {
-                                            var num = parseInt(inventory[nome_var]['Quantita']);
-                                            num = num-parseInt(args[2]);
-                                            if (num <= 0) {
-                                                delete inventory[nome_var];
-                                            } else {
-                                                inventory[nome_var]['Quantita'] = num;
-                                            }
-                                            methodDB.inventory_update(args[1], inventory);
-                                        } else {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`[ ERROR ] Ogetto non rovato: `+message.author.username)
-                                                .setTitle('Ogetto non è prensente nel\'inventario');
-                                            message.channel.send(Container);
-                                        }
-                                    }
-                                });
-                            }
-                        }
-                    } else {
-                        emit_print(message);
-                    }
-                } else {
-                    emit_print(message);
+                if (oggetto_mysql == 1) {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                        .setTitle('Errore Oggetto non trovato');
+                    message.channel.send(Container);
+                    return 1;
+                }
+                await sleep(1000);
+                await delete_itmes_temp(file_name);
+            } else {
+                emit_print(message);
+                return 1;
+            }
+
+            // get Scheda PG
+            if (args[1].length == 24) {
+                var Scheda = await get_Scheda_pg(args[1]);
+                var Scheda_PG = Scheda[0];
+                if (Scheda_PG == 1) {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                        .setTitle('Errore Scheda PG non trovata');
+                    message.channel.send(Container);
+                    return 1;
                 }
             } else {
                 emit_print(message);
+                return 1;
             }
+            
+            // add sub items Scheda PG
+            if (args[0] == "add" || args[0] == "-a") {
+                var nome_var = oggetto_mysql['Nome'];
+                var inventory = Scheda_PG['Inventory'];
+                var check_nam = inventory[nome_var];
+                if (check_nam !== undefined) {
+                    var num = parseInt(inventory[nome_var]['Quantita']);
+                    num = num+parseInt(args[2]);
+                    inventory[nome_var]['Quantita'] = num;
+                } else {
+                    var oggetto = {};
+                    oggetto_mysql['Quantita'] = parseInt(args[2]);
+                    oggetto[nome_var] = oggetto_mysql
+                    Object.assign(inventory, oggetto);
+                }
+                methodDB.inventory_update(args[1], inventory);  
+            } else if (args[0] == "sub" || args[0] == "-s") {
+                var nome_var = oggetto_mysql['Nome'];
+                var inventory = Scheda_PG['Inventory'];
+                var check_nam = inventory[nome_var];
+                if (check_nam !== undefined) {
+                    var num = inventory[nome_var]['Quantita'];
+                    num = num-parseInt(args[2]);
+                    if (num <= 0) {
+                        delete inventory[nome_var];
+                    } else {
+                        inventory[nome_var]['Quantita'] = num;
+                    }
+                    methodDB.inventory_update(args[1], inventory);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Ogetto non rovato: `+message.author.username)
+                        .setTitle('Ogetto non è prensente nel\'inventario');
+                    message.channel.send(Container);
+                }
+            } else {
+                emit_print(message);
+                return 1;
+            }
+
         } else {
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
@@ -230,4 +124,88 @@ function emit_print(message) {
         .setAuthor(`Comando pgoggetto`)
         .setTitle('Sintassi:\n **&pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome oggetto]');
     message.channel.send(Container);
+}
+
+async function get_obj_By_Id_Mysql(id_serach, name_file) {
+    var ogetto_selct;
+    var ogetto_selct_new;
+    var nome_var;
+    db.query('SELECT * FROM `ogetti` WHERE `id`=? LIMIT 1', [id_serach], (err, results) => {
+        if (err) {
+            ogetto_selct_new = "1";
+            
+        } else {
+            ogetto_selct = results[0];
+            nome_var = ogetto_selct['nome'];
+            if (ogetto_selct['sincronia'] == 1) {
+                    var sinc = 'Si';
+            } else {
+                    var sinc = 'No';
+            }
+            ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
+            
+        }
+        fs.appendFile('./temp/'+name_file+'.txt', ogetto_selct_new, function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
+}
+
+async function get_obj_By_Nome_Mysql(Name_search, name_file) {
+    var ogetto_selct;
+    var ogetto_selct_new = {};
+    var nome_var;
+    db.query('SELECT * FROM `ogetti` WHERE `nome`=? LIMIT 1', [Name_search], (err, results) => {
+        if (err) {
+            ogetto_selct_new = 1;
+        } else {
+            ogetto_selct = results[0];
+            nome_var = ogetto_selct['nome'];
+            if (ogetto_selct['sincronia'] == 1) {
+                var sinc = 'Si';
+            } else {
+                var sinc = 'No';
+            }
+            ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
+            
+        }
+        fs.appendFile('./temp/'+name_file+'.txt', ogetto_selct_new, function(err) {
+            if (err) {
+                console.log(err);
+            }
+        });
+    });
+}
+
+async function get_Scheda_pg(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {    
+        var cursor = methodDB.serachbyid(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+async function get_itmes_temp(name_file) { 
+    var oggetto;
+    var path = './temp/'+name_file+'.txt';
+    const data = fs.readFileSync(path, 'utf8');
+    oggetto = JSON.parse(data);
+    return oggetto;
+}
+
+async function delete_itmes_temp(name_file) {
+    var path = './temp/'+name_file+'.txt';
+    try {
+        fs.unlinkSync(path);
+    } catch(err) {
+        console.log("[ "+color.red('ERROR')+" ] Imposibile eliminare il File Temp: "+name_file+".txt\n"+err);
+    }
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
