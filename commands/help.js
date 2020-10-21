@@ -81,7 +81,7 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .addField(":question: Help :question:",'• **help** [comando]')
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]')
-                .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]')
+                .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]')
                 .addField("🧰 Tools 🧰",'• **roll** Es:[1d20+5]\n ')
                 .setFooter("Bot by Alexkill ITA#3593", "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
