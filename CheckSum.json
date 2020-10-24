@@ -13,7 +13,7 @@
     },
     "add_sub_item.js": {
         "name": "add_sub_item.js",
-        "SHA512": "7c48b232856795f312a01dc693be786c54722b92438ef8070a6a364e026ea0b01b4c3891ace61da2bb482878972dfc849c77e46e1fb63acdaaaf87653933f2f9"
+        "SHA512": "668fe9ae11d6decb079273743b6fd4a2bacfb90c5c9968a5c598e786498177bc1ba8982ca5310ac6e25047ea4e42c78f3eb98f008d9a2456d90ff0d67e746801"
     },
     "avatar.js": {
         "name": "avatar.js",
@@ -25,7 +25,7 @@
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
-        "SHA512": "518e93b7b362832685645dff646e4ee29b4f6a96479ef09ea8c5f9af0ce1e0a954662313b714cda739474b1274271640fad7f1f60edeb40c39002f7f2142819e"
+        "SHA512": "acb589d42419ab56ea33d664c33d321596239ac420fb37e33210ed9a6bc5e67b4b901cfd3e94aae9878ae1c539c2755937c6c6bc9d704d1649cbc2378f5bb912"
     },
     "get_meteo.js": {
         "name": "get_meteo.js",
@@ -70,7 +70,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.25",
-        "Date Check": "21/10/2020 17:48"
+        "Version": "1.0.26",
+        "Date Check": "24/10/2020 13:48"
     }
 }

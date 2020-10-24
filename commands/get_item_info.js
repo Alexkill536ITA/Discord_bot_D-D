@@ -23,7 +23,7 @@ module.exports = {
                     for (let index = 1; index < args.length; index++) {
                         nome += " "+args[index];
                     }
-                    db.query('SELECT * FROM `ogetti` WHERE `nome`=? LIMIT 1',[nome], async (error, results) => {
+                    db.query('SELECT * FROM `oggetti` WHERE `nome`=? LIMIT 1',[nome], async (error, results) => {
                         if (!results || results.length == 0) {
                             Container.setColor([255, 0, 0])
                             .setAuthor(`Richiesta di: ${message.author.username}`)
@@ -34,7 +34,7 @@ module.exports = {
                         }
                     });
                 } else {
-                    db.query('SELECT * FROM `ogetti` WHERE `id`=? LIMIT 1',[args[0]], async (error, results) => {
+                    db.query('SELECT * FROM `oggetti` WHERE `id`=? LIMIT 1',[args[0]], async (error, results) => {
                         if (!results || results.length == 0) {
                             Container.setColor([255, 0, 0])
                             .setAuthor(`Richiesta di: ${message.author.username}`)
@@ -90,7 +90,9 @@ async function emiter_output(client,message,cursor) {
     } else if (text_obj.length > 1024 && text_obj.length <= 2000) {
         Container.addField('Effetto: ', ':arrow_down:');
         message.channel.send(Container);
+        await message.channel.send(':large_blue_diamond:------------------:regional_indicator_s::regional_indicator_t::regional_indicator_a::regional_indicator_r::regional_indicator_t:-------------------:large_blue_diamond:');
         message.channel.send(text_obj);
+        await message.channel.send(':large_blue_diamond:--------------------:regional_indicator_e::regional_indicator_n::regional_indicator_d:---------------------:large_blue_diamond:');
     } else if (text_obj.length > 2000) {
         Container.addField('Effetto: ', ':arrow_down:');
         await message.channel.send(Container);

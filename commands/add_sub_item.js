@@ -156,7 +156,7 @@ async function get_obj_By_Id_Mysql(id_serach, name_file) {
     var ogetto_selct;
     var ogetto_selct_new;
     var nome_var;
-    db.query('SELECT * FROM `ogetti` WHERE `id`=? LIMIT 1', [id_serach], (err, results) => {
+    db.query('SELECT * FROM `oggetti` WHERE `id`=? LIMIT 1', [id_serach], (err, results) => {
         if (err) {
             ogetto_selct_new = "1";
             
@@ -183,7 +183,7 @@ async function get_obj_By_Nome_Mysql(Name_search, name_file) {
     var ogetto_selct;
     var ogetto_selct_new = {};
     var nome_var;
-    db.query('SELECT * FROM `ogetti` WHERE `nome`=? LIMIT 1', [Name_search], (err, results) => {
+    db.query('SELECT * FROM `oggetti` WHERE `nome`=? LIMIT 1', [Name_search], (err, results) => {
         if (err) {
             ogetto_selct_new = 1;
         } else {
