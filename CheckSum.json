@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "bae8661920ac0d793865ceea4360deed0988603b19ccbe716849887231986f5b5ef460b462a6da614539c454e0d92509cd83e1b9e6da3789548b3e18c6ed4ea8"
+        "SHA512": "ceae9dea08b139abc81d4f50573571472f4b96c2b40627f804352e29b59af69895d6c4333ca2e5a82d4b6f4cdbf0980eb968cd3737e088eeb90628147862372f"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -10,6 +10,10 @@
     "mysql.js": {
         "name": "mysql.js",
         "SHA512": "d0f89108afb9edf66dfa3cc780a82f224bf94da2c70a0578ec8ed78f381234efa3b1c21fdf0f8f5fa32066a5bd5bb56824daf50a6a3b1b72bb680a15f017df62"
+    },
+    "add_sub_custom_item.js": {
+        "name": "add_sub_custom_item.js",
+        "SHA512": "e52a4d2dbc7be10f13b83e625839cd0938b94261f18d04e5c956e6dc08c5a95eedef169de24b6c901a898d2bdb349593e77ed99c39748c54638c07a4ca512171"
     },
     "add_sub_item.js": {
         "name": "add_sub_item.js",
@@ -33,7 +37,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "cb68272091565165b98afa7034027c8734012e684bc02cf55a72216b0ed5df3f4f638d2a9e8b141ddb61198198a5bd3d980aa947f89174335c11f0133a4029d4"
+        "SHA512": "e00a0b31b5e3649691015b98f48186feb16ecb7bda8ab54448c419134018dda5bcf733e62b48e3bfced48e23ffa1828f68c2533e4c74eb6f4635858cd1d1a9ff"
     },
     "id.js": {
         "name": "id.js",
@@ -70,7 +74,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.30",
-        "Date Check": "25/10/2020 13:07"
+        "Version": "1.0.37",
+        "Date Check": "26/10/2020 22:34"
     }
 }

@@ -75,13 +75,19 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi:\n **&pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome oggetto]\n\n **OPZIONI**\n add = Aggiungi\n sub = Togli \n\n Aggiungi o Togli oggetto dal inventario [Opzione]\n Inserire Id Scheda [ID_Scheda]\n Quantità in [Quantità]\n Inserire Id o Nome completo dell\'oggetto [Id/Nome oggetto]');
             message.channel.send(Container);
+        } else if (args[0] == "pgoggetto") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help pgoggetto')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi:\n **&pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]\n\n **OPZIONI**\n add = Aggiungi\n sub = Togli \n\n Aggiungi o Togli oggetto dal inventario [Opzione]\n Inserire Id Scheda [ID_Scheda]\n Quantità in [Quantità]\n Inseire Si/No [Sincronia]\n Inserire Nome completo dell\'oggetto [Nome oggetto]');
+            message.channel.send(Container);
         } else {
             Container.setColor([255, 0, 0])
                 .setTitle('Lista comandi')
                 .setThumbnail(botavatar.displayAvatarURL())
                 .addField(":question: Help :question:",'• **help** [comando]')
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]')
-                .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]')
+                .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **roll** Es:[1d20+5]\n ')
                 .setFooter("Bot by Alexkill ITA#3593", "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
