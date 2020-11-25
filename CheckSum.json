@@ -7,10 +7,6 @@
         "name": "mongodb_controll.js",
         "SHA512": "383cecdebdea4c016e4fd82d2a130fcdc41b78d278ab75ab2fcd0ddc1f12757786e49b1d1d6af93f27a6c152d97ede1acfbe523b06416702ec88b429f388f2c1"
     },
-    "mysql.js": {
-        "name": "mysql.js",
-        "SHA512": "d0f89108afb9edf66dfa3cc780a82f224bf94da2c70a0578ec8ed78f381234efa3b1c21fdf0f8f5fa32066a5bd5bb56824daf50a6a3b1b72bb680a15f017df62"
-    },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
         "SHA512": "b489037e989ef0c3d964e57670e8ad54ef73f1bfe559a9e566b7c3f001a1ef84278d9eaab80e36820fd67fc12083260dab4940fd83e514469a290970ed68f2e7"
