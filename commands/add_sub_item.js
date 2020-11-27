@@ -5,14 +5,10 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
-const fs = require('fs');
-const color = require('ansi-colors');
-const { v4: uuidv4 } = require('uuid');
 const { DiscordAPIError } = require("discord.js");
 const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
-const db = require('../mysql');
 const config = require("../config.json");
 
 module.exports = {
@@ -24,112 +20,101 @@ module.exports = {
         if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             // get itemes 
             if (args[3]) {
-                var file_name = uuidv4();
                 if (isNaN(parseInt(args[3]))) {
-                    var oggetto_mysql;
                     var nome = args[3];
                     for (let index = 4; index < args.length; index++) {
                         nome += " "+args[index];
                     }
-                    await get_obj_By_Nome_Mysql(nome, file_name);
-                    await sleep(500);
-                    oggetto_mysql = await get_itmes_temp(file_name);
-                } else {
-                    await get_obj_By_Id_Mysql(args[3], file_name);
-                    await sleep(500);
-                    oggetto_mysql = await get_itmes_temp(file_name);
-                }
-                if (oggetto_mysql == 1) {
-                    Container.setColor([255, 0, 0])
-                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                        .setTitle('Errore Oggetto non trovato');
-                    message.channel.send(Container);
-                    return 1;
-                }
-                await sleep(1000);
-                await delete_itmes_temp(file_name);
-            } else {
-                emit_print(message);
-                return 1;
-            }
-
-            // get Scheda PG
-            if (args[1].length == 24) {
-                var Scheda = await get_Scheda_pg(args[1]);
-                var Scheda_PG = Scheda[0];
-                if (Scheda_PG == 1) {
-                    Container.setColor([255, 0, 0])
-                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                        .setTitle('Errore Scheda PG non trovata');
-                    message.channel.send(Container);
-                    return 1;
-                }
-            } else {
-                emit_print(message);
-                return 1;
-            }
-            
-            // add sub items Scheda PG
-            if (!isNaN(parseInt(args[3]))) {
-                if (args[0] == "add" || args[0] == "-a") {
-                var nome_var = oggetto_mysql['Nome'];
-                var inventory = Scheda_PG['Inventory'];
-                var check_nam = inventory[nome_var];
-                if (check_nam !== undefined) {
-                    var num = parseInt(inventory[nome_var]['Quantita']);
-                    num = num+parseInt(args[2]);
-                    inventory[nome_var]['Quantita'] = num;
-                } else {
-                    var oggetto = {};
-                    oggetto_mysql['Quantita'] = parseInt(args[2]);
-                    oggetto[nome_var] = oggetto_mysql
-                    Object.assign(inventory, oggetto);
-                }
-                methodDB.inventory_update(args[1], inventory);
-                Container = new Discord.MessageEmbed();
-                Container.setColor([255, 0, 0])
-                    .setTitle('Schada: '+ message.author.username)
-                    .setThumbnail(message.author.displayAvatarURL(),true)
-                    .addField("Nome", oggetto_mysql['Nome'])
-                    .addField("Quantità", inventory[nome_var]['Quantita'])
-                    .addField("Sincronia", oggetto_mysql['Sincronia'])
-                    .setTimestamp()
-                    .setFooter("Data", message.author.displayAvatarURL());
-                message.channel.send(Container);
-                } else if (args[0] == "sub" || args[0] == "-s") {
-                    var nome_var = oggetto_mysql['Nome'];
-                    var inventory = Scheda_PG['Inventory'];
-                    var check_nam = inventory[nome_var];
-                    if (check_nam !== undefined) {
-                        var num = inventory[nome_var]['Quantita'];
-                        num = num-parseInt(args[2]);
-                        if (num <= 0) {
-                            delete inventory[nome_var];
-                            var num_memory = "Non possiede più l'oggetto";
-                        } else {
-                            inventory[nome_var]['Quantita'] = num;
-                            var num_memory = inventory[nome_var]['Quantita'];
-                        }
-                        methodDB.inventory_update(args[1], inventory);
-                        Container.setColor([255, 0, 0])
-                            .setTitle('Schada: '+ message.author.username)
-                            .setThumbnail(message.author.displayAvatarURL(),true)
-                            .addField("Nome", oggetto_mysql['Nome'])
-                            .addField("Quantità", num_memory)
-                            .addField("Sincronia", oggetto_mysql['Sincronia'])
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL());
-                        message.channel.send(Container);
-                    } else {
-                        Container.setColor([255, 0, 0])
-                            .setAuthor(`Ogetto non rovato: `+message.author.username)
-                            .setTitle('Ogetto non è prensente nel\'inventario');
-                        message.channel.send(Container);
+                    var on_sevice_db = await methodDB.open_db();
+                    if (on_sevice_db != 1) {    
+                        methodDB.settab_db("Oggeti_Di_Gioco");
+                        var cursor = methodDB.serachbynome_obj(nome);
+                        cursor.then(async function (result) {
+                            if(result) {
+                                if (result == null) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetto non trovato');
+                                    message.channel.send(Container);
+                                    return 1;
+                                } else {
+                                    if (args[1].length == 24) {
+                                        var Scheda = await get_Scheda_pg(args[1]);
+                                        if (Scheda != null) {
+                                            var complete = add_sub(message, args, Scheda[0], result);
+                                            if (complete == 1) {
+                                                emit_print(message);
+                                                return 1;
+                                            } else if (complete == 2) {
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Ogetto non rovato: `+message.author.username)
+                                                    .setTitle('Ogetto non è prensente nel\'inventario');
+                                                message.channel.send(Container);
+                                                return 1;
+                                            } else {
+                                                return 0;
+                                            }
+                                        } else {
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                .setTitle('Errore Scheda PG non trovata');
+                                            message.channel.send(Container);
+                                            return 1;
+                                        }     
+                                    } else {
+                                        emit_print(message);
+                                        return 1;
+                                    }
+                                }
+                            }
+                        });
                     }
                 } else {
-                    emit_print(message);
-                    return 1;
-                }    
+                    var on_sevice_db = await methodDB.open_db();
+                    if (on_sevice_db != 1) {    
+                        methodDB.settab_db("Oggeti_Di_Gioco");
+                        var cursor = methodDB.serachbyid_obj(args[3]);
+                        cursor.then(async function (result) {
+                            if(result) {
+                                if (result == null) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetto non trovato');
+                                    message.channel.send(Container);
+                                    return 1;
+                                } else {
+                                    if (args[1].length == 24) {
+                                        var Scheda = await get_Scheda_pg(args[1]);
+                                        if (Scheda != null) {
+                                            var complete = add_sub(message, args, Scheda[0], result);
+                                            if (complete == 1) {
+                                                emit_print(message);
+                                                return 1;
+                                            } else if (complete == 2) {
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Ogetto non rovato: `+message.author.username)
+                                                    .setTitle('Ogetto non è prensente nel\'inventario');
+                                                message.channel.send(Container);
+                                                return 1;
+                                            } else {
+                                                return 0;
+                                            }
+                                        } else {
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                .setTitle('Errore Scheda PG non trovata');
+                                            message.channel.send(Container);
+                                            return 1;
+                                        }
+                                    } else {
+                                        emit_print(message);
+                                        return 1;
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
             } else {
                 emit_print(message);
                 return 1;
@@ -144,6 +129,82 @@ module.exports = {
     }
 }
 
+function add_sub(message, args, Scheda_PG, result) {
+    // add sub items Scheda PG
+    if (args[0] == "add" || args[0] == "-a") {
+        var qut = 0;
+        var nome_var = result.nome;
+        var inventory = Scheda_PG['Inventory'];
+        var check_nam = inventory[nome_var];
+        if (check_nam !== undefined) {
+            var num = parseInt(inventory[nome_var]['Quantita']);
+            num = num+parseInt(args[2]);
+            inventory[nome_var]['Quantita'] = num;
+            qut = num;
+        } else {
+            var oggetto = {};
+            var ogg_temp = {};
+            ogg_temp['Nome'] = nome_var;
+            ogg_temp['Quantita'] = parseInt(args[2]);
+            ogg_temp['Sincronia'] = result.sincronia;
+            oggetto[nome_var] = ogg_temp; 
+            qut = parseInt(args[2]);
+            Object.assign(inventory, oggetto);
+        }
+        methodDB.inventory_update(args[1], inventory);
+        Container = new Discord.MessageEmbed();
+        Container.setColor([255, 0, 0])
+            .setTitle('Schada: '+ message.author.username)
+            .setThumbnail(message.author.displayAvatarURL(),true)
+            .addField("Nome", result.nome)
+            .addField("Quantità", qut)
+            .addField("Sincronia", result.sincronia)
+            .setTimestamp()
+            .setFooter("Data", message.author.displayAvatarURL());
+        message.channel.send(Container);
+    } else if (args[0] == "sub" || args[0] == "-s") {
+        var qut = 0;
+        var nome_var = result.nome;
+        var inventory = Scheda_PG['Inventory'];
+        var check_nam = inventory[nome_var];
+        if (check_nam !== undefined) {
+            var num = parseInt(inventory[nome_var]['Quantita']);
+            num = num-parseInt(args[2]);
+            if (num <= 0 || isNaN(num) == true) {
+                var num_memory = "Non possiede più l'oggetto";
+                Container = new Discord.MessageEmbed();
+                Container.setColor([255, 0, 0])
+                    .setTitle('Schada: '+ message.author.username)
+                    .setThumbnail(message.author.displayAvatarURL(),true)
+                    .addField("Nome", nome_var)
+                    .addField("Quantità", num_memory)
+                    .addField("Sincronia", inventory[nome_var]['Sincronia'])
+                    .setTimestamp()
+                    .setFooter("Data", message.author.displayAvatarURL());
+                delete inventory[nome_var];
+            } else {
+                inventory[nome_var]['Quantita'] = num;
+                var num_memory = inventory[nome_var]['Quantita'];
+                Container = new Discord.MessageEmbed();
+                Container.setColor([255, 0, 0])
+                    .setTitle('Schada: '+ message.author.username)
+                    .setThumbnail(message.author.displayAvatarURL(),true)
+                    .addField("Nome", nome_var)
+                    .addField("Quantità", num_memory)
+                    .addField("Sincronia", inventory[nome_var]['Sincronia'])
+                    .setTimestamp()
+                    .setFooter("Data", message.author.displayAvatarURL());
+            }
+            methodDB.inventory_update(args[1], inventory);
+            message.channel.send(Container);
+        } else {
+            return 2;
+        }
+    } else {
+        return 1;
+    }
+}
+
 function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
@@ -152,86 +213,13 @@ function emit_print(message) {
     message.channel.send(Container);
 }
 
-async function get_obj_By_Id_Mysql(id_serach, name_file) {
-    var ogetto_selct;
-    var ogetto_selct_new;
-    var nome_var;
-    db.query('SELECT * FROM `oggetti` WHERE `id`=? LIMIT 1', [id_serach], (err, results) => {
-        if (err) {
-            ogetto_selct_new = "1";
-            
-        } else {
-            ogetto_selct = results[0];
-            nome_var = ogetto_selct['nome'];
-            if (ogetto_selct['sincronia'] == 1) {
-                    var sinc = 'Si';
-            } else {
-                    var sinc = 'No';
-            }
-            ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
-            
-        }
-        fs.appendFile('./temp/'+name_file+'.temp', ogetto_selct_new, function(err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    });
-}
-
-async function get_obj_By_Nome_Mysql(Name_search, name_file) {
-    var ogetto_selct;
-    var ogetto_selct_new = {};
-    var nome_var;
-    db.query('SELECT * FROM `oggetti` WHERE `nome`=? LIMIT 1', [Name_search], (err, results) => {
-        if (err) {
-            ogetto_selct_new = 1;
-        } else {
-            ogetto_selct = results[0];
-            nome_var = ogetto_selct['nome'];
-            if (ogetto_selct['sincronia'] == 1) {
-                var sinc = 'Si';
-            } else {
-                var sinc = 'No';
-            }
-            ogetto_selct_new = '{ "Nome": "'+nome_var+'", "Quantita": 0, "Sincronia": "'+sinc+'" }';
-            
-        }
-        fs.appendFile('./temp/'+name_file+'.temp', ogetto_selct_new, function(err) {
-            if (err) {
-                console.log(err);
-            }
-        });
-    });
-}
-
 async function get_Scheda_pg(id_serach) {
     var on_sevice_db = await methodDB.open_db();
-    if (on_sevice_db != 1) {    
+    if (on_sevice_db != 1) {   
+        methodDB.settab_db("Schede_PG"); 
         var cursor = methodDB.serachbyid(id_serach);
     } else {
         return 1;
     }
     return cursor;
-}
-
-async function get_itmes_temp(name_file) { 
-    var oggetto;
-    var path = './temp/'+name_file+'.temp';
-    const data = fs.readFileSync(path, 'utf8');
-    oggetto = JSON.parse(data);
-    return oggetto;
-}
-
-async function delete_itmes_temp(name_file) {
-    var path = './temp/'+name_file+'.temp';
-    try {
-        fs.unlinkSync(path);
-    } catch(err) {
-        console.log("[ "+color.red('ERROR')+" ] Imposibile eliminare il File Temp: "+name_file+".temp\n"+err);
-    }
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }

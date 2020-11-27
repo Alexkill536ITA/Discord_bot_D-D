@@ -31,6 +31,11 @@ async function main() {
         console.log("[ "+color.blue('INFO')+"  ] Start Service...");
         Discord_start();
     }
+
+    /**
+     ** DEV MODE TEST 
+    */
+    // Discord_start();
 }
 
 //------------------------------------------------------//
@@ -71,6 +76,8 @@ function Discord_start() {
             client.commands.get('roll').execute(client, message,args);
         } else if (command == 'pg') {
             client.commands.get('pg').execute(message,args);
+        } else if (command == 'pglist') {
+            client.commands.get('pglist').execute(message,args);
         } else if (command == 'pginventario') {
             client.commands.get('pginventario').execute(message,args);
         } else if (command == 'money') {

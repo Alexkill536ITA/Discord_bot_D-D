@@ -5,7 +5,6 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
-const color = require('ansi-colors');
 const { DiscordAPIError } = require("discord.js");
 const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
@@ -61,12 +60,13 @@ module.exports = {
                         } else {
                             var oggetto = {};
                             var ogg_temp = {};
-                            ogg_temp[nome] = nome;
+                            ogg_temp['Nome'] = nome;
                             ogg_temp['Quantita'] = parseInt(args[2]);
                             ogg_temp['Sincronia'] = sinc;
                             oggetto[nome] = ogg_temp;
                             Object.assign(inventory, oggetto);
                         }
+                        methodDB.settab_db("Schede_PG");
                         methodDB.inventory_update(args[1], inventory);
                         Container = new Discord.MessageEmbed();
                         Container.setColor([255, 0, 0])
@@ -83,23 +83,31 @@ module.exports = {
                         var check_nam = inventory[nome];
                         if (check_nam !== undefined) {
                             num = num-parseInt(args[2]);
-                        if (num <= 0) {
-                            delete inventory[nome];
-                            var num_memory = "Non possiede più l'oggetto";
-                        } else {
-                            inventory[nome]['Quantita'] = num;
-                            var num_memory = inventory[nome]['Quantita'];
-                        }
-                        methodDB.inventory_update(args[1], inventory);
-                        Container.setColor([255, 0, 0])
-                            .setTitle('Schada: '+ message.author.username)
-                            .setThumbnail(message.author.displayAvatarURL(),true)
-                            .addField("Nome", nome)
-                            .addField("Quantità", num_memory)
-                            .addField("Sincronia", inventory[nome]['Sincronia'])
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL());
-                        message.channel.send(Container);
+                            if (num <= 0 || isNaN(num) == true) {
+                                var num_memory = "Non possiede più l'oggetto";
+                                Container.setColor([255, 0, 0])
+                                    .setTitle('Schada: '+ message.author.username)
+                                    .setThumbnail(message.author.displayAvatarURL(),true)
+                                    .addField("Nome", nome)
+                                    .addField("Quantità", num_memory)
+                                    .addField("Sincronia", inventory[nome]['Sincronia'])
+                                    .setTimestamp()
+                                    .setFooter("Data", message.author.displayAvatarURL());
+                                delete inventory[nome];
+                            } else {
+                                inventory[nome]['Quantita'] = num;
+                                var num_memory = inventory[nome]['Quantita'];
+                                Container.setColor([255, 0, 0])
+                                    .setTitle('Schada: '+ message.author.username)
+                                    .setThumbnail(message.author.displayAvatarURL(),true)
+                                    .addField("Nome", nome)
+                                    .addField("Quantità", num_memory)
+                                    .addField("Sincronia", inventory[nome]['Sincronia'])
+                                    .setTimestamp()
+                                    .setFooter("Data", message.author.displayAvatarURL());
+                                methodDB.inventory_update(args[1], inventory);
+                            }
+                            message.channel.send(Container);
                         } else {
                             Container = new Discord.MessageEmbed();
                             Container.setColor([255, 0, 0])
@@ -138,7 +146,8 @@ function emit_print(message) {
 
 async function get_Scheda_pg(id_serach) {
     var on_sevice_db = await methodDB.open_db();
-    if (on_sevice_db != 1) {    
+    if (on_sevice_db != 1) {   
+        methodDB.settab_db("Schede_PG"); 
         var cursor = methodDB.serachbyid(id_serach);
     } else {
         return 1;

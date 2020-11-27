@@ -28,7 +28,7 @@ var connect_up = false;
 // Gestione Connessione
 async function set_db_collection() {
     database = client.db("Piccolo_Grande_Mondo");
-    collection = database.collection("Schede_PG");
+    // collection = database.collection("Schede_PG");
     console.log("[ "+color.blue('INFO')+"  ] Connect MongoDB success");
 }
 
@@ -44,6 +44,10 @@ exports.open_db = async function() {
         connect_up = false;
         return 1;
     }
+}
+
+exports.settab_db = function(slect) {
+    collection = database.collection(slect);
 }
 
 exports.close_db = function() {
@@ -62,6 +66,18 @@ exports.load_pg = async function(id_discord, id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
     var cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
     return cursor;
+}
+
+exports.serachbyid_obj = function(query) {
+    return collection.findOne({ 'Id': query });
+}
+
+exports.serachbynome_obj = function(query) {
+    return collection.findOne({ 'nome': query });
+}
+
+exports.serachbylistpg = function(query) {
+    return collection.find({ 'Nome_Discord': query }).toArray();
 }
 
 // MongoDB Insert
