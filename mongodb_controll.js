@@ -27,7 +27,7 @@ var connect_up = false;
 
 // Gestione Connessione
 async function set_db_collection() {
-    database = client.db("Piccolo_Grande_Mondo");
+    database = client.db(process.env.DATABASE_MONGDB_DB);
     // collection = database.collection("Schede_PG");
     console.log("[ "+color.blue('INFO')+"  ] Connect MongoDB success");
 }
