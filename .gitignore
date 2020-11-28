@@ -1,4 +1,5 @@
 Create_SHA.py
+node_modules/
 test/
 release/
 .env
