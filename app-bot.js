@@ -23,14 +23,16 @@ const config = require("./config.json");
 //------------------------------------------------------//
 async function main() {
     console.log("[ "+color.blue('INFO')+"  ] Start Process");
-    var pass = await CheckSum.CheckSum_file();
-    if (pass == 1) {
-        console.log("[ "+color.blue('INFO')+"  ] Stop Process");
-        process.exit(0);
-    } else {
-        console.log("[ "+color.blue('INFO')+"  ] Start Service...");
-        Discord_start();
-    }
+    // var pass = await CheckSum.CheckSum_file();
+    // if (pass == 1) {
+    //     console.log("[ "+color.blue('INFO')+"  ] Stop Process");
+    //     process.exit(0);
+    // } else {
+    //     console.log("[ "+color.blue('INFO')+"  ] Start Service...");
+    //     Discord_start();
+    // }
+    console.log("[ "+color.blue('INFO')+"  ] Start Service...");
+    Discord_start();
 }
 
 //------------------------------------------------------//

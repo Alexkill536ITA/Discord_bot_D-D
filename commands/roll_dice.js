@@ -21,17 +21,18 @@ module.exports = {
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             if (args[0]) {
                 var result = diceRoller.roll(args[0]);
-                if (result['result'] != 'undefined') {
+                if (result['result'] !== undefined) {
                     Container.setColor([255, 0, 0])
                         .setTitle('Roll dice')
                         .setThumbnail(botavatar.displayAvatarURL())
                         .addField("Risultato", args[0]+" = ```"+result['result']+"```");
-                message.reply(" ");
-                message.channel.send(Container);
+                    message.reply(" ");
+                    message.channel.send(Container);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando Roll`)
-                        .setTitle('Sintassi **&roll** Es:[1d20+5]');        
+                        .setTitle('Sintassi **&roll** Es:[1d20+5]');
+                    message.reply(" ");   
                     message.channel.send(Container);
                 }
             } else {
