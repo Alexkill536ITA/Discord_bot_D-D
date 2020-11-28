@@ -1,11 +1,11 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "b9181e288d996649b3472b2c8f8f4a9f253fb7cee1b2a2115c996e93673a46e547823bf1de13464e98e11d2d03e50ac0f69274ddb78c021827e586bd8323f699"
+        "SHA512": "61eb60e01c9c0eb701f814a8d006f50506198a7ec1c8cd93cfeb567334c2a46c39d73e2e0a99ea50f6808e11d8e39467545a93770c8db576d3bfd96b7087de28"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "383cecdebdea4c016e4fd82d2a130fcdc41b78d278ab75ab2fcd0ddc1f12757786e49b1d1d6af93f27a6c152d97ede1acfbe523b06416702ec88b429f388f2c1"
+        "SHA512": "d34c9114c4842ab72d06e37d725d11c908bb800ec81b84791d095edeb6cbfe0fd897b0a4492fbbe6a2c6d9986df76a578760716336af5b064a83f5a18a93a34d"
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
@@ -57,7 +57,7 @@
     },
     "show_pg.js": {
         "name": "show_pg.js",
-        "SHA512": "4de6135aa48dba2681ba2487be2daafc1a4673645067537d88280aee2f530a838212411f87e6325c862e1eccb0ff57e538950e6d3ed872dc3821909b55207e60"
+        "SHA512": "ae6be1236ff12740216eef76a0e3505f8b38b388567dae7772bc7618ea7a963a7e3b5e02e577cae1f08abe0fbc144d16f7dc886a5faa1ca2a99c5052c3eb4b78"
     },
     "clock_timer_event.js": {
         "name": "clock_timer_event.js",
@@ -74,7 +74,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.40",
-        "Date Check": "25/11/2020 22:39"
+        "Version": "1.0.41",
+        "Date Check": "28/11/2020 12:22"
     }
 }
