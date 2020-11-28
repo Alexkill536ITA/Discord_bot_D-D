@@ -41,6 +41,9 @@ exports.open_db = async function() {
         }
     } catch (e) {
         console.log("[ "+color.red('ERROR')+" ] Connect MongoDB Faill \n");
+        if (process.env.DEBUG_MODE == true) {
+            console.log("[ "+color.magenta('DEBUG')+" ] "+e);
+        }
         connect_up = false;
         return 1;
     }
