@@ -53,13 +53,16 @@ function check_date(client) {
     result += "Prossimo evento tra: ";
     if(hh != 0) {
         result += hh;
-        result += ":";
+        result += "h ";
     }    
     if(mm != 0) {
         result +=  mm;
-        result +=  ":";
+        result +=  "m ";
     }
-    result += ss;
+    if(ss != 0) {
+        result += ss;
+        result +=  "s";
+    }
     
     if (result == 'Prossimo evento tra: 0') {
         let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
