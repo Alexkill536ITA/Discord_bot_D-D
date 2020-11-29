@@ -91,13 +91,11 @@ exports.serachbylistpg = function(query) {
 
 // MongoDB Update
 exports.money_update =function(id_scheda, value_new) {
-    id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, {$set: {Money:value_new}});
     return 0;
 }
 
 exports.exp_update =function (id_scheda, value_new) {
-    id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, {$set: {Exp:value_new}});
     return 0;
 }

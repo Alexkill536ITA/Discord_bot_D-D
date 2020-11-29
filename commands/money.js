@@ -30,11 +30,9 @@ module.exports = {
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function(result) {
                                     if (result != null) {
-                                        var js_result = JSON.stringify(result);
-                                        js_result = JSON.parse(js_result);
-                                        var old_value = parseFloat(js_result['Money']);
+                                        var old_value = result[0].Money;
                                         var new_value = old_value + parseFloat(args[1]);
-                                        methodDB.money_update(js_result['_id'], new_value);
+                                        methodDB.money_update(result[0]._id, new_value);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor([255, 0, 0])
                                             .setTitle('Schada: '+ message.author.username)
@@ -65,11 +63,12 @@ module.exports = {
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function(result) {
                                     if (result != null) {
-                                        var js_result = JSON.stringify(result);
-                                        js_result = JSON.parse(js_result);
-                                        var old_value = parseFloat(js_result['Money']);
+                                        var old_value = result[0].Money;
                                         var new_value = old_value - parseFloat(args[1]);
-                                        methodDB.money_update(js_result['_id'], new_value);
+                                        if (new_value < 0) {
+                                            new_value = 0;
+                                        }
+                                        methodDB.money_update(result[0]._id, new_value);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor([255, 0, 0])
                                             .setTitle('Schada: '+ message.author.username)
