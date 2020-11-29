@@ -26,6 +26,7 @@ module.exports = {
                         } else {
                             var on_sevice_db = await methodDB.open_db();
                             if (on_sevice_db != 1) {
+                                methodDB.settab_db("Schede_PG");
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function(result) {
                                     if (result != null) {
@@ -64,6 +65,7 @@ module.exports = {
                         } else {
                             var on_sevice_db = await methodDB.open_db();
                             if (on_sevice_db != 1) {
+                                methodDB.settab_db("Schede_PG");
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function(result) {
                                     if (result != null) {
