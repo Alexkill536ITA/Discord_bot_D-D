@@ -64,7 +64,7 @@ module.exports = {
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function(result) {
                                     if (result != null) {
-                                        var old_value = result.Exp;
+                                        var old_value = result[0].Exp;
                                         var new_value = old_value - parseInt(args[1]);
                                         if (new_value < 0) {
                                             new_value = 0;
