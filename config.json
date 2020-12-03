@@ -2,7 +2,7 @@
     "prefix": "&",
     "owner": "188587744140853251",
     "role_base": [
-        ":crown:Admin",
+        "👑Admin",
         "Moderatori",
         "Helper",
         "Dungeon Master",
@@ -10,13 +10,13 @@
         "Gildano"
     ],
     "role_avance": [
-        ":crown:Admin",
+        "👑Admin",
         "Moderatori",
         "Dungeon Master"
     ],
     "role_admin": [
-        ":crown:Admin"
+        "👑Admin"
     ],
     "set_event_meteo": "10:00",
-    "event_chat_meteo": "223487445369356289"
+    "event_chat_meteo": "784136487544553543"
 }

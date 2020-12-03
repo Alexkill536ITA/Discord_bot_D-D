@@ -6,6 +6,7 @@
 \**----------------------------------------------------**/
 
 const goglas_var = require('./globals_var.js');
+const color = require("ansi-colors");
 
 /*
  * |------------------------------------|
@@ -41,7 +42,7 @@ exports.set_meteo_out = function() {
 	const f_Inverno = new Date(year,02,19);
 	var rand_number = getRandomInt(1,100);
 	var data_set = [];
-
+	
 	if (today.getTime() >= i_Primavera.getTime() && today.getTime() <= f_Primavera.getTime()) {
 		if (rand_number >= 1 && rand_number <= 29){
 			// console.log("Primavera "+1);
@@ -115,7 +116,7 @@ exports.set_meteo_out = function() {
 			goglas_var.setMeteo(data_set);
 		}
 	} else {
-		console.error('[ ERROR ] Impossibile calcolare il meteo');
+		console.error('[ '+color.red('ERROR')+' ] Impossibile calcolare il meteo');
 	}
 	return goglas_var.getMeteo();
 }

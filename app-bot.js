@@ -66,7 +66,7 @@ function Discord_start() {
         const command = args.shift().toLowerCase();
 
         if (command == 'id') {
-            client.commands.get('id').execute(message, args);
+            client.commands.get('id').execute(client, message, args);
         } else if (command == 'avatar') {
             client.commands.get('avatar').execute(message, args);
         } else if (command == 'roll') {
