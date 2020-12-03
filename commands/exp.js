@@ -95,7 +95,7 @@ module.exports = {
         } else {
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autoriazato a usare questo comando');   
+                .setTitle('Non sei autorizzato a usare questo comando');   
             message.channel.send(Container);
         }
     }

@@ -16,7 +16,8 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
+            if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
                 var users_selt = getUserFromMention(client, args[0]);
                 Container.setColor([255, 0, 0]).setTitle('ID Utente Discord').setDescription(users_selt.username+": "+users_selt.id);
                 message.author.send(Container);
@@ -40,7 +41,6 @@ module.exports = {
                 .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
                 message.channel.send(Container);
             }
-            
         } else {
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")

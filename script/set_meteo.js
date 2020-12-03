@@ -39,10 +39,10 @@ exports.set_meteo_out = function() {
 	const i_Autunno = new Date(year,08,22);
 	const f_Autunno = new Date(year,10,20);
 	const i_Inverno = new Date(year,10,21);
-	const f_Inverno = new Date(year,02,19);
+	const f_Inverno = new Date(year+1,02,19);
 	var rand_number = getRandomInt(1,100);
 	var data_set = [];
-	
+
 	if (today.getTime() >= i_Primavera.getTime() && today.getTime() <= f_Primavera.getTime()) {
 		if (rand_number >= 1 && rand_number <= 29){
 			// console.log("Primavera "+1);
