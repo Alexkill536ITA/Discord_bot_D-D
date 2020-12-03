@@ -34,7 +34,7 @@ module.exports = {
             if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
                 var out = globals_var.getMeteo();
                 var check_out = out['title'];
-                if (check_out !== undefined) {
+		if (check_out == null) {
                     meteo.set_meteo_out();
                     var out = globals_var.getMeteo();
                     out.setThumbnail(botavatar.displayAvatarURL());
