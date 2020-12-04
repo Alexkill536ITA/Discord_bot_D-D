@@ -64,11 +64,12 @@ function check_date(client) {
         result +=  "s";
     }
     
-    if (result == 'Prossimo evento tra: 0') {
+    if (result == 'Prossimo evento tra: ') {
         let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
         out = meteo.set_meteo_out();
         out.setThumbnail(botavatar.displayAvatarURL());
         client.channels.cache.get(config.event_chat_meteo).send(out);
+        console.log('[ '+color.magenta('EVENT')+' ] Compleate Send EVENT');
     } else {
         console.log('[ '+color.magenta('EVENT')+' ] '+result);
     }
