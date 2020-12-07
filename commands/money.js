@@ -105,6 +105,6 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Money`)
-        .setTitle('Sinstassi **&money** [Opzione][Valore][ID_Scheda]');
+        .setTitle('Sinstassi **'+config.prefix+'money** [Opzione][Valore][ID_Scheda]');
     message.channel.send(Container);
 }

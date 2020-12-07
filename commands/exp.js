@@ -107,7 +107,7 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Milestone`)
-        .setTitle('Sintassi **&milestone** [Opzione][Valore][ID_Scheda]');        
+        .setTitle('Sintassi **'+config.prefix+'milestone** [Opzione][Valore][ID_Scheda]');        
     message.channel.send(Container);
 }
 

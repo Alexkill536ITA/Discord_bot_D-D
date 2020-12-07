@@ -63,7 +63,7 @@ module.exports = {
             } else {
                 Container.setColor([255, 0, 0])
                 .setAuthor(`Comando Oggetto`)
-                .setTitle('Sintassi **&oggetto** [Id/Nome]');
+                .setTitle('Sintassi **'+config.prefix+'oggetto** [Id/Nome]');
                 message.channel.send(Container);
             }
         } else {

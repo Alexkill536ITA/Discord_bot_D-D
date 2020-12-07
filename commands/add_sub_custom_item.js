@@ -142,7 +142,7 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
-        .setTitle('Sintassi:\n **&pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]');
+        .setTitle('Sintassi:\n **'+config.prefix+'pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]');
     message.channel.send(Container);
 }
 

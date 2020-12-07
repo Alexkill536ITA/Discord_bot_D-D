@@ -59,13 +59,13 @@ module.exports = {
                 } else {
                     Container.setColor([255, 0, 0])
                     .setAuthor(`Comando PG`)
-                    .setTitle('Sintassi **&pg** [@utente][ID_Scheda]');        
+                    .setTitle('Sintassi **'+config.prefix+'pg** [@utente][ID_Scheda]');        
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
                 .setAuthor(`Comando PG`)
-                .setTitle('Sintassi **&pg** [@utente][ID_Scheda]');        
+                .setTitle('Sintassi **'+config.prefix+'pg** [@utente][ID_Scheda]');        
                 message.channel.send(Container);
             }
         } else {

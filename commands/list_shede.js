@@ -97,7 +97,7 @@ module.exports = {
                 Container = new Discord.MessageEmbed();
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando pglist`)
-                    .setTitle('Sintassi **&pglist** [@utente]');   
+                    .setTitle('Sintassi **'+config.prefix+'pglist** [@utente]');   
                 message.channel.send(Container);
             }
         } else {

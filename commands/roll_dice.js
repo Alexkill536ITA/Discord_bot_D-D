@@ -33,14 +33,14 @@ module.exports = {
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando Roll`)
-                        .setTitle('Sintassi **&roll** Es:[1d20+5]');
+                        .setTitle('Sintassi **'+config.prefix+'roll** Es:[1d20+5]');
                     message.reply(" ");   
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando Roll`)
-                    .setTitle('Sintassi **&roll** Es:[1d20+5]');        
+                    .setTitle('Sintassi **'+config.prefix+'roll** Es:[1d20+5]');        
                 message.channel.send(Container);
             }
         } else {
