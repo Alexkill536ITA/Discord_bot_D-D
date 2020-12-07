@@ -10,6 +10,7 @@ const { MongoClient } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'money',
@@ -18,6 +19,7 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             if (args[0] == "add" || args[0] == "-a") {
                 if (args[2]) {
                     if (args[1] && args[2].length == 24) {
@@ -34,7 +36,7 @@ module.exports = {
                                         var new_value = old_value + parseFloat(args[1]);
                                         methodDB.money_update(result[0]._id, new_value);
                                         Container = new Discord.MessageEmbed();
-                                        Container.setColor([255, 0, 0])
+                                        Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ message.author.username)
                                             .setThumbnail(message.author.displayAvatarURL(),true)
                                             .addField("Money", new_value)
@@ -70,7 +72,7 @@ module.exports = {
                                         }
                                         methodDB.money_update(result[0]._id, new_value);
                                         Container = new Discord.MessageEmbed();
-                                        Container.setColor([255, 0, 0])
+                                        Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ message.author.username)
                                             .setThumbnail(message.author.displayAvatarURL(),true)
                                             .addField("Money", new_value)

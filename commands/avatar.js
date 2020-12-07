@@ -8,6 +8,7 @@
 const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name:'avatar',
@@ -16,16 +17,17 @@ module.exports = {
         const Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 const user = message.mentions.users.first();
-                Container.setColor([255, 0, 0])
+                Container.setColor(colrs_set)
                     .setTitle('Avatar di: '+user.username)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL())
                     .setImage(user.displayAvatarURL({ dynamic: true }));
                 message.reply(Container);
             } else {
-                Container.setColor([255, 0, 0])
+                Container.setColor(colrs_set)
                     .setTitle('Avatar di: '+message.author.username)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL())

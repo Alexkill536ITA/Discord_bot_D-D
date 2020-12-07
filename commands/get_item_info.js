@@ -9,6 +9,7 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
 const methodDB = require("../mongodb_controll");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'oggetto',
@@ -75,6 +76,7 @@ module.exports = {
 }
 
 async function emiter_output(client,message,cursor) {
+    var colrs_set = clor_gen.rand_Color();
     Container = new Discord.MessageEmbed();
     let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
     var text_obj = `${cursor.effetto}`;
@@ -89,7 +91,7 @@ async function emiter_output(client,message,cursor) {
     } else {
         var sinc = "NO";
     }
-    Container.setColor([255, 0, 0])
+    Container.setColor(colrs_set)
     .setThumbnail(botavatar.displayAvatarURL())
     .setAuthor(`Richiesta di: ${message.author.username}`)
     .setTitle('Oggetto: '+cursor.nome)

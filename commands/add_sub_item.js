@@ -10,6 +10,7 @@ const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'pgoggetto',
@@ -131,6 +132,7 @@ module.exports = {
 
 function add_sub(message, args, Scheda_PG, result) {
     // add sub items Scheda PG
+    var colrs_set = clor_gen.rand_Color();
     if (args[0] == "add" || args[0] == "-a") {
         var qut = 0;
         var nome_var = result.nome;
@@ -153,7 +155,7 @@ function add_sub(message, args, Scheda_PG, result) {
         }
         methodDB.inventory_update(args[1], inventory);
         Container = new Discord.MessageEmbed();
-        Container.setColor([255, 0, 0])
+        Container.setColor(colrs_set)
             .setTitle('Schada: '+ message.author.username)
             .setThumbnail(message.author.displayAvatarURL(),true)
             .addField("Nome", result.nome)
@@ -173,7 +175,7 @@ function add_sub(message, args, Scheda_PG, result) {
             if (num <= 0 || isNaN(num) == true) {
                 var num_memory = "Non possiede più l'oggetto";
                 Container = new Discord.MessageEmbed();
-                Container.setColor([255, 0, 0])
+                Container.setColor(colrs_set)
                     .setTitle('Schada: '+ message.author.username)
                     .setThumbnail(message.author.displayAvatarURL(),true)
                     .addField("Nome", nome_var)
@@ -186,7 +188,7 @@ function add_sub(message, args, Scheda_PG, result) {
                 inventory[nome_var]['Quantita'] = num;
                 var num_memory = inventory[nome_var]['Quantita'];
                 Container = new Discord.MessageEmbed();
-                Container.setColor([255, 0, 0])
+                Container.setColor(colrs_set)
                     .setTitle('Schada: '+ message.author.username)
                     .setThumbnail(message.author.displayAvatarURL(),true)
                     .addField("Nome", nome_var)

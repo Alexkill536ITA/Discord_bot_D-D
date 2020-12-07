@@ -11,6 +11,7 @@ const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const Pagination = require('discord-paginationembed');
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'pglist',
@@ -19,6 +20,7 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var autore = message.mentions.users.first();
                 var id_discord = args[0].replace('<@!', '');
@@ -39,7 +41,7 @@ module.exports = {
                                     .setAuthorizedUsers([message.author.id])
                                     .setChannel(message.channel)
                                     .setPageIndicator(false)
-                                    .setColor([255, 0, 0])
+                                    .setColor(colrs_set)
                                     .setTitle('Lista Schada PG: '+ autore.username)
                                     .setThumbnail(autore.displayAvatarURL(),true)
                                     .addField("N:", result.length,true)
@@ -75,7 +77,7 @@ module.exports = {
                                 Embeds.build();
                             } else {
                                 Container = new Discord.MessageEmbed();
-                                Container.setColor([255, 0, 0])
+                                Container.setColor(colrs_set)
                                     .setTitle('Lista Schede PG: '+ autore.username)
                                     .setThumbnail(autore.displayAvatarURL(),true)
                                     .addField("ID Scheda",result[0]._id)

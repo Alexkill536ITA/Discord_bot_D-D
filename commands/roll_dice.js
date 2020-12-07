@@ -8,6 +8,7 @@
 const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 const DiceRoller = require('roll-dice');
 let diceRoller = new DiceRoller();
 
@@ -19,10 +20,11 @@ module.exports = {
         let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var result = diceRoller.roll(args[0]);
                 if (result['result'] !== undefined) {
-                    Container.setColor([255, 0, 0])
+                    Container.setColor(colrs_set)
                         .setTitle('Roll dice')
                         .setThumbnail(botavatar.displayAvatarURL())
                         .addField("Risultato", args[0]+" = ```"+result['result']+"```");

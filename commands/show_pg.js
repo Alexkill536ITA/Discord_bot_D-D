@@ -10,6 +10,8 @@ const { MongoClient } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll.js");
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
+
 
 module.exports = {
     name: 'pg',
@@ -18,6 +20,7 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var autore = message.mentions.users.first();
                 if (args[1] && args[1].length == 24) {
@@ -32,7 +35,7 @@ module.exports = {
                                 var js_result = JSON.stringify(result);
                                 js_result = JSON.parse(js_result);
                                 Container = new Discord.MessageEmbed();
-                                Container.setColor([255, 0, 0])
+                                Container.setColor(colrs_set)
                                     .setTitle('Schada PG: '+ autore.username)
                                     .setThumbnail(autore.displayAvatarURL(),true)
                                     .addField("ID Scheda",js_result['_id'])

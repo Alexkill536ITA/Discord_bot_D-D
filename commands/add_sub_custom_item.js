@@ -10,6 +10,7 @@ const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'pgcustom',
@@ -18,6 +19,7 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+            var colrs_set = clor_gen.rand_Color();
             var nome;
             var stp = 1;
             if (args[1].length == 24) {
@@ -69,7 +71,7 @@ module.exports = {
                         methodDB.settab_db("Schede_PG");
                         methodDB.inventory_update(args[1], inventory);
                         Container = new Discord.MessageEmbed();
-                        Container.setColor([255, 0, 0])
+                        Container.setColor(colrs_set)
                             .setTitle('Schada: '+ message.author.username)
                             .setThumbnail(message.author.displayAvatarURL(),true)
                             .addField("Nome", nome)
@@ -85,7 +87,7 @@ module.exports = {
                             num = num-parseInt(args[2]);
                             if (num <= 0 || isNaN(num) == true) {
                                 var num_memory = "Non possiede più l'oggetto";
-                                Container.setColor([255, 0, 0])
+                                Container.setColor(colrs_set)
                                     .setTitle('Schada: '+ message.author.username)
                                     .setThumbnail(message.author.displayAvatarURL(),true)
                                     .addField("Nome", nome)
@@ -97,7 +99,7 @@ module.exports = {
                             } else {
                                 inventory[nome]['Quantita'] = num;
                                 var num_memory = inventory[nome]['Quantita'];
-                                Container.setColor([255, 0, 0])
+                                Container.setColor(colrs_set)
                                     .setTitle('Schada: '+ message.author.username)
                                     .setThumbnail(message.author.displayAvatarURL(),true)
                                     .addField("Nome", nome)

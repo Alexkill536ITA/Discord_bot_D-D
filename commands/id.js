@@ -8,6 +8,7 @@
 const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'id',
@@ -19,21 +20,23 @@ module.exports = {
             let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
             if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
                 if (args[0]) {
+                    var colrs_set = clor_gen.rand_Color();
                     var users_selt = getUserFromMention(client, args[0]);
-                    Container.setColor([255, 0, 0]).setTitle('ID Utente Discord').setDescription(users_selt.username+": "+users_selt.id);
+                    Container.setColor(colrs_set).setTitle('ID Utente Discord').setDescription(users_selt.username+": "+users_selt.id);
                     message.author.send(Container);
                     Container = new Discord.MessageEmbed();
-                    Container.setColor([255, 0, 0])
+                    Container.setColor(colrs_set)
                     .setTitle('Invio ID Utente Completato')
                     .setDescription(`🆔 Richiesta di: ${message.author.username}`)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL())
                     .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
                 } else {
-                    Container.setColor([255, 0, 0]).setTitle('Il Tuo ID Utente Discord').setDescription(message.author.username+": "+message.author);
+                    var colrs_set = clor_gen.rand_Color();
+                    Container.setColor(colrs_set).setTitle('Il Tuo ID Utente Discord').setDescription(message.author.username+": "+message.author);
                     message.author.send(Container);
                     Container = new Discord.MessageEmbed();
-                    Container.setColor([255, 0, 0])
+                    Container.setColor(colrs_set)
                     .setTitle('Invio ID Utente Completato')
                     .setDescription(`🆔 Richiesta di: ${message.author.username}`)
                     .setTimestamp()
@@ -42,10 +45,11 @@ module.exports = {
                 }
                 message.channel.send(Container);
             } else {
-                Container.setColor([255, 0, 0]).setTitle('Il Tuo ID Utente Discord').setDescription(message.author.username+": "+message.author);
+                var colrs_set = clor_gen.rand_Color();
+                Container.setColor(colrs_set).setTitle('Il Tuo ID Utente Discord').setDescription(message.author.username+": "+message.author);
                 message.author.send(Container);
                 Container = new Discord.MessageEmbed();
-                Container.setColor([255, 0, 0])
+                Container.setColor(colrs_set)
                 .setTitle('Invio ID Utente Completato')
                 .setDescription(`🆔 Richiesta di: ${message.author.username}`)
                 .setTimestamp()
