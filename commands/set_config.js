@@ -57,9 +57,8 @@ module.exports = {
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                    .setTitle('Help setconfig')
-                    .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]');
+                .setAuthor(`Comando setconfig`)
+                .setTitle('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]');
                 message.channel.send(Container);
             }
         } else {
