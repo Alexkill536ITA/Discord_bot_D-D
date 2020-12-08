@@ -55,6 +55,12 @@ module.exports = {
                         .setTitle('Sintassi **'+config.prefix+'setconfig random_color [true/false]');
                     message.channel.send(Container);
                 }
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setTitle('Help setconfig')
+                    .setThumbnail(botavatar.displayAvatarURL())
+                    .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]');
+                message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
