@@ -89,8 +89,8 @@ module.exports = {
                         } else {
                             Container = new Discord.MessageEmbed();
                             Container.setColor([255, 0, 0])
-                                .setAuthor(`Comando pglist`)
-                                .setTitle('Sintassi **&pglist** [@utente]');   
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore Utente non trovato');   
                             message.channel.send(Container);
                         }
                     });
