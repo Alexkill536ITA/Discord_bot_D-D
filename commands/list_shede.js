@@ -23,7 +23,9 @@ module.exports = {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var autore = message.mentions.users.first();
-                var id_discord = args[0].replace('<@!', '');
+                var id_discord = args[0].replace('<', '');
+                id_discord = id_discord.replace('@', '');
+                id_discord = id_discord.replace('!', '');
                 id_discord = id_discord.replace('>', '');
                 var on_sevice_db = await methodDB.open_db();
                 if (on_sevice_db != 1) {
