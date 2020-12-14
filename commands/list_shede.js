@@ -32,7 +32,7 @@ module.exports = {
                     methodDB.settab_db("Schede_PG");
                     var cursor = methodDB.serachbylistpg(id_discord);
                     cursor.then(function(result) {
-                        if (result != null || result != []) {
+                        if (result != null || result == []) {
                             if (result.length >= 2) {
                                 const embeds = [];
                                 for (let i=0; i <= result.length; i++) {
