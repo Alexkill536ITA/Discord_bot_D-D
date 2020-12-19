@@ -112,7 +112,7 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .addField("💬 Prefix 💬", "• **"+config.prefix+"**")
                 .addField(":question: Help :question:",'• **help** [comando]')
-                .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n •**register**')
+                .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register**')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **roll** Es:[1d20+5]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]')
