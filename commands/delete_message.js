@@ -8,7 +8,6 @@
 const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
-const clor_gen = require("../script/color_gen.js");
 
 module.exports = {
     name: 'clearchat',

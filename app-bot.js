@@ -69,6 +69,8 @@ function Discord_start() {
             client.commands.get('id').execute(client, message, args);
         } else if (command == 'avatar') {
             client.commands.get('avatar').execute(message, args);
+        } else if (command == 'register') {
+            client.commands.get('register').execute(client, message, args);
         } else if (command == 'roll') {
             client.commands.get('roll').execute(client, message,args);
         } else if (command == 'pg') {
