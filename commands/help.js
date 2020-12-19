@@ -94,6 +94,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n prefix = [Nuvo Prefix]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n random_color = [true/false]');
             message.channel.send(Container);
+        } else if (args[0] == "clearchat") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help clearchat')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi:\n **'+config.prefix+'clearchat** [Opzione/Valore]\n\n **OPZIONI**\n all = Tutto\n\n Il comando clearchat elimina i messaggi data una quntità specifica o l\'intera chat con **all** nel campo [Opzione/Valore]');
+            message.channel.send(Container);
         } else {
             Container.setColor([255, 0, 0])
                 .setTitle('Lista comandi')
@@ -102,7 +108,7 @@ module.exports = {
                 .addField(":question: Help :question:",'• **help** [comando]')
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
-                .addField("🧰 Tools 🧰",'• **roll** Es:[1d20+5]\n ')
+                .addField("🧰 Tools 🧰",'• **roll** Es:[1d20+5]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]')
                 .setFooter("Bot by Alexkill ITA#3593", "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
