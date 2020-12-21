@@ -80,7 +80,7 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help meteo')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi: **'+config.prefix+'meteo** \n\n Mostra il meteo giornaliero');
+                    .setDescription('Sintassi: **'+config.prefix+'meteo** [Opzione][Valore] \n\n **OPZIONI**\n set = Setta\n\n **Valori**\n 1 = Sereno\n 2 = Nuvoloso\n 3 = Pioggia\n 4 = Nevicata\n\n Il comando **meteo** di base mostra il meteo giornaliero, Nel campo [Opzione] se inserito solo **set** il meteo viene generato in modo randomico ma se agiunto un da 1 a 4 nel campo [Valore] si seceglie quello che sivuole');
                 message.channel.send(Container);
         } else if (args[0] == "pgoggetto") {
             Container.setColor([255, 0, 0])

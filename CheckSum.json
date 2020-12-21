@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "436e784baf486341d1937a075da7e9db400ecfdae0a7d478e3529dc4b3dfed2297d7b87b07514c40b13f3c22f95b165c2a82d42048f43ba50cb277825a0fcfa0"
+        "SHA512": "b209ceb23bed7ea02d59bb8c4b03ea561d96559b815650c955c197f7ad3b7aaf429072a25c01e97d7a384167c7929075057d8f08be92b5820570f8d4986ca772"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -19,6 +19,10 @@
         "name": "avatar.js",
         "SHA512": "bfa6e6b157a2ed8467010d41e56dc45bf11ce76cd3ef33bec3e763cb90f6c2228be18a1470e228f4014a975de7ee79f52b6bdc85c50654a4ee20ed9aa1af3a1c"
     },
+    "delete_message.js": {
+        "name": "delete_message.js",
+        "SHA512": "a5096fb7f851db42acf5f51d4d1313a425b57ddd56a43822c03b016f799797632a9c87b11bd95649ececc96cba9c5a81ac02e0a6df2b5e17e6eb0b49f6e6676b"
+    },
     "exp.js": {
         "name": "exp.js",
         "SHA512": "c4ed2a9d25df745dc38a83a1c3e7e0fe05a7473b7303ad4acdbcae61d3f7540683ad33db71d02c36dd4b560f248213388fb297d5f8b213993a35f1330bf4aafe"
@@ -29,11 +33,11 @@
     },
     "get_meteo.js": {
         "name": "get_meteo.js",
-        "SHA512": "abcd6beeb14fea2c81f6c65d1803b737736faed6fb025bfed6964840777136b39dc8b7e818d9f4aca60dce3b81d7b7197727e87933b776340a84bc5538aa5525"
+        "SHA512": "c613d025e1cf6ff08d22a8922dcac60aea7e825cba471bf3cd51d3143831ac78748032af58d39a7f758db2ac93da31d0a10136972b07e5cb59613b689f60f507"
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "47782f72c8e1b8b7d726bf73d5c1b0595aa5ae106487c4991021d12dbd9af5e2878a10f49727beae1da13e3b7a67e543022a97b628112bbfb6668d6d2e20a69d"
+        "SHA512": "dd293159384d004586f970093e2313caf57a32ad5314e2e20e6263d37d510f265b267a8e7bdf3d4b3267a37d4905b819738f12de44107a70ab28707000cdaf26"
     },
     "id.js": {
         "name": "id.js",
@@ -41,7 +45,7 @@
     },
     "list_shede.js": {
         "name": "list_shede.js",
-        "SHA512": "3eabeb57eb7e65d4bcfb5943f8ab920e83e6edce4e942f9ed9fe166f6c821c81184b9ca3af124258233672510e9f72ee54bcfa2d8647ab453714f22f153927ab"
+        "SHA512": "7f7134e669e399f4eb75a8b0fad31070072b2cd8fff0634dd8894afa6cb0afd50b9ec282b4b64c6c55a42fa33a3618ecbc3728895bbf62ed6ccadcfa9e30a63e"
     },
     "money.js": {
         "name": "money.js",
@@ -53,7 +57,7 @@
     },
     "set_config.js": {
         "name": "set_config.js",
-        "SHA512": "227eab926a1b751823c45d3356f873e39e4b50296ff05ab28f9bfa4ffb6387bf13ffaef6e887f9b476d98666c9973090487c2732bfdc9b85b614295acceae1c1"
+        "SHA512": "f0e27d1a43a0a26106ed0ce2bc9eb5f2faac468281c22fc45dc333489f69681085a4cce61384da664618ce5b82da95a34d17df11683b73bdf683365730540a5b"
     },
     "show_inventory.js": {
         "name": "show_inventory.js",
@@ -62,6 +66,10 @@
     "show_pg.js": {
         "name": "show_pg.js",
         "SHA512": "e66b982026addb2bc089d529c8a85843eea32f66b8c8cc21c08e1c1089d2e9384c31eba223f2e400f5780903faabfef101a488d95cda8aa6a2c6f484bb931fa4"
+    },
+    "show_register_link.js": {
+        "name": "show_register_link.js",
+        "SHA512": "0374127f8d2e5b7b7e988c911ff0e8aaf37b6af450314c2db2ebf868ff350a83cf317e1a063e0c056ae24f8404ba36df9d4df9b74e70178bacf81be84af39d81"
     },
     "clock_timer_event.js": {
         "name": "clock_timer_event.js",
@@ -82,7 +90,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.51",
-        "Date Check": "07/12/2020 23:54"
+        "Version": "1.0.54",
+        "Date Check": "21/12/2020 01:12"
     }
 }
