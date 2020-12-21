@@ -23,6 +23,9 @@ module.exports = {
                 var check = Check_Num(args[0]);
                 if (check == true) {
                     var result = eval(args[0]);
+                    if (isNaN(result)) {
+                        result = "Ma si Scemo";
+                    }
                     Container.setColor(colrs_set)
                         .setTitle('Calcolatrice')
                         .setThumbnail(botavatar.displayAvatarURL())
