@@ -40,6 +40,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi **'+config.prefix+'roll** Es:[1d20+5] \n\nRoll fa un tiro di dadi a tua scelta');        
                 message.channel.send(Container);
+        } else if (args[0] == "math") {
+            Container.setColor([255, 0, 0])
+                .setTitle(`Help math`)
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi **'+config.prefix+'math** Es:[2+2*5-10/2] \n\n Math una calcolatrice semplice');       
+            message.channel.send(Container);
         } else if (args[0] == "pg") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Pg')
@@ -114,7 +120,7 @@ module.exports = {
                 .addField(":question: Help :question:",'• **help** [comando]')
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register**')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
-                .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **clearchat** [Opzione/Valore]\n')
+                .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]')
                 .setFooter("Bot by Alexkill ITA#3593", "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);

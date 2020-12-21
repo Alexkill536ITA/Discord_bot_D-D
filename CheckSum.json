@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "b209ceb23bed7ea02d59bb8c4b03ea561d96559b815650c955c197f7ad3b7aaf429072a25c01e97d7a384167c7929075057d8f08be92b5820570f8d4986ca772"
+        "SHA512": "958587b71caa61f9ea6e94169f6e1458e590da9e38da98ed0c2d61e5c99c1ef38fcf9fb1f3a09ed5f184ff15ef1e8b2a7a29bebbdabb4a3f92af966e24ffa7e3"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -18,6 +18,10 @@
     "avatar.js": {
         "name": "avatar.js",
         "SHA512": "bfa6e6b157a2ed8467010d41e56dc45bf11ce76cd3ef33bec3e763cb90f6c2228be18a1470e228f4014a975de7ee79f52b6bdc85c50654a4ee20ed9aa1af3a1c"
+    },
+    "calculator.js": {
+        "name": "calculator.js",
+        "SHA512": "9e816c34573c6ff30aefe53b9faeb2faae5fa85320f79493df1a7d28c8c8ad62dd434aecbd66080bc68cf4df935fd1bdaa759932124b689e0ee024a8592c2a33"
     },
     "delete_message.js": {
         "name": "delete_message.js",
@@ -37,7 +41,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "dd293159384d004586f970093e2313caf57a32ad5314e2e20e6263d37d510f265b267a8e7bdf3d4b3267a37d4905b819738f12de44107a70ab28707000cdaf26"
+        "SHA512": "c56131f8b136a9b20a7fd6f4a485445fb480d62518abdc70f5b5e01bbc95a3fc301ddac6c37135c0b8fd1cad788fb80130ae3fdf3d1c135cb1fc44d9d0f20a82"
     },
     "id.js": {
         "name": "id.js",
@@ -90,7 +94,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.55",
-        "Date Check": "21/12/2020 01:19"
+        "Version": "1.0.56",
+        "Date Check": "21/12/2020 02:47"
     }
 }

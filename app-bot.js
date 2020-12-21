@@ -73,6 +73,8 @@ function Discord_start() {
             client.commands.get('register').execute(client, message, args);
         } else if (command == 'roll') {
             client.commands.get('roll').execute(client, message,args);
+        } else if (command == 'math') {
+            client.commands.get('math').execute(client, message,args);
         } else if (command == 'pg') {
             client.commands.get('pg').execute(message,args);
         } else if (command == 'pglist') {
