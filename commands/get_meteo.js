@@ -21,15 +21,21 @@ module.exports = {
             if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
                 if (args[1] == 1 || args[1] == 2 || args[1] == 3 || args[1] == 4) {
                     if (args[1] == 1) {
-                        Container.setColor(255,0,0).setThumbnail(botavatar.displayAvatarURL()).setTitle('🌐 Il Meteo giornaliero:').setDescription(':sunny: Sereno');
+                        var value = [1,1]
+                        globals_var.setMeteo(value);
                     } else if (args[1] == 2) {
-                        Container.setColor(255,0,0).setThumbnail(botavatar.displayAvatarURL()).setTitle('🌐 Il Meteo giornaliero:').setDescription(':cloud: Nuvoloso');
+                        var value = [1,2]
+                        globals_var.setMeteo(value);
                     } else if (args[1] == 3) {
-                        Container.setColor(255,0,0).setThumbnail(botavatar.displayAvatarURL()).setTitle('🌐 Il Meteo giornaliero:').setDescription(':cloud_rain: Pioggia');
+                        var value = [1,3]
+                        globals_var.setMeteo(value);
                     } else if (args[1] == 4) {
-                        Container.setColor(255,0,0).setThumbnail(botavatar.displayAvatarURL()).setTitle('🌐 Il Meteo giornaliero:').setDescription(':cloud_snow: Nevicata');
+                        var value = [1,4]
+                        globals_var.setMeteo(value);
                     }
-                    message.channel.send(Container);
+                    var out = globals_var.getMeteo();
+                    out.setThumbnail(botavatar.displayAvatarURL());
+                    message.channel.send(out);
                 } else {
                     meteo.set_meteo_out();
                     var out = globals_var.getMeteo();

@@ -33,7 +33,7 @@
     },
     "get_meteo.js": {
         "name": "get_meteo.js",
-        "SHA512": "c613d025e1cf6ff08d22a8922dcac60aea7e825cba471bf3cd51d3143831ac78748032af58d39a7f758db2ac93da31d0a10136972b07e5cb59613b689f60f507"
+        "SHA512": "fefc6b0b102dcdc8aafa5f6e815b5f37ed0b3338222a74c4cf7d8c62f8b4b1ce9decadb975436228d2a9903f3eb2f6a29d95a4c8b4a20aa866f5e3573b9ad0cb"
     },
     "help.js": {
         "name": "help.js",
@@ -90,7 +90,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.54",
-        "Date Check": "21/12/2020 01:12"
+        "Version": "1.0.55",
+        "Date Check": "21/12/2020 01:19"
     }
 }
