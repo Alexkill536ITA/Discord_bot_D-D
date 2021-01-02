@@ -30,16 +30,16 @@ exports.set_meteo_out = function() {
 	var today = new Date();
 	var year = today.getFullYear();
 	var month = today.getMonth();
-	var day = today.getDay();
-	today = new Date(year,month,day);
+	var day = today.getDate();
+	//today = new Date(year,month,day);
 	const i_Primavera = new Date(year,02,20);
 	const f_Primavera = new Date(year,05,19);
 	const i_Estate = new Date(year,05,20);
 	const f_Estate = new Date(year,08,21);
 	const i_Autunno = new Date(year,08,22);
 	const f_Autunno = new Date(year,10,20);
-	const i_Inverno = new Date(year,10,21);
-	const f_Inverno = new Date(year+1,02,19);
+	//const i_Inverno = new Date(year,10,21);
+	//const f_Inverno = new Date(year+1,02,19);
 	var rand_number = getRandomInt(1,100);
 	var data_set = [];
 
@@ -97,7 +97,7 @@ exports.set_meteo_out = function() {
 			data_set = [3,4];
 			goglas_var.setMeteo(data_set);
 		}
-	} else if (today.getTime() >= i_Inverno.getTime() && today.getTime() <= f_Inverno.getTime()) {
+	} else {
 		if (rand_number >= 1 && rand_number <= 29){
 			// console.log("Inverno "+1);
 			data_set = [4,1];
@@ -115,8 +115,10 @@ exports.set_meteo_out = function() {
 			data_set = [4,4];
 			goglas_var.setMeteo(data_set);
 		}
-	} else {
-		console.error('[ '+color.red('ERROR')+' ] Impossibile calcolare il meteo');
 	}
+	console.log('[ '+color.cyan('DEBUG')+' ] :'+today+"\n Anno:"+year+"\n Mese:"+month+"\n Giorno:"+day+
+		"\n Inizio Primavera: "+i_Primavera+"\n Fine Primavara: "+f_Primavera+
+		"\n Inizio Estate: "+i_Estate+"\n Fine Estate: "+f_Estate+
+		"\n Inizio Autunno: "+i_Autunno+"\n Fine Autunno"+f_Autunno);
 	return goglas_var.getMeteo();
 }
