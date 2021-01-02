@@ -18,7 +18,7 @@ module.exports = {
     description: "Lista Personaggi",
     async execute(message, args) {
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        // let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
