@@ -15,7 +15,7 @@ module.exports = {
     description: "Lista Comandi",
     async execute(client, message, args){
         var Container = new Discord.MessageEmbed();
-        let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (args[0] == "id") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help ID')
