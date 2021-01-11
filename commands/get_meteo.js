@@ -15,7 +15,7 @@ module.exports = {
     description: "Motra Meteo",
     async execute(client, message, args) {
         var Container = new Discord.MessageEmbed();
-        let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (args[0] == 'set') {
             let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
             if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {

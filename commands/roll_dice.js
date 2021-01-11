@@ -17,7 +17,7 @@ module.exports = {
     description: "rolla dadi",
     async execute(client, message, args){
         var Container = new Discord.MessageEmbed();
-        let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
