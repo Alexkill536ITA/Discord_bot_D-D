@@ -78,7 +78,7 @@ module.exports = {
 async function emiter_output(client,message,cursor) {
     var colrs_set = clor_gen.rand_Color();
     Container = new Discord.MessageEmbed();
-    let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
+    let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
     var text_obj = `${cursor.effetto}`;
     var text_sen = [];
     if (cursor.note == '') {
