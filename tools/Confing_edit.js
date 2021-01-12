@@ -15,7 +15,7 @@ exports.set_prefix = function(prefix) {
         }
         // increase customer order count by 1
         customer.prefix = prefix;
-        fs.writeFile("./config.json", JSON.stringify(customer), err => {
+        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
           if (err) console.error("Error writing file:", err);
         });
     });
@@ -29,7 +29,7 @@ exports.set_ora_event = function(ora) {
         }
         // increase customer order count by 1
         customer.set_event_meteo = ora;
-        fs.writeFile("./config.json", JSON.stringify(customer), err => {
+        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
           if (err) console.error("Error writing file:", err);
         });
     });
@@ -43,7 +43,7 @@ exports.set_chat_event = function(id_chat) {
         }
         // increase customer order count by 1
         customer.event_chat_meteo = id_chat;
-        fs.writeFile("./config.json", JSON.stringify(customer), err => {
+        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
           if (err) console.error("Error writing file:", err);
         });
     });
@@ -57,10 +57,24 @@ exports.set_random_color = function(set_color) {
         }
         // increase customer order count by 1
         customer.random_color_enable = set_color;
-        fs.writeFile("./config.json", JSON.stringify(customer), err => {
+        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
           if (err) console.error("Error writing file:", err);
         });
     });
+}
+
+exports.set_event_meteo_enable = function(event_meteo_enable) {
+  jsonReader("./config.json", (err, customer) => {
+      if (err) {
+        console.error("Error reading file:", err);
+        return;
+      }
+      // increase customer order count by 1
+      customer.event_meteo_enable = event_meteo_enable;
+      fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+        if (err) console.error("Error writing file:", err);
+      });
+  });
 }
 
 function jsonReader(filePath, cb) {

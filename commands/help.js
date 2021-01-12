@@ -108,7 +108,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help setconfig')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n prefix = [Nuvo Prefix]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n random_color = [true/false]');
+                .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n prefix = [Nuvo Prefix]\n event_meteo_enable = [true/false]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n random_color = [true/false]');
             message.channel.send(Container);
         } else if (args[0] == "clearchat") {
             Container.setColor([255, 0, 0])

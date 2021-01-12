@@ -21,6 +21,6 @@
     "event_meteo_enable": true,
     "set_event_meteo": "10:00",
     "event_chat_meteo": "784136487544553543",
-    "random_color_enable": true,
+    "random_color_enable": "true",
     "Debug_Level": "INFO"
 }

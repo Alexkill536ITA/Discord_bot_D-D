@@ -40,7 +40,7 @@ async function main() {
 //------------------------------------------------------//
 function Discord_start() {
     client.login(process.env.TOKEN);
-    const prefix = config.prefix;
+    const prefix = config.prefix
     const cmd_fs = require('fs');  //Declaration File Commands
 
     // Start Bot
@@ -98,11 +98,11 @@ function Discord_start() {
         } else if (command == 'clearchat') {
             client.commands.get('clearchat').execute(client, message, args);
         } else if (command == 'setconfig') {
-            client.commands.get('setconfig').execute(message, args);
+            client.commands.get('setconfig').execute(client,message, args);
         // } else if (command == 'restart') {
         //     client.commands.get('restart').execute(client, message, args);
         } else {
-            message.channel.send('Usare il comando **&help** per la lista dei comandi');
+            message.channel.send('Usare il comando **'+config.prefix+'help** per la lista dei comandi');
         };
     });
 }

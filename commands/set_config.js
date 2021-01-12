@@ -9,12 +9,13 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
 const setconfig = require("../tools/Confing_edit.js");
+// const reboot_bot = require("./restart_bot.js"); 
 const color = require("ansi-colors");
 
 module.exports = {
     name: 'setconfig',
     description: "set config",
-    execute(message, args) {
+    execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
             console.log('[ '+color.cyan('DEBUG')+' ] Event Execute set_config');
         }
@@ -25,15 +26,28 @@ module.exports = {
                 var myregexp = /^[a-zA-Z0-9]+$/;
                 if (myregexp.test(args[1]) == false) {
                    setconfig.set_prefix(args[1]); 
+                   // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig prefix`)
                         .setTitle('Sintassi **'+config.prefix+'setconfig prefix [Prefix nuovo]');        
                     message.channel.send(Container);
                 }
+            } else if (args[0] == "event_meteo_enable") {
+                boll = args[1].toLowerCase();
+                if (boll == "true" || boll == "false") {
+                    setconfig.set_event_meteo_enable(boll);
+                    // reboot_bot.execute(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando setconfig event_meteo_enable`)
+                        .setTitle('Sintassi **'+config.prefix+'setconfig event_meteo_enable [true/false]');
+                    message.channel.send(Container);
+                }
             } else if (args[0] == "ora_event_meteo"){
                 if (args[1].length == 5) {
                     setconfig.set_ora_event(args[1]);
+                    // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig ora_event_meteo`)
@@ -43,6 +57,7 @@ module.exports = {
             } else if (args[0] == "chat_event_meteo") {
                 if (args[1].length > 0 && args[1].length <= 18 && isNaN(parseInt(args[1])) == false) {
                     setconfig.set_chat_event(args[1]);
+                    // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig chat_event_meteo`)
@@ -53,6 +68,7 @@ module.exports = {
                 boll = args[1].toLowerCase();
                 if (boll == "true" || boll == "false") {
                     setconfig.set_random_color(boll);
+                    // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig random_color`)
