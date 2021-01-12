@@ -101,6 +101,8 @@ function Discord_start() {
             client.commands.get('setconfig').execute(client,message, args);
         // } else if (command == 'restart') {
         //     client.commands.get('restart').execute(client, message, args);
+        } else if (command == 'version') {
+            client.commands.get('version').execute(client,message, args);
         } else {
             message.channel.send('Usare il comando **'+config.prefix+'help** per la lista dei comandi');
         };

@@ -112,6 +112,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n prefix = [Nuvo Prefix]\n event_meteo_enable = [true/false]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n random_color = [true/false]');
             message.channel.send(Container);
+        } else if (args[0] == "version") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help version')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi:\n **'+config.prefix+'version** \n\n Mostra Versione del Bot e del specifiche del Server Host');
+            message.channel.send(Container);
         } else if (args[0] == "clearchat") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help clearchat')
@@ -127,7 +133,7 @@ module.exports = {
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register**')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
-                .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]')
+                .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version "+vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
         }
