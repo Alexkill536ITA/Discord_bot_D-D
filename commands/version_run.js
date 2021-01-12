@@ -10,7 +10,8 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
 const color =  require("ansi-colors");
-const vers = require("../CheckSum.json")
+const vers = require("../CheckSum.json");
+const lib = require("../package.json");
 const os = require("os");
 const osutils = require("os-utils");
 const osName = require("os-name");
@@ -72,6 +73,21 @@ module.exports = {
             ut_day = ut_day%24;
             var uptime_server = "Up time Server: "+ut_day+"d:"+ut_hour+"h:"+ut_min+"m:" +ut_sec+"s";
 
+            // Uptime Application:
+            var ap_sec = process.uptime(); 
+            var ap_min = ap_sec/60; 
+            var ap_hour = ap_min/60;
+            var ap_day = ap_hour/24;
+            ap_sec = Math.floor(ap_sec); 
+            ap_min = Math.floor(ap_min); 
+            ap_hour = Math.floor(ap_hour); 
+            ap_day = Math.floor(ap_day);
+            ap_hour = ap_hour%60; 
+            ap_min = ap_min%60; 
+            ap_sec = ap_sec%60;
+            ap_day = ap_day%24;
+            var uptime_app = "Up time App: "+ap_day+"d:"+ap_hour+"h:"+ap_min+"m:" +ap_sec+"s";
+
             // set Img os
             if (platform_run == "win32") {
                 var img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Windows_logo_-_2012_%28dark_blue%29.svg/1200px-Windows_logo_-_2012_%28dark_blue%29.svg.png"
@@ -97,6 +113,12 @@ module.exports = {
                 var img_os = "https://cdn.onlinewebfonts.com/svg/img_144996.png"
             }
 
+            // Dependencies:
+            var Dependencies = ""
+            for (a in lib.dependencies) {
+                Dependencies = Dependencies+a+": "+lib.dependencies[a]+"\n";
+            }
+
             // Output
             if (config.Debug_Level == "DEBUG") {
                 console.log("[ "+color.cyan('DEBUG')+" ] type: "+type_run);
@@ -118,7 +140,8 @@ module.exports = {
                 .addField("Operation System","OS Name: "+Name_run+"\nType: "+type_run+"\nPlatform: "+platform_run+"\nRelease: "+release_run+"\narch: "+arch_run)
                 .addField("Hardware Server","CPU: "+CPU_name+"\nCores: "+osutils.cpuCount()+"\n"+total_ram+"\n"+uptime_server)
                 .addField("Demon Node.js","Version: "+process.version)
-                .addField("Application Bot","Version: v"+version_app);
+                .addField("Dependencies",Dependencies)
+                .addField("Application Bot","Version: v"+version_app+"\n"+uptime_app);
             message.channel.send(Container);
 
         } else {
