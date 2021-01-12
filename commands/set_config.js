@@ -9,11 +9,15 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
 const setconfig = require("../tools/Confing_edit.js");
+const color = require("ansi-colors");
 
 module.exports = {
     name: 'setconfig',
     description: "set config",
     execute(message, args) {
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute set_config');
+        }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
         if(message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {

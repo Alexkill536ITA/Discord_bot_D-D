@@ -9,11 +9,15 @@ const Discord = require('discord.js');
 const globals_var = require('../script/globals_var.js');
 const meteo = require('../script/set_meteo.js');
 const config = require("../config.json");
+const color = require("ansi-colors");
 
 module.exports = {
     name: 'meteo',
     description: "Motra Meteo",
     async execute(client, message, args) {
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_meteo');
+        }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (args[0] == 'set') {

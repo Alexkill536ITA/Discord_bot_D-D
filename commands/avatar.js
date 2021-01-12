@@ -9,11 +9,15 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
+const color = require("ansi-colors");
 
 module.exports = {
     name:'avatar',
     description: "get avatar",
     execute(message, args) {
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_avatar');
+        }
         const Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {

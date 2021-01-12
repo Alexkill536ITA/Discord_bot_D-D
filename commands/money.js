@@ -11,11 +11,15 @@ const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
+const color = require("ansi-colors");
 
 module.exports = {
     name: 'money',
     description: "Aggiungi o togli denaro",
     async execute(message, args) {
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute add_sub_money');
+        }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {

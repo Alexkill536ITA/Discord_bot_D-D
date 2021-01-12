@@ -3,3 +3,4 @@ node_modules/
 test/
 release/
 .env
+package_run_pm2.txt

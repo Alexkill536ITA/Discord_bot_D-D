@@ -8,11 +8,15 @@
 const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
+const color = require("ansi-colors");
 
 module.exports = {
     name: 'register',
     description: "Show help register",
     execute(client, message, args){
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute show_register_link');
+        }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);

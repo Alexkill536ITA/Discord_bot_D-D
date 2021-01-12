@@ -7,6 +7,7 @@
 
 const goglas_var = require('./globals_var.js');
 const color = require("ansi-colors");
+const config = require('../config.json');
 
 /*
  * |------------------------------------|
@@ -116,9 +117,11 @@ exports.set_meteo_out = function() {
 			goglas_var.setMeteo(data_set);
 		}
 	}
-	console.log('[ '+color.cyan('DEBUG')+' ] :'+today+"\n Anno:"+year+"\n Mese:"+month+"\n Giorno:"+day+
-		"\n Inizio Primavera: "+i_Primavera+"\n Fine Primavara: "+f_Primavera+
-		"\n Inizio Estate: "+i_Estate+"\n Fine Estate: "+f_Estate+
-		"\n Inizio Autunno: "+i_Autunno+"\n Fine Autunno"+f_Autunno);
+	if (config.Debug_Level == "DEBUG") {
+		console.log('[ '+color.cyan('DEBUG')+' ] :'+today+"\n Anno:"+year+"\n Mese:"+month+"\n Giorno:"+day+
+			"\n Inizio Primavera: "+i_Primavera+"\n Fine Primavara: "+f_Primavera+
+			"\n Inizio Estate: "+i_Estate+"\n Fine Estate: "+f_Estate+
+			"\n Inizio Autunno: "+i_Autunno+"\n Fine Autunno"+f_Autunno);
+	}
 	return goglas_var.getMeteo();
 }

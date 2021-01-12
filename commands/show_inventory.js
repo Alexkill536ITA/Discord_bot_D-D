@@ -12,11 +12,15 @@ const methodDB = require("../mongodb_controll");
 const Pagination = require('discord-paginationembed');
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
+const color = require("ansi-colors");
 
 module.exports = {
     name: 'pginventario',
     description: "motra inventaryio pg",
     async execute(message, args){
+        if (config.Debug_Level == "DEBUG") {
+            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute show_inventrory');
+        }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
