@@ -121,17 +121,29 @@ module.exports = {
 
             // Output
             if (config.Debug_Level == "DEBUG") {
-                console.log("[ "+color.cyan('DEBUG')+" ] type: "+type_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] platform: "+platform_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] release: "+release_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] arch: "+arch_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] Name: "+Name_run);
+                var Dep = "";
+                var run_1 = false;
+                console.log("[ "+color.cyan('DEBUG')+" ] OS Name: "+Name_run);
+                console.log("[ "+color.cyan('DEBUG')+" ] Type: "+type_run);
+                console.log("[ "+color.cyan('DEBUG')+" ] Platform: "+platform_run);
+                console.log("[ "+color.cyan('DEBUG')+" ] Release: "+release_run);
+                console.log("[ "+color.cyan('DEBUG')+" ] Arch: "+arch_run);
                 console.log("[ "+color.cyan('DEBUG')+" ] CPU: "+CPU_name);
-                console.log("[ "+color.cyan('DEBUG')+" ] CPU Cores: "+osutils.cpuCount());
+                console.log("[ "+color.cyan('DEBUG')+" ] Cores: "+osutils.cpuCount());
                 console.log("[ "+color.cyan('DEBUG')+" ] "+total_ram);
                 console.log("[ "+color.cyan('DEBUG')+" ] "+uptime_server);
                 console.log("[ "+color.cyan('DEBUG')+" ] Node.js: "+version_node);
+                for (a in lib.dependencies) {
+                    if (run_1 == false) {
+                        Dep = "[ "+color.cyan('DEBUG')+" ] "+a+": "+lib.dependencies[a];
+                        run_1 = true;
+                    } else {
+                        Dep = Dep+"\n[ "+color.cyan('DEBUG')+" ] "+a+": "+lib.dependencies[a];
+                    }
+                }
+                console.log("[ "+color.cyan('DEBUG')+" ] Dependencies:\n"+Dep);
                 console.log("[ "+color.cyan('DEBUG')+" ] app: "+version_app);
+                console.log("[ "+color.cyan('DEBUG')+" ] "+uptime_app);
             }
 
             Container.setColor([255, 0, 0])
