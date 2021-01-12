@@ -9,7 +9,9 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const globals_var = require('../script/globals_var.js');
 const config = require("../config.json");
+const vers = require("../CheckSum.json");
 const color = require("ansi-colors");
+const { version, versions } = require("process");
 
 module.exports = {
     name: 'help',
@@ -126,7 +128,7 @@ module.exports = {
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]')
-                .setFooter("Bot by Alexkill ITA#3593", "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
+                .setFooter("Bot by Alexkill ITA#3593                                                                                                Version "+vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
         }
     }
