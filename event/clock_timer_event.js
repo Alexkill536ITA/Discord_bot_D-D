@@ -65,7 +65,7 @@ function check_date(client) {
     }
     
     if (result == 'Prossimo evento tra: ') {
-        let botavatar = client.users.cache.find(user => user.username == "Infinity Dice");
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         out = meteo.set_meteo_out();
         out.setThumbnail(botavatar.displayAvatarURL());
         client.channels.cache.get(config.event_chat_meteo).send(out);
