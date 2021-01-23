@@ -1,11 +1,11 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "400d68e284020de13f90999e49325951eff7178404ba1f54199b911af487c33aef1e5703fb5468d729d24a4b9ca475842372787a9ee2bc9cdfffeaf61f68dda9"
+        "SHA512": "4e0acf7eca20872c1ce9881a77bb0b303723b488443f3a77f191eca5704bd256c44e3fb19a5cee38a9820da9812f255a12a2a2eb2c621bedff7e2134bf21eb0d"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "7ba9e4ee619c5c2abb19fa8bb8f4a932d162e6fcf4b7c80ba6b977a8c2c0effa81a7fc9f80c07801728994e46b44aa3b1a71ba063e9f5d4bfc1b9c46d59b6033"
+        "SHA512": "ae2d972e4fb72d555ac1d9e28ba25f7bd962da7a4e9190a7dff82fb656a0f7dcb1a5e34b700fb3abcdb34d58d3db7d3b404e0fe4acf811f1c89377c85f5a5afd"
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
@@ -41,7 +41,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "fa2f6bc497e79c3e7e5e0aaa40b57ebffd2235836d3f54adbbf64988cdd78979c55de8dc002622fdcb550f75d96a2763027e23203b65dd3a7d3f1eea7b79c9d5"
+        "SHA512": "815fc0ebe8bc0c7919c05e8385dd8024ec860bb8acaff274f4b83f38a98605bc1ad65091a8bcf5d8474f9cb1b079a65ff5863032ca832018fe4ee2bcc34265a2"
     },
     "id.js": {
         "name": "id.js",
@@ -79,9 +79,13 @@
         "name": "show_register_link.js",
         "SHA512": "628711dcbeadf847939113dffd5c955271e067104a720a0ae582bc879f215a0615859f52f63809095c6103e1e498870afe09dd93ffd5b1ca6643ed193d58cb84"
     },
+    "version_run.js": {
+        "name": "version_run.js",
+        "SHA512": "792d4e2fa81bbb5b2579dc6305002972703ea70adde795cd4499e47e83c27ed1b7d6ad2f3527ad065f4d8d3c0379dfb986712218a67a5a91074132197f5c0b25"
+    },
     "clock_timer_event.js": {
         "name": "clock_timer_event.js",
-        "SHA512": "add63bd94b7ef7fea980e4fd6ae2eee5a736e8e43715508b2c5244f72ff081544adb7f286e741aba19b2550e5273152ab141998c2d6f1002b67c83c246758437"
+        "SHA512": "c64cc44756e518708896d57a72de077a39fd6da4c3404546bf70222d64a7dadf96304b422523a01e870650c095e600f18f70559e1d1609b3bd111087530b5413"
     },
     "color_gen.js": {
         "name": "color_gen.js",
@@ -98,7 +102,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.70",
-        "Date Check": "12/01/2021 13:50"
+        "Version": "1.0.71",
+        "Date Check": "23/01/2021 20:07"
     }
 }

@@ -9,6 +9,7 @@ const color = require("ansi-colors");
 const mongo = require("mongodb");
 const MongoClient = require("mongodb").MongoClient;
 const client = new MongoClient(process.env.DATABASE_MONGDB, { useUnifiedTopology: true });
+const config_load = require('./config.json');
 var database;
 var collection;
 var connect_up = false;
@@ -41,7 +42,7 @@ exports.open_db = async function() {
         }
     } catch (e) {
         console.log("[ "+color.red('ERROR')+" ] Connect MongoDB Faill \n");
-        if (process.env.DEBUG_MODE == true) {
+        if (config_load.Debug_Level == 'DEBUG') {
             console.log("[ "+color.magenta('DEBUG')+" ] "+e);
         }
         connect_up = false;
