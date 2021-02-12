@@ -34,6 +34,12 @@ module.exports = {
                         let hashedPassword = await bcrypt.hash(temp_pass, 8)
                         methodDB.password_update(result._id, hashedPassword);
                         Container.setColor(colrs_set)
+                            .setTitle('Richiesta Completata')
+                            .setDescription(`🆔 Richiesta di: ${message.author.username}`)
+                            .setTimestamp()
+                            .setFooter("Data", message.author.displayAvatarURL())
+                            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
+                        Container.setColor(colrs_set)
                             .setTitle('Reset Password')
                             .setDescription(message.author.username+": "+message.author+"\n Usare la Password appena generata per loggarsi")
                             .addField("Username", result.username )

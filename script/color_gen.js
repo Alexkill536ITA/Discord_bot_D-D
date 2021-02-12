@@ -12,7 +12,7 @@ exports.rand_Color = function() {
     if (config.Debug_Level == "DEBUG") {
         console.log('[ '+color.cyan('DEBUG')+' ] Event Generate color');
     }
-    if (config.random_color_enable == true) {
+    if (config.random_color_enable == "true") {
         var red  = 0;
         var gren = 0;
         var blue = 0;
