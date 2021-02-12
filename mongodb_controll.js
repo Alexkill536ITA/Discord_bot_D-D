@@ -66,6 +66,11 @@ exports.serachbyid = async function(id_scheda) {
     return cursor;
 }
 
+exports.serachbyid_user = async function(id_discord) {
+    var cursor = await collection.findOne({ 'Id_discord': id_discord }); 
+    return cursor;
+}
+
 exports.load_pg = async function(id_discord, id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
     var cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
@@ -110,6 +115,12 @@ exports.level_update =function (id_scheda, value_new) {
 exports.inventory_update =function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, {$set: {Inventory:value_new}});
+    return 0;
+}
+
+exports.password_update =function (id_user, value_new) {
+    id_user = mongo.ObjectID(id_user);
+    collection.updateOne({ '_id': id_user }, {$set: {password : value_new, temp_paw : "1"}});
     return 0;
 }
 

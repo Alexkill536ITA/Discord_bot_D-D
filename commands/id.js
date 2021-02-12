@@ -19,7 +19,7 @@ module.exports = {
             console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_id');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        // let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
             if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {

@@ -42,6 +42,9 @@ module.exports = {
             // Version Application
             var version_app = vers.Create.Version;
 
+            // Relase Date Application
+            var Relase_app_date = vers.Create["Date Check"];
+
             // info CPU
             var CPU_name = os.cpus();
             CPU_name = CPU_name[0].model;
@@ -153,7 +156,7 @@ module.exports = {
                 .addField("Hardware Server","CPU: "+CPU_name+"\nCores: "+osutils.cpuCount()+"\n"+total_ram+"\n"+uptime_server)
                 .addField("Demon Node.js","Version: "+process.version)
                 .addField("Dependencies",Dependencies)
-                .addField("Application Bot","Version: v"+version_app+"\n"+uptime_app);
+                .addField("Application Bot","Version: v"+version_app+"\n Relase Date: "+Relase_app_date+"\n"+uptime_app);
             message.channel.send(Container);
 
         } else {

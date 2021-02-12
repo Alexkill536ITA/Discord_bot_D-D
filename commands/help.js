@@ -40,6 +40,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **'+config.prefix+'register** Mostra il link con la guida per registrasi al BOT');
             message.channel.send(Container);
+        } else if (args[0] == "resetpassword") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help resetpassword')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **'+config.prefix+'resetpassword** Genera una nuova Password Temporanea');
+            message.channel.send(Container);
         } else if (args[0] == "roll") {
             Container.setColor([255, 0, 0])
                 .setTitle(`Help Roll`)
@@ -130,7 +136,7 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .addField("💬 Prefix 💬", "• **"+config.prefix+"**")
                 .addField(":question: Help :question:",'• **help** [comando]')
-                .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register**')
+                .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]\n • **version**')
