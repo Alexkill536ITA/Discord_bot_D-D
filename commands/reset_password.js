@@ -39,6 +39,8 @@ module.exports = {
                             .setTimestamp()
                             .setFooter("Data", message.author.displayAvatarURL())
                             .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
+                        message.channel.send(Container);
+                        Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
                             .setTitle('Reset Password')
                             .setDescription(message.author.username+": "+message.author+"\n Usare la Password appena generata per loggarsi")
