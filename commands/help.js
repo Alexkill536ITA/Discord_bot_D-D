@@ -112,6 +112,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi:\n **'+config.prefix+'pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]\n\n **OPZIONI**\n add = Aggiungi\n sub = Togli \n\n Aggiungi o Togli oggetto dal inventario [Opzione]\n Inserire Id Scheda [ID_Scheda]\n Quantità in [Quantità]\n Inseire Si/No [Sincronia]\n Inserire Nome completo dell\'oggetto [Nome oggetto]');
             message.channel.send(Container);
+        } else if (args[0] == "patchnotes") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help patchnotes')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi:\n **'+config.prefix+'patchnotes** \n\n Mostra le modifiche e cambiamenti al bot fatte fino a dora');
+            message.channel.send(Container);
         } else if (args[0] == "setconfig") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help setconfig')
@@ -139,7 +145,7 @@ module.exports = {
                 .addField("👤 Utente 👤",'• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡",'• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
                 .addField("🧰 Tools 🧰",'• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
-                .addField("⚙️ Impostazioni ⚙️", '• **setconfig** [Opzione][Valore]\n • **version**')
+                .addField("⚙️ Impostazioni ⚙️", '• **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version "+vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
             message.channel.send(Container);
         }
