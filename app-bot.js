@@ -99,6 +99,8 @@ function Discord_start() {
             client.commands.get('help').execute(client, message, args);
         } else if (command == 'clearchat') {
             client.commands.get('clearchat').execute(client, message, args);
+        } else if (command == 'patchnotes') {
+            client.commands.get('patchnotes').execute(client,message, args);
         } else if (command == 'setconfig') {
             client.commands.get('setconfig').execute(client,message, args);
         // } else if (command == 'restart') {
