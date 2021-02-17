@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "abae46177303671d441e939ac8cd690f7365043bbabe653d35e80fed70e89e23b2b38a9a51ade5dbbe7aeea2785e7de4b5166ec571cf13137d06defed3af0fc4"
+        "SHA512": "a8812b9705bb5941f52091fc4ac58f1d8b29fb88b0b0017138fa09a7b34e95eb2319fa17b7139c6556f035d700608ea99eb30042dea545296cc0b3cd925f9a22"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -29,7 +29,7 @@
     },
     "exp.js": {
         "name": "exp.js",
-        "SHA512": "9f731fd55c480af887b1e3ffe10d473e05ce9793ba8d60e9df19e49c1a65abdc63a0e0994b566b3384716f497e420e6f5686d069f33f523f9242e073528bf6c3"
+        "SHA512": "1f0507deaf79bbf7c49af2cc6485d4449cc280c9c6be4c3f60fbc01ea02654f7bc496e682c757b165e6d5e42922ca571bc81a3136ef69fa02001217c44b1e8e1"
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
@@ -41,7 +41,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "2f741fddc45e33e995b36f157585029b7107816701d7a5667a7ed14994a52b6b3a32afd2ee868818fb3e8820a91d0a0dce774df6b79245f500534b00cb3ba3a5"
+        "SHA512": "dfb45552e1c03028325e7699fad4c91caf37a533e6731deba01bffac8242c8531ff4f7ee8b461e933de5dfecd39be1b6ed53e035ba5ce91fdbc1c70d32d55787"
     },
     "id.js": {
         "name": "id.js",
@@ -55,9 +55,13 @@
         "name": "money.js",
         "SHA512": "ac0004fc6898671a984a28758893fa25e4d357c6f9025e69dee47e84dcb4f6db9ba9db0c237c92f57feb8089f4e7a28a95b5972bf3da1429a5b3f53b73ad33c3"
     },
+    "patch_notes.js": {
+        "name": "patch_notes.js",
+        "SHA512": "3453e9410d6abe94c8e81baaad92c522223e53ddafcd3f994eb5f124e3f186a697e9da62c799ea2aec2d4712dbd34499f977301192c2a0eaee94de41fa8f7717"
+    },
     "reset_password.js": {
         "name": "reset_password.js",
-        "SHA512": "85397ee36692a10c2438ab37e56566de2a975e7147925e651d5536b9233259053ed54abaf1dc6ae34b4bd191acf80cfbbcc795461633e6a6b6fcc0e1c782a49a"
+        "SHA512": "d293e5bffbf23c750e5348fd12131fefa9f9014afabbf297dac7d46cb0759b6805a4d1c55461015d952bd45ea884844ec874c3b918d20f29152332b6da8893cb"
     },
     "restart_bot.js": {
         "name": "restart_bot.js",
@@ -93,7 +97,7 @@
     },
     "color_gen.js": {
         "name": "color_gen.js",
-        "SHA512": "f8573979128ffe65ef51242367b461a06e4c5017784baaab42f2aba994f9eabbe1db89f665baac270e887a44f0d2b2e9eda533a2e6e9921ba90c8ba2f295adcd"
+        "SHA512": "8c703760165a4e4e2bdeffdd93f3eb0e764810618de4785d0e2a62b51c976857a97dfe714823fb5ae0409d3e269bd0fd3719628cec3ee0d70be055d63915c55e"
     },
     "globals_var.js": {
         "name": "globals_var.js",
@@ -106,7 +110,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.72",
-        "Date Check": "12/02/2021 22:01"
+        "Version": "1.0.73",
+        "Date Check": "17/02/2021 22:19"
     }
 }
