@@ -39,7 +39,7 @@ module.exports = {
                                         var old_value = result[0].Exp;
                                         var new_value = old_value + parseInt(args[1]);
                                         methodDB.exp_update(result[0]._id, new_value);
-                                        LevelUP_auto(result[0]._id,new_value);
+                                        LevelUP_auto(message,result[0].Nome_Discord,result[0]._id,new_value);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ message.author.username)
@@ -76,7 +76,7 @@ module.exports = {
                                             new_value = 0;
                                         }
                                         methodDB.exp_update(result[0]._id, new_value);
-                                        LevelUP_auto(result[0]._id,new_value);
+                                        LevelUP_auto(message,result[0].Nome_Discord,result[0]._id,new_value);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ message.author.username)
@@ -115,42 +115,74 @@ function emit_print(message) {
     message.channel.send(Container);
 }
 
-function LevelUP_auto(id,exp) {
-    if (exp < 4) {
-        methodDB.level_update(id, 3);
+function LevelUP_auto(message,id_discord,id,exp) {
+    if (exp >= 0 && exp < 4) {
+        methodDB.level_update(id, 3);           // 0
+        Manager_role_level(message,id_discord, config.Level["Rame"])
     } else if (exp >= 4 && exp < 9) {
-        methodDB.level_update(id, 4);
+        methodDB.level_update(id, 4);           // 4
+        Manager_role_level(message,id_discord, config.Level["Rame"])
     } else if (exp >= 9 && exp < 15) {
-        methodDB.level_update(id, 5);
-    } else if (exp >= 15 && exp < 23) {
-        methodDB.level_update(id, 6);
-    } else if (exp >= 23 && exp < 32) {
-        methodDB.level_update(id, 7);
-    } else if (exp >= 32 && exp < 42) {
-        methodDB.level_update(id, 8);
-    } else if (exp >= 42 && exp < 53) {
-        methodDB.level_update(id, 9);
-    } else if (exp >= 53 && exp < 65) {
-        methodDB.level_update(id, 10);
-    } else if (exp >= 65 && exp < 78) {
-        methodDB.level_update(id, 11);
-    } else if (exp >= 78 && exp < 92) {
-        methodDB.level_update(id, 12);
-    } else if (exp >= 92 && exp < 107) {
-        methodDB.level_update(id, 13);
-    } else if (exp >= 107 && exp < 123) {
-        methodDB.level_update(id, 14);
-    } else if (exp >= 123 && exp < 140) {
-        methodDB.level_update(id, 15);
-    } else if (exp >= 140 && exp < 158) {
-        methodDB.level_update(id, 16);
-    } else if (exp >= 158 && exp < 177) {
-        methodDB.level_update(id, 17);
-    } else if (exp >= 177 && exp < 197) {
-        methodDB.level_update(id, 18);
-    } else if (exp >= 197 && exp < 218) {
-        methodDB.level_update(id, 19);
-    } else if (exp >= 218) {
-        methodDB.level_update(id, 20);
+        methodDB.level_update(id, 5);           // 9
+        Manager_role_level(message,id_discord, config.Level["Rame"])
+    } else if (exp >= 15 && exp < 22) {
+        methodDB.level_update(id, 6);           // 15
+        Manager_role_level(message,id_discord, config.Level["Bronzo"])
+    } else if (exp >= 22 && exp < 30) {
+        methodDB.level_update(id, 7);           // 22
+        Manager_role_level(message,id_discord, config.Level["Bronzo"])
+    } else if (exp >= 30 && exp < 39) {
+        methodDB.level_update(id, 8);           // 30
+        Manager_role_level(message,id_discord, config.Level["Ferro"])
+    } else if (exp >= 39 && exp < 48) {
+        methodDB.level_update(id, 9);           // 39
+        Manager_role_level(message,id_discord, config.Level["Ferro"])
+    } else if (exp >= 48 && exp < 58) {
+        methodDB.level_update(id, 10);          // 48
+        Manager_role_level(message,id_discord, config.Level["Argento"])
+    } else if (exp >= 58 && exp < 69) {
+        methodDB.level_update(id, 11);          // 58
+        Manager_role_level(message,id_discord, config.Level["Argento"])
+    } else if (exp >= 69 && exp < 81) {
+        methodDB.level_update(id, 12);          // 69
+        Manager_role_level(message,id_discord, config.Level["Electrum"])
+    } else if (exp >= 81 && exp < 93) {
+        methodDB.level_update(id, 13);          // 81
+        Manager_role_level(message,id_discord, config.Level["Electrum"])
+    } else if (exp >= 93 && exp < 106) {
+        methodDB.level_update(id, 14);          // 93
+        Manager_role_level(message,id_discord, config.Level["Oro"])
+    } else if (exp >= 106 && exp < 120) {
+        methodDB.level_update(id, 15);          // 106
+        Manager_role_level(message,id_discord, config.Level["Oro"])
+    } else if (exp >= 120 && exp < 135) {
+        methodDB.level_update(id, 16);          // 120
+        Manager_role_level(message,id_discord, config.Level["Platino"])
+    } else if (exp >= 135 && exp < 151) {
+        methodDB.level_update(id, 17);          // 135
+        Manager_role_level(message,id_discord, config.Level["Platino"])
+    } else if (exp >= 151 && exp < 168) {
+        methodDB.level_update(id, 18);          // 151
+        Manager_role_level(message,id_discord, config.Level["Mithril"])
+    } else if (exp >= 168 && exp < 185) {
+        methodDB.level_update(id, 19);          // 168
+        Manager_role_level(message,id_discord, config.Level["Mithril"])
+    } else if (exp >= 185) {                    
+        methodDB.level_update(id, 20);          // 185
+        Manager_role_level(message,id_discord, config.Level["Adamantio"])
     } 
+}
+
+function Manager_role_level(message,id_discord,level_select) {
+    let member = message.guild.members.cache.get(id_discord);
+    let Role_select = message.guild.roles.cache.get(level_select)
+    if (!member.roles.cache.some(role => role === Role_select)) {
+        for (index in config.Level) {    
+            let Role = message.guild.roles.cache.get(config.Level[index]);
+            if(member.roles.cache.some(role => role === Role)) {
+                member.roles.remove(Role).catch(console.error);
+            }
+        }
+        member.roles.add(Role_select).catch(console.error);
+    }
 }

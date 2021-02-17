@@ -25,8 +25,8 @@ module.exports = {
         Container.setColor([255, 0, 0])
                 .setTitle('Patch Notes')
                 .setDescription('Patch Notes Version: '+vers.Create.Version+' Data: 13/02/2021')
-                .addField('Aggunte Nuove', "• Aggiunto sitema per **Password Dimenticata** \n Valido Lato Web e BOT")
-                .addField('Fix Bug Minori', '• Correzione di testi e errori di aspetto grafico \n Valido Lato Web e BOT')
+                .addField('Aggunte Nuove', "• New systeml leveling e auto add role level")
+                .addField('Fix Bug Minori', '• Correzioni minori')
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version "+vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
         message.channel.send(Container);
