@@ -24,7 +24,7 @@ module.exports = {
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         Container.setColor([255, 0, 0])
                 .setTitle('Patch Notes')
-                .setDescription('Patch Notes Version: '+vers.Create.Version+' Data: 13/02/2021')
+                .setDescription('Patch Notes Version: '+vers.Create.Version+' Data: '+vers.Create["Date Check"])
                 .addField('Aggunte Nuove', "• New systeml leveling e auto add role level")
                 .addField('Fix Bug Minori', '• Correzioni minori')
                 .setThumbnail(botavatar.displayAvatarURL())
