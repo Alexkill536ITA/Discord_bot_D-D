@@ -39,8 +39,8 @@ module.exports = {
                                         var old_value = result[0].Money;
                                         var new_value = old_value + parseFloat(args[1]);
                                         methodDB.money_update(result[0]._id, new_value);
-                                        console.log(result[0].Nome_Discord)
-                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        var nome_temp_stamp = result[0].Nome_Discord
+                                        let member = message.guild.members.cache.get(nome_temp_stamp);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ result[0].Nome_PG)
@@ -77,7 +77,8 @@ module.exports = {
                                             new_value = 0;
                                         }
                                         methodDB.money_update(result[0]._id, new_value);
-                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        var nome_temp_stamp = result[0].Nome_Discord
+                                        let member = message.guild.members.cache.get(nome_temp_stamp);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Schada: '+ result[0].Nome_PG)
