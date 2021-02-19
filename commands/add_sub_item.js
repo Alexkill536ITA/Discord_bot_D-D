@@ -158,11 +158,11 @@ function add_sub(message, args, Scheda_PG, result) {
             Object.assign(inventory, oggetto);
         }
         methodDB.inventory_update(args[1], inventory);
-        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+        // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
         Container = new Discord.MessageEmbed();
         Container.setColor(colrs_set)
             .setTitle('Schada: '+ Scheda_PG.Nome_PG)
-            .setThumbnail(member.user.displayAvatarURL(),true)
+            // .setThumbnail(member.user.displayAvatarURL(),true)
             .addField("Nome", result.nome)
             .addField("Quantità", qut)
             .addField("Sincronia", result.sincronia)
@@ -179,11 +179,11 @@ function add_sub(message, args, Scheda_PG, result) {
             num = num-parseInt(args[2]);
             if (num <= 0 || isNaN(num) == true) {
                 var num_memory = "Non possiede più l'oggetto";
-                let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+                // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                 Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
                     .setTitle('Schada: '+ Scheda_PG.Nome_PG)
-                    .setThumbnail(member.user.displayAvatarURL(),true)
+                    // .setThumbnail(member.user.displayAvatarURL(),true)
                     .addField("Nome", nome_var)
                     .addField("Quantità", num_memory)
                     .addField("Sincronia", inventory[nome_var]['Sincronia'])
@@ -193,10 +193,11 @@ function add_sub(message, args, Scheda_PG, result) {
             } else {
                 inventory[nome_var]['Quantita'] = num;
                 var num_memory = inventory[nome_var]['Quantita'];
+                // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                 Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
                     .setTitle('Schada: '+ message.author.username)
-                    .setThumbnail(message.author.displayAvatarURL(),true)
+                    // .setThumbnail(message.author.displayAvatarURL(),true)
                     .addField("Nome", nome_var)
                     .addField("Quantità", num_memory)
                     .addField("Sincronia", inventory[nome_var]['Sincronia'])
