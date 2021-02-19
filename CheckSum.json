@@ -9,11 +9,11 @@
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
-        "SHA512": "7a9b14efd3d73d835149fff4d045aa1263a4b7a9cf993327b87d686f260c4cb87ac083dca04016ae1bd85c96f7012143969baeb5e3ad7aea66d7448def9100b0"
+        "SHA512": "9d673d51c77300547e6ccca6d89d6a3de24e8adaea48a6c2443b4de1ff7ae5905ee345844cfd9ede69576f51f2d8a9dc252bee404b6e471ddf64d850d11dc600"
     },
     "add_sub_item.js": {
         "name": "add_sub_item.js",
-        "SHA512": "75915e0b6e64b793234487a9cacbc8b0ad5249e5b2189cb790ed8a331ce921f9cc7d74cf98af9878a30326aa6d883c574626c4c2b635b8ea6d33efb8f1ee7959"
+        "SHA512": "da27842b31c4d0e1fde55a938d76153665f5ee506752ea1d6dd249ccaef62085de85bb7b25c26457b186b336644da01f14e63391c5912b73a843045721aa5e4f"
     },
     "avatar.js": {
         "name": "avatar.js",
@@ -29,7 +29,7 @@
     },
     "exp.js": {
         "name": "exp.js",
-        "SHA512": "1f0507deaf79bbf7c49af2cc6485d4449cc280c9c6be4c3f60fbc01ea02654f7bc496e682c757b165e6d5e42922ca571bc81a3136ef69fa02001217c44b1e8e1"
+        "SHA512": "448970e101876bf958fecebe15e8bc770dadbd5f7c0929953fc70ea826cb5933741123e7fe0247670b1a15a9f669b56a656290fae4657f2386cac08e06364984"
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
@@ -53,11 +53,11 @@
     },
     "money.js": {
         "name": "money.js",
-        "SHA512": "ac0004fc6898671a984a28758893fa25e4d357c6f9025e69dee47e84dcb4f6db9ba9db0c237c92f57feb8089f4e7a28a95b5972bf3da1429a5b3f53b73ad33c3"
+        "SHA512": "a3b24149830ac6c7cdf57d4d28ef3c8bccad215017577cd973e33dfe62664abd197cfc4c6fe781ee1059e3f165f53b4a746d08f18426c57eefee4052cfa45841"
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "3453e9410d6abe94c8e81baaad92c522223e53ddafcd3f994eb5f124e3f186a697e9da62c799ea2aec2d4712dbd34499f977301192c2a0eaee94de41fa8f7717"
+        "SHA512": "b3b2a7104d98d90bc79a0f58759396e392e05378e803ed763c834e256c2cd218dedc662d60dda0a687bbb78f73e21d47f6b1ee9e5a1d863dd4cc849126976a52"
     },
     "reset_password.js": {
         "name": "reset_password.js",
@@ -110,7 +110,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.73",
-        "Date Check": "17/02/2021 22:19"
+        "Version": "1.0.74",
+        "Date Check": "19/02/2021 23:05"
     }
 }

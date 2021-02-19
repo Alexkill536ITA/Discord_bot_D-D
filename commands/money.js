@@ -39,10 +39,11 @@ module.exports = {
                                         var old_value = result[0].Money;
                                         var new_value = old_value + parseFloat(args[1]);
                                         methodDB.money_update(result[0]._id, new_value);
+                                        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ message.author.username)
-                                            .setThumbnail(message.author.displayAvatarURL(),true)
+                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
@@ -75,10 +76,11 @@ module.exports = {
                                             new_value = 0;
                                         }
                                         methodDB.money_update(result[0]._id, new_value);
+                                        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ message.author.username)
-                                            .setThumbnail(message.author.displayAvatarURL(),true)
+                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());

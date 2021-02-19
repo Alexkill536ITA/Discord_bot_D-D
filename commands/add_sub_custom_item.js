@@ -74,10 +74,11 @@ module.exports = {
                         }
                         methodDB.settab_db("Schede_PG");
                         methodDB.inventory_update(args[1], inventory);
+                        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
-                            .setTitle('Schada: '+ message.author.username)
-                            .setThumbnail(message.author.displayAvatarURL(),true)
+                            .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                            .setThumbnail(member.user.displayAvatarURL(),true)
                             .addField("Nome", nome)
                             .addField("Quantità", args[2])
                             .addField("Sincronia", args[3])
@@ -91,9 +92,10 @@ module.exports = {
                             num = num-parseInt(args[2]);
                             if (num <= 0 || isNaN(num) == true) {
                                 var num_memory = "Non possiede più l'oggetto";
+                                let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: '+ message.author.username)
-                                    .setThumbnail(message.author.displayAvatarURL(),true)
+                                    .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                                    .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)
                                     .addField("Sincronia", inventory[nome]['Sincronia'])
@@ -103,9 +105,10 @@ module.exports = {
                             } else {
                                 inventory[nome]['Quantita'] = num;
                                 var num_memory = inventory[nome]['Quantita'];
+                                let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: '+ message.author.username)
-                                    .setThumbnail(message.author.displayAvatarURL(),true)
+                                    .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                                    .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)
                                     .addField("Sincronia", inventory[nome]['Sincronia'])

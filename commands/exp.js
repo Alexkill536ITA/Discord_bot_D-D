@@ -40,10 +40,11 @@ module.exports = {
                                         var new_value = old_value + parseInt(args[1]);
                                         methodDB.exp_update(result[0]._id, new_value);
                                         LevelUP_auto(message,result[0].Nome_Discord,result[0]._id,new_value);
+                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ message.author.username)
-                                            .setThumbnail(message.author.displayAvatarURL(),true)
+                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
@@ -77,10 +78,11 @@ module.exports = {
                                         }
                                         methodDB.exp_update(result[0]._id, new_value);
                                         LevelUP_auto(message,result[0].Nome_Discord,result[0]._id,new_value);
+                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ message.author.username)
-                                            .setThumbnail(message.author.displayAvatarURL(),true)
+                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
