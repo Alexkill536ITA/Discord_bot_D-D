@@ -168,7 +168,7 @@ function add_item(message, args, Scheda_PG, result) {
             var oggetto = {};
             var ogg_temp = {};
             ogg_temp['Nome'] = nome_var;
-            ogg_temp['Quantita'] = parseInt(args[2]);
+            ogg_temp['Quantita'] = parseInt(args[1]);
             ogg_temp['Sincronia'] = result.sincronia;
             oggetto[nome_var] = ogg_temp; 
             qut = parseInt(args[2]);
