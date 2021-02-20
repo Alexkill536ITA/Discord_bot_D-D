@@ -48,7 +48,8 @@ module.exports = {
                                     .addField('\u200b', '\u200b')
                                     .addField("Nome",js_result['Nome_PG'],true)
                                     .addField("Razza",js_result['Razza'],true)
-                                    .addField("Classe",js_result['Classe'] + " Sotto Classe",js_result['Sotto Classe'],true)
+                                    .addField("Classe",js_result['Classe'],true)
+                                    .addField("Sotto Classe",js_result['Sotto Classe'],true)
                                     .addField("Background",js_result['Background'],true)
                                     .addField("Money",js_result['Money']);
                                 message.channel.send(Container)
