@@ -151,12 +151,12 @@ function add_item(message, args, Scheda_PG, result) {
     var colrs_set = clor_gen.rand_Color();
     var qut = 0;
     var nome_var = result.nome;
-    var costo = result.costo;
+    var costo = parseInt(result.costo);
     var id_sheda = Scheda_PG['_id'];
     var inventory = Scheda_PG['Inventory'];
     var money_pg = Scheda_PG['Money'];
     var check_nam = inventory[nome_var];
-    var consto_fin = costo*args[2];
+    var consto_fin = costo*parseInt(args[1]);
     money_pg = money_pg - consto_fin
     if (money_pg >= 0) {
         if (check_nam !== undefined) {
