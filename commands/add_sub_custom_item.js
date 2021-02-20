@@ -36,6 +36,7 @@ module.exports = {
                             nome += " "+args[i];
                         }
                     }
+                    nome = String(nome).toLowerCase();
 
                     if (args[3] == "Si" || args[3] =="si" || args[3] == "SI" ) {
                         sinc = 1;

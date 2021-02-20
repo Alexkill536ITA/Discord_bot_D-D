@@ -25,7 +25,7 @@ module.exports = {
         Container.setColor([255, 0, 0])
                 .setTitle('Patch Notes')
                 .setDescription('Patch Notes Version: '+vers.Create.Version+' Data: '+vers.Create["Date Check"])
-                .addField('Aggunte Nuove', "• New systeml leveling e auto add role level")
+                .addField('Aggunte Nuove', "• Add Shop System")
                 .addField('Correzioni', "• Fix message return exe/add sub item/money")
                 .addField('Fix Bug Minori', '• Correzioni minori')
                 .setThumbnail(botavatar.displayAvatarURL())

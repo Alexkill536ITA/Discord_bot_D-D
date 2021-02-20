@@ -30,6 +30,7 @@ module.exports = {
                     for (let index = 4; index < args.length; index++) {
                         nome += " "+args[index];
                     }
+                    nome = String(nome).toLowerCase();
                     var on_sevice_db = await methodDB.open_db();
                     if (on_sevice_db != 1) {    
                         methodDB.settab_db("Oggeti_Di_Gioco");
@@ -71,6 +72,11 @@ module.exports = {
                                         return 1;
                                     }
                                 }
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Oggetto non trovato');
+                                message.channel.send(Container);
                             }
                         });
                     }
@@ -116,6 +122,11 @@ module.exports = {
                                         return 1;
                                     }
                                 }
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Oggetto non trovato');
+                                message.channel.send(Container);
                             }
                         });
                     }
