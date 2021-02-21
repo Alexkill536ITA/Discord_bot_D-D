@@ -17,18 +17,18 @@ const bcrypt = require('bcryptjs');
 module.exports = {
     name: 'resetpassword',
     description: "Recover Password",
-    async execute(client, message, args){
+    async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute Recover_Password');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute Recover_Password');
         }
         var Container = new Discord.MessageEmbed();
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             var on_sevice_db = await methodDB.open_db();
             if (on_sevice_db != 1) {
                 methodDB.settab_db("Utenti_web")
                 var cursor = methodDB.serachbyid_user(message.author.id);
-                cursor.then(async function(result) {
+                cursor.then(async function (result) {
                     if (result != null) {
                         var temp_pass = generatePassword();
                         let hashedPassword = await bcrypt.hash(temp_pass, 8)
@@ -43,9 +43,9 @@ module.exports = {
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
                             .setTitle('Reset Password')
-                            .setDescription(message.author.username+": "+message.author+"\n Usare la Password appena generata per loggarsi")
-                            .addField("Username", result.username )
-                            .addField("Password Temp", temp_pass );
+                            .setDescription(message.author.username + ": " + message.author + "\n Usare la Password appena generata per loggarsi")
+                            .addField("Username", result.username)
+                            .addField("Password Temp", temp_pass);
                         message.author.send(Container);
                     } else {
                         Container.setColor([255, 0, 0])
@@ -62,8 +62,8 @@ module.exports = {
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autoriazato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autoriazato a usare questo comando');
             message.channel.send(Container);
         }
     }

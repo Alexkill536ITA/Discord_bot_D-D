@@ -15,50 +15,50 @@ const color = require("ansi-colors");
 module.exports = {
     name: 'oggetto',
     description: "get info items",
-    async execute(client,message, args){
+    async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_item_info');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_item_info');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             if (args[0]) {
                 if (isNaN(parseInt(args[0]))) {
                     var nome = args[0];
                     for (let index = 1; index < args.length; index++) {
-                        nome += " "+args[index];
+                        nome += " " + args[index];
                     }
                     var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {    
+                    if (on_sevice_db != 1) {
                         methodDB.settab_db("Oggeti_Di_Gioco");
                         var cursor = methodDB.serachbynome_obj(nome);
                         cursor.then(function (result) {
-                            if(result) {
+                            if (result) {
                                 if (result == null) {
                                     Container.setColor([255, 0, 0])
                                         .setAuthor(`Richiesta di: ${message.author.username}`)
                                         .setTitle('Errore Oggetto non trovato');
                                     message.channel.send(Container);
                                 } else {
-                                    emiter_output(client,message,result);
+                                    emiter_output(client, message, result);
                                 }
                             }
                         });
                     }
                 } else {
                     var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {    
+                    if (on_sevice_db != 1) {
                         methodDB.settab_db("Oggeti_Di_Gioco");
                         var cursor = methodDB.serachbyid_obj(args[0]);
                         cursor.then(function (result) {
-                            if(result) {
+                            if (result) {
                                 if (result == null) {
                                     Container.setColor([255, 0, 0])
                                         .setAuthor(`Richiesta di: ${message.author.username}`)
                                         .setTitle('Errore Oggetto non trovato');
                                     message.channel.send(Container);
                                 } else {
-                                    emiter_output(client,message,result);
+                                    emiter_output(client, message, result);
                                 }
                             }
                         });
@@ -66,20 +66,20 @@ module.exports = {
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                .setAuthor(`Comando Oggetto`)
-                .setTitle('Sintassi **'+config.prefix+'oggetto** [Id/Nome]');
+                    .setAuthor(`Comando Oggetto`)
+                    .setTitle('Sintassi **' + config.prefix + 'oggetto** [Id/Nome]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }
 }
 
-async function emiter_output(client,message,cursor) {
+async function emiter_output(client, message, cursor) {
     var colrs_set = clor_gen.rand_Color();
     Container = new Discord.MessageEmbed();
     let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
@@ -96,14 +96,14 @@ async function emiter_output(client,message,cursor) {
         var sinc = "NO";
     }
     Container.setColor(colrs_set)
-    .setThumbnail(botavatar.displayAvatarURL())
-    .setAuthor(`Richiesta di: ${message.author.username}`)
-    .setTitle('Oggetto: '+cursor.nome)
-    .addField('Id', cursor.Id,true)
-    .addField('Rarità', cursor.rarita,true)
-    .addField('Costo', cursor.costo,true)
-    .addField('Unità/Note', note,true)
-    .addField('Sinronia', sinc,true);
+        .setThumbnail(botavatar.displayAvatarURL())
+        .setAuthor(`Richiesta di: ${message.author.username}`)
+        .setTitle('Oggetto: ' + cursor.nome)
+        .addField('Id', cursor.Id, true)
+        .addField('Rarità', cursor.rarita, true)
+        .addField('Costo', cursor.costo, true)
+        .addField('Unità/Note', note, true)
+        .addField('Sinronia', sinc, true);
     if (text_obj != '' && text_obj.length <= 1024) {
         Container.addField('Effetto: ', text_obj);
         message.channel.send(Container);
@@ -121,14 +121,14 @@ async function emiter_output(client,message,cursor) {
         var j = 0;
         for (let i = 0; i < text_obj.length; i++) {
             text_sen[j] += text_obj.charAt(i);
-            text_sen[j] = text_sen[j].replace("undefined","");
+            text_sen[j] = text_sen[j].replace("undefined", "");
             x++;
             if (x == 1999) {
                 x = 0;
                 j++;
             }
         }
-        for (let y = 0; y <= j ; y++) {
+        for (let y = 0; y <= j; y++) {
             await message.channel.send(text_sen[y]);
             await sleep(500);
         }

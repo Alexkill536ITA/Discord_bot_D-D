@@ -22,7 +22,7 @@ const config = require("./config.json");
 /*                    Check Files                       */
 //------------------------------------------------------//
 async function main() {
-    console.log("[ "+color.blue('INFO')+"  ] Start Process");
+    console.log("[ " + color.blue('INFO') + "  ] Start Process");
     // var pass = await CheckSum.CheckSum_file();
     // if (pass == 1) {
     //     console.log("[ "+color.blue('INFO')+"  ] Stop Process");
@@ -31,7 +31,7 @@ async function main() {
     //     console.log("[ "+color.blue('INFO')+"  ] Start Service...");
     //     Discord_start();
     // }
-    console.log("[ "+color.blue('INFO')+"  ] Start Service...");
+    console.log("[ " + color.blue('INFO') + "  ] Start Service...");
     Discord_start();
 }
 
@@ -45,15 +45,15 @@ function Discord_start() {
 
     // Start Bot
     client.once('ready', () => {
-        console.info('[  '+color.green('OK')+'   ] Service Online');
-        console.info('[ '+color.blue('INFO')+'  ] Logged in as ['+color.cyan(client.user.tag)+']');
+        console.info('[  ' + color.green('OK') + '   ] Service Online');
+        console.info('[ ' + color.blue('INFO') + '  ] Logged in as [' + color.cyan(client.user.tag) + ']');
         Event_time.timer(client);
     });
 
     // Load File Commands
     client.commands = new Discord.Collection();
     const commandFiles = cmd_fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-    for(const file of commandFiles) {
+    for (const file of commandFiles) {
         const command = require(`./commands/${file}`);
         client.commands.set(command.name, command);
     }
@@ -74,43 +74,43 @@ function Discord_start() {
         } else if (command == 'resetpassword') {
             client.commands.get('resetpassword').execute(client, message, args);
         } else if (command == 'roll') {
-            client.commands.get('roll').execute(client, message,args);
+            client.commands.get('roll').execute(client, message, args);
         } else if (command == 'math') {
-            client.commands.get('math').execute(client, message,args);
+            client.commands.get('math').execute(client, message, args);
         } else if (command == 'pg') {
-            client.commands.get('pg').execute(message,args);
+            client.commands.get('pg').execute(message, args);
         } else if (command == 'pglist') {
-            client.commands.get('pglist').execute(message,args);
+            client.commands.get('pglist').execute(message, args);
         } else if (command == 'pginventario') {
-            client.commands.get('pginventario').execute(message,args);
+            client.commands.get('pginventario').execute(message, args);
         } else if (command == 'money') {
-            client.commands.get('money').execute(message,args);
+            client.commands.get('money').execute(message, args);
         } else if (command == 'milestone') {
-            client.commands.get('milestone').execute(message,args);
+            client.commands.get('milestone').execute(message, args);
         } else if (command == 'oggetto') {
-            client.commands.get('oggetto').execute(client, message,args);
+            client.commands.get('oggetto').execute(client, message, args);
         } else if (command == 'pgoggetto') {
-            client.commands.get('pgoggetto').execute(client, message,args);
+            client.commands.get('pgoggetto').execute(client, message, args);
         } else if (command == 'pgcustom') {
-            client.commands.get('pgcustom').execute(client, message,args);
+            client.commands.get('pgcustom').execute(client, message, args);
         } else if (command == 'shop') {
-            client.commands.get('shop').execute(client, message,args);
+            client.commands.get('shop').execute(client, message, args);
         } else if (command == 'meteo') {
-            client.commands.get('meteo').execute(client, message,args);
+            client.commands.get('meteo').execute(client, message, args);
         } else if (command == 'help') {
             client.commands.get('help').execute(client, message, args);
         } else if (command == 'clearchat') {
             client.commands.get('clearchat').execute(client, message, args);
         } else if (command == 'patchnotes') {
-            client.commands.get('patchnotes').execute(client,message, args);
+            client.commands.get('patchnotes').execute(client, message, args);
         } else if (command == 'setconfig') {
-            client.commands.get('setconfig').execute(client,message, args);
-        // } else if (command == 'restart') {
-        //     client.commands.get('restart').execute(client, message, args);
+            client.commands.get('setconfig').execute(client, message, args);
+            // } else if (command == 'restart') {
+            //     client.commands.get('restart').execute(client, message, args);
         } else if (command == 'version') {
-            client.commands.get('version').execute(client,message, args);
+            client.commands.get('version').execute(client, message, args);
         } else {
-            message.channel.send('Usare il comando **'+config.prefix+'help** per la lista dei comandi');
+            message.channel.send('Usare il comando **' + config.prefix + 'help** per la lista dei comandi');
         };
     });
 }

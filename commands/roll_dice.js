@@ -17,14 +17,14 @@ let diceRoller = new DiceRoller();
 module.exports = {
     name: 'roll',
     description: "rolla dadi",
-    async execute(client, message, args){
+    async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute roll_dice');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute roll_dice');
         }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var result = diceRoller.roll(args[0]);
@@ -32,26 +32,26 @@ module.exports = {
                     Container.setColor(colrs_set)
                         .setTitle('Roll dice')
                         .setThumbnail(botavatar.displayAvatarURL())
-                        .addField("Risultato", args[0]+" = ```"+result['result']+"```");
+                        .addField("Risultato", args[0] + " = ```" + result['result'] + "```");
                     message.reply(" ");
                     message.channel.send(Container);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando Roll`)
-                        .setTitle('Sintassi **'+config.prefix+'roll** Es:[1d20+5]');
-                    message.reply(" ");   
+                        .setTitle('Sintassi **' + config.prefix + 'roll** Es:[1d20+5]');
+                    message.reply(" ");
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando Roll`)
-                    .setTitle('Sintassi **'+config.prefix+'roll** Es:[1d20+5]');        
+                    .setTitle('Sintassi **' + config.prefix + 'roll** Es:[1d20+5]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }

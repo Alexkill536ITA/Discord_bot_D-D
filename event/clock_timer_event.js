@@ -13,12 +13,12 @@ const config = require("../config.json");
 exports.timer = async (client) => {
     var ms = 0;
     while (1) {
-        ms = check_date(client)-1000;
+        ms = check_date(client) - 1000;
         await sleep(ms);
         await sleep(1000);
     }
 }
-            
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -33,8 +33,8 @@ function check_date(client) {
     var minuti = today.getMinutes();
     var sec = today.getSeconds();
     var set_event = config.set_event_meteo.split(':');
-    today = new Date(year,month,day,ora,minuti,sec);
-    var event_day = new Date(year,month,day,set_event[0],set_event[1],00);
+    today = new Date(year, month, day, ora, minuti, sec);
+    var event_day = new Date(year, month, day, set_event[0], set_event[1], 00);
 
     if (event_day < today) {
         event_day.setDate(event_day.getDate() + 1);
@@ -49,29 +49,29 @@ function check_date(client) {
     msec -= mm * 1000 * 60;
     var ss = Math.floor(msec / 1000);
     msec -= ss * 1000;
-    var result ="";
+    var result = "";
     result += "Prossimo evento tra: ";
-    if(hh != 0) {
+    if (hh != 0) {
         result += hh;
         result += "h ";
-    }    
-    if(mm != 0) {
-        result +=  mm;
-        result +=  "m ";
     }
-    if(ss != 0) {
+    if (mm != 0) {
+        result += mm;
+        result += "m ";
+    }
+    if (ss != 0) {
         result += ss;
-        result +=  "s";
+        result += "s";
     }
-    
+
     if (result == 'Prossimo evento tra: ') {
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         out = meteo.set_meteo_out();
         out.setThumbnail(botavatar.displayAvatarURL());
         client.channels.cache.get(config.event_chat_meteo).send(out);
-        console.log('[ '+color.magenta('EVENT')+' ] Compleate Send EVENT');
+        console.log('[ ' + color.magenta('EVENT') + ' ] Compleate Send EVENT');
     } else {
-        console.log('[ '+color.magenta('EVENT')+' ] '+result);
+        console.log('[ ' + color.magenta('EVENT') + ' ] ' + result);
     }
     return diff;
 }

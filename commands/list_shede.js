@@ -19,11 +19,11 @@ module.exports = {
     description: "Lista Personaggi",
     async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_list_schedule');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_list_schedule');
         }
         var Container = new Discord.MessageEmbed();
         // let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var autore = message.mentions.users.first();
@@ -35,11 +35,11 @@ module.exports = {
                 if (on_sevice_db != 1) {
                     methodDB.settab_db("Schede_PG");
                     var cursor = methodDB.serachbylistpg(id_discord);
-                    cursor.then(function(result) {
+                    cursor.then(function (result) {
                         if (result.length != 0) {
                             if (result.length >= 2) {
                                 const embeds = [];
-                                for (let i=0; i <= result.length; i++) {
+                                for (let i = 0; i <= result.length; i++) {
                                     embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
                                 }
                                 const Embeds = new Pagination.Embeds()
@@ -48,12 +48,12 @@ module.exports = {
                                     .setChannel(message.channel)
                                     .setPageIndicator(false)
                                     .setColor(colrs_set)
-                                    .setTitle('Lista Schada PG: '+ autore.username)
-                                    .setThumbnail(autore.displayAvatarURL(),true)
-                                    .addField("N:", result.length,true)
+                                    .setTitle('Lista Schada PG: ' + autore.username)
+                                    .setThumbnail(autore.displayAvatarURL(), true)
+                                    .addField("N:", result.length, true)
                                     .addField('\u200b', '\u200b')
-                                    .addField("ID Scheda",result[0]._id,true)
-                                    .addField("Nome PG",result[0].Nome_PG,true)
+                                    .addField("ID Scheda", result[0]._id, true)
+                                    .addField("Nome PG", result[0].Nome_PG, true)
                                     .setDisabledNavigationEmojis(['all'])
                                     .setDeleteOnTimeout(false)
                                     .setFunctionEmojis({
@@ -84,17 +84,17 @@ module.exports = {
                             } else {
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)
-                                    .setTitle('Lista Schede PG: '+ autore.username)
-                                    .setThumbnail(autore.displayAvatarURL(),true)
-                                    .addField("ID Scheda",result[0]._id)
-                                    .addField("Nome",result[0].Nome_PG,);
+                                    .setTitle('Lista Schede PG: ' + autore.username)
+                                    .setThumbnail(autore.displayAvatarURL(), true)
+                                    .addField("ID Scheda", result[0]._id)
+                                    .addField("Nome", result[0].Nome_PG,);
                                 message.channel.send(Container);
                             }
                         } else {
                             Container = new Discord.MessageEmbed();
                             Container.setColor([255, 0, 0])
                                 .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Utente non trovato');   
+                                .setTitle('Errore Utente non trovato');
                             message.channel.send(Container);
                         }
                     });
@@ -103,14 +103,14 @@ module.exports = {
                 Container = new Discord.MessageEmbed();
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando pglist`)
-                    .setTitle('Sintassi **'+config.prefix+'pglist** [@utente]');   
+                    .setTitle('Sintassi **' + config.prefix + 'pglist** [@utente]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
-        }    
+        }
     }
 }

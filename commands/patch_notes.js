@@ -16,20 +16,20 @@ const { version, versions } = require("process");
 module.exports = {
     name: 'patchnotes',
     description: "Patch Notes",
-    async execute(client, message, args){
+    async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_help');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_help');
         }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         Container.setColor([255, 0, 0])
-                .setTitle('Patch Notes')
-                .setDescription('Patch Notes Version: '+vers.Create.Version+' Data: '+vers.Create["Date Check"])
-                .addField('Aggunte Nuove', "• Add Shop System")
-                .addField('Correzioni', "• Fix message return exe/add sub item/money")
-                .addField('Fix Bug Minori', '• Correzioni minori')
-                .setThumbnail(botavatar.displayAvatarURL())
-                .setFooter("Bot by Alexkill ITA#3593                                                                                                Version "+vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
+            .setTitle('Patch Notes')
+            .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
+            .addField('Aggunte Nuove', "• Add Shop System")
+            .addField('Correzioni', "• Fix message return exe/add sub item/money")
+            .addField('Fix Bug Minori', '• Correzioni minori')
+            .setThumbnail(botavatar.displayAvatarURL())
+            .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
         message.channel.send(Container);
     }
 }

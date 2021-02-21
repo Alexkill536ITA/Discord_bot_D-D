@@ -8,12 +8,12 @@
 const config = require("../config.json");
 const color = require("ansi-colors");
 
-exports.rand_Color = function() {
+exports.rand_Color = function () {
     if (config.Debug_Level == "DEBUG") {
-        console.log('[ '+color.cyan('DEBUG')+' ] Event Generate color');
+        console.log('[ ' + color.cyan('DEBUG') + ' ] Event Generate color');
     }
     if (config.random_color_enable == "true") {
-        var red  = 0;
+        var red = 0;
         var gren = 0;
         var blue = 0;
         min = Math.ceil(0);
@@ -25,5 +25,5 @@ exports.rand_Color = function() {
     } else {
         return [255, 0, 0];
     }
-    
+
 }

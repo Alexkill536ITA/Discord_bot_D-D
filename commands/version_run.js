@@ -9,7 +9,7 @@ const { DiscordAPIError } = require("discord.js");
 const Discord = require('discord.js');
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
-const color =  require("ansi-colors");
+const color = require("ansi-colors");
 const vers = require("../CheckSum.json");
 const lib = require("../package.json");
 const os = require("os");
@@ -21,20 +21,20 @@ const { prototype } = require("module");
 module.exports = {
     name: 'version',
     description: "version",
-    execute(client, message, args){
+    execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute get_version');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_version');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
 
             // Operation System
             var type_run = os.type();
             var platform_run = os.platform();
             var release_run = os.release();
             var arch_run = os.arch();
-            var Name_run = osName(platform_run,release_run);
+            var Name_run = osName(platform_run, release_run);
 
             // Version Node.js
             var version_node = process.version;
@@ -50,46 +50,46 @@ module.exports = {
             CPU_name = CPU_name[0].model;
 
             // info RAM
-            var total_memory = os.totalmem(); 
-            var total_mem_in_kb = total_memory/1024; 
-            var total_mem_in_mb = total_mem_in_kb/1024; 
-            var total_mem_in_gb = total_mem_in_mb/1024; 
-            total_mem_in_kb = Math.floor(total_mem_in_kb); 
-            total_mem_in_mb = Math.floor(total_mem_in_mb); 
-            total_mem_in_gb = Math.floor(total_mem_in_gb); 
-            total_mem_in_mb = total_mem_in_mb%1024; 
-            total_mem_in_kb = total_mem_in_kb%1024; 
-            total_ram = "Total memory: "+total_mem_in_gb +"GB "+total_mem_in_mb+"MB "+ total_mem_in_kb+"KB";
+            var total_memory = os.totalmem();
+            var total_mem_in_kb = total_memory / 1024;
+            var total_mem_in_mb = total_mem_in_kb / 1024;
+            var total_mem_in_gb = total_mem_in_mb / 1024;
+            total_mem_in_kb = Math.floor(total_mem_in_kb);
+            total_mem_in_mb = Math.floor(total_mem_in_mb);
+            total_mem_in_gb = Math.floor(total_mem_in_gb);
+            total_mem_in_mb = total_mem_in_mb % 1024;
+            total_mem_in_kb = total_mem_in_kb % 1024;
+            total_ram = "Total memory: " + total_mem_in_gb + "GB " + total_mem_in_mb + "MB " + total_mem_in_kb + "KB";
 
             // Uptime Server Host:
-            var ut_sec = os.uptime(); 
-            var ut_min = ut_sec/60; 
-            var ut_hour = ut_min/60;
-            var ut_day = ut_hour/24;
-            ut_sec = Math.floor(ut_sec); 
-            ut_min = Math.floor(ut_min); 
-            ut_hour = Math.floor(ut_hour); 
+            var ut_sec = os.uptime();
+            var ut_min = ut_sec / 60;
+            var ut_hour = ut_min / 60;
+            var ut_day = ut_hour / 24;
+            ut_sec = Math.floor(ut_sec);
+            ut_min = Math.floor(ut_min);
+            ut_hour = Math.floor(ut_hour);
             ut_day = Math.floor(ut_day);
-            ut_hour = ut_hour%60; 
-            ut_min = ut_min%60; 
-            ut_sec = ut_sec%60;
-            ut_day = ut_day%24;
-            var uptime_server = "Up time Server: "+ut_day+"d:"+ut_hour+"h:"+ut_min+"m:" +ut_sec+"s";
+            ut_hour = ut_hour % 60;
+            ut_min = ut_min % 60;
+            ut_sec = ut_sec % 60;
+            ut_day = ut_day % 24;
+            var uptime_server = "Up time Server: " + ut_day + "d:" + ut_hour + "h:" + ut_min + "m:" + ut_sec + "s";
 
             // Uptime Application:
-            var ap_sec = process.uptime(); 
-            var ap_min = ap_sec/60; 
-            var ap_hour = ap_min/60;
-            var ap_day = ap_hour/24;
-            ap_sec = Math.floor(ap_sec); 
-            ap_min = Math.floor(ap_min); 
-            ap_hour = Math.floor(ap_hour); 
+            var ap_sec = process.uptime();
+            var ap_min = ap_sec / 60;
+            var ap_hour = ap_min / 60;
+            var ap_day = ap_hour / 24;
+            ap_sec = Math.floor(ap_sec);
+            ap_min = Math.floor(ap_min);
+            ap_hour = Math.floor(ap_hour);
             ap_day = Math.floor(ap_day);
-            ap_hour = ap_hour%60; 
-            ap_min = ap_min%60; 
-            ap_sec = ap_sec%60;
-            ap_day = ap_day%24;
-            var uptime_app = "Up time App: "+ap_day+"d:"+ap_hour+"h:"+ap_min+"m:" +ap_sec+"s";
+            ap_hour = ap_hour % 60;
+            ap_min = ap_min % 60;
+            ap_sec = ap_sec % 60;
+            ap_day = ap_day % 24;
+            var uptime_app = "Up time App: " + ap_day + "d:" + ap_hour + "h:" + ap_min + "m:" + ap_sec + "s";
 
             // set Img os
             if (platform_run == "win32") {
@@ -119,50 +119,50 @@ module.exports = {
             // Dependencies:
             var Dependencies = ""
             for (a in lib.dependencies) {
-                Dependencies = Dependencies+a+": "+lib.dependencies[a]+"\n";
+                Dependencies = Dependencies + a + ": " + lib.dependencies[a] + "\n";
             }
 
             // Output
             if (config.Debug_Level == "DEBUG") {
                 var Dep = "";
                 var run_1 = false;
-                console.log("[ "+color.cyan('DEBUG')+" ] OS Name: "+Name_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] Type: "+type_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] Platform: "+platform_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] Release: "+release_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] Arch: "+arch_run);
-                console.log("[ "+color.cyan('DEBUG')+" ] CPU: "+CPU_name);
-                console.log("[ "+color.cyan('DEBUG')+" ] Cores: "+osutils.cpuCount());
-                console.log("[ "+color.cyan('DEBUG')+" ] "+total_ram);
-                console.log("[ "+color.cyan('DEBUG')+" ] "+uptime_server);
-                console.log("[ "+color.cyan('DEBUG')+" ] Node.js: "+version_node);
+                console.log("[ " + color.cyan('DEBUG') + " ] OS Name: " + Name_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] Type: " + type_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] Platform: " + platform_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] Release: " + release_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] Arch: " + arch_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] CPU: " + CPU_name);
+                console.log("[ " + color.cyan('DEBUG') + " ] Cores: " + osutils.cpuCount());
+                console.log("[ " + color.cyan('DEBUG') + " ] " + total_ram);
+                console.log("[ " + color.cyan('DEBUG') + " ] " + uptime_server);
+                console.log("[ " + color.cyan('DEBUG') + " ] Node.js: " + version_node);
                 for (a in lib.dependencies) {
                     if (run_1 == false) {
-                        Dep = "[ "+color.cyan('DEBUG')+" ] "+a+": "+lib.dependencies[a];
+                        Dep = "[ " + color.cyan('DEBUG') + " ] " + a + ": " + lib.dependencies[a];
                         run_1 = true;
                     } else {
-                        Dep = Dep+"\n[ "+color.cyan('DEBUG')+" ] "+a+": "+lib.dependencies[a];
+                        Dep = Dep + "\n[ " + color.cyan('DEBUG') + " ] " + a + ": " + lib.dependencies[a];
                     }
                 }
-                console.log("[ "+color.cyan('DEBUG')+" ] Dependencies:\n"+Dep);
-                console.log("[ "+color.cyan('DEBUG')+" ] app: "+version_app);
-                console.log("[ "+color.cyan('DEBUG')+" ] "+uptime_app);
+                console.log("[ " + color.cyan('DEBUG') + " ] Dependencies:\n" + Dep);
+                console.log("[ " + color.cyan('DEBUG') + " ] app: " + version_app);
+                console.log("[ " + color.cyan('DEBUG') + " ] " + uptime_app);
             }
 
             Container.setColor([255, 0, 0])
                 .setTitle("Version Bot and Info Server Host")
                 .setThumbnail(img_os)
-                .addField("Operation System","OS Name: "+Name_run+"\nType: "+type_run+"\nPlatform: "+platform_run+"\nRelease: "+release_run+"\narch: "+arch_run)
-                .addField("Hardware Server","CPU: "+CPU_name+"\nCores: "+osutils.cpuCount()+"\n"+total_ram+"\n"+uptime_server)
-                .addField("Demon Node.js","Version: "+process.version)
-                .addField("Dependencies",Dependencies)
-                .addField("Application Bot","Version: v"+version_app+"\n Relase Date: "+Relase_app_date+"\n"+uptime_app);
+                .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run)
+                .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n" + total_ram + "\n" + uptime_server)
+                .addField("Demon Node.js", "Version: " + process.version)
+                .addField("Dependencies", Dependencies)
+                .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
             message.channel.send(Container);
 
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autoriazato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autoriazato a usare questo comando');
             message.channel.send(Container);
         }
     }

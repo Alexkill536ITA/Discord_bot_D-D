@@ -18,11 +18,11 @@ module.exports = {
     description: "Aggiungi o togli denaro",
     async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute add_sub_money');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_money');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0] == "add" || args[0] == "-a") {
                 if (args[2]) {
@@ -34,7 +34,7 @@ module.exports = {
                             if (on_sevice_db != 1) {
                                 methodDB.settab_db("Schede_PG");
                                 var cursor = methodDB.serachbyid(args[2]);
-                                cursor.then(function(result) {
+                                cursor.then(function (result) {
                                     if (result != null) {
                                         var old_value = result[0].Money;
                                         var new_value = old_value + parseFloat(args[1]);
@@ -43,7 +43,7 @@ module.exports = {
                                         // let member = message.guild.members.cache.get(nome_temp_stamp);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setTitle('Schada: ' + result[0].Nome_PG)
                                             // .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Money", new_value)
                                             .setTimestamp()
@@ -69,7 +69,7 @@ module.exports = {
                             if (on_sevice_db != 1) {
                                 methodDB.settab_db("Schede_PG");
                                 var cursor = methodDB.serachbyid(args[2]);
-                                cursor.then(function(result) {
+                                cursor.then(function (result) {
                                     if (result != null) {
                                         var old_value = result[0].Money;
                                         var new_value = old_value - parseFloat(args[1]);
@@ -81,7 +81,7 @@ module.exports = {
                                         // let member = message.guild.members.cache.get(nome_temp_stamp);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: '+ result[0].Nome_PG)
+                                            .setTitle('Schada: ' + result[0].Nome_PG)
                                             // .setThumbnail(member.user.displayAvatarURL(),true)
                                             .addField("Money", new_value)
                                             .setTimestamp()
@@ -102,8 +102,8 @@ module.exports = {
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }
@@ -113,6 +113,6 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Money`)
-        .setTitle('Sinstassi **'+config.prefix+'money** [Opzione][Valore][ID_Scheda]');
+        .setTitle('Sinstassi **' + config.prefix + 'money** [Opzione][Valore][ID_Scheda]');
     message.channel.send(Container);
 }

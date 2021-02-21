@@ -18,35 +18,35 @@ module.exports = {
     description: "Aggiungi o togli oggetto custom",
     async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute add_sub_custom_item');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_custom_item');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if(message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             var nome;
             var stp = 1;
             if (args[1].length == 24) {
                 if (!isNaN(parseInt(args[2]))) {
-                    for(let i = 4; i<args.length; i++) {
+                    for (let i = 4; i < args.length; i++) {
                         if (stp == 1) {
                             nome = args[i];
                             stp = 0;
                         } else {
-                            nome += " "+args[i];
+                            nome += " " + args[i];
                         }
                     }
                     nome = String(nome).toLowerCase();
 
-                    if (args[3] == "Si" || args[3] =="si" || args[3] == "SI" ) {
+                    if (args[3] == "Si" || args[3] == "si" || args[3] == "SI") {
                         sinc = 1;
-                    } else if (args[3] == "No" || args[3] =="no" || args[3] == "NO") {
+                    } else if (args[3] == "No" || args[3] == "no" || args[3] == "NO") {
                         sinc = 0;
                     } else {
                         emit_print(message);
                         return 1;
                     }
-        
+
                     var Scheda = await get_Scheda_pg(args[1]);
                     var Scheda_PG = Scheda[0];
                     if (Scheda_PG == 1) {
@@ -62,7 +62,7 @@ module.exports = {
                         var check_nam = inventory[nome];
                         if (check_nam !== undefined) {
                             var num = parseInt(inventory[nome]['Quantita']);
-                            num = num+parseInt(args[2]);
+                            num = num + parseInt(args[2]);
                             inventory[nome]['Quantita'] = num;
                         } else {
                             var oggetto = {};
@@ -78,7 +78,7 @@ module.exports = {
                         // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
-                            .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
                             // .setThumbnail(member.user.displayAvatarURL(),true)
                             .addField("Nome", nome)
                             .addField("Quantità", args[2])
@@ -90,12 +90,12 @@ module.exports = {
                         var inventory = Scheda_PG['Inventory'];
                         var check_nam = inventory[nome];
                         if (check_nam !== undefined) {
-                            num = num-parseInt(args[2]);
+                            num = num - parseInt(args[2]);
                             if (num <= 0 || isNaN(num) == true) {
                                 var num_memory = "Non possiede più l'oggetto";
                                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                                    .setTitle('Schada: ' + Scheda_PG.Nome_PG)
                                     // .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)
@@ -108,7 +108,7 @@ module.exports = {
                                 var num_memory = inventory[nome]['Quantita'];
                                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: '+ Scheda_PG.Nome_PG)
+                                    .setTitle('Schada: ' + Scheda_PG.Nome_PG)
                                     // .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)
@@ -121,8 +121,8 @@ module.exports = {
                         } else {
                             Container = new Discord.MessageEmbed();
                             Container.setColor([255, 0, 0])
-                            .setAuthor(`Ogetto non rovato: `+message.author.username)
-                            .setTitle('Ogetto non è prensente nel\'inventario');
+                                .setAuthor(`Ogetto non rovato: ` + message.author.username)
+                                .setTitle('Ogetto non è prensente nel\'inventario');
                             message.channel.send(Container);
                         }
                     } else {
@@ -139,8 +139,8 @@ module.exports = {
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }
@@ -150,14 +150,14 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
-        .setTitle('Sintassi:\n **'+config.prefix+'pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'pgoggetto** [Opzione][ID_Scheda][Quantità][Sincronia][Nome oggetto]');
     message.channel.send(Container);
 }
 
 async function get_Scheda_pg(id_serach) {
     var on_sevice_db = await methodDB.open_db();
-    if (on_sevice_db != 1) {   
-        methodDB.settab_db("Schede_PG"); 
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Schede_PG");
         var cursor = methodDB.serachbyid(id_serach);
     } else {
         return 1;

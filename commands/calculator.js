@@ -14,14 +14,14 @@ const color = require("ansi-colors");
 module.exports = {
     name: 'math',
     description: "Calculator",
-    async execute(client, message, args){
+    async execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute calculator');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute calculator');
         }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var check = Check_Num(args[0]);
@@ -33,24 +33,24 @@ module.exports = {
                     Container.setColor(colrs_set)
                         .setTitle('Calcolatrice')
                         .setThumbnail(botavatar.displayAvatarURL())
-                        .addField("Risultato", args[0]+" = ```"+result+"```");
+                        .addField("Risultato", args[0] + " = ```" + result + "```");
                     message.channel.send(Container);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Calcolatrice`)
-                        .setTitle('Sintassi **'+config.prefix+'math** Es:[2+2*5-10/2]');        
+                        .setTitle('Sintassi **' + config.prefix + 'math** Es:[2+2*5-10/2]');
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Calcolatrice`)
-                    .setTitle('Sintassi **'+config.prefix+'math** Es:[2+2*5-10/2]');        
+                    .setTitle('Sintassi **' + config.prefix + 'math** Es:[2+2*5-10/2]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }
@@ -58,7 +58,7 @@ module.exports = {
 
 function Check_Num(string_exspers) {
     var i = string_exspers.length;
-    var ch = string_exspers.charAt(i-1);
+    var ch = string_exspers.charAt(i - 1);
     if (ch == "/" || ch == "*" || ch == "+" || ch == "-" || ch == "." || ch == "(" || ch == "%") {
         return false;
     }

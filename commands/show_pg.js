@@ -17,13 +17,13 @@ const color = require("ansi-colors");
 module.exports = {
     name: 'pg',
     description: "motra pg",
-    async execute(message, args){
+    async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute show_pg');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute show_pg');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if(message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
             if (args[0]) {
                 var autore = message.mentions.users.first();
@@ -33,25 +33,25 @@ module.exports = {
                         var id_discord = args[1].replace('<@!', '');
                         id_discord = id_discord.replace('>', '');
                         methodDB.settab_db("Schede_PG");
-                        const cursor = methodDB.load_pg(autore.id,id_discord);
-                        cursor.then(function(result) {
+                        const cursor = methodDB.load_pg(autore.id, id_discord);
+                        cursor.then(function (result) {
                             if (result != null) {
                                 var js_result = JSON.stringify(result);
                                 js_result = JSON.parse(js_result);
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada PG: '+ autore.username)
-                                    .setThumbnail(autore.displayAvatarURL(),true)
-                                    .addField("ID Scheda",js_result['_id'])
+                                    .setTitle('Schada PG: ' + autore.username)
+                                    .setThumbnail(autore.displayAvatarURL(), true)
+                                    .addField("ID Scheda", js_result['_id'])
                                     .addField("Livello", js_result['Livello'], true)
-                                    .addField("Milestone", js_result['Exp'],true)
+                                    .addField("Milestone", js_result['Exp'], true)
                                     .addField('\u200b', '\u200b')
-                                    .addField("Nome",js_result['Nome_PG'],true)
-                                    .addField("Razza",js_result['Razza'],true)
-                                    .addField("Classe",js_result['Classe'],true)
-                                    .addField("Sotto Classe",js_result['Sotto Classe'],true)
-                                    .addField("Background",js_result['Background'],true)
-                                    .addField("Money",js_result['Money']);
+                                    .addField("Nome", js_result['Nome_PG'], true)
+                                    .addField("Razza", js_result['Razza'], true)
+                                    .addField("Classe", js_result['Classe'], true)
+                                    .addField("Sotto Classe", js_result['Sotto Classe'], true)
+                                    .addField("Background", js_result['Background'], true)
+                                    .addField("Money", js_result['Money']);
                                 message.channel.send(Container)
                             } else {
                                 Container.setColor([255, 0, 0])
@@ -63,20 +63,20 @@ module.exports = {
                     }
                 } else {
                     Container.setColor([255, 0, 0])
-                    .setAuthor(`Comando PG`)
-                    .setTitle('Sintassi **'+config.prefix+'pg** [@utente][ID_Scheda]');        
+                        .setAuthor(`Comando PG`)
+                        .setTitle('Sintassi **' + config.prefix + 'pg** [@utente][ID_Scheda]');
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                .setAuthor(`Comando PG`)
-                .setTitle('Sintassi **'+config.prefix+'pg** [@utente][ID_Scheda]');        
+                    .setAuthor(`Comando PG`)
+                    .setTitle('Sintassi **' + config.prefix + 'pg** [@utente][ID_Scheda]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
         }
     }

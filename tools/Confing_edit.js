@@ -7,86 +7,86 @@
 
 const fs = require("fs");
 
-exports.set_prefix = function(prefix) {
-    jsonReader("./config.json", (err, customer) => {
-        if (err) {
-          console.error("Error reading file:", err);
-          return;
-        }
-        // increase customer order count by 1
-        customer.prefix = prefix;
-        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
-          if (err) console.error("Error writing file:", err);
-        });
-    });
-}
-
-exports.set_ora_event = function(ora) {
-    jsonReader("./config.json", (err, customer) => {
-        if (err) {
-          console.error("Error reading file:", err);
-          return;
-        }
-        // increase customer order count by 1
-        customer.set_event_meteo = ora;
-        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
-          if (err) console.error("Error writing file:", err);
-        });
-    });
-}
-
-exports.set_chat_event = function(id_chat) {
-    jsonReader("./config.json", (err, customer) => {
-        if (err) {
-          console.error("Error reading file:", err);
-          return;
-        }
-        // increase customer order count by 1
-        customer.event_chat_meteo = id_chat;
-        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
-          if (err) console.error("Error writing file:", err);
-        });
-    });
-}
-
-exports.set_random_color = function(set_color) {
-    jsonReader("./config.json", (err, customer) => {
-        if (err) {
-          console.error("Error reading file:", err);
-          return;
-        }
-        // increase customer order count by 1
-        customer.random_color_enable = set_color;
-        fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
-          if (err) console.error("Error writing file:", err);
-        });
-    });
-}
-
-exports.set_event_meteo_enable = function(event_meteo_enable) {
+exports.set_prefix = function (prefix) {
   jsonReader("./config.json", (err, customer) => {
-      if (err) {
-        console.error("Error reading file:", err);
-        return;
-      }
-      // increase customer order count by 1
-      customer.event_meteo_enable = event_meteo_enable;
-      fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
-        if (err) console.error("Error writing file:", err);
-      });
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+    // increase customer order count by 1
+    customer.prefix = prefix;
+    fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+      if (err) console.error("Error writing file:", err);
+    });
+  });
+}
+
+exports.set_ora_event = function (ora) {
+  jsonReader("./config.json", (err, customer) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+    // increase customer order count by 1
+    customer.set_event_meteo = ora;
+    fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+      if (err) console.error("Error writing file:", err);
+    });
+  });
+}
+
+exports.set_chat_event = function (id_chat) {
+  jsonReader("./config.json", (err, customer) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+    // increase customer order count by 1
+    customer.event_chat_meteo = id_chat;
+    fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+      if (err) console.error("Error writing file:", err);
+    });
+  });
+}
+
+exports.set_random_color = function (set_color) {
+  jsonReader("./config.json", (err, customer) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+    // increase customer order count by 1
+    customer.random_color_enable = set_color;
+    fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+      if (err) console.error("Error writing file:", err);
+    });
+  });
+}
+
+exports.set_event_meteo_enable = function (event_meteo_enable) {
+  jsonReader("./config.json", (err, customer) => {
+    if (err) {
+      console.error("Error reading file:", err);
+      return;
+    }
+    // increase customer order count by 1
+    customer.event_meteo_enable = event_meteo_enable;
+    fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
+      if (err) console.error("Error writing file:", err);
+    });
   });
 }
 
 function jsonReader(filePath, cb) {
-    fs.readFile(filePath, (err, fileData) => {
-        if (err) {
-            return cb && cb(err);
-        }
-        try {
-            const object = JSON.parse(fileData);
-            return cb && cb(null, object);
-        } catch (err) {
-            return cb && cb(err);
-        }
-    });
+  fs.readFile(filePath, (err, fileData) => {
+    if (err) {
+      return cb && cb(err);
+    }
+    try {
+      const object = JSON.parse(fileData);
+      return cb && cb(null, object);
+    } catch (err) {
+      return cb && cb(err);
+    }
+  });
 }

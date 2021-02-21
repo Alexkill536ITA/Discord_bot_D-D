@@ -17,20 +17,20 @@ module.exports = {
     description: "set config",
     execute(client, message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ '+color.cyan('DEBUG')+' ] Event Execute set_config');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute set_config');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
-        if(message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+        if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
             if (args[0] == "prefix") {
                 var myregexp = /^[a-zA-Z0-9]+$/;
                 if (myregexp.test(args[1]) == false) {
-                   setconfig.set_prefix(args[1]); 
-                   // reboot_bot.execute(client, message, args);
+                    setconfig.set_prefix(args[1]);
+                    // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig prefix`)
-                        .setTitle('Sintassi **'+config.prefix+'setconfig prefix [Prefix nuovo]');        
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig prefix [Prefix nuovo]');
                     message.channel.send(Container);
                 }
             } else if (args[0] == "event_meteo_enable") {
@@ -41,17 +41,17 @@ module.exports = {
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig event_meteo_enable`)
-                        .setTitle('Sintassi **'+config.prefix+'setconfig event_meteo_enable [true/false]');
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig event_meteo_enable [true/false]');
                     message.channel.send(Container);
                 }
-            } else if (args[0] == "ora_event_meteo"){
+            } else if (args[0] == "ora_event_meteo") {
                 if (args[1].length == 5) {
                     setconfig.set_ora_event(args[1]);
                     // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig ora_event_meteo`)
-                        .setTitle('Sintassi **'+config.prefix+'setconfig ora_event_meteo [hh:mm]');        
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig ora_event_meteo [hh:mm]');
                     message.channel.send(Container);
                 }
             } else if (args[0] == "chat_event_meteo") {
@@ -61,7 +61,7 @@ module.exports = {
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig chat_event_meteo`)
-                        .setTitle('Sintassi **'+config.prefix+'setconfig chat_event_meteo [ID TextChat]');
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig chat_event_meteo [ID TextChat]');
                     message.channel.send(Container);
                 }
             } else if (args[0] == "random_color") {
@@ -72,19 +72,19 @@ module.exports = {
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando setconfig random_color`)
-                        .setTitle('Sintassi **'+config.prefix+'setconfig random_color [true/false]');
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig random_color [true/false]');
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                .setAuthor(`Comando setconfig`)
-                .setTitle('Sintassi:\n **'+config.prefix+'setconfig** [Opzione][Valore]');
+                    .setAuthor(`Comando setconfig`)
+                    .setTitle('Sintassi:\n **' + config.prefix + 'setconfig** [Opzione][Valore]');
                 message.channel.send(Container);
             }
         } else {
             Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied `+message.author.username+" 🚫")
-                .setTitle('Non sei autoriazato a usare questo comando');   
+                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                .setTitle('Non sei autoriazato a usare questo comando');
             message.channel.send(Container);
         }
     }
