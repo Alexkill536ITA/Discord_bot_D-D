@@ -23,7 +23,19 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-
+            if (args[0] == "vendi") {
+                if (args[1] == message.author.id) {
+                    if (args[2].lengh == 24) {
+                        if (parserInt(args[3]) > 0) {
+                            if (parserInt(args[4]) > 0) {
+                                
+                            }
+                        }
+                    }
+                }
+            } else {
+                
+            }
         } else {
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
