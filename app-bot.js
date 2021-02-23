@@ -95,6 +95,8 @@ function Discord_start() {
             client.commands.get('pgcustom').execute(client, message, args);
         } else if (command == 'shop') {
             client.commands.get('shop').execute(client, message, args);
+        } else if (command == 'scambio') {
+            client.commands.get('scambio').execute(client, message, args);
         } else if (command == 'meteo') {
             client.commands.get('meteo').execute(client, message, args);
         } else if (command == 'help') {
