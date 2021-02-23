@@ -90,10 +90,10 @@ exports.serachbylistpg = function (query) {
 }
 
 // MongoDB Insert
-// exports.insert_db =function(Data_value) {
-//     collection.insertOne(Data_value);
-//     return 0;
-// }
+exports.insert_db =function(Data_value) {
+    collection.insertOne(Data_value);
+    return 0;
+}
 
 // MongoDB Update
 exports.money_update = function (id_scheda, value_new) {

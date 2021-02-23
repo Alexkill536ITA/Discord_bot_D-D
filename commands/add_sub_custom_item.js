@@ -114,9 +114,9 @@ module.exports = {
                                     .addField("Quantità", num_memory)
                                     .addField("Sincronia", inventory[nome]['Sincronia'])
                                     .setTimestamp()
-                                    .setFooter("Data", message.author.displayAvatarURL());
-                                methodDB.inventory_update(args[1], inventory);
+                                    .setFooter("Data", message.author.displayAvatarURL());    
                             }
+                            methodDB.inventory_update(args[1], inventory);
                             message.channel.send(Container);
                         } else {
                             Container = new Discord.MessageEmbed();

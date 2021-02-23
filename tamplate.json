@@ -1,0 +1,11 @@
+{
+    "_id": {
+        "$oid": "5fc3f86137229c3dd1ab7974"
+    },
+    "Nome_Discord": "188587744140853251",
+    "ID_Scheda_venditore": "5fc3f86137229c3dd1ab7974",
+    "ID_oder_list": 1,
+    "Nome_Oggetto": "corazza di piastere",
+    "Quantita": 1,
+    "Prezzo": 100
+}
