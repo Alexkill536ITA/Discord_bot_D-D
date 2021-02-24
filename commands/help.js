@@ -82,6 +82,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'Shop** [ID_Scheda][Quantità][Id/Nome oggetto] \n\nLo shop permette di accquistare oggetti materiali pozzioni armi. Uso inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
+        } else if (args[0] == "scambio") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help scambio')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato] \n\n **OPZIONI**\n vendi\n compra \n\n Il comando scambio permette di vendere un oggetto del proprio inventario e comprare da un altro\n Il comando scambio con opzione **vendi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da mettre in vendita [Qunatità] il prezzo [Prezzo] e inserire il nome del oggetto [Nome oggetto] \n\n Il comando scambio con opzione **compra** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da comprare [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]');
+            message.channel.send(Container);
         } else if (args[0] == "money") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Money')

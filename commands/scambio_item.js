@@ -33,7 +33,7 @@ module.exports = {
                             nome += " " + args[index];
                         }
                         nome = String(nome).toLowerCase();
-                        
+
 
                         var Scheda = await get_Scheda_pg(args[2]);
                         var Scheda_PG = Scheda[0];
@@ -75,6 +75,17 @@ module.exports = {
 
                             methodDB.settab_db("Lista_scambio");
                             methodDB.insert_db(oggetto);
+
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
+                                .addField("Nome oggetto", nome)
+                                .addField("Quantità", parseInt(args[3]))
+                                .addField("Sincronia", inventory[nome]['Sincronia'])
+                                .addField("Prezzo", parseInt(args[4]))
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container);
 
                         } else {
                             Container = new Discord.MessageEmbed();
@@ -214,6 +225,17 @@ module.exports = {
                             methodDB.settab_db("Schede_PG");
                             methodDB.money_update(Scheda_PG_vendor['_id'], money_pg_new);
                         }
+
+                        Container = new Discord.MessageEmbed();
+                        Container.setColor(colrs_set)
+                            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                            // .setThumbnail(member.user.displayAvatarURL(),true)
+                            .addField("Nome", nome_var)
+                            .addField("Quantità", qut)
+                            .addField("Sincronia", result.sincronia)
+                            .setTimestamp()
+                            .setFooter("Data", message.author.displayAvatarURL());
+                        message.channel.send(Container);
                     } else {
                         emit_print_3(message);
                         return 1;
@@ -243,19 +265,19 @@ function emit_print_1(message) {
     message.channel.send(Container);
 }
 
-function emit_print_2(message) {
-    var Container = new Discord.MessageEmbed();
-    Container.setColor([255, 0, 0])
-        .setAuthor(`Comando scambio`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'scambio edit** [@utente][ID_Scheda][Quantità][Prezzo][ID_Assegnato]');
-    message.channel.send(Container);
-}
+// function emit_print_2(message) {
+//     var Container = new Discord.MessageEmbed();
+//     Container.setColor([255, 0, 0])
+//         .setAuthor(`Comando scambio`)
+//         .setTitle('Sintassi:\n **' + config.prefix + 'scambio edit** [@utente][ID_Scheda][Quantità][Prezzo][ID_Assegnato]');
+//     message.channel.send(Container);
+// }
 
 function emit_print_3(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando scambio`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'scambio compra** [@utente][ID_Scheda][Quantità][ID/Nome oggetto]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'scambio compra** [@utente][ID_Scheda][Quantità][ID_aqquisto]');
     message.channel.send(Container);
 }
 
@@ -263,7 +285,7 @@ function emit_print_4(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando scambio`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_aqquisto]');
     message.channel.send(Container);
 }
 
