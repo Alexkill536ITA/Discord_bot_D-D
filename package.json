@@ -17,7 +17,7 @@
     "discord-paginationembed": "^2.1.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.6.3",
+    "mongodb": "^3.6.4",
     "os-name": "^4.0.0",
     "os-utils": "0.0.14",
     "roll-dice": "^0.2.1",
