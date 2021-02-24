@@ -80,7 +80,7 @@ module.exports = {
                             Container = new Discord.MessageEmbed();
                             Container.setColor(clor_gen.rand_Color())
                                 .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
-                                .addField("ID aqquisto", oggetto['ID Shop'])
+                                .addField("ID shop", oggetto['ID Shop'])
                                 .addField("Nome oggetto", nome)
                                 .addField("Quantità", parseInt(args[3]))
                                 .addField("Sincronia", sincro)
