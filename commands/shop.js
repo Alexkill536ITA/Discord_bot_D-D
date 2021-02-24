@@ -174,7 +174,7 @@ function add_item(message, args, Scheda_PG, result) {
             ogg_temp['Quantita'] = parseInt(args[1]);
             ogg_temp['Sincronia'] = result.sincronia;
             oggetto[nome_var] = ogg_temp;
-            qut = parseInt(args[2]);
+            qut = parseInt(args[1]);
             Object.assign(inventory, oggetto);
         }
         methodDB.settab_db("Schede_PG");
