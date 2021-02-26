@@ -172,7 +172,7 @@ function add_sub(message, args, Scheda_PG, result) {
         // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
         Container = new Discord.MessageEmbed();
         Container.setColor(colrs_set)
-            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
             // .setThumbnail(member.user.displayAvatarURL(),true)
             .addField("Nome", result.nome)
             .addField("Quantità", qut)
@@ -193,7 +193,7 @@ function add_sub(message, args, Scheda_PG, result) {
                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                 Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
-                    .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                    .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                     // .setThumbnail(member.user.displayAvatarURL(),true)
                     .addField("Nome", nome_var)
                     .addField("Quantità", num_memory)
@@ -207,7 +207,7 @@ function add_sub(message, args, Scheda_PG, result) {
                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                 Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
-                    .setTitle('Schada: ' + message.author.username)
+                    .setTitle('Scheda: ' + message.author.username)
                     // .setThumbnail(message.author.displayAvatarURL(),true)
                     .addField("Nome", nome_var)
                     .addField("Quantità", num_memory)

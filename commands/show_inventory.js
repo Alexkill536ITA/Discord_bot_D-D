@@ -65,7 +65,7 @@ module.exports = {
                                         .setChannel(message.channel)
                                         .setPageIndicator(false)
                                         .setColor(colrs_set)
-                                        .setTitle('Schada Inventario: ' + autore.username)
+                                        .setTitle('Scheda Inventario: ' + autore.username)
                                         .setThumbnail(autore.displayAvatarURL(), true)
                                         .addField("N:", obj_string.length, true)
                                         .addField("ID Scheda", js_result['_id'], true)
@@ -106,7 +106,7 @@ module.exports = {
                                 } else {
                                     Container = new Discord.MessageEmbed();
                                     Container.setColor(colrs_set)
-                                        .setTitle('Schada Inventario: ' + autore.username)
+                                        .setTitle('Scheda Inventario: ' + autore.username)
                                         .setThumbnail(autore.displayAvatarURL(), true)
                                         .addField("ID Scheda", js_result['_id'])
                                         .addField("Nome", js_result['Nome_PG'],)

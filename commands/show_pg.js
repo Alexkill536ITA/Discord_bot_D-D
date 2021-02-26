@@ -40,7 +40,7 @@ module.exports = {
                                 js_result = JSON.parse(js_result);
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada PG: ' + autore.username)
+                                    .setTitle('Scheda PG: ' + autore.username)
                                     .setThumbnail(autore.displayAvatarURL(), true)
                                     .addField("ID Scheda", js_result['_id'])
                                     .addField("Livello", js_result['Livello'], true)

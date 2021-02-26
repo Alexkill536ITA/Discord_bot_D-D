@@ -332,7 +332,7 @@ module.exports = {
 
                         Container = new Discord.MessageEmbed();
                         Container.setColor(clor_gen.rand_Color())
-                            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                             // .setThumbnail(member.user.displayAvatarURL(),true)
                             .addField("Nome", nome_var)
                             .addField("Quantità", qut)

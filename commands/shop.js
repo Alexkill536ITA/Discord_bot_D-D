@@ -36,7 +36,7 @@ module.exports = {
                         var cursor = methodDB.serachbynome_obj(nome);
                         cursor.then(async function (result) {
                             if (result) {
-                                if (result == null) {
+                                if (result == null || result == undefined) {
                                     Container.setColor([255, 0, 0])
                                         .setAuthor(`Richiesta di: ${message.author.username}`)
                                         .setTitle('Errore Oggetto non trovato');

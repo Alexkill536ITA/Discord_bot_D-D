@@ -78,7 +78,7 @@ module.exports = {
                         // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
-                            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                             // .setThumbnail(member.user.displayAvatarURL(),true)
                             .addField("Nome", nome)
                             .addField("Quantità", args[2])
@@ -95,7 +95,7 @@ module.exports = {
                                 var num_memory = "Non possiede più l'oggetto";
                                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                                    .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                                     // .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)
@@ -108,7 +108,7 @@ module.exports = {
                                 var num_memory = inventory[nome]['Quantita'];
                                 // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                                 Container.setColor(colrs_set)
-                                    .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                                    .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                                     // .setThumbnail(member.user.displayAvatarURL(),true)
                                     .addField("Nome", nome)
                                     .addField("Quantità", num_memory)

@@ -43,7 +43,7 @@ module.exports = {
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: ' + result[0].Nome_PG)
+                                            .setTitle('Scheda: ' + result[0].Nome_PG)
                                             .setThumbnail(member.user.displayAvatarURL(), true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
@@ -81,7 +81,7 @@ module.exports = {
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Schada: ' + result[0].Nome_PG)
+                                            .setTitle('Scheda: ' + result[0].Nome_PG)
                                             .setThumbnail(member.user.displayAvatarURL(), true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
