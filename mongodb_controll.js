@@ -94,6 +94,11 @@ exports.serachbyid_Object = async function (id_shop) {
     return cursor;
 }
 
+exports.getAll_Object = async function () {
+    var cursor = await collection.find({}).toArray();
+    return cursor;
+}
+
 // MongoDB Insert
 exports.insert_db =function(Data_value) {
     collection.insertOne(Data_value);

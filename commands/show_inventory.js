@@ -114,7 +114,6 @@ module.exports = {
                                         .addField("Inventario", "Vuoto");
                                     message.channel.send(Container);
                                 }
-
                             } else {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)

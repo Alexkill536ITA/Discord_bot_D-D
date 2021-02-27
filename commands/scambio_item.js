@@ -12,6 +12,7 @@ const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
+const Pagination = require('discord-paginationembed');
 const cryptoRandomString = require('crypto-random-string');
 
 module.exports = {
@@ -23,6 +24,7 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             if (args[0] == "vendi") {
                 var user_call = getUserFromMention(args[1]);
@@ -201,7 +203,7 @@ module.exports = {
                         Container = new Discord.MessageEmbed();
                         Container.setColor(clor_gen.rand_Color())
                             .setTitle('Operazione di Rimozione e Riassegnazione Oggetto Completata')
-                            .addField('Schada',Scheda_PG['Nome_PG'])
+                            .addField('Schada', Scheda_PG['Nome_PG'])
                             // .setThumbnail(member.user.displayAvatarURL(),true)
                             .addField("Nome", nome_var)
                             .addField("Quantità", qut)
@@ -347,6 +349,82 @@ module.exports = {
                 } else {
                     emit_print_3(message);
                     return 1;
+                }
+            } else if (args[0] == "list") {
+                var on_sevice_db = await methodDB.open_db();
+                if (on_sevice_db != 1) {
+                    methodDB.settab_db("Lista_scambio");
+                    var cursor = methodDB.getAll_Object();
+                    cursor.then(async function (result) {
+                        if (typeof result !== 'undefined' && result.length > 0) {
+                            var obj_N = result;
+                            var i = 0;
+                            var j = 0;
+                            var x = 0;
+                            var obj_string = [];
+                            for (var i in obj_N) {
+                                obj_string[j] += '**ID aqquisto:** ' + obj_N[i]['ID Shop'] + '\n**Nome:** ' + obj_N[i]['Nome'] + '\n**Quantità:** ' + obj_N[i]['Quantità'] + '\n**Prezzo:** ' + obj_N[i]['Prezzo'] + 'mo\n\n';
+                                obj_string[j] = obj_string[j].replace("undefined", "");
+                                x++
+                                if (x == 10) {
+                                    x = 0;
+                                    j++
+                                }
+                            }
+                            const embeds = [];
+                            for (let i = 0; i <= obj_string.length; i++) {
+                                embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
+                            }
+                            const Embeds = new Pagination.Embeds()
+                                .setArray(embeds)
+                                .setAuthorizedUsers([message.author.id])
+                                .setChannel(message.channel)
+                                .setPageIndicator(false)
+                                .setColor(clor_gen.rand_Color())
+                                .setThumbnail(botavatar.displayAvatarURL())
+                                .setTitle('Vetrina Scambi')
+                                .addField("N:", obj_string.length, true)
+                                .addField("Articoli: ", obj_string[0])
+                                .setDisabledNavigationEmojis(['all'])
+                                .setDeleteOnTimeout(false)
+                                .setFunctionEmojis({
+                                    '◀️': (_, instance) => {
+                                        for (const embed of instance.array) {
+                                            var e = embed.fields[0].value;
+                                            e--;
+                                            if (e >= 0) {
+                                                embed.fields[0].value = e;
+                                                embed.fields[5].value = obj_string[e];
+                                            }
+                                        }
+                                    },
+                                    '▶️': (_, instance) => {
+                                        for (const embed of instance.array) {
+                                            var e = embed.fields[0].value;
+                                            e++;
+                                            if (e < embed.fields[1].value) {
+                                                embed.fields[0].value = e;
+                                                embed.fields[5].value = obj_string[e];
+                                            }
+                                        }
+                                    }
+                                });
+                            // Debug embeds function
+                            // .on('start', () => console.log('Started!'))
+                            // .on('finish', (user) => console.log(`Finished! User: ${user.username}`))
+                            // .on('react', (user, emoji) => console.log(`Reacted! User: ${user.username} | Emoji: ${emoji.name} (${emoji.id})`))
+                            // .on('expire', () => console.warn('Expired!'))
+                            // .on('error', console.error);
+                            Embeds.build();
+                        } else {
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor([225, 0, 0])
+                                .setTitle('Vetrina Scambi')
+                                .setThumbnail(botavatar.displayAvatarURL())
+                                .addField("Vetrina", "Vuota");
+                            message.channel.send(Container);
+                        }
+                    });
                 }
             } else {
                 emit_print_4(message);
