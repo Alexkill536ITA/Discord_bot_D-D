@@ -7,12 +7,13 @@
         "Moderatori",
         "Helper",
         "Dungeon Master",
-        "Dungeon Master (In Prova)",
+        "DM in Prova",
         "Gildano"
     ],
     "role_avance": [
         "Admin",
         "Moderatori",
+        "DM in Prova",
         "Dungeon Master"
     ],
     "role_admin": [
