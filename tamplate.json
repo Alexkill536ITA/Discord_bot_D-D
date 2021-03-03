@@ -1,79 +1,614 @@
 {
     "Nome_shop": "Emporio",
     "Lista": [
-        "**Gruppo Oggetti normali:**\n\n• Nome: abaco Prezzo: 2mo ID Aquisto: 51\n\n• Nome: abaco comune Prezzo: 1mo ID Aquisto: 515\n\n• Nome: abito da viaggiatore Prezzo: 2mo ID Aquisto: 54\n\n• Nome: abito pregiato Prezzo: 15mo ID Aquisto: 55\n\n• Nome: abito di marca Prezzo: 500mo ID Aquisto: 516\n\n• Nome: acciarino e pietra focaia Prezzo: 1mo ID Aquisto: 56\n\n• Nome: acido in fiala Prezzo: 25mo ID Aquisto: 57\n\n• Nome: acqua santa in ampolla Prezzo: 25mo ID Aquisto: 58\n\n• Nome: ampolla o boccale(10) Prezzo: 2mo ID Aquisto: 59\n\n• Nome: anello con sigillo Prezzo: 7mo ID Aquisto: 60\n\n• Nome: antitossina in fiala Prezzo: 50mo ID Aquisto: 61\n\n• Nome: ariete portatile Prezzo: 4mo ID Aquisto: 62\n\n• Nome: asta ( 3 metri ) Prezzo: 1mo ID Aquisto: 63\n\n• Nome: attrezzi da scalatore Prezzo: 25mo ID Aquisto: 64\n\n• Nome: barile Prezzo: 2mo ID Aquisto: 65\n\n• Nome: bilancia da mercante 5mo ID Aquisto: 66\n\n• Nome: borsa  Prezzo: 1mo ID Aquisto: 67\n\n• Nome: borsa firmata Prezzo: 30mo ID Aquisto: 517\n\n• Nome: borsa del guaritore Prezzo: 5mo ID Aquisto: 68\n", 
-        "Nome: borsa per componenti Prezzo: 25mo ID Aquisto: 69\n\n• Nome: bottiglia di vetro Prezzo: 2mo ID Aquisto: 70\n\n• Nome: campanella Prezzo: 1mo ID Aquisto: 72\n\n• Nome: candela (10) Prezzo: 1mo ID Aquisto: 73\n\n• Nome: canna da pesca Prezzo: 1mo ID Aquisto: 75\n\n• Nome: canna da pesca professionale Prezzo: 20mo ID Aquisto: 518\n\n• Nome: cannocchiale Prezzo: 1000mo ID Aquisto: 76\n\n• Nome: carta (30) Prezzo: 3mo ID Aquisto: 78\n\n• Nome: catena (3 metri) Prezzo: 5mo ID Aquisto: 79\n\n• Nome: cera per sigillo Prezzo: 5mo ID Aquisto: 80\n\n• Nome: chiodo da rocciatore (50) Prezzo: 2mo ID Aquisto: 81\n\n• Nome: clessidra Prezzo: 25mo ID Aquisto: 82\n\n• Nome: clessidra del drago Prezzo: 100mo ID Aquisto: 519\n\n• Nome: corda di canapa (15 metri) Prezzo: 1mo ID Aquisto: 84\n\n• Nome: corda di seta (15 metri) Prezzo: 1mo ID Aquisto: 85\n\n• Nome: Cote per affilare Prezzo: 5mo ID Aquisto: 86\n\n• Nome: faretra Prezzo: 1mo ID Aquisto: 89\n\n• Nome: custodia per quadrelli Prezzo: 1mo ID Aquisto: 520\n\n• Nome: fiala Prezzo: 1mo ID Aquisto: 90\n",
-        "Nome: forziere Prezzo: 5mo ID Aquisto: 101\n\n• Nome: fuoco dell'alchimista (ampolla) Prezzo: 50mo ID Aquisto: 102\n\n• Nome: gavetta Prezzo: 1mo ID Aquisto: 103\n\n• Nome: gessetto (10) Prezzo: 1mo ID Aquisto: 104\n\n• Nome: giaciglio Prezzo: 1mo ID Aquisto: 105\n\n• Nome: inchiostro 30g Prezzo: 10mo ID Aquisto: 106\n\n• Nome: boccette (da 30 grammi) Prezzo: 10mo ID Aquisto: 521\n\n• Nome: lanterna Prezzo: 5mo ID Aquisto: 522\n\n• Nome: lanterna schermabile Prezzo: 10mo ID Aquisto: 109\n\n• Nome: lente di ingrandimento Prezzo: 100mo ID Aquisto: 110\n\n• Nome: libro Prezzo: 25mo ID Aquisto: 111\n\n• Nome: libro degli incantesimi Prezzo: 50mo ID Aquisto: 112\n\n• Nome: manette Prezzo: 2mo ID Aquisto: 113\n\n• Nome: manette osé Prezzo: 15mo ID Aquisto: 523\n\n• Nome: otre Prezzo: 1mo ID Aquisto: 121\n\n• Nome: pennino (5) Prezzo: 1mo ID Aquisto: 122\n\n• Nome: pergamena (un foglio) (2) Prezzo: 1mo ID Aquisto: 123\n\n• Nome: piccone da minatore Prezzo: 2mo ID Aquisto: 124\n\n• Nome: piede di porco Prezzo: 3mo ID Aquisto: 125\n",
-        "Nome: pozione di guarigione Prezzo: 50mo ID Aquisto: 126\n\n• Nome: profumo (fiala) Prezzo: 5mo ID Aquisto: 127\n\n• Nome: rampino Prezzo: 2mo ID Aquisto: 128\n\n• Nome: razioni (10) Prezzo: 1mo ID Aquisto: 129\n\n• Nome: sapone Prezzo: 1mo ID Aquisto: 131\n\n• Nome: sfere metalliche (sacchetto da 1000) Prezzo: 1mo ID Aquisto: 135\n\n• Nome: Simboli sacri Prezzo: 5mo ID Aquisto: 524\n\n• Nome: specchio piccolo di metallo Prezzo: 5mo ID Aquisto: 136\n\n• Nome: tagliola Prezzo: 5mo ID Aquisto: 141\n\n• Nome: tenda per due persone Prezzo: 2mo ID Aquisto: 142\n\n• Nome: torcia (10) Prezzo: 1mo ID Aquisto: 153\n\n• Nome: triboli (sacchetto 20) Prezzo: 1mo ID Aquisto: 144\n\n• Nome: vanga o badile Prezzo: 2mo ID Aquisto: 145\n\n• Nome: vaso di ferro Prezzo: 2mo ID Aquisto: 146\n\n• Nome: veleno base Prezzo: 100mo ID Aquisto: 147\n\n• Nome: zaino Prezzo: 1mo ID Aquisto: 149\n",
-        "**Gruppo dei Focus arcano:**\n\n• Nome: bacchetta Prezzo: 10mo ID Aquisto: 92\n\n• Nome: bastone Prezzo: 5mo ID Aquisto: 93\n\n• Nome: cristallo Prezzo: 10mo ID Aquisto: 94\n\n• Nome: globo Prezzo: 20mo ID Aquisto: 95\n\n• Nome: verga Prezzo: 10mo ID Aquisto: 96\n\n• Nome: Focus Prezzo: 20mo druidicimo ID Aquisto: 525\n\n• Nome: totem Prezzo: 1mo ID Aquisto: 100\n \n\n**Gruppo Munizioni**\n\n• Nome: Aghi da cerbottata (50) Prezzo: 1mo ID Aquisto: 116\n\n• Nome: freccie (20) Prezzo: 1mo ID Aquisto: 526\n\n• Nome: proiettili da fionda (50) Prezzo: 1mo ID Aquisto: 118\n\n• Nome: quadrelli da balestra (20) Prezzo: 1mo ID Aquisto: 119\n\n• Nome: olio (ampolla) (5) Prezzo: 1mo ID Aquisto: 120"
+        {
+            "Nome": "Gruppo Oggetti normali:",
+            "Value": "-"
+        },
+        {
+            "Nome": "abaco ",
+            "Value": "Prezzo: 2mo ID Aquisto: 51"
+        },
+        {
+            "Nome": "abaco comune ",
+            "Value": "Prezzo: 1mo ID Aquisto: 515"
+        },
+        {
+            "Nome": "abito da viaggiatore ",
+            "Value": "Prezzo: 2mo ID Aquisto: 54"
+        },
+        {
+            "Nome": "abito pregiato ",
+            "Value": "Prezzo: 15mo ID Aquisto: 55"
+        },
+        {
+            "Nome": "abito di marca ",
+            "Value": "Prezzo: 500mo ID Aquisto: 516"
+        },
+        {
+            "Nome": "acciarino e pietra focaia ",
+            "Value": "Prezzo: 1mo ID Aquisto: 56"
+        },
+        {
+            "Nome": "acido in fiala ",
+            "Value": "Prezzo: 25mo ID Aquisto: 57"
+        },
+        {
+            "Nome": "acqua santa in ampolla ",
+            "Value": "Prezzo: 25mo ID Aquisto: 58"
+        },
+        {
+            "Nome": "ampolla o boccale(10) ",
+            "Value": "Prezzo: 2mo ID Aquisto: 59"
+        },
+        {
+            "Nome": "anello con sigillo ",
+            "Value": "Prezzo: 7mo ID Aquisto: 60"
+        },
+        {
+            "Nome": "antitossina in fiala ",
+            "Value": "Prezzo: 50mo ID Aquisto: 61"
+        },
+        {
+            "Nome": "ariete portatile ",
+            "Value": "Prezzo: 4mo ID Aquisto: 62"
+        },
+        {
+            "Nome": "asta ( 3 metri ) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 63"
+        },
+        {
+            "Nome": "attrezzi da scalatore ",
+            "Value": "Prezzo: 25mo ID Aquisto: 64"
+        },
+        {
+            "Nome": "barile ",
+            "Value": "Prezzo: 2mo ID Aquisto: 65"
+        },
+        {
+            "Nome": "bilancia da mercante 5mo ID Aquisto: 66"
+        },
+        {
+            "Nome": "borsa  ",
+            "Value": "Prezzo: 1mo ID Aquisto: 67"
+        },
+        {
+            "Nome": "borsa firmata ",
+            "Value": "Prezzo: 30mo ID Aquisto: 517"
+        },
+        {
+            "Nome": "borsa del guaritore ",
+            "Value": "Prezzo: 5mo ID Aquisto: 68"
+        },
+        {
+            "Nome": "borsa per componenti ",
+            "Value": "Prezzo: 25mo ID Aquisto: 69"
+        },
+        {
+            "Nome": "bottiglia di vetro ",
+            "Value": "Prezzo: 2mo ID Aquisto: 70"
+        },
+        {
+            "Nome": "campanella ",
+            "Value": "Prezzo: 1mo ID Aquisto: 72"
+        },
+        {
+            "Nome": "candela (10) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 73"
+        },
+        {
+            "Nome": "canna da pesca ",
+            "Value": "Prezzo: 1mo ID Aquisto: 75"
+        },
+        {
+            "Nome": "canna da pesca professionale ",
+            "Value": "Prezzo: 20mo ID Aquisto: 518"
+        },
+        {
+            "Nome": "cannocchiale ",
+            "Value": "Prezzo: 1000mo ID Aquisto: 76"
+        },
+        {
+            "Nome": "carta (30) ",
+            "Value": "Prezzo: 3mo ID Aquisto: 78"
+        },
+        {
+            "Nome": "catena (3 metri) ",
+            "Value": "Prezzo: 5mo ID Aquisto: 79"
+        },
+        {
+            "Nome": "cera per sigillo ",
+            "Value": "Prezzo: 5mo ID Aquisto: 80"
+        },
+        {
+            "Nome": "chiodo da rocciatore (50) ",
+            "Value": "Prezzo: 2mo ID Aquisto: 81"
+        },
+        {
+            "Nome": "clessidra ",
+            "Value": "Prezzo: 25mo ID Aquisto: 82"
+        },
+        {
+            "Nome": "clessidra del drago ",
+            "Value": "Prezzo: 100mo ID Aquisto: 519"
+        },
+        {
+            "Nome": "corda di canapa (15 metri) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 84"
+        },
+        {
+            "Nome": "corda di seta (15 metri) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 85"
+        },
+        {
+            "Nome": "Cote per affilare ",
+            "Value": "Prezzo: 5mo ID Aquisto: 86"
+        },
+        {
+            "Nome": "faretra ",
+            "Value": "Prezzo: 1mo ID Aquisto: 89"
+        },
+        {
+            "Nome": "custodia per quadrelli ",
+            "Value": "Prezzo: 1mo ID Aquisto: 520"
+        },
+        {
+            "Nome": "fiala ",
+            "Value": "Prezzo: 1mo ID Aquisto: 90"
+        },
+        {
+            "Nome": "forziere ",
+            "Value": "Prezzo: 5mo ID Aquisto: 101"
+        },
+        {
+            "Nome": "fuoco dell'alchimista (ampolla) ",
+            "Value": "Prezzo: 50mo ID Aquisto: 102"
+        },
+        {
+            "Nome": "gavetta ",
+            "Value": "Prezzo: 1mo ID Aquisto: 103"
+        },
+        {
+            "Nome": "gessetto (10) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 104"
+        },
+        {
+            "Nome": "giaciglio ",
+            "Value": "Prezzo: 1mo ID Aquisto: 105"
+        },
+        {
+            "Nome": "inchiostro 30g ",
+            "Value": "Prezzo: 10mo ID Aquisto: 106"
+        },
+        {
+            "Nome": "boccette (da 30 grammi) ",
+            "Value": "Prezzo: 10mo ID Aquisto: 521"
+        },
+        {
+            "Nome": "lanterna ",
+            "Value": "Prezzo: 5mo ID Aquisto: 522"
+        },
+        {
+            "Nome": "lanterna schermabile ",
+            "Value": "Prezzo: 10mo ID Aquisto: 109"
+        },
+        {
+            "Nome": "lente di ingrandimento ",
+            "Value": "Prezzo: 100mo ID Aquisto: 110"
+        },
+        {
+            "Nome": "libro ",
+            "Value": "Prezzo: 25mo ID Aquisto: 111"
+        },
+        {
+            "Nome": "libro degli incantesimi ",
+            "Value": "Prezzo: 50mo ID Aquisto: 112"
+        },
+        {
+            "Nome": "manette ",
+            "Value": "Prezzo: 2mo ID Aquisto: 113"
+        },
+        {
+            "Nome": "manette osé ",
+            "Value": "Prezzo: 15mo ID Aquisto: 523"
+        },
+        {
+            "Nome": "otre ",
+            "Value": "Prezzo: 1mo ID Aquisto: 121"
+        },
+        {
+            "Nome": "pennino (5) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 122"
+        },
+        {
+            "Nome": "pergamena (un foglio) (2) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 123"
+        },
+        {
+            "Nome": "piccone da minatore ",
+            "Value": "Prezzo: 2mo ID Aquisto: 124"
+        },
+        {
+            "Nome": "piede di porco ",
+            "Value": "Prezzo: 3mo ID Aquisto: 125"
+        },
+        {
+            "Nome": "pozione di guarigione ",
+            "Value": "Prezzo: 50mo ID Aquisto: 126"
+        },
+        {
+            "Nome": "profumo (fiala) ",
+            "Value": "Prezzo: 5mo ID Aquisto: 127"
+        },
+        {
+            "Nome": "rampino",
+            "Value": "Prezzo: 2mo ID Aquisto: 128"
+        },
+        {
+            "Nome": "razioni (10) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 129"
+        },
+        {
+            "Nome": "sapone",
+            "Value": "Prezzo: 1mo ID Aquisto: 131"
+        },
+        {
+            "Nome": "sfere metalliche (sacchetto da 1000) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 135"
+        },
+        {
+            "Nome": "Simboli sacri",
+            "Value": "Prezzo: 5mo ID Aquisto: 524"
+        },
+        {
+            "Nome": "specchio piccolo di metallo ",
+            "Value": "Prezzo: 5mo ID Aquisto: 136"
+        },
+        {
+            "Nome": "tagliola",
+            "Value": "Prezzo: 5mo ID Aquisto: 141"
+        },
+        {
+            "Nome": "tenda per due persone ",
+            "Value": "Prezzo: 2mo ID Aquisto: 142"
+        },
+        {
+            "Nome": "torcia (10)",
+            "Value": "Prezzo: 1mo ID Aquisto: 153"
+        },
+        {
+            "Nome": "triboli (sacchetto 20) ",
+            "Value": "Prezzo: 1mo ID Aquisto: 144"
+        },
+        {
+            "Nome": "vanga o badile",
+            "Value": "Prezzo: 2mo ID Aquisto: 145"
+        },
+        {
+            "Nome": "vaso di ferro",
+            "Value": "Prezzo: 2mo ID Aquisto: 146"
+        },
+        {
+            "Nome": "veleno base",
+            "Value": "Prezzo: 100mo ID Aquisto: 147"
+        },
+        {
+            "Nome": "zaino",
+            "Value": "Prezzo: 1mo ID Aquisto: 149"
+        },
+        {
+            "Nome": "Gruppo dei Focus arcano:",
+            "Value": "-"
+        },
+        {
+            "Nome": "bacchetta",
+            "Value": "Prezzo: 10mo ID Aquisto: 92"
+        },
+        {
+            "Nome": "bastone",
+            "Value": "Prezzo: 5mo ID Aquisto: 93"
+        },
+        {
+            "Nome": "cristallo",
+            "Value": "Prezzo: 10mo ID Aquisto: 94"
+        },
+        {
+            "Nome": "globo",
+            "Value": "Prezzo: 20mo ID Aquisto: 95"
+        },
+        {
+            "Nome": "verga",
+            "Value": "Prezzo: 10mo ID Aquisto: 96"
+        },
+        {
+            "Nome": "Focus",
+            "Value": "Prezzo: 20mo druidicimo ID Aquisto: 525"
+        },
+        {
+            "Nome": "totem",
+            "Value": "Prezzo: 1mo ID Aquisto: 100"
+        },
+        {
+            "Nome": "Gruppo Munizioni",
+            "Value": "-"
+        },
+        {
+            "Nome": "Aghi da cerbottata (50)",
+            "Value": "Prezzo: 1mo ID Aquisto: 116"
+        },
+        {
+            "Nome": "freccie (20)",
+            "Value": "Prezzo: 1mo ID Aquisto: 526"
+        },
+        {
+            "Nome": "proiettili da fionda (50)",
+            "Value": "Prezzo: 1mo ID Aquisto: 118"
+        },
+        {
+            "Nome": "quadrelli da balestra (20)",
+            "Value": "Prezzo: 1mo ID Aquisto: 119"
+        },
+        {
+            "Nome": "olio (ampolla) (5)",
+            "Value": "Prezzo: 1mo ID Aquisto: 120"
+        }
     ]
-}
+},
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 {
     "Nome_shop": "Numero 42",
     "Lista": [
-        "**Armature Leggere:**\n
-       \n• Nome: armature imbottita Prezzo: 5mo ID Aquisto: 
-       \n• Nome: armature cuoio Prezzo: 10mo ID Aquisto: 
-       \n• Nome: armature cuoio borchiato Prezzo: 45mo ID Aquisto: 
-        **Armature medie:**
-       \n• Nome: armature pelle Prezzo: 10mo ID Aquisto: 
-       \n• Nome: giaco di maglia Prezzo: 50mo ID Aquisto: 
-       \n• Nome: corazza di scaglie Prezzo: 50mo ID Aquisto: 
-       \n• Nome: corazza di piastre Prezzo: 400mo ID Aquisto: 
-       \n• Nome: mezz'armatura Prezzo: 750mo ID Aquisto: 
-        **Armature pesanti:**
-       \n• Nome: corazza ad anelli Prezzo: 30mo ID Aquisto: 
-       \n• Nome: cotta di maglia Prezzo: 75mo ID Aquisto: 
-       \n• Nome: corazza a strisce Prezzo: 200mo ID Aquisto: 
-       \n• Nome: armatura completa Prezzo: 1500mo ID Aquisto: 
-       \n• Nome: scudo Prezzo: 10mo ID Aquisto: 
-        **Armi da mischia semplici:**
-       \n• Nome: Ascia Prezzo: 5mo ID Aquisto: 
-       \n• Nome: bastone ferrato Prezzo: 2mo ID Aquisto: 
-       \n• Nome: falcetto Prezzo: 1mo ID Aquisto: 
-       \n• Nome: giavellotto Prezzo: 1mo ID Aquisto: 
-       \n• Nome: bastone Prezzo: 2mo ID Aquisto: 
-       \n• Nome: lancia Prezzo: 1mo ID Aquisto: 
-       \n• Nome: martello leggero Prezzo: 2mo ID Aquisto: 
-       \n• Nome: mazza Prezzo: 5mo ID Aquisto: 
-       \n• Nome: pugnale Prezzo: 2mo ID Aquisto: 
-       \n• Nome: randello Prezzo: 1mo ID Aquisto: 
-       \n• Nome: randello pesante Prezzo: 2mo ID Aquisto: 
-        **Armi a distanza semplici:**
-       \n• Nome: arco corto Prezzo: 25mo ID Aquisto: 
-       \n• Nome: balestra leggera Prezzo: 25mo ID Aquisto: 
-       \n• Nome: dardi (20) Prezzo: 1mo ID Aquisto: 
-       \n• Nome: fionda Prezzo: 1mo ID Aquisto: 
-        **Armi da mischia da guerra:**
-       \n• Nome: Alabarda Prezzo: 20mo ID Aquisto: 
-       \n• Nome: ascia bipenne Prezzo: 30mo ID Aquisto: 
-       \n• Nome: ascia da battaglia Prezzo: 10mo ID Aquisto:  (nella nomenclatura è scritta "Asc a da Battaglia" da correggere)
-       \n• Nome: falcione Prezzo: 20mo ID Aquisto: 
-       \n• Nome: frusta Prezzo: 2mo ID Aquisto: 
-       \n• Nome: lancia da cavaliere Prezzo: 10mo ID Aquisto: 
-       \n• Nome: maglio Prezzo: 20mo ID Aquisto: 
-       \n• Nome: martello da guerra Prezzo: 15mo ID Aquisto: 
-       \n• Nome: mazzafrusto Prezzo: 10mo ID Aquisto: 
-       \n• Nome: morning star Prezzo: 15mo ID Aquisto: 
-       \n• Nome: picca Prezzo: 5mo ID Aquisto: 
-       \n• Nome: piccone da guerra Prezzo: 5mo ID Aquisto: 
-       \n• Nome: scimitarra Prezzo: 25mo ID Aquisto: 
-       \n• Nome: spada corta Prezzo: 10mo ID Aquisto: 
-       \n• Nome: spada lunga Prezzo: 15mo ID Aquisto: 
-       \n• Nome: spadone Prezzo: 50mo ID Aquisto: 
-       \n• Nome: stocco Prezzo: 25mo ID Aquisto: 
-       \n• Nome: tridente Prezzo: 4mo ID Aquisto: 
-        **Armi a distanza da guerra:**
-       \n• Nome: arco lungo Prezzo: 50mo ID Aquisto: 
-       \n• Nome: balestra a mano Prezzo: 75mo ID Aquisto: 
-       \n• Nome: balestra pesante Prezzo: 50mo ID Aquisto: 
-       \n• Nome: cerbottana Prezzo: 10mo ID Aquisto: 
-       \n• Nome: rete Prezzo: 1mo ID Aquisto: 
-        **Armi Da Fuoco:**\n
-       \n• Nome: pistola Prezzo: 250mo ID Aquisto:
-       \n• Nome: Schioppo Prezzo: 500mo ID Aquisto:
-       \n• Nome: Moschetto Prezzo: 650mo ID Aquisto:
-       \n• Nome: Fucile avanzato Prezzo: 1200mo ID Aquisto: "
+        {
+            "Nome": "Armature Leggere:",
+            "Value": "-"
+        },
+        {
+            "Nome": "armatura imbottita",
+            "Value": "Prezzo: 5mo ID Aquisto: 1"
+        },
+        {
+            "Nome": "armatura cuoio",
+            "Value": "Prezzo: 10mo ID Aquisto: 2"
+        },
+        {
+            "Nome": "armatura cuoio borchiato",
+            "Value": "Prezzo: 45mo ID Aquisto: 3"
+        },
+        {
+            "Nome": "Armature medie:",
+            "Value": "-"
+        },
+        {
+            "Nome": "armature pelle",
+            "Value": "Prezzo: 10mo ID Aquisto: 4"
+        },
+        {
+            "Nome": "giaco di maglia",
+            "Value": "Prezzo: 50mo ID Aquisto: 5"
+        },
+        {
+            "Nome": "corazza a scaglie",
+            "Value": "Prezzo: 50mo ID Aquisto: 6"
+        },
+        {
+            "Nome": "corazza a piastre",
+            "Value": "Prezzo: 400mo ID Aquisto: 7"
+        },
+        {
+            "Nome": "mezza armatura",
+            "Value": "Prezzo: 750mo ID Aquisto: 8"
+        },
+        {
+            "Nome": "Armature pesanti:",
+            "Value": "-"
+        },
+        {
+            "Nome": "corazza ad anelli",
+            "Value": "Prezzo: 30mo ID Aquisto: 9"
+        },
+        {
+            "Nome": "cotta di maglia",
+            "Value": "Prezzo: 75mo ID Aquisto: 10"
+        },
+        {
+            "Nome": "corazza a strisce",
+            "Value": "Prezzo: 200mo ID Aquisto: 11"
+        },
+        {
+            "Nome": "armatura completa",
+            "Value": "Prezzo: 1500mo ID Aquisto: 12"
+        },
+        {
+            "Nome": "scudo",
+            "Value": "Prezzo: 10mo ID Aquisto: 13"
+        },
+        {
+            "Nome": "Armi da mischia semplici:",
+            "Value": "-"
+        },
+        {
+            "Nome": "Ascia",
+            "Value": "Prezzo: 5mo ID Aquisto: 14"
+        },
+        {
+            "Nome": "bastone ferrato",
+            "Value": "Prezzo: 2mo ID Aquisto: 15"
+        },
+        {
+            "Nome": "falcetto",
+            "Value": "Prezzo: 1mo ID Aquisto: 16"
+        },
+        {
+            "Nome": "giavellotto",
+            "Value": "Prezzo: 1mo ID Aquisto: 17"
+        },
+        {
+            "Nome": "bastone",
+            "Value": "Prezzo: 2mo ID Aquisto: 93"
+        },
+        {
+            "Nome": "lancia",
+            "Value": "Prezzo: 1mo ID Aquisto: 18"
+        },
+        {
+            "Nome": "martello",
+            "Value": "leggero Prezzo: 2mo ID Aquisto: 19"
+        },
+        {
+            "Nome": "mazza",
+            "Value": "Prezzo: 5mo ID Aquisto: 20"
+        },
+        {
+            "Nome": "pugnale",
+            "Value": "Prezzo: 2mo ID Aquisto: 21"
+        },
+        {
+            "Nome": "randello",
+            "Value": "Prezzo: 1mo ID Aquisto: 22"
+        },
+        {
+            "Nome": "randello",
+            "Value": "pesante Prezzo: 2mo ID Aquisto: 23"
+        },
+        {
+            "Nome": "Armi a distanza semplici:**",
+            "Value": "-"
+        },
+        {
+            "Nome": "arco corto",
+            "Value": "Prezzo: 25mo ID Aquisto: 24"
+        },
+        {
+            "Nome": "balestra leggera",
+            "Value": "Prezzo: 25mo ID Aquisto: 25"
+        },
+        {
+            "Nome": "dardi (20)",
+            "Value": "Prezzo: 1mo ID Aquisto: 26"
+        },
+        {
+            "Nome": "fionda",
+            "Value": "Prezzo: 1mo ID Aquisto: 27"
+        },
+        {
+            "Nome": "Armi da mischia da guerra:",
+            "Value": "-"
+        },
+        {
+            "Nome": "Alabarda",
+            "Value": "Prezzo: 20mo ID Aquisto: 28"
+        },
+        {
+            "Nome": "ascia bipenne",
+            "Value": "Prezzo: 30mo ID Aquisto: 29"
+        },
+        {
+            "Nome": "ascia da battaglia",
+            "Value": "Prezzo: 10mo ID Aquisto: 30"
+        },
+        {
+            "Nome": "falcione",
+            "Value": "Prezzo: 20mo ID Aquisto: 31"
+        },
+        {
+            "Nome": "frusta",
+            "Value": "Prezzo: 2mo ID Aquisto: 32"
+        },
+        {
+            "Nome": "lancia da cavaliere",
+            "Value": "Prezzo: 10mo ID Aquisto: 33"
+        },
+        {
+            "Nome": "maglio",
+            "Value": "Prezzo: 20mo ID Aquisto: 34"
+        },
+        {
+            "Nome": "martello da guerra",
+            "Value": "Prezzo: 15mo ID Aquisto: 35"
+        },
+        {
+            "Nome": "mazzafrusto",
+            "Value": "Prezzo: 10mo ID Aquisto: 36"
+        },
+        {
+            "Nome": "morning star",
+            "Value": "Prezzo: 15mo ID Aquisto: 37"
+        },
+        {
+            "Nome": "picca",
+            "Value": "Prezzo: 5mo ID Aquisto: 38"
+        },
+        {
+            "Nome": "piccone da guerra",
+            "Value": "Prezzo: 5mo ID Aquisto: 39"
+        },
+        {
+            "Nome": "scimitarra",
+            "Value": "Prezzo: 25mo ID Aquisto: 40"
+        },
+        {
+            "Nome": "spada corta",
+            "Value": "Prezzo: 10mo ID Aquisto: 41"
+        },
+        {
+            "Nome": "spada lunga",
+            "Value": "Prezzo: 15mo ID Aquisto: 42"
+        },
+        {
+            "Nome": "spadone",
+            "Value": "Prezzo: 50mo ID Aquisto: 43"
+        },
+        {
+            "Nome": "stocco",
+            "Value": "Prezzo: 25mo ID Aquisto: 44"
+        },
+        {
+            "Nome": "tridente",
+            "Value": "Prezzo: 4mo ID Aquisto: 45"
+        },
+        {
+            "Nome": "Armi a distanza da guerra:",
+            "Value": "-"
+        },
+        {
+            "Nome": "arco lungo",
+            "Value": "Prezzo: 50mo ID Aquisto: 46"
+        },
+        {
+            "Nome": "balestra a mano",
+            "Value": "Prezzo: 75mo ID Aquisto: 47"
+        },
+        {
+            "Nome": "balestra pesante",
+            "Value": "Prezzo: 50mo ID Aquisto: 48"
+        },
+        {
+            "Nome": "cerbottana",
+            "Value": "Prezzo: 10mo ID Aquisto: 49"
+        },
+        {
+            "Nome": "rete",
+            "Value": "Prezzo: 1mo ID Aquisto: 50"
+        },
+        {
+            "Nome": "Armi Da Fuoco:",
+            "Value": "-"
+        },
+        {
+            "Nome": "pistola ",
+            "Value": "Prezzo: 250mo ID Aquisto: 511"
+        },
+        {
+            "Nome": "Schioppo ",
+            "Value": "Prezzo: 500mo ID Aquisto: 512"
+        },
+        {
+            "Nome": "Moschetto ",
+            "Value": "Prezzo: 650mo ID Aquisto: 513"
+        },
+        {
+            "Nome": "Fucile avanzato ",
+            "Value": "Prezzo: 1200mo ID Aquisto: 514"
+        }
     ]
 }
