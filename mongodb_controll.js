@@ -85,6 +85,10 @@ exports.serachbynome_obj = function (query) {
     return collection.findOne({ 'nome': query });
 }
 
+exports.serachbynome_shop = function (query) {
+    return collection.findOne({ 'Nome_shop': query });
+}
+
 exports.serachbylistpg = function (query) {
     return collection.find({ 'Nome_Discord': query }).toArray();
 }

@@ -10,6 +10,7 @@ const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
+const Pagination = require('discord-paginationembed');
 const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
 
@@ -22,8 +23,39 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (args[0] && args[1] && args[2]) {
+            if (args[0].toLowerCase() == "emporio") {
+                var cursor = get_List('Emporio');
+                cursor.then(async function (result) {
+                    if (result) {
+                        if (result == null || result == undefined) {
+                            Container.setColor([255, 0, 0])
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore Oggetto non trovato');
+                            message.channel.send(Container);
+                            return 1;
+                        } else {
+                            show_list(message, botavatar, result);
+                        }
+                    }
+                });
+            } else if (args[0].toLowerCase() == "numero42") {
+                var cursor = get_List('Numero42');
+                cursor.then(async function (result) {
+                    if (result) {
+                        if (result == null || result == undefined) {
+                            Container.setColor([255, 0, 0])
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore Oggetto non trovato');
+                            message.channel.send(Container);
+                            return 1;
+                        } else {
+                            show_list(message, botavatar, result);
+                        }
+                    }
+                });
+            } else if (args[0] && args[1] && args[2]) {
                 if (isNaN(parseInt(args[2]))) {
                     var nome = args[2];
                     for (let index = 4; index < args.length; index++) {
@@ -146,7 +178,7 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [ID_Scheda][Quantità][Id/Nome oggetto]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]');
     message.channel.send(Container);
 }
 
@@ -211,4 +243,77 @@ async function get_Scheda_pg(id_serach) {
         return 1;
     }
     return cursor;
+}
+
+async function get_List(nome) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Shop_fissi");
+        var cursor = methodDB.serachbynome_shop(nome);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+function show_list(message, botavatar, row_list) {
+    var colrs_set = clor_gen.rand_Color();
+    var i = 0;
+    var x = 0;
+    var j = 0;
+    var obj_string = [];
+    for (i in row_list['Lista']) {
+        obj_string[j] += row_list['Lista'][i];
+        obj_string[j] = obj_string[j].replace("undefined", "");
+        x++
+        if (x == 20) {
+            x = 0;
+            j++
+        }
+    }
+    const embeds = [];
+    for (let i = 0; i <= obj_string.length; i++) {
+        embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
+    }
+    const Embeds = new Pagination.Embeds()
+        .setArray(embeds)
+        .setAuthorizedUsers([message.author.id])
+        .setChannel(message.channel)
+        .setPageIndicator(false)
+        .setColor(colrs_set)
+        .setTitle('Shop:' + row_list['Nome_shop'])
+        .setThumbnail(botavatar.displayAvatarURL())
+        .addField("N:", obj_string.length, true)
+        .addField("Vetrina", obj_string[0])
+        .setDisabledNavigationEmojis(['all'])
+        .setDeleteOnTimeout(false)
+        .setFunctionEmojis({
+            '◀️': (_, instance) => {
+                for (const embed of instance.array) {
+                    var e = embed.fields[0].value;
+                    e--;
+                    if (e >= 0) {
+                        embed.fields[0].value = e;
+                        embed.fields[2].value = obj_string[e];
+                    }
+                }
+            },
+            '▶️': (_, instance) => {
+                for (const embed of instance.array) {
+                    var e = embed.fields[0].value;
+                    e++;
+                    if (e < embed.fields[1].value) {
+                        embed.fields[0].value = e;
+                        embed.fields[2].value = obj_string[e];
+                    }
+                }
+            }
+        });
+    // Debug embeds function
+    // .on('start', () => console.log('Started!'))
+    // .on('finish', (user) => console.log(`Finished! User: ${user.username}`))
+    // .on('react', (user, emoji) => console.log(`Reacted! User: ${user.username} | Emoji: ${emoji.name} (${emoji.id})`))
+    // .on('expire', () => console.warn('Expired!'))
+    // .on('error', console.error);
+    Embeds.build();
 }
