@@ -25,7 +25,8 @@ module.exports = {
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (args[0].toLowerCase() == "emporio") {
+            var argos_0 = String(args[0]).toLowerCase();
+            if (argos_0 == "emporio") {
                 var cursor = get_List('Emporio');
                 cursor.then(async function (result) {
                     if (result) {
@@ -40,7 +41,7 @@ module.exports = {
                         }
                     }
                 });
-            } else if (args[0].toLowerCase() == "numero42") {
+            } else if (argos_0 == "numero42") {
                 var cursor = get_List('Numero42');
                 cursor.then(async function (result) {
                     if (result) {
@@ -55,7 +56,7 @@ module.exports = {
                         }
                     }
                 });
-            } else if (args[0].length == 24 && args[1] && args[2]) {
+            } else if (String(args[0]).length == 24 && args[1] && args[2]) {
                 if (isNaN(parseInt(args[2]))) {
                     var nome = args[2];
                     for (let index = 4; index < args.length; index++) {
@@ -75,7 +76,7 @@ module.exports = {
                                     message.channel.send(Container);
                                     return 1;
                                 } else {
-                                    if (args[0].length == 24) {
+                                    if (String(args[0]).length == 24) {
                                         var Scheda = await get_Scheda_pg(args[0]);
                                         if (Scheda != null) {
                                             var complete = add_item(message, args, Scheda[0], result);
@@ -125,7 +126,7 @@ module.exports = {
                                     message.channel.send(Container);
                                     return 1;
                                 } else {
-                                    if (args[0].length == 24) {
+                                    if (String(args[0]).length == 24) {
                                         var Scheda = await get_Scheda_pg(args[0]);
                                         if (Scheda != null) {
                                             var complete = add_item(message, args, Scheda[0], result);
@@ -263,7 +264,7 @@ function show_list(message, botavatar, row_list) {
     var j = 0;
     var obj_string = [];
     for (i in row_list['Lista']) {
-        obj_string[j] += "**Nome:** " + row_list['Lista'][i]['Nome'] + " " + row_list['Lista'][i]['Value']+"\n\n";
+        obj_string[j] += "**Nome:** " + row_list['Lista'][i]['Nome'] + " " + row_list['Lista'][i]['Value'] + "\n\n";
         obj_string[j] = obj_string[j].replace("undefined", "");
         x++
         if (x == 10) {
