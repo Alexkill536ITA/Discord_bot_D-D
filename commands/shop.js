@@ -55,7 +55,7 @@ module.exports = {
                         }
                     }
                 });
-            } else if (args[0] && args[1] && args[2]) {
+            } else if (args[0].length == 24 && args[1] && args[2]) {
                 if (isNaN(parseInt(args[2]))) {
                     var nome = args[2];
                     for (let index = 4; index < args.length; index++) {
