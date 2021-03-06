@@ -263,10 +263,10 @@ function show_list(message, botavatar, row_list) {
     var j = 0;
     var obj_string = [];
     for (i in row_list['Lista']) {
-        obj_string[j] += row_list['Lista'][i];
+        obj_string[j] += "**Nome:** " + row_list['Lista'][i]['Nome'] + " " + row_list['Lista'][i]['Value']+"\n\n";
         obj_string[j] = obj_string[j].replace("undefined", "");
         x++
-        if (x == 20) {
+        if (x == 10) {
             x = 0;
             j++
         }
