@@ -131,12 +131,9 @@ module.exports = {
                                         if (Scheda != null) {
                                             var complete = add_item(message, args, Scheda[0], result);
                                             if (complete == 1) {
-                                                emit_print(message);
-                                                return 1;
-                                            } else if (complete == 2) {
                                                 Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                                    .setTitle('Ogetto non è prensente nel\'inventario');
+                                                    .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                    .setTitle('No puoi spacciarti per un altro');
                                                 message.channel.send(Container);
                                                 return 1;
                                             } else {
@@ -194,45 +191,48 @@ function add_item(message, args, Scheda_PG, result) {
     var check_nam = inventory[nome_var];
     var consto_fin = costo * parseInt(args[1]);
     money_pg = money_pg - consto_fin
-    if (money_pg >= 0) {
-        if (check_nam !== undefined) {
-            var num = parseInt(inventory[nome_var]['Quantita']);
-            num = num + parseInt(args[1]);
-            inventory[nome_var]['Quantita'] = num;
-            qut = num;
+    if (message.author == result['Nome_Discord']) {
+        if (money_pg >= 0) {
+            if (check_nam !== undefined) {
+                var num = parseInt(inventory[nome_var]['Quantita']);
+                num = num + parseInt(args[1]);
+                inventory[nome_var]['Quantita'] = num;
+                qut = num;
+            } else {
+                var oggetto = {};
+                var ogg_temp = {};
+                ogg_temp['Nome'] = nome_var;
+                ogg_temp['Quantita'] = parseInt(args[1]);
+                ogg_temp['Sincronia'] = result.sincronia;
+                oggetto[nome_var] = ogg_temp;
+                qut = parseInt(args[1]);
+                Object.assign(inventory, oggetto);
+            }
+            methodDB.settab_db("Schede_PG");
+            methodDB.inventory_update(id_sheda, inventory);
+            methodDB.money_update(id_sheda, money_pg);
+            // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+            Container = new Discord.MessageEmbed();
+            Container.setColor(colrs_set)
+                .setTitle('Schada: ' + Scheda_PG.Nome_PG)
+                // .setThumbnail(member.user.displayAvatarURL(),true)
+                .addField("Costo Totale Sottratto", consto_fin)
+                .addField("Nome", result.nome)
+                .addField("Quantità", qut)
+                .addField("Sincronia", result.sincronia)
+                .setTimestamp()
+                .setFooter("Data", message.author.displayAvatarURL());
+            message.channel.send(Container);
         } else {
-            var oggetto = {};
-            var ogg_temp = {};
-            ogg_temp['Nome'] = nome_var;
-            ogg_temp['Quantita'] = parseInt(args[1]);
-            ogg_temp['Sincronia'] = result.sincronia;
-            oggetto[nome_var] = ogg_temp;
-            qut = parseInt(args[1]);
-            Object.assign(inventory, oggetto);
+            Container = new Discord.MessageEmbed();
+            Container.setColor([255, 0, 0])
+                .setTitle('ERRORE Fondi Insufficenti')
+                .setDescription('Torna quando sarai più ricco');
+            message.channel.send(Container);
         }
-        methodDB.settab_db("Schede_PG");
-        methodDB.inventory_update(id_sheda, inventory);
-        methodDB.money_update(id_sheda, money_pg);
-        // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
-        Container = new Discord.MessageEmbed();
-        Container.setColor(colrs_set)
-            .setTitle('Schada: ' + Scheda_PG.Nome_PG)
-            // .setThumbnail(member.user.displayAvatarURL(),true)
-            .addField("Costo Totale Sottratto", consto_fin)
-            .addField("Nome", result.nome)
-            .addField("Quantità", qut)
-            .addField("Sincronia", result.sincronia)
-            .setTimestamp()
-            .setFooter("Data", message.author.displayAvatarURL());
-        message.channel.send(Container);
     } else {
-        Container = new Discord.MessageEmbed();
-        Container.setColor([255, 0, 0])
-            .setTitle('ERRORE Fondi Insufficenti')
-            .setDescription('Torna quando sarai più ricco');
-        message.channel.send(Container);
+        return 1;
     }
-
 }
 
 async function get_Scheda_pg(id_serach) {
