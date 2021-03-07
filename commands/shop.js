@@ -84,7 +84,7 @@ module.exports = {
                                         if (complete == 1) {
                                             Container.setColor([255, 0, 0])
                                                 .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                .setTitle('No puoi spacciarti per un altro');
+                                                .setTitle('Non puoi spacciarti per un altro');
                                             message.channel.send(Container);
                                             return 1;
                                         } else {
@@ -125,7 +125,7 @@ module.exports = {
                                             if (complete == 1) {
                                                 Container.setColor([255, 0, 0])
                                                     .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                    .setTitle('No puoi spacciarti per un altro');
+                                                    .setTitle('Non puoi spacciarti per un altro');
                                                 message.channel.send(Container);
                                                 return 1;
                                             } else {
