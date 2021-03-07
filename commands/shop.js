@@ -59,7 +59,7 @@ module.exports = {
             } else if (String(args[0]).length == 24 && args[1] && args[2]) {
                 if (isNaN(parseInt(args[2]))) {
                     var nome = args[2];
-                    for (let index = 4; index < args.length; index++) {
+                    for (let index = 3; index < args.length; index++) {
                         nome += " " + args[index];
                     }
                     nome = String(nome).toLowerCase();
