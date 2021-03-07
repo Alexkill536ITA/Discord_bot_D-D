@@ -62,7 +62,7 @@ module.exports = {
                     if (args.length > 3) {
                         for (let index = 3; index < args.length; index++) {
                             nome += " " + args[index];
-                        }    
+                        }
                     }
                     nome = String(nome).toLowerCase();
                     var on_sevice_db = await methodDB.open_db();
@@ -70,47 +70,40 @@ module.exports = {
                         methodDB.settab_db("Oggeti_Di_Gioco");
                         var cursor = methodDB.serachbynome_obj(nome);
                         cursor.then(async function (result) {
-                            if (result) {
-                                if (result == null || result == undefined) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                    return 1;
-                                } else {
-                                    if (String(args[0]).length == 24) {
-                                        var Scheda = await get_Scheda_pg(args[0]);
-                                        if (Scheda != null) {
-                                            var complete = add_item(message, args, Scheda[0], result);
-                                            if (complete == 1) {
-                                                emit_print(message);
-                                                return 1;
-                                            } else if (complete == 2) {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                                    .setTitle('Ogetto non è prensente nel\'inventario');
-                                                message.channel.send(Container);
-                                                return 1;
-                                            } else {
-                                                return 0;
-                                            }
-                                        } else {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                .setTitle('Errore Scheda PG non trovata');
-                                            message.channel.send(Container);
-                                            return 1;
-                                        }
-                                    } else {
-                                        emit_print(message);
-                                        return 1;
-                                    }
-                                }
-                            } else {
+                            if (result == null || result == undefined) {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)
                                     .setTitle('Errore Oggetto non trovato');
                                 message.channel.send(Container);
+                                return 1;
+                            } else {
+                                if (String(args[0]).length == 24) {
+                                    var Scheda = await get_Scheda_pg(args[0]);
+                                    if (Scheda != null) {
+                                        var complete = add_item(message, args, Scheda[0], result);
+                                        if (complete == 1) {
+                                            emit_print(message);
+                                            return 1;
+                                        } else if (complete == 2) {
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Ogetto non rovato: ` + message.author.username)
+                                                .setTitle('Ogetto non è prensente nel\'inventario');
+                                            message.channel.send(Container);
+                                            return 1;
+                                        } else {
+                                            return 0;
+                                        }
+                                    } else {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Scheda PG non trovata');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    }
+                                } else {
+                                    emit_print(message);
+                                    return 1;
+                                }
                             }
                         });
                     }
@@ -193,7 +186,7 @@ function add_item(message, args, Scheda_PG, result) {
     var check_nam = inventory[nome_var];
     var consto_fin = costo * parseInt(args[1]);
     money_pg = money_pg - consto_fin
-    if (message.author == result['Nome_Discord']) {
+    if (message.author.id == Scheda_PG['Nome_Discord']) {
         if (money_pg >= 0) {
             if (check_nam !== undefined) {
                 var num = parseInt(inventory[nome_var]['Quantita']);
