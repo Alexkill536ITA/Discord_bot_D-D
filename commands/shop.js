@@ -82,12 +82,9 @@ module.exports = {
                                     if (Scheda != null) {
                                         var complete = add_item(message, args, Scheda[0], result);
                                         if (complete == 1) {
-                                            emit_print(message);
-                                            return 1;
-                                        } else if (complete == 2) {
                                             Container.setColor([255, 0, 0])
-                                                .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                                .setTitle('Ogetto non è prensente nel\'inventario');
+                                                .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                .setTitle('No puoi spacciarti per un altro');
                                             message.channel.send(Container);
                                             return 1;
                                         } else {
