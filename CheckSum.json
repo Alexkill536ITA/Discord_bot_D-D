@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "b472f034491262ae0d1e13fd7969a932d02f6117ea42b55c5372bb0d2fe2cd61ae0164d9f75e62f981f198312c871d1b540116209683c15a3caadd800186f44b"
+        "SHA512": "2f4e78d724bc1532d96b8f0b66b5b80c1a1f06c8bddc63ead62e51f06c9d913f84f28c18f1d899591db5d020af0bc57a1d88c472f8895a2d238bb9aae1494dbe"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -29,7 +29,7 @@
     },
     "exp.js": {
         "name": "exp.js",
-        "SHA512": "aa1da6833ba3508f6c3f300af52f4acf13c88e7e20a30c470fe5e96f1be1f2b704c400765f8be3634545bac9108e9f5a3d143cf9650dc706051f4406685b230f"
+        "SHA512": "2c9515498f57474389a584bf0417dce3f49e3f1af85bc6ac07fd1bd66c85011a799efd1f25ad27194692196758c14078d53ba16b5171e720f8e8c22a6bbfdeee"
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
@@ -41,7 +41,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "fd041bd12a48fecffe7a2501c291ddc39af10d7a2d5efdabfcf4d3f7ac3064377eba728e7dc28cb638bf0b5666feae16b0ddff684d46e55faf60f6cf94087b74"
+        "SHA512": "ae6536608f514fc3d32f26210c15a4f934174bda750da001629bc542c0063cc9cbb787679bf9146b83953640fa20f2929508738e9028e64a160cb89dba60110c"
     },
     "id.js": {
         "name": "id.js",
@@ -57,7 +57,7 @@
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "9d0a619b806aaea4ff8cc8492a09387cc03718c6c76dc361357b2b63758eed9738fd2f2c8dd73c6640153332045b897afaca657641b1ca52bcb70eacf2032603"
+        "SHA512": "aecacf9d6b8fa4ea85e1f13516baa500fd6c0a130c3934dc0a6636dff634113eda8a439cbce08fca945824afa123d853b09fd75e67cd184b06720c83d4dd415b"
     },
     "reset_password.js": {
         "name": "reset_password.js",
@@ -81,7 +81,7 @@
     },
     "shop.js": {
         "name": "shop.js",
-        "SHA512": "acd8c8cf9fb7cde3817e5cbf4b172ea9d5452aaff229802ab414db3936634472d19f04de88260efb83048a111438ce98b4d62f87e5c1f47d3922f2465d83a646"
+        "SHA512": "46a0cce8fc117ba4ee4333ee5aea9cb478553a704b194b1967d603760ac9dafab2c9b4b0aa9cb31133ea3ba224fd7664591c63f5ae3ab1754e0b8c08850c6184"
     },
     "show_inventory.js": {
         "name": "show_inventory.js",
@@ -94,6 +94,10 @@
     "show_register_link.js": {
         "name": "show_register_link.js",
         "SHA512": "608353131d36729af346891fa7269c9ae380293d539730ee95332ec4030e2da6341615e9f9134330521b31e51be8bc900cc7d6246b735b9d997bc53a0a97e1b1"
+    },
+    "use_item.js": {
+        "name": "use_item.js",
+        "SHA512": "c54c24c09342fbb8b02dac0fefed6df542c4efeb5c0907be1ced0878cb07c1021cb3d1962195c70f14d307dd11771759e8321460bfbc8dbcdb25e33069825f86"
     },
     "version_run.js": {
         "name": "version_run.js",
@@ -118,7 +122,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.76",
-        "Date Check": "04/03/2021 22:15"
+        "Version": "1.0.77",
+        "Date Check": "12/03/2021 22:00"
     }
 }
