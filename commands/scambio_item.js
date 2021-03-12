@@ -28,7 +28,7 @@ module.exports = {
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             if (args[0] == "vendi") {
                 var user_call = getUserFromMention(args[1]);
-                if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0 && isNaN(parseInt(args[4])) == false && parseInt(args[4]) > 0) {
+                if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0 && isNaN(parseFloat(args[4])) == false && parseFloat(args[4]) > 0) {
                     if (args[5]) {
                         var nome = args[5];
                         for (let index = 6; index < args.length; index++) {
@@ -74,7 +74,7 @@ module.exports = {
                             oggetto['Nome'] = nome;
                             oggetto['Quantita'] = parseInt(args[3]);
                             oggetto['Sincronia'] = sincro;
-                            oggetto['Prezzo'] = parseInt(args[4]);
+                            oggetto['Prezzo'] = parseFloat(args[4]);
 
                             methodDB.settab_db("Lista_scambio");
                             methodDB.insert_db(oggetto);
@@ -86,7 +86,7 @@ module.exports = {
                                 .addField("Nome oggetto", nome)
                                 .addField("Quantità", parseInt(args[3]))
                                 .addField("Sincronia", sincro)
-                                .addField("Prezzo", parseInt(args[4]))
+                                .addField("Prezzo", parseFloat(args[4]))
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
@@ -128,89 +128,94 @@ module.exports = {
                 //         emit_print_2(message);
                 //     }
             } else if (args[0] == "rimuovi") {
-                var user_call = getUserFromMention(args[1]);
-                if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0) {
-                    if (args[4]) {
-                        // Get Scheda Venditore 
-                        var Scheda = await get_Scheda_pg(args[2]);
-                        var Scheda_PG = Scheda[0];
-                        if (Scheda_PG == 1) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda PG non trovata');
+                if (args[1]) {
+                    var user_call = getUserFromMention(args[1]);
+                    if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0) {
+                        if (args[4]) {
+                            // Get Scheda Venditore 
+                            var Scheda = await get_Scheda_pg(args[2]);
+                            var Scheda_PG = Scheda[0];
+                            if (Scheda_PG == 1) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Scheda PG non trovata');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            // Get Scheda Oggetto
+                            var Scheda_Ojc_temp = await get_Object_scambio(args[4]);
+                            var Scheda_Object = Scheda_Ojc_temp[0];
+                            if (Scheda_Object == 1 || Scheda_Object == undefined) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Ogetto non trovato');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            if (Scheda_PG['Nome_Discord'] != Scheda_Object['ID_Discord'] && Scheda_PG['_id'] != Scheda_Object['ID_Sheda']) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Hey Non Ciprovare a Rubare');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            var num_ojb = Scheda_Object['Quantita'];
+                            num_ojb = num_ojb - parseInt(args[3]);
+                            if (num_ojb == 0 || isNaN(num_ojb) == true || args[3] == 'all') {
+                                delete_record = true
+                            } else {
+                                Scheda_Object['Quantita'] = num_ojb;
+                            }
+
+                            // Controllo Presenza già a inventario
+                            var nome_var = Scheda_Object['Nome'];
+                            var inventory = Scheda_PG['Inventory'];
+                            var check_nam = inventory[Scheda_Object['Nome']];
+                            if (check_nam !== undefined) {
+                                var num = parseInt(inventory[nome_var]['Quantita']);
+                                num = num + parseInt(args[3]);
+                                inventory[nome_var]['Quantita'] = num;
+                                qut = num;
+                            } else {
+                                var oggetto = {};
+                                var ogg_temp = {};
+                                ogg_temp['Nome'] = nome_var;
+                                ogg_temp['Quantita'] = parseInt(args[3]);
+                                ogg_temp['Sincronia'] = Scheda_Object['Sincronia'];
+                                oggetto[nome_var] = ogg_temp;
+                                qut = parseInt(args[2]);
+                                Object.assign(inventory, oggetto);
+                            }
+
+                            methodDB.settab_db("Schede_PG");
+                            methodDB.inventory_update(Scheda_PG['_id'], inventory);
+
+                            if (delete_record == true) {
+                                methodDB.settab_db("Lista_scambio");
+                                methodDB.delete_db(Scheda_Object['_id']);
+                            } else {
+                                methodDB.settab_db("Lista_scambio");
+                                methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
+                            }
+
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(clor_gen.rand_Color())
+                                .setTitle('Operazione di Rimozione e Riassegnazione Oggetto Completata')
+                                .addField('Schada', Scheda_PG['Nome_PG'])
+                                // .setThumbnail(member.user.displayAvatarURL(),true)
+                                .addField("Nome", nome_var)
+                                .addField("Quantità", qut)
+                                .addField("Sincronia", Scheda_Object['Sincronia'])
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
+                        } else {
+                            emit_print_5(message);
                             return 1;
                         }
-
-                        // Get Scheda Oggetto
-                        var Scheda_Ojc_temp = await get_Object_scambio(args[4]);
-                        var Scheda_Object = Scheda_Ojc_temp[0];
-                        if (Scheda_Object == 1 || Scheda_Object == undefined) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Ogetto non trovato');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        if (Scheda_PG['Nome_Discord'] != Scheda_Object['ID_Discord'] && Scheda_PG['_id'] != Scheda_Object['ID_Sheda']) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Hey Non Ciprovare a Rubare');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        var num_ojb = Scheda_Object['Quantita'];
-                        num_ojb = num_ojb - parseInt(args[3]);
-                        if (num_ojb == 0 || isNaN(num_ojb) == true || args[3] == 'all') {
-                            delete_record = true
-                        } else {
-                            Scheda_Object['Quantita'] = num_ojb;
-                        }
-
-                        // Controllo Presenza già a inventario
-                        var nome_var = Scheda_Object['Nome'];
-                        var inventory = Scheda_PG['Inventory'];
-                        var check_nam = inventory[Scheda_Object['Nome']];
-                        if (check_nam !== undefined) {
-                            var num = parseInt(inventory[nome_var]['Quantita']);
-                            num = num + parseInt(args[3]);
-                            inventory[nome_var]['Quantita'] = num;
-                            qut = num;
-                        } else {
-                            var oggetto = {};
-                            var ogg_temp = {};
-                            ogg_temp['Nome'] = nome_var;
-                            ogg_temp['Quantita'] = parseInt(args[3]);
-                            ogg_temp['Sincronia'] = Scheda_Object['Sincronia'];
-                            oggetto[nome_var] = ogg_temp;
-                            qut = parseInt(args[2]);
-                            Object.assign(inventory, oggetto);
-                        }
-
-                        methodDB.settab_db("Schede_PG");
-                        methodDB.inventory_update(Scheda_PG['_id'], inventory);
-
-                        if (delete_record == true) {
-                            methodDB.settab_db("Lista_scambio");
-                            methodDB.delete_db(Scheda_Object['_id']);
-                        } else {
-                            methodDB.settab_db("Lista_scambio");
-                            methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
-                        }
-
-                        Container = new Discord.MessageEmbed();
-                        Container.setColor(clor_gen.rand_Color())
-                            .setTitle('Operazione di Rimozione e Riassegnazione Oggetto Completata')
-                            .addField('Schada', Scheda_PG['Nome_PG'])
-                            // .setThumbnail(member.user.displayAvatarURL(),true)
-                            .addField("Nome", nome_var)
-                            .addField("Quantità", qut)
-                            .addField("Sincronia", Scheda_Object['Sincronia'])
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL());
-                        message.channel.send(Container);
                     } else {
                         emit_print_5(message);
                         return 1;
@@ -220,128 +225,140 @@ module.exports = {
                     return 1;
                 }
             } else if (args[0] == "compra") {
-                var user_call = getUserFromMention(args[1]);
-                if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0) {
-                    if (args[4]) {
-                        // Get Scheda Compratore 
-                        var Scheda = await get_Scheda_pg(args[2]);
-                        var Scheda_PG = Scheda[0];
-                        if (Scheda_PG == 1) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda PG non trovata');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        // Get Scheda Oggetto
-                        var Scheda_Ojc_temp = await get_Object_scambio(args[4]);
-                        var Scheda_Object = Scheda_Ojc_temp[0];
-                        if (Scheda_Object == 1 || Scheda_Object == undefined) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Ogetto non trovato');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        // Get Scheda Venditore 
-                        var sender_money = true;
-                        var Scheda = await get_Scheda_pg(Scheda_Object['ID_Sheda']);
-                        var Scheda_PG_vendor = Scheda[0];
-                        if (Scheda_PG_vendor == 1 || Scheda_Object == undefined) {
-                            sender_money = false;
-                        }
-
-                        if (Scheda_PG['Nome_Discord'] == Scheda_Object['ID_Discord'] && Scheda_PG['_id'] == Scheda_Object['ID_Sheda']) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Non puoi ricomprare l\'oggetto per rimuovere usare (**scanbio rimuovi**)');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        // Calcolo residuo scheda oggetto
-                        var costo = Scheda_Object['Prezzo'];
-                        var num_ojb = Scheda_Object['Quantita'];
-                        var nome_var = Scheda_Object['Nome'];
-                        var id_sheda = Scheda_PG['_id'];
-                        var inventory = Scheda_PG['Inventory'];
-                        var money_pg = Scheda_PG['Money'];
-                        var check_nam = inventory[nome_var];
-                        var consto_fin = costo * parseInt(args[3]);
-                        money_pg = money_pg - consto_fin
-                        if (money_pg >= 0) {
-                            var delete_record = false;
-                            num_ojb = num_ojb - parseInt(args[3]);
-                            if (num_ojb < 0) {
+                if (args[1]) {
+                    var user_call = getUserFromMention(args[1]);
+                    if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0) {
+                        if (args[4]) {
+                            // Get Scheda Compratore 
+                            var Scheda = await get_Scheda_pg(args[2]);
+                            var Scheda_PG = Scheda[0];
+                            if (Scheda_PG == 1) {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetti insufficienti per la richiesta');
+                                    .setTitle('Errore Scheda PG non trovata');
                                 message.channel.send(Container);
                                 return 1;
-                            } else {
-                                if (num_ojb == 0 || isNaN(num_ojb) == true) {
-                                    delete_record = true
-                                } else {
-                                    Scheda_Object['Quantita'] = num_ojb;
-                                }
                             }
-                        } else {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Soldi insufficienti per la acquisto');
+
+                            // Get Scheda Oggetto
+                            var Scheda_Ojc_temp = await get_Object_scambio(args[4]);
+                            var Scheda_Object = Scheda_Ojc_temp[0];
+                            if (Scheda_Object == 1 || Scheda_Object == undefined) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Ogetto non trovato');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            // Get Scheda Venditore 
+                            var sender_money = true;
+                            var Scheda = await get_Scheda_pg(Scheda_Object['ID_Sheda']);
+                            var Scheda_PG_vendor = Scheda[0];
+                            if (typeof Scheda_Object == 'undefined') {
+                                sender_money = false;
+                            }
+                            if (Scheda_Object !== undefined) {
+                                sender_money = false;
+                            }
+                            if (Scheda_PG_vendor == 1) {
+                                sender_money = false;
+                            }
+
+
+                            if (Scheda_PG['Nome_Discord'] == Scheda_Object['ID_Discord'] && Scheda_PG['_id'] == Scheda_Object['ID_Sheda']) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Non puoi ricomprare l\'oggetto per rimuovere usare (**scambio rimuovi**)');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            // Calcolo residuo scheda oggetto
+                            var costo = Scheda_Object['Prezzo'];
+                            var num_ojb = Scheda_Object['Quantita'];
+                            var nome_var = Scheda_Object['Nome'];
+                            var id_sheda = Scheda_PG['_id'];
+                            var inventory = Scheda_PG['Inventory'];
+                            var money_pg = Scheda_PG['Money'];
+                            var check_nam = inventory[nome_var];
+                            var consto_fin = costo * parseInt(args[3]);
+                            money_pg = money_pg - consto_fin
+                            if (money_pg >= 0) {
+                                var delete_record = false;
+                                num_ojb = num_ojb - parseInt(args[3]);
+                                if (num_ojb < 0) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetti insufficienti per la richiesta');
+                                    message.channel.send(Container);
+                                    return 1;
+                                } else {
+                                    if (num_ojb == 0 || isNaN(num_ojb) == true) {
+                                        delete_record = true
+                                    } else {
+                                        Scheda_Object['Quantita'] = num_ojb;
+                                    }
+                                }
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Soldi insufficienti per la acquisto');
+                                message.channel.send(Container);
+                                return 1;
+                            }
+
+                            // Controllo Presenza già a inventario
+                            var check_nam = inventory[Scheda_Object['Nome']];
+                            if (check_nam !== undefined) {
+                                var num = parseInt(inventory[nome_var]['Quantita']);
+                                num = num + parseInt(args[3]);
+                                inventory[nome_var]['Quantita'] = num;
+                                qut = num;
+                            } else {
+                                var oggetto = {};
+                                var ogg_temp = {};
+                                ogg_temp['Nome'] = nome_var;
+                                ogg_temp['Quantita'] = parseInt(args[3]);
+                                ogg_temp['Sincronia'] = Scheda_Object['Sincronia'];
+                                oggetto[nome_var] = ogg_temp;
+                                qut = parseInt(args[2]);
+                                Object.assign(inventory, oggetto);
+                            }
+
+                            // Asegnazione oggetto e rimozione soldi
+                            methodDB.settab_db("Schede_PG");
+                            methodDB.inventory_update(id_sheda, inventory);
+                            methodDB.money_update(id_sheda, money_pg);
+
+                            if (delete_record == true) {
+                                methodDB.settab_db("Lista_scambio");
+                                methodDB.delete_db(Scheda_Object['_id']);
+                            } else {
+                                methodDB.settab_db("Lista_scambio");
+                                methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
+                            }
+
+                            if (sender_money == true) {
+                                var money_pg_new = Scheda_PG_vendor['Money'] + consto_fin;
+                                methodDB.settab_db("Schede_PG");
+                                methodDB.money_update(Scheda_PG_vendor['_id'], money_pg_new);
+                            }
+
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(clor_gen.rand_Color())
+                                .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
+                                // .setThumbnail(member.user.displayAvatarURL(),true)
+                                .addField("Nome", nome_var)
+                                .addField("Quantità", qut)
+                                .addField("Sincronia", Scheda_Object['Sincronia'])
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
+                        } else {
+                            emit_print_3(message);
                             return 1;
                         }
-
-                        // Controllo Presenza già a inventario
-                        var check_nam = inventory[Scheda_Object['Nome']];
-                        if (check_nam !== undefined) {
-                            var num = parseInt(inventory[nome_var]['Quantita']);
-                            num = num + parseInt(args[3]);
-                            inventory[nome_var]['Quantita'] = num;
-                            qut = num;
-                        } else {
-                            var oggetto = {};
-                            var ogg_temp = {};
-                            ogg_temp['Nome'] = nome_var;
-                            ogg_temp['Quantita'] = parseInt(args[3]);
-                            ogg_temp['Sincronia'] = Scheda_Object['Sincronia'];
-                            oggetto[nome_var] = ogg_temp;
-                            qut = parseInt(args[2]);
-                            Object.assign(inventory, oggetto);
-                        }
-
-                        // Asegnazione oggetto e rimozione soldi
-                        methodDB.settab_db("Schede_PG");
-                        methodDB.inventory_update(id_sheda, inventory);
-                        methodDB.money_update(id_sheda, money_pg);
-
-                        if (delete_record == true) {
-                            methodDB.settab_db("Lista_scambio");
-                            methodDB.delete_db(Scheda_Object['_id']);
-                        } else {
-                            methodDB.settab_db("Lista_scambio");
-                            methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
-                        }
-
-                        if (sender_money == true) {
-                            var money_pg_new = Scheda_PG_vendor['Money'] + consto_fin;
-                            methodDB.settab_db("Schede_PG");
-                            methodDB.money_update(Scheda_PG_vendor['_id'], money_pg_new);
-                        }
-
-                        Container = new Discord.MessageEmbed();
-                        Container.setColor(clor_gen.rand_Color())
-                            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
-                            // .setThumbnail(member.user.displayAvatarURL(),true)
-                            .addField("Nome", nome_var)
-                            .addField("Quantità", qut)
-                            .addField("Sincronia", Scheda_Object['Sincronia'])
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL());
-                        message.channel.send(Container);
                     } else {
                         emit_print_3(message);
                         return 1;
@@ -467,7 +484,7 @@ function emit_print_4(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando scambio`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_aqquisto]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][Prezzo][ID/Nome oggetto/ID_aqquisto]');
     message.channel.send(Container);
 }
 

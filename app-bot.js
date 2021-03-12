@@ -117,6 +117,10 @@ function Discord_start() {
             //     client.commands.get('restart').execute(client, message, args);
         } else if (command == 'version') {
             client.commands.get('version').execute(client, message, args);
+        // } else if (command == 'debug') {
+        //     if (config.Debug_Level == "DEBUG") {
+        //         client.commands.get('debug').execute(client, message, args);
+        //     }
         } else {
             message.channel.send('Usare il comando **' + config.prefix + 'help** per la lista dei comandi');
         };
