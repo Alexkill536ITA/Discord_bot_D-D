@@ -25,8 +25,8 @@ module.exports = {
         Container.setColor([255, 0, 0])
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
-            .addField('Aggunte Nuove', "• Shop System add show list")
-            // .addField('Correzioni', "• Fix message return exe/add sub item/money")
+            .addField('Aggunte Nuove', "• add Consume Items")
+            .addField('Correzioni', "• Edit system leveling\n • Fix Shop System and show list")
             .addField('Fix Bug Minori', '• Correzioni minori')
             .setThumbnail(botavatar.displayAvatarURL())
             .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");

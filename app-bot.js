@@ -87,6 +87,8 @@ function Discord_start() {
             client.commands.get('money').execute(message, args);
         } else if (command == 'milestone') {
             client.commands.get('milestone').execute(message, args);
+        } else if (command == 'consuma') {
+            client.commands.get('consuma').execute(client, message, args);
         } else if (command == 'oggetto') {
             client.commands.get('oggetto').execute(client, message, args);
         } else if (command == 'pgoggetto') {

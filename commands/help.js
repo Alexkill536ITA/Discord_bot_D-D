@@ -106,6 +106,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'oggetto** [Id/Nome] \n\n Mostra le informazioni dell\'oggetto\n Per ricercare uno oggetto inserire [Id/Nome]');
             message.channel.send(Container);
+        } else if (args[0] == "consuma") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help consuma')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'consuma** [ID_Scheda][Quantità][Nome oggetto] \n\n Il Comando consuma l\'oggetto selezionato e rimuove dal inventario. Per usare il comando inserire [ID_Scheda] la qunatità che si intende consumare [Quantità] e infine il nome dello oggetto [Nome oggetto]');
+            message.channel.send(Container);
         } else if (args[0] == "meteo") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help meteo')
@@ -155,7 +161,9 @@ module.exports = {
                 .addField("💬 Prefix 💬", "• **" + config.prefix + "**")
                 .addField(":question: Help :question:", '• **help** [comando]')
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
-                .addField("🟡 PG 🟡", '• **pg** [@utente][ID_Scheda]\n • **pglist** [@utente]\n • **pginventario** [@utente][ID_Scheda]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **oggetto** [Id/Nome]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]')
+                .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
+                .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
+                .addField("🟠 Comandi PG Masetr 🟠", "• **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
