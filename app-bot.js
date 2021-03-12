@@ -10,6 +10,7 @@ const Discord = require("discord.js");
 const dotenv = require('dotenv');
 const Event_time = require('./event/clock_timer_event');
 const CheckSum = require('./tools/CheckSum-Code');
+const vers = require("./CheckSum.json");
 const client = new Discord.Client();
 
 //------------------------------------------------------//
@@ -23,6 +24,9 @@ const config = require("./config.json");
 //------------------------------------------------------//
 async function main() {
     console.log("[ " + color.blue('INFO') + "  ] Start Process");
+    console.log("[ " + color.blue('INFO') + "  ] Name Applications: " + color.yellow('GdrBot Discord'));
+    console.log("[ " + color.blue('INFO') + "  ] Authors: " + color.yellow('Alexkill536ITA'));
+    console.log("[ " + color.blue('INFO') + "  ] Version Running: " + color.yellow("v" + vers.Create.Version));
     // var pass = await CheckSum.CheckSum_file();
     // if (pass == 1) {
     //     console.log("[ "+color.blue('INFO')+"  ] Stop Process");
