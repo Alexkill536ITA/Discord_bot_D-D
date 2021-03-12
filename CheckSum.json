@@ -57,7 +57,7 @@
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "aecacf9d6b8fa4ea85e1f13516baa500fd6c0a130c3934dc0a6636dff634113eda8a439cbce08fca945824afa123d853b09fd75e67cd184b06720c83d4dd415b"
+        "SHA512": "db8726df46ea26eaaa0aba9559f59c257b5f0799ffba29b0bd719f10a2bf0b0da600d691ea25367676b0116421003c523410f5177152f7ef50c2772b26839eef"
     },
     "reset_password.js": {
         "name": "reset_password.js",
@@ -122,7 +122,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.77",
-        "Date Check": "12/03/2021 22:00"
+        "Version": "1.0.78",
+        "Date Check": "12/03/2021 22:02"
     }
 }
