@@ -166,10 +166,10 @@ function LevelUP_auto(message, id_discord, id, exp) {
     } else if (exp >= 137 && exp <153 ) {
         methodDB.level_update(id, 18);          // 151
         Manager_role_level(message, id_discord, config.Level["Mithril"])
-    } else if (exp >= 153 && exp < 180) {
+    } else if (exp >= 153 && exp < 172) {
         methodDB.level_update(id, 19);          // 168
         Manager_role_level(message, id_discord, config.Level["Mithril"])
-    } else if (exp >= 198) {
+    } else if (exp >= 182) {
         methodDB.level_update(id, 20);          // 185
         Manager_role_level(message, id_discord, config.Level["Adamantio"])
     }
