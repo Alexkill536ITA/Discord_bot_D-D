@@ -165,7 +165,7 @@ module.exports = {
                 .setTitle('Lista comandi')
                 .setThumbnail(botavatar.displayAvatarURL())
                 .addField("💬 Prefix 💬", "• **" + config.prefix + "**")
-                .addField(":question: Help :question:", '• **help** [comando]')
+                .addField(":question: Descrizione Comandi :question:", '• **help** [comando]')
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
