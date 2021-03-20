@@ -398,7 +398,7 @@ module.exports = {
                             var x = 0;
                             var obj_string = [];
                             for (var i in obj_N) {
-                                obj_string[j] += '**ID aqquisto:** ' + obj_N[i]['ID Shop'] + '\n**Nome:** ' + obj_N[i]['Nome'] + '\n**Quantità:** ' + obj_N[i]['Quantità'] + '\n**Prezzo:** ' + obj_N[i]['Prezzo'] + 'mo\n\n';
+                                obj_string[j] += '**ID aqquisto:** ' + obj_N[i]['ID Shop'] + '\n**Nome:** ' + obj_N[i]['Nome'] + '\n**Quantità:** ' + obj_N[i]['Quantita'] + '\n**Prezzo:** ' + obj_N[i]['Prezzo'] + 'mo\n\n';
                                 obj_string[j] = obj_string[j].replace("undefined", "");
                                 x++
                                 if (x == 10) {
