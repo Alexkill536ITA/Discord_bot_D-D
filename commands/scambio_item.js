@@ -80,14 +80,20 @@ module.exports = {
                                 methodDB.settab_db("Lista_scambio");
                                 methodDB.insert_db(oggetto);
 
+                                if (sincro == "1") {
+                                    var sinc = "Si";
+                                } else {
+                                    var sinc = "No";
+                                }
+
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(clor_gen.rand_Color())
                                     .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
                                     .addField("ID shop", oggetto['ID Shop'])
                                     .addField("Nome oggetto", nome)
                                     .addField("Quantità", parseInt(args[3]))
-                                    .addField("Sincronia", sincro)
-                                    .addField("Prezzo", parseFloat(args[4]))
+                                    .addField("Sincronia", sinc)
+                                    .addField("Prezzo", parseFloat(args[4] + "mo"))
                                     .setThumbnail(message.author.displayAvatarURL())
                                     .setTimestamp()
                                     .setFooter("Data", message.author.displayAvatarURL());
@@ -209,6 +215,12 @@ module.exports = {
                                 methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
                             }
 
+                            if (Scheda_Object['Sincronia'] == "1") {
+                                var sinc = "Si";
+                            } else {
+                                var sinc = "No";
+                            }
+
                             let meber_user = client.users.cache.find(user => user.id == Scheda_Object['ID_Discord']);
 
                             Container = new Discord.MessageEmbed();
@@ -218,7 +230,7 @@ module.exports = {
                                 .setThumbnail(meber_user.displayAvatarURL(), true)
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
-                                .addField("Sincronia", Scheda_Object['Sincronia'])
+                                .addField("Sincronia", sinc)
                                 .addField("Ogetti Rimanenti in vendita", num_ojb)
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
@@ -362,13 +374,19 @@ module.exports = {
                                 methodDB.money_update(Scheda_PG_vendor['_id'], money_pg_new);
                             }
 
+                            if (Scheda_Object['Sincronia'] == "1") {
+                                var sinc = "Si";
+                            } else {
+                                var sinc = "No";
+                            }
+
                             Container = new Discord.MessageEmbed();
                             Container.setColor(clor_gen.rand_Color())
                                 .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                                 // .setThumbnail(member.user.displayAvatarURL(),true)
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
-                                .addField("Sincronia", Scheda_Object['Sincronia'])
+                                .addField("Sincronia", sinc)
                                 .setThumbnail(botavatar.displayAvatarURL())
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
