@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "ca81412cfdbb378000ccb7eebfca56bbc607312f83a2f5eaac780da1428bf28bdb13dd5e11b8f5e70440f4a2670efeba21967a872da424bb5df2df88fe8538ab"
+        "SHA512": "b72c55b6960b9d81687f64a57868a8f03017cb47a43dcacf58abd3a185a7209bfed04b1499b7153c482ca44ad9838d63bf69831776e8ea1115080699b81da899"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -33,7 +33,7 @@
     },
     "exp.js": {
         "name": "exp.js",
-        "SHA512": "2c9515498f57474389a584bf0417dce3f49e3f1af85bc6ac07fd1bd66c85011a799efd1f25ad27194692196758c14078d53ba16b5171e720f8e8c22a6bbfdeee"
+        "SHA512": "f381a1b8bb9aa07ad758c4a7b299a25b2415eb82fd89a3330b290a0663910c9262f28425a706820a8e32e659270becebb779c579b2b517ccf5b9f366c47fbba6"
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
@@ -45,7 +45,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "62dba9b62546075281bf8898dad2ef108cf5cc3357344637f61987fc3e8d3aaa275cbb9bc61ef4f2095cd5321cc4c8e6dd9467c7d8485ed89aad6d2de9704e6e"
+        "SHA512": "fc46da27caa72357e582994131d0920f1c653e2995fdac28ceb494a0406fc5cec6f1dc31fc2cadeaf1e36044b4f5d88270b956d6ff9eed07f7a6440439d7ed95"
     },
     "id.js": {
         "name": "id.js",
@@ -77,7 +77,7 @@
     },
     "scambio_item.js": {
         "name": "scambio_item.js",
-        "SHA512": "4689b67e3df383f2bda8f8615ae61a959522b18f71fc47193495c5dc7313c06e1f59c88794af677725dcce1842ff04dedf0f9ee9765ecd2101981faa3253c85b"
+        "SHA512": "d2c0013b51333f5064e311f4ce82f416f67624edff56e3b47953b21020c39d249a7ebc14525d34bdf81569b7f27ddebd009fcae7de8521613df2c93255418140"
     },
     "set_config.js": {
         "name": "set_config.js",
@@ -130,7 +130,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.79",
-        "Date Check": "17/03/2021 21:05"
+        "Version": "1.0.80",
+        "Date Check": "20/03/2021 11:13"
     }
 }
