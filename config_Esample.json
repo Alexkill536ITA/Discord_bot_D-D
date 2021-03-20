@@ -7,19 +7,34 @@
         "Moderatori",
         "Helper",
         "Dungeon Master",
+        "DM in Prova",
         "Gildano"
     ],
     "role_avance": [
         "Admin",
         "Moderatori",
+        "DM in Prova",
         "Dungeon Master"
     ],
     "role_admin": [
         "Admin"
     ],
+    "Level": {
+        "Rame": "752574293224849539",
+        "Bronzo": "752574190565195877",
+        "Ferro": "808401242555809843",
+        "Argento": "752574137276432404",
+        "Electrum": "808401383741063168",
+        "Oro": "752574065847435345",
+        "Platino": "752573958506938428",
+        "Mithril": "753003889166647326",
+        "Adamantio": "752573613311393842"
+    },
     "event_meteo_enable": true,
     "set_event_meteo": "10:00",
     "event_chat_meteo": "784136487544553543",
-    "random_color_enable": true,
+    "chat_scambi": "770795462584041543",
+    "chat_scambi_ping": "Gildano",
+    "random_color_enable": "true",
     "Debug_Level": "INFO"
 }
