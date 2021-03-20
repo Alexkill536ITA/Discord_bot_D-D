@@ -27,83 +27,88 @@ module.exports = {
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
             if (args[0] == "vendi") {
-                var user_call = getUserFromMention(args[1]);
-                if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0 && isNaN(parseFloat(args[4])) == false && parseFloat(args[4]) > 0) {
-                    if (args[5]) {
-                        var nome = args[5];
-                        for (let index = 6; index < args.length; index++) {
-                            nome += " " + args[index];
-                        }
-                        nome = String(nome).toLowerCase();
+                if (args[1]) {
+                    var user_call = getUserFromMention(args[1]);
+                    if (user_call == message.author.id && args[2].length == 24 && isNaN(parseInt(args[3])) == false && parseInt(args[3]) > 0 && isNaN(parseFloat(args[4])) == false && parseFloat(args[4]) > 0) {
+                        if (args[5]) {
+                            var nome = args[5];
+                            for (let index = 6; index < args.length; index++) {
+                                nome += " " + args[index];
+                            }
+                            nome = String(nome).toLowerCase();
 
-                        var Scheda = await get_Scheda_pg(args[2]);
-                        var Scheda_PG = Scheda[0];
-                        if (Scheda_PG == 1) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda PG non trovata');
-                            message.channel.send(Container);
-                            return 1;
-                        }
-
-                        var inventory = Scheda_PG['Inventory'];
-                        var check_nam = inventory[nome];
-                        if (check_nam !== undefined) {
-                            var num = inventory[nome]['Quantita'];
-                            num = num - parseInt(args[3]);
-                            if (num < 0) {
+                            var Scheda = await get_Scheda_pg(args[2]);
+                            var Scheda_PG = Scheda[0];
+                            if (Scheda_PG == 1) {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetti insufficienti');
+                                    .setTitle('Errore Scheda PG non trovata');
                                 message.channel.send(Container);
-                            } else {
-                                if (num == 0 || isNaN(num) == true) {
-                                    var sincro = inventory[nome]['Sincronia'];
-                                    delete inventory[nome];
-                                } else {
-                                    var sincro = inventory[nome]['Sincronia'];
-                                    inventory[nome]['Quantita'] = num;
-                                }
+                                return 1;
                             }
-                            methodDB.inventory_update(args[2], inventory);
 
-                            var oggetto = {};
-                            oggetto['ID_Discord'] = user_call;
-                            oggetto['ID_Sheda'] = args[2];
-                            oggetto['ID Shop'] = cryptoRandomString({ length: 10, type: 'alphanumeric' });;
-                            oggetto['Nome'] = nome;
-                            oggetto['Quantita'] = parseInt(args[3]);
-                            oggetto['Sincronia'] = sincro;
-                            oggetto['Prezzo'] = parseFloat(args[4]);
+                            var inventory = Scheda_PG['Inventory'];
+                            var check_nam = inventory[nome];
+                            if (check_nam !== undefined) {
+                                var num = inventory[nome]['Quantita'];
+                                num = num - parseInt(args[3]);
+                                if (num < 0) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetti insufficienti');
+                                    message.channel.send(Container);
+                                } else {
+                                    if (num == 0 || isNaN(num) == true) {
+                                        var sincro = inventory[nome]['Sincronia'];
+                                        delete inventory[nome];
+                                    } else {
+                                        var sincro = inventory[nome]['Sincronia'];
+                                        inventory[nome]['Quantita'] = num;
+                                    }
+                                }
+                                methodDB.inventory_update(args[2], inventory);
 
-                            methodDB.settab_db("Lista_scambio");
-                            methodDB.insert_db(oggetto);
+                                var oggetto = {};
+                                oggetto['ID_Discord'] = user_call;
+                                oggetto['ID_Sheda'] = args[2];
+                                oggetto['ID Shop'] = cryptoRandomString({ length: 10, type: 'alphanumeric' });;
+                                oggetto['Nome'] = nome;
+                                oggetto['Quantita'] = parseInt(args[3]);
+                                oggetto['Sincronia'] = sincro;
+                                oggetto['Prezzo'] = parseFloat(args[4]);
 
-                            Container = new Discord.MessageEmbed();
-                            Container.setColor(clor_gen.rand_Color())
-                                .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
-                                .addField("ID shop", oggetto['ID Shop'])
-                                .addField("Nome oggetto", nome)
-                                .addField("Quantità", parseInt(args[3]))
-                                .addField("Sincronia", sincro)
-                                .addField("Prezzo", parseFloat(args[4]))
-                                .setThumbnail(message.author.displayAvatarURL())
-                                .setTimestamp()
-                                .setFooter("Data", message.author.displayAvatarURL());
-                            message.channel.send(Container);
-                            let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
-                            client.channels.cache.get(config.chat_scambi).send(Container.setDescription("<@&" + role_ping.id + ">"));
+                                methodDB.settab_db("Lista_scambio");
+                                methodDB.insert_db(oggetto);
 
+                                Container = new Discord.MessageEmbed();
+                                Container.setColor(clor_gen.rand_Color())
+                                    .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
+                                    .addField("ID shop", oggetto['ID Shop'])
+                                    .addField("Nome oggetto", nome)
+                                    .addField("Quantità", parseInt(args[3]))
+                                    .addField("Sincronia", sincro)
+                                    .addField("Prezzo", parseFloat(args[4]))
+                                    .setThumbnail(message.author.displayAvatarURL())
+                                    .setTimestamp()
+                                    .setFooter("Data", message.author.displayAvatarURL());
+                                message.channel.send(Container);
+                                let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
+                                client.channels.cache.get(config.chat_scambi).send(Container.setDescription("<@&" + role_ping.id + ">"));
+
+                            } else {
+                                Container = new Discord.MessageEmbed();
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Ogetto non rovato: ` + message.author.username)
+                                    .setTitle('Ogetto non è prensente nel\'inventario');
+                                message.channel.send(Container);
+                            }
                         } else {
-                            Container = new Discord.MessageEmbed();
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                .setTitle('Ogetto non è prensente nel\'inventario');
-                            message.channel.send(Container);
+                            emit_print_1(message);
+                            return 1;
                         }
                     } else {
                         emit_print_1(message);
-                        return 1;
+                        return 1
                     }
                 } else {
                     emit_print_1(message);
@@ -210,7 +215,7 @@ module.exports = {
                             Container.setColor(clor_gen.rand_Color())
                                 .setTitle('Operazione di Rimozione e Riassegnazione Oggetto Completata')
                                 .addField('Schada', Scheda_PG['Nome_PG'])
-                                .setThumbnail(meber_user.displayAvatarURL(),true)
+                                .setThumbnail(meber_user.displayAvatarURL(), true)
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
                                 .addField("Sincronia", Scheda_Object['Sincronia'])
