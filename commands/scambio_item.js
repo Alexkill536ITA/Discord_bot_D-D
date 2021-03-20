@@ -214,7 +214,7 @@ module.exports = {
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
                                 .addField("Sincronia", Scheda_Object['Sincronia'])
-
+                                .addField("Ogetti Rimanenti in vendita", num_ojb)
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
