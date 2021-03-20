@@ -87,9 +87,12 @@ module.exports = {
                                 .addField("Quantità", parseInt(args[3]))
                                 .addField("Sincronia", sincro)
                                 .addField("Prezzo", parseFloat(args[4]))
+                                .setThumbnail(message.author.displayAvatarURL())
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
+                            let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
+                            client.channels.cache.get(config.chat_scambi).send(Container.setDescription("<@&" + role_ping.id + ">"));
 
                         } else {
                             Container = new Discord.MessageEmbed();
@@ -201,14 +204,17 @@ module.exports = {
                                 methodDB.Object_scambio_update(Scheda_Object['_id'], Scheda_Object);
                             }
 
+                            let meber_user = client.users.cache.find(user => user.id == Scheda_Object['ID_Discord']);
+
                             Container = new Discord.MessageEmbed();
                             Container.setColor(clor_gen.rand_Color())
                                 .setTitle('Operazione di Rimozione e Riassegnazione Oggetto Completata')
                                 .addField('Schada', Scheda_PG['Nome_PG'])
-                                // .setThumbnail(member.user.displayAvatarURL(),true)
+                                .setThumbnail(meber_user.displayAvatarURL(),true)
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
                                 .addField("Sincronia", Scheda_Object['Sincronia'])
+
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);
@@ -266,10 +272,16 @@ module.exports = {
                             }
 
 
-                            if (Scheda_PG['Nome_Discord'] == Scheda_Object['ID_Discord'] && Scheda_PG['_id'] == Scheda_Object['ID_Sheda']) {
+                            if (Scheda_PG['_id'] == Scheda_Object['ID_Sheda']) {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Non puoi ricomprare l\'oggetto per rimuovere usare (**scambio rimuovi**)');
+                                    .setTitle('Errore Non puoi ricomprare l\'oggetto per rimuovere usare \n(**scambio rimuovi**)');
+                                message.channel.send(Container);
+                                return 1;
+                            } else if (Scheda_PG['Nome_Discord'] == Scheda_Object['ID_Discord']) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Cosa pensi di fare broker system');
                                 message.channel.send(Container);
                                 return 1;
                             }
@@ -352,6 +364,7 @@ module.exports = {
                                 .addField("Nome", nome_var)
                                 .addField("Quantità", qut)
                                 .addField("Sincronia", Scheda_Object['Sincronia'])
+                                .setThumbnail(botavatar.displayAvatarURL())
                                 .setTimestamp()
                                 .setFooter("Data", message.author.displayAvatarURL());
                             message.channel.send(Container);

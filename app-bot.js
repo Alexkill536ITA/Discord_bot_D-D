@@ -115,8 +115,8 @@ function Discord_start() {
             client.commands.get('patchnotes').execute(client, message, args);
         } else if (command == 'setconfig') {
             client.commands.get('setconfig').execute(client, message, args);
-            // } else if (command == 'restart') {
-            //     client.commands.get('restart').execute(client, message, args);
+        // } else if (command == 'restart') {
+        //     client.commands.get('restart').execute(client, message, args);
         } else if (command == 'version') {
             client.commands.get('version').execute(client, message, args);
         // } else if (command == 'debug') {
