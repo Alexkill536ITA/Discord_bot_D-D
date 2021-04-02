@@ -56,7 +56,7 @@ module.exports = {
                         }
                     }
                 });
-            } else if (args[0].length == 24) {
+            } else if (String(args[0].length) == 24) {
                 if (args[2]) {
                     if (args[3]) {
                         if (isNaN(parseInt(args[2]))) {
@@ -79,7 +79,7 @@ module.exports = {
                                         message.channel.send(Container);
                                         return 1;
                                     } else {
-                                        if (args[0].length == 24) {
+                                        if (String(args[0]).length == 24) {
                                             var Scheda = await get_Scheda_pg(args[0]);
                                             if (Scheda != null) {
                                                 var complete = add_item(message, args, Scheda[0], result);
