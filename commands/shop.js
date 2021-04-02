@@ -56,7 +56,7 @@ module.exports = {
                         }
                     }
                 });
-            } else if (String(args[0]).length == 24 && args[1] && args[2]) {
+            } else if (String(args[0]).length == 22 && args[1] && args[2]) {
                 if (isNaN(parseInt(args[2]))) {
                     var nome = args[2];
                     if (args.length > 3) {
@@ -77,7 +77,7 @@ module.exports = {
                                 message.channel.send(Container);
                                 return 1;
                             } else {
-                                if (String(args[0]).length == 24) {
+                                if (String(args[0]).length == 22) {
                                     var Scheda = await get_Scheda_pg(args[0]);
                                     if (Scheda != null) {
                                         var complete = add_item(message, args, Scheda[0], result);
@@ -153,6 +153,8 @@ module.exports = {
                     }
                 }
             } else {
+                console.log(args[0]);
+                console.log(String(args[0]).length);
                 emit_print(message);
             }
         } else {
