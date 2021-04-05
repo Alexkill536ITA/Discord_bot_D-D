@@ -7,3 +7,4 @@ package_run_pm2.txt
 version.txt
 config.json
 commands/debug_input.js
+template_PG.json

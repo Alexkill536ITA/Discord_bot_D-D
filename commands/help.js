@@ -50,7 +50,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle(`Help Roll`)
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi **' + config.prefix + 'roll** Es:[1d20+5] \n\nRoll fa un tiro di dadi a tua scelta');
+                .setDescription('Sintassi **' + config.prefix + 'roll** Es:[1d20] / [1d20+1d8] / [d%] / [1d20+5] \n\nRoll fa un tiro di dadi a tua scelta');
             message.channel.send(Container);
         } else if (args[0] == "math") {
             Container.setColor([255, 0, 0])

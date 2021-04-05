@@ -68,13 +68,13 @@ function Discord_start() {
     client.on('message', message => {
         if (message.author.bot) {
             return;
-        } //else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
-        //     if (config.Debug_Level == "DEBUG") {
-        //         console.log("[ " + color.magenta('DEBUG') + " ] Triger Hit " + hit_msg + " Channel " + message.channel.name);
-        //         hit_msg = hit_msg + 1;
-        //     }
-        //     client.commands.get('PBC_Chat').execute(client, message);
-        // }
+        } else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
+            if (config.Debug_Level == "DEBUG") {
+                console.log("[ " + color.magenta('DEBUG') + " ] Triger Hit " + hit_msg + " Channel " + message.channel.name);
+                hit_msg = hit_msg + 1;
+            }
+            client.commands.get('PBC_Chat').execute(client, message);
+        }
 
         if (!message.content.startsWith(prefix)) return;
 

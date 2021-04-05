@@ -1,11 +1,11 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "b72c55b6960b9d81687f64a57868a8f03017cb47a43dcacf58abd3a185a7209bfed04b1499b7153c482ca44ad9838d63bf69831776e8ea1115080699b81da899"
+        "SHA512": "34c9d7212b1b922c6e8d90892608b2fe32a1ce2a4efa05a3e68657bfc28bb249f16a855a546e458952f843bad59de107553e1b4b4b65492078b9615eb3e04035"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "1bdc3922af68219512fc7581bd33ad1b096940bb9e292a077986458078bc158870004dc5d5e082584b679f03fa039f0c2b6d14122d23f0617d6c2f784bd3ca1a"
+        "SHA512": "192c27550520539b39c3475d9420ebe7f022cc1c6170901e3ea29a55ef5094a12d1fd6f9f40d77b2a45eb36f773d6adb8050d54be7b1a8b1b4e48139217db561"
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
@@ -45,7 +45,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "fc46da27caa72357e582994131d0920f1c653e2995fdac28ceb494a0406fc5cec6f1dc31fc2cadeaf1e36044b4f5d88270b956d6ff9eed07f7a6440439d7ed95"
+        "SHA512": "f5a5818443f210c27b7adfa491807930509d7556a0e5e9bc0eca9a5e9d3e86a5ae94a0a9607f157777ede707b04bc3fd25bbcb78eeab8bc47fa386ab048299f2"
     },
     "id.js": {
         "name": "id.js",
@@ -57,11 +57,15 @@
     },
     "money.js": {
         "name": "money.js",
-        "SHA512": "644fc6c9521bcbdda507d2e717a8bdd5fbe5158da2aed91e478ee710489642fa526a7b34888addd5685e983c291e511b410058f0244540507e09d2b987b5873f"
+        "SHA512": "5853f484dd8e3f152739f83588ca42b6a42294d48de13f4ff6f1260be2d653b81b35aa4672447c23d6b3e4177010c9251778f2d19f4e7991f70fc45f04ee28c9"
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "c00eafeef02a55ed92f83c483b276cb4c6c81e9b97362a7c0c9cfab3618b81c47fc5a7703351772b3439f8e897885cd04bba0a4956f30291b25c3ef9a54bd2f4"
+        "SHA512": "967885a90b8ce34f375f5ac304d52e129cdfcb800427e70edea3aff94b69e6859cbb4dc823a52056ad31003b030cd2a5099a20c0c6b413996d913eeb5b15cd0b"
+    },
+    "pbc_exp.js": {
+        "name": "pbc_exp.js",
+        "SHA512": "b8ed30cd1922b1a6f9a1f50c9da3b7331f6f65d1f4f832fe34c8876ef78049a49ce6b9d30cdac5f1c2059d240cc29655ff2bf7d89b9c2ce66e328e55a069ba2f"
     },
     "reset_password.js": {
         "name": "reset_password.js",
@@ -73,11 +77,11 @@
     },
     "roll_dice.js": {
         "name": "roll_dice.js",
-        "SHA512": "d7e72cc772d53424f0139354da08741f4cb20fbb39b24f83158a619a617bb9b2df3237907a771341487b2486a4585ac130f331b79c775aa975bfbb0106c0bf1e"
+        "SHA512": "92d16111efa13c9e630a4db1138427c5be6aa8bcee0afecd1c1e9f9e348856c00c982d4c23b4bdc67d4ab4c1a2b57eef1f1eda3b7ff202e0c3461ccb12c8df67"
     },
     "scambio_item.js": {
         "name": "scambio_item.js",
-        "SHA512": "d2c0013b51333f5064e311f4ce82f416f67624edff56e3b47953b21020c39d249a7ebc14525d34bdf81569b7f27ddebd009fcae7de8521613df2c93255418140"
+        "SHA512": "cdba91802f68226a766efc0d13465334d3940863d3654f070f946f3857614c41b352da6a8f188ff4a39fdef66d4513b31ee04a0b67073c475b94759b1d3ae38f"
     },
     "set_config.js": {
         "name": "set_config.js",
@@ -85,7 +89,7 @@
     },
     "shop.js": {
         "name": "shop.js",
-        "SHA512": "c895553b9110d4aa1452f19e7c94bb92b7d201fc02b95d81172a1a7aaf35ed1cfb396b1110c975f1d11f03d651a22aecd28acae0f9f4f40e460cec60c01709ff"
+        "SHA512": "05ee235a6cb389f6899a75b3082ea42bb165c062c358863a6f77fbf554498fe202c07e2d4132b0128f5d18a613d97f9e70a4d5572abc02cea5bcbaef16dca81a"
     },
     "show_descript.js": {
         "name": "show_descript.js",
@@ -130,7 +134,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.80",
-        "Date Check": "20/03/2021 11:13"
+        "Version": "1.0.81",
+        "Date Check": "05/04/2021 23:50"
     }
 }
