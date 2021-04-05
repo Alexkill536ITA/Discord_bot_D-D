@@ -10,7 +10,7 @@ const Discord = require('discord.js');
 const config = require("../config.json");
 const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
-const Roll = require('roll'),
+var Roll = require('roll'),
 roll = new Roll();
 
 module.exports = {
