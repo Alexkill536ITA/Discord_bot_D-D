@@ -103,8 +103,13 @@ exports.getAll_Object = async function () {
     return cursor;
 }
 
+exports.serachCustom = async function (query, Value) {
+    var cursor = await collection.find({ query: _Value }).toArray();
+    return cursor;
+}
+
 // MongoDB Insert
-exports.insert_db =function(Data_value) {
+exports.insert_db = function (Data_value) {
     collection.insertOne(Data_value);
     return 0;
 }
@@ -138,7 +143,6 @@ exports.Object_scambio_update = function (id_scheda, value_new) {
     return 0;
 }
 
-
 exports.password_update = function (id_user, value_new) {
     id_user = mongo.ObjectID(id_user);
     collection.updateOne({ '_id': id_user }, { $set: { password: value_new, temp_paw: "1" } });
@@ -146,8 +150,8 @@ exports.password_update = function (id_user, value_new) {
 }
 
 // MongoDB Delete
-exports.delete_db = function(id_scheda) {
+exports.delete_db = function (id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.deleteOne({ '_id': id_scheda });
     return 0;
-} 
+}

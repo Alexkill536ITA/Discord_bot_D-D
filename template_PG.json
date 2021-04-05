@@ -1,0 +1,20 @@
+{
+    "_id": {
+        "$oid": "60313a2a5dc0f45983c8cdf4"
+    },
+    "Nome_Discord": "188587744140853251",
+    "Livello": 6,
+    "Exp": 15,
+    "Nome_PG": "kentorns",
+    "Razza": "Vastaris",
+    "Classe": "Monaco",
+    "Background": "Forestiero",
+    "Money": 50,
+    "Inventory": {},
+    "Sotto Classe": "Non Assegnata",
+    "Descrizione": "Non asegnata",
+    "Pbc_frag": {
+        "Frammento": 0,
+        "Data": "10/10/2021"
+    }
+}

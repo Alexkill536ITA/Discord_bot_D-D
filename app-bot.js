@@ -13,6 +13,8 @@ const CheckSum = require('./tools/CheckSum-Code');
 const vers = require("./CheckSum.json");
 const client = new Discord.Client();
 
+var hit_msg = 0;
+
 //------------------------------------------------------//
 /*                       Config                         */
 //------------------------------------------------------//
@@ -64,7 +66,17 @@ function Discord_start() {
 
     // Lissener Message/Commands
     client.on('message', message => {
-        if (!message.content.startsWith(prefix) || message.author.bot) return;
+        if (message.author.bot) {
+            return;
+        } //else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
+        //     if (config.Debug_Level == "DEBUG") {
+        //         console.log("[ " + color.magenta('DEBUG') + " ] Triger Hit " + hit_msg + " Channel " + message.channel.name);
+        //         hit_msg = hit_msg + 1;
+        //     }
+        //     client.commands.get('PBC_Chat').execute(client, message);
+        // }
+
+        if (!message.content.startsWith(prefix)) return;
 
         const args = message.content.slice(prefix.length).split(/ +/);
         const command = args.shift().toLowerCase();
@@ -115,14 +127,14 @@ function Discord_start() {
             client.commands.get('patchnotes').execute(client, message, args);
         } else if (command == 'setconfig') {
             client.commands.get('setconfig').execute(client, message, args);
-        // } else if (command == 'restart') {
-        //     client.commands.get('restart').execute(client, message, args);
+            // } else if (command == 'restart') {
+            //     client.commands.get('restart').execute(client, message, args);
         } else if (command == 'version') {
             client.commands.get('version').execute(client, message, args);
-        // } else if (command == 'debug') {
-        //     if (config.Debug_Level == "DEBUG") {
-        //         client.commands.get('debug').execute(client, message, args);
-        //     }
+            // } else if (command == 'debug') {
+            //     if (config.Debug_Level == "DEBUG") {
+            //         client.commands.get('debug').execute(client, message, args);
+            //     }
         } else {
             message.channel.send('Usare il comando **' + config.prefix + 'help** per la lista dei comandi');
         };
