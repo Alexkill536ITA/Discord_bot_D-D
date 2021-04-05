@@ -31,7 +31,7 @@ module.exports = {
                     Container.setColor(colrs_set)
                         .setTitle('Roll dice')
                         .setThumbnail(botavatar.displayAvatarURL())
-                        .addField("Risultato", args[0] + " = ```" + result.calculations + " = " + result.result + "```");
+                        .addField("Risultato", args[0] + " = ```fix\nRolled: " + result.rolled + "``````css\nResult: " + result.result + "```");
                     message.reply(" ");
                     message.channel.send(Container);
                 } else {
