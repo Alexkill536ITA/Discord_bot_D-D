@@ -98,9 +98,9 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
         var colrs_set = clor_gen.rand_Color();
         Container = new Discord.MessageEmbed();
         Container.setColor(colrs_set)
-            .setTitle('Scheda: ' + level)
+            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
             .setThumbnail(message.author.displayAvatarURL(), true)
-            .addField("Livello: ", Scheda_PG.Livello)
+            .addField("Livello: ", level)
             .addField("Milestone ottenute: ", exp_value)
             .setTimestamp()
             .setFooter("Data", message.author.displayAvatarURL());
