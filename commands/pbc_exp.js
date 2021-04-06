@@ -92,13 +92,13 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
         exp_value = exp_value + 1;
         methodDB.settab_db("Schede_PG");
         methodDB.exp_update(Scheda_PG._id, exp_value);
-        LevelUP_auto(message, message.author.id, Scheda_PG._id, exp_value);
+        var level = LevelUP_auto(message, message.author.id, Scheda_PG._id, exp_value);
         methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);
 
         var colrs_set = clor_gen.rand_Color();
         Container = new Discord.MessageEmbed();
         Container.setColor(colrs_set)
-            .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
+            .setTitle('Scheda: ' + level)
             .setThumbnail(message.author.displayAvatarURL(), true)
             .addField("Livello: ", Scheda_PG.Livello)
             .addField("Milestone ottenute: ", exp_value)
@@ -128,57 +128,75 @@ function LevelUP_auto(message, id_discord, id, exp) {
     if (exp >= 0 && exp < 3) {
         methodDB.level_update(id, 3);           // 0
         Manager_role_level(message, id_discord, config.Level["Rame"])
+        return 3;
     } else if (exp >= 3 && exp < 7) {
         methodDB.level_update(id, 4);           // 4
         Manager_role_level(message, id_discord, config.Level["Rame"])
+        return 4;
     } else if (exp >= 7 && exp < 12) {
         methodDB.level_update(id, 5);           // 9
         Manager_role_level(message, id_discord, config.Level["Rame"])
+        return 5;
     } else if (exp >= 12 && exp < 18) {
         methodDB.level_update(id, 6);           // 15
         Manager_role_level(message, id_discord, config.Level["Bronzo"])
+        return 6;
     } else if (exp >= 18 && exp < 25) {
         methodDB.level_update(id, 7);           // 22
         Manager_role_level(message, id_discord, config.Level["Bronzo"])
+        return 7;
     } else if (exp >= 25 && exp < 33) {
         methodDB.level_update(id, 8);           // 30
         Manager_role_level(message, id_discord, config.Level["Ferro"])
+        return 8;
     } else if (exp >= 33 && exp < 42) {
         methodDB.level_update(id, 9);           // 39
         Manager_role_level(message, id_discord, config.Level["Ferro"])
+        return 9;
     } else if (exp >= 42 && exp < 51) {
         methodDB.level_update(id, 10);          // 48
         Manager_role_level(message, id_discord, config.Level["Argento"])
+        return 10;
     } else if (exp >= 51 && exp < 61) {
         methodDB.level_update(id, 11);          // 58
         Manager_role_level(message, id_discord, config.Level["Argento"])
+        return 11;
     } else if (exp >= 61 && exp < 72) {
         methodDB.level_update(id, 12);          // 69
         Manager_role_level(message, id_discord, config.Level["Electrum"])
+        return 12;
     } else if (exp >= 72 && exp < 83) {
         methodDB.level_update(id, 13);          // 81
         Manager_role_level(message, id_discord, config.Level["Electrum"])
+        return 13;
     } else if (exp >= 83 && exp < 95) {
         methodDB.level_update(id, 14);          // 93
         Manager_role_level(message, id_discord, config.Level["Oro"])
+        return 14;
     } else if (exp >= 95 && exp < 108) {
         methodDB.level_update(id, 15);          // 106
         Manager_role_level(message, id_discord, config.Level["Oro"])
+        return 15;
     } else if (exp >= 108 && exp < 122) {
         methodDB.level_update(id, 16);          // 120
         Manager_role_level(message, id_discord, config.Level["Platino"])
+        return 16;
     } else if (exp >= 122 && exp < 137) {
         methodDB.level_update(id, 17);          // 135
         Manager_role_level(message, id_discord, config.Level["Platino"])
+        return 17;
     } else if (exp >= 137 && exp < 153) {
         methodDB.level_update(id, 18);          // 151
         Manager_role_level(message, id_discord, config.Level["Mithril"])
+        return 18;
     } else if (exp >= 153 && exp < 172) {
         methodDB.level_update(id, 19);          // 168
         Manager_role_level(message, id_discord, config.Level["Mithril"])
+        return 19;
     } else if (exp >= 182) {
         methodDB.level_update(id, 20);          // 185
         Manager_role_level(message, id_discord, config.Level["Adamantio"])
+        return 20;
     }
 }
 
