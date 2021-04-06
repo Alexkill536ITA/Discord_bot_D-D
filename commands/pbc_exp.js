@@ -23,7 +23,7 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (message.content.length >= 120) {
+            if (message.content.length >= config.Level_Chat_min_char) {
                 var Scheda = await get_Scheda_pg(message.author.id);
                 var Scheda_PG = Scheda[0];
                 if (Scheda_PG == 1) {
@@ -80,7 +80,7 @@ function getWeekNumber(d) {
 function add_exp_frag(message, frammenti, exp, Scheda_PG) {
     var ogg_temp = {};
     frammenti = frammenti + 1;
-    if (frammenti == 100) {
+    if (frammenti == config.Level_Chat_max) {
         exp = exp + 1;
         frammenti = 0;
 
