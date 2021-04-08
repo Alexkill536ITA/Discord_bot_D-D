@@ -34,7 +34,7 @@ module.exports = {
                     return 1;
                 }
 
-                if (Scheda_PG["Pbc_frag"]["Data"] === undefined) {
+                if (Scheda_PG["Pbc_frag"] == undefined) {
                     reset_frag(message, Scheda_PG);
                 } else {
                     var settimana_valida = getWeekNumber(new Date());
