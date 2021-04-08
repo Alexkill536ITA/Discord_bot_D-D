@@ -139,7 +139,7 @@ exports.inventory_update = function (id_scheda, value_new) {
 
 exports.inventory_pbc_frag = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
-    collection.updateOne({ '_id': id_scheda }, { $set: { Pbc_frag: value_new } });
+    collection.updateOne({ '_id': id_scheda }, { $set: { "Pbc_frag" : value_new } });
     return 0;
 }
 
