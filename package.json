@@ -1,6 +1,6 @@
 {
   "name": "discord_bot_pgm",
-  "version": "1.0.70",
+  "version": "1.0.80",
   "description": "Bot per la gestione delle shede PG D&D",
   "main": "app-bot.js",
   "scripts": {
