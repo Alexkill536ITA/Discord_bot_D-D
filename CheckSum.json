@@ -1,11 +1,11 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "34c9d7212b1b922c6e8d90892608b2fe32a1ce2a4efa05a3e68657bfc28bb249f16a855a546e458952f843bad59de107553e1b4b4b65492078b9615eb3e04035"
+        "SHA512": "c7fbd26853e8dc69dc31ec4103e11016ebbfb61a4f8d226771a29ed68a135d9f6758effe38705f3f807cc50d87216c696fed8cccea53f19fdae375159deb26bf"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "192c27550520539b39c3475d9420ebe7f022cc1c6170901e3ea29a55ef5094a12d1fd6f9f40d77b2a45eb36f773d6adb8050d54be7b1a8b1b4e48139217db561"
+        "SHA512": "4cb09168e1ae4abf254a6452750b608e2d075cc4c0a82d5ec85bbf31a158c5d8285b0fe113cbbb298e4c442532620010511853c8c90eba9e0f74f3ff1395b187"
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
@@ -45,7 +45,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "f5a5818443f210c27b7adfa491807930509d7556a0e5e9bc0eca9a5e9d3e86a5ae94a0a9607f157777ede707b04bc3fd25bbcb78eeab8bc47fa386ab048299f2"
+        "SHA512": "a89d2eb6310a01e96818e60e20c8baa64adf434bb07777747bda4329464ec931346b824f32015d43b4103c47b3ede72ddfcef102c0dc9f714556c22bcb58bb0c"
     },
     "id.js": {
         "name": "id.js",
@@ -61,11 +61,15 @@
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "967885a90b8ce34f375f5ac304d52e129cdfcb800427e70edea3aff94b69e6859cbb4dc823a52056ad31003b030cd2a5099a20c0c6b413996d913eeb5b15cd0b"
+        "SHA512": "6a778233ee2c1d1eb67452300cb5d60dd764d90a3ae15904ab76061ca7217db83c9392832248820fd7e1e1a684f8922c0acf3b9aff1a705f154fc1b6b27d2fa3"
     },
     "pbc_exp.js": {
         "name": "pbc_exp.js",
-        "SHA512": "b8ed30cd1922b1a6f9a1f50c9da3b7331f6f65d1f4f832fe34c8876ef78049a49ce6b9d30cdac5f1c2059d240cc29655ff2bf7d89b9c2ce66e328e55a069ba2f"
+        "SHA512": "bf37c5ec72bf29c795f486c6952bc49f445810f26785d6b7df53e6edf5531c4d38dbae1bc22e4841a8bc373cdde2166712c58872cab561572ab09af2f382d769"
+    },
+    "ping.js": {
+        "name": "ping.js",
+        "SHA512": "65e87bfc25aa0c9ea2362cc461694f896c54546d75bc615dfce9dac918cfa32138fcb8d387b843a7127bb27ef7d465b2f9f01682985b4a556e8a706512c0d117"
     },
     "reset_password.js": {
         "name": "reset_password.js",
@@ -134,7 +138,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.0.81",
-        "Date Check": "05/04/2021 23:50"
+        "Version": "1.0.82",
+        "Date Check": "18/04/2021 00:38"
     }
 }
