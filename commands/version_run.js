@@ -174,6 +174,7 @@ module.exports = {
                 getos(function (e, os_linux) {
                     if (e) return console.log(e);
                     var obj_linux = JSON.stringify(os_linux)
+                    console.log(typeof os_linux);
                     var platform_run = obj_linux["dist"];
                     var release_run = obj_linux["release"];
                     //Kernell INFO
@@ -183,7 +184,7 @@ module.exports = {
                     Container.setColor([255, 0, 0])
                         .setTitle("Version Bot and Info Server Host")
                         .setThumbnail(img_os)
-                        .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run + "\n Kernel: " + kernel_release_run)
+                        .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\nArch: " + arch_run + "\n Kernel: " + kernel_release_run)
                         .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
                         .addField("Demon Node.js", "Version: " + process.version)
                         .addField("Dependencies", Dependencies)
@@ -194,7 +195,7 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle("Version Bot and Info Server Host")
                     .setThumbnail(img_os)
-                    .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run)
+                    .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\nArch: " + arch_run)
                     .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
                     .addField("Demon Node.js", "Version: " + process.version)
                     .addField("Dependencies", Dependencies)
