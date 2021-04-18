@@ -31,32 +31,10 @@ module.exports = {
 
             // Operation System
             var type_run = os.type();
-            if (type_run == "Linux") {
-                var getos = require('getos');
-                var time_out = 0;
-                do {
-                    var obj_linux = getos(function (e, os) {
-                        if (e) return console.log(e);
-                        return console.log(JSON.stringify(os))
-                        // return JSON.stringify(os);
-                    });
-                    time_out = time_out + 1;
-                    console.log(time_out)
-                } while (obj_linux === undefined && time_out < 5);
-
-                console.log(obj_linux);
-                var platform_run = obj_linux["dist"];
-                var release_run = obj_linux["release"];
-                //Kernell INFO
-                var Name_run = osName(platform_run, release_run);
-                var kernel_release_run = os.release();
-                var arch_run = os.arch();
-            } else {
-                var platform_run = os.platform();
-                var release_run = os.release();
-                var arch_run = os.arch();
-                var Name_run = osName(platform_run, release_run);
-            }
+            var platform_run = os.platform();
+            var release_run = os.release();
+            var arch_run = os.arch();
+            var Name_run = osName(platform_run, release_run);
 
             // Version Node.js
             var version_node = process.version;
@@ -192,15 +170,26 @@ module.exports = {
             }
 
             if (type_run == "Linux") {
-                Container.setColor([255, 0, 0])
-                    .setTitle("Version Bot and Info Server Host")
-                    .setThumbnail(img_os)
-                    .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run + "\n Kernel: " + kernel_release_run)
-                    .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
-                    .addField("Demon Node.js", "Version: " + process.version)
-                    .addField("Dependencies", Dependencies)
-                    .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
-                message.channel.send(Container);
+                var getos = require('getos');
+                getos(function (e, os) {
+                    if (e) return console.log(e);
+                    var obj_linux = JSON.stringify(os)
+                    var platform_run = obj_linux["dist"];
+                    var release_run = obj_linux["release"];
+                    //Kernell INFO
+                    var Name_run = osName(platform_run, release_run);
+                    var kernel_release_run = os.release();
+                    var arch_run = os.arch();
+                    Container.setColor([255, 0, 0])
+                        .setTitle("Version Bot and Info Server Host")
+                        .setThumbnail(img_os)
+                        .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run + "\n Kernel: " + kernel_release_run)
+                        .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
+                        .addField("Demon Node.js", "Version: " + process.version)
+                        .addField("Dependencies", Dependencies)
+                        .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
+                    message.channel.send(Container);
+                });
             } else {
                 Container.setColor([255, 0, 0])
                     .setTitle("Version Bot and Info Server Host")
