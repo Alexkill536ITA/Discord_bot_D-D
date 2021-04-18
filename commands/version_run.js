@@ -43,7 +43,7 @@ module.exports = {
                 console.log("Your OS is:" + JSON.stringify(os))
                 return os;
             })
-            console.log("Your OS is:" + JSON.stringify(obj))
+            console.log("2 Your OS is:" + JSON.stringify(obj))
 
             // Version Node.js
             var version_node = process.version;
