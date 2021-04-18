@@ -171,9 +171,9 @@ module.exports = {
 
             if (type_run == "Linux") {
                 var getos = require('getos');
-                getos(function (e, os) {
+                getos(function (e, os_linux) {
                     if (e) return console.log(e);
-                    var obj_linux = JSON.stringify(os)
+                    var obj_linux = JSON.stringify(os_linux)
                     var platform_run = obj_linux["dist"];
                     var release_run = obj_linux["release"];
                     //Kernell INFO
