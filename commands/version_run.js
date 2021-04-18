@@ -35,7 +35,8 @@ module.exports = {
                 var getos = require('getos');
                 var obj_linux = getos(function (e, os) {
                     if (e) return console.log(e);
-                    return os;
+                    console.log(JSON.stringify(os))
+                    return JSON.stringify(os);
                 });
                 var platform_run = obj_linux["dist"];
                 var release_run = obj_linux["release"];
