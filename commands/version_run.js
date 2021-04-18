@@ -41,6 +41,7 @@ module.exports = {
                         return JSON.stringify(os);
                     });
                     time_out = time_out + 1;
+                    console.log(time_out)
                 } while (obj_linux === undefined && time_out < 5);
 
                 console.log(obj_linux);
