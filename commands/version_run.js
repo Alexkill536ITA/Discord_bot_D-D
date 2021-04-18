@@ -33,11 +33,16 @@ module.exports = {
             var type_run = os.type();
             if (type_run == "Linux") {
                 var getos = require('getos');
-                var obj_linux = getos(function (e, os) {
-                    if (e) return console.log(e);
-                    console.log(JSON.stringify(os))
-                    return JSON.stringify(os);
-                });
+                var time_out = 0;
+                do {
+                    var obj_linux = getos(function (e, os) {
+                        if (e) return console.log(e);
+                        console.log(JSON.stringify(os))
+                        return JSON.stringify(os);
+                    });
+                    time_out = time_out + 1;
+                } while (obj_linux === undefined && time_out < 5);
+
                 console.log(obj_linux);
                 var platform_run = obj_linux["dist"];
                 var release_run = obj_linux["release"];
