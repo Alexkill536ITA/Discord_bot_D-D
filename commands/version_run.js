@@ -37,8 +37,8 @@ module.exports = {
                 do {
                     var obj_linux = getos(function (e, os) {
                         if (e) return console.log(e);
-                        console.log(JSON.stringify(os))
-                        return JSON.stringify(os);
+                        return console.log(JSON.stringify(os))
+                        // return JSON.stringify(os);
                     });
                     time_out = time_out + 1;
                     console.log(time_out)
