@@ -38,6 +38,7 @@ module.exports = {
                     console.log(JSON.stringify(os))
                     return JSON.stringify(os);
                 });
+                console.log(obj_linux);
                 var platform_run = obj_linux["dist"];
                 var release_run = obj_linux["release"];
                 //Kernell INFO
