@@ -31,19 +31,24 @@ module.exports = {
 
             // Operation System
             var type_run = os.type();
-            var platform_run = os.platform();
-            var release_run = os.release();
-            var arch_run = os.arch();
-            var Name_run = osName(platform_run, release_run);
-
-            var getos = require('getos')
-
-            var obj = getos(function (e, os) {
-                if (e) return console.log(e)
-                console.log("Your OS is:" + JSON.stringify(os))
-                return os;
-            })
-            console.log("2 Your OS is:" + JSON.stringify(obj))
+            if (type_run == "Linux") {
+                var getos = require('getos');
+                var obj_linux = getos(function (e, os) {
+                    if (e) return console.log(e);
+                    return os;
+                });
+                var platform_run = obj_linux["dist"];
+                var release_run = obj_linux["release"];
+                //Kernell INFO
+                var Name_run = osName(platform_run, release_run);
+                var kernel_release_run = os.release();
+                var arch_run = os.arch();
+            } else {
+                var platform_run = os.platform();
+                var release_run = os.release();
+                var arch_run = os.arch();
+                var Name_run = osName(platform_run, release_run);
+            }
 
             // Version Node.js
             var version_node = process.version;
@@ -157,6 +162,7 @@ module.exports = {
                 console.log("[ " + color.cyan('DEBUG') + " ] Type: " + type_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] Platform: " + platform_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] Release: " + release_run);
+                console.log("[ " + color.cyan('DEBUG') + " ] Kernel Release: " + kernel_release_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] Arch: " + arch_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] CPU: " + CPU_name);
                 console.log("[ " + color.cyan('DEBUG') + " ] Speed CPU: " + speed_CPU);
@@ -177,15 +183,27 @@ module.exports = {
                 console.log("[ " + color.cyan('DEBUG') + " ] " + uptime_app);
             }
 
-            Container.setColor([255, 0, 0])
-                .setTitle("Version Bot and Info Server Host")
-                .setThumbnail(img_os)
-                .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run)
-                .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
-                .addField("Demon Node.js", "Version: " + process.version)
-                .addField("Dependencies", Dependencies)
-                .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
-            message.channel.send(Container);
+            if (type_run == "Linux") {
+                Container.setColor([255, 0, 0])
+                    .setTitle("Version Bot and Info Server Host")
+                    .setThumbnail(img_os)
+                    .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run + "\n Kernel: " + kernel_release_run)
+                    .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
+                    .addField("Demon Node.js", "Version: " + process.version)
+                    .addField("Dependencies", Dependencies)
+                    .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
+                message.channel.send(Container);
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setTitle("Version Bot and Info Server Host")
+                    .setThumbnail(img_os)
+                    .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run)
+                    .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
+                    .addField("Demon Node.js", "Version: " + process.version)
+                    .addField("Dependencies", Dependencies)
+                    .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
+                message.channel.send(Container);
+            }
 
         } else {
             Container.setColor([255, 0, 0])
