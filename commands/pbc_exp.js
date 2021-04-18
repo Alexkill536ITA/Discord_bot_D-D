@@ -37,11 +37,13 @@ module.exports = {
                 if (Scheda_PG["Pbc_frag"] == undefined) {
                     reset_frag(message, Scheda_PG);
                 } else {
-                    var settimana_valida = getWeekNumber(new Date());
-                    var ultima_asseganzione = getWeekNumber(Scheda_PG["Pbc_frag"]["Data"]);
+                    // var settimana_valida = getWeekNumber(new Date());
+                    // var ultima_asseganzione = getWeekNumber(Scheda_PG["Pbc_frag"]["Data"]);
+                    var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
                     var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
                     var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
-                    if (ultima_asseganzione[0] == settimana_valida[0]) {
+                    // if (ultima_asseganzione[0] == settimana_valida[0]) {
+                    if (ultima_asseganzione  == getmonthNumber(new Date())) {
                         if (Exp_get_attuale < 2) {
                             add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
                         } else {
@@ -75,6 +77,11 @@ function getWeekNumber(d) {
     return [d.getUTCFullYear(), weekNo];
     // var result = getWeekNumber(new Date());
     // console.log('It\'s currently week ' + result[1] + ' of ' + result[0]);
+}
+
+function getmonthNumber(d) {
+    let month = ("0" + (d.getMonth() + 1)).slice(-2);
+    return month; 
 }
 
 function add_exp_frag(message, frammenti, exp, Scheda_PG) {
