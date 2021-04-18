@@ -36,6 +36,15 @@ module.exports = {
             var arch_run = os.arch();
             var Name_run = osName(platform_run, release_run);
 
+            var getos = require('getos')
+
+            var obj = getos(function (e, os) {
+                if (e) return console.log(e)
+                console.log("Your OS is:" + JSON.stringify(os))
+                return os;
+            })
+            console.log("Your OS is:" + JSON.stringify(obj))
+
             // Version Node.js
             var version_node = process.version;
 
@@ -46,8 +55,10 @@ module.exports = {
             var Relase_app_date = vers.Create["Date Check"];
 
             // info CPU
-            var CPU_name = os.cpus();
-            CPU_name = CPU_name[0].model;
+            var CPU = os.cpus();
+            var speed_CPU = CPU[0].speed;
+            CPU_name = CPU[0].model;
+
 
             // info RAM
             var total_memory = os.totalmem();
@@ -93,7 +104,23 @@ module.exports = {
 
             // set Img os
             if (platform_run == "win32") {
-                var img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Windows_logo_-_2012_%28dark_blue%29.svg/1200px-Windows_logo_-_2012_%28dark_blue%29.svg.png"
+                if (Name_run == "Windows 10") {
+                    var img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Windows_logo_-_2012_%28dark_blue%29.svg/1200px-Windows_logo_-_2012_%28dark_blue%29.svg.png"
+                } else if (Name_run == "Windows 8.1") {
+                    var img_os = "https://downloadandkey.com/wp-content/uploads/2017/08/windows-8.1-logo.jpg"
+                } else if (Name_run == "Windows 8") {
+                    var img_os = "https://banner2.cleanpng.com/20180324/lhq/kisspng-windows-8-1-computer-software-windows-7-windows-logos-5ab719a19b2416.7302040815219490896355.jpg"
+                } else if (Name_run == "Windows 7") {
+                    var img_os = "https://technicallyeasy.net/wp-content/uploads/2010/03/windows-logo-450449.png"
+                } else if (Name_run == "Windows Vista") {
+                    var img_os = "https://lh3.googleusercontent.com/proxy/bSCIWmG9Ct7X0YjcXhCJljxRR580_Udt5DQMtlcQKOXaI9u7btDyTv-TafyAJtyXH7TP-Y9bHawIVFcYx3xy6qwiQ7AVgUtTA-1guzOAHNHWf3te87Zz1Bz8fntD_PWP_tjEM7EyNDcf"
+                } else if (Name_run == "Windows Server 2003") {
+                    var img_os = "https://lh3.googleusercontent.com/proxy/yr-1j2BuzgM637_5Yd_BNE-dDqKPiEds_NtZ-bUCC4YGBphMnOaaZJe84EpVFWEinuWD9QjMOXyfGY0qgEHi0y83FCo0OT4VfrRQVXtp0YQ2TtLjjCNi0DxeKzL9bPie1zRhsRO1FUA"
+                } else if (Name_run == "Windows XP") {
+                    var img_os = "https://i.imgur.com/OtfzGgx.png"
+                } else {
+                    var img_os = "https://www.kindpng.com/picc/m/277-2770780_windows-server-2012-icon-hd-png-download.png"
+                }
             } else if (platform_run == "darwin") {
                 var img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/MacOS_logo_%282017%29.svg/768px-MacOS_logo_%282017%29.svg.png"
             } else if (platform_run == "linux") {
@@ -132,6 +159,7 @@ module.exports = {
                 console.log("[ " + color.cyan('DEBUG') + " ] Release: " + release_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] Arch: " + arch_run);
                 console.log("[ " + color.cyan('DEBUG') + " ] CPU: " + CPU_name);
+                console.log("[ " + color.cyan('DEBUG') + " ] Speed CPU: " + speed_CPU);
                 console.log("[ " + color.cyan('DEBUG') + " ] Cores: " + osutils.cpuCount());
                 console.log("[ " + color.cyan('DEBUG') + " ] " + total_ram);
                 console.log("[ " + color.cyan('DEBUG') + " ] " + uptime_server);
@@ -153,7 +181,7 @@ module.exports = {
                 .setTitle("Version Bot and Info Server Host")
                 .setThumbnail(img_os)
                 .addField("Operation System", "OS Name: " + Name_run + "\nType: " + type_run + "\nPlatform: " + platform_run + "\nRelease: " + release_run + "\narch: " + arch_run)
-                .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n" + total_ram + "\n" + uptime_server)
+                .addField("Hardware Server", "CPU: " + CPU_name + "\nCores: " + osutils.cpuCount() + "\n Core Speed: " + speed_CPU + "MHz\n" + total_ram + "\n" + uptime_server)
                 .addField("Demon Node.js", "Version: " + process.version)
                 .addField("Dependencies", Dependencies)
                 .addField("Application Bot", "Version: v" + version_app + "\n Relase Date: " + Relase_app_date + "\n" + uptime_app);
