@@ -176,9 +176,30 @@ module.exports = {
                     var platform_run = os_linux["dist"];
                     var release_run = os_linux["release"];
                     //Kernell INFO
-                    var Name_run = osName(platform_run, release_run);
+                    var Name_run = osName(os.platform(), os.release());
                     var kernel_release_run = os.release();
                     var arch_run = os.arch();
+
+                    if (platform_run == "Debian") {
+                        img_os = "https://www.shareicon.net/data/2015/09/17/102428_debian_512x512.png";
+                    } else if (platform_run == "Fedora") {
+                        img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Fedora_logo.svg/1024px-Fedora_logo.svg.png";
+                    } else if (platform_run == "Ubuntu") {
+                        img_os = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Logo-ubuntu_cof-orange-hex.svg/1024px-Logo-ubuntu_cof-orange-hex.svg.png";
+                    } else if (platform_run == "SUSE Linux" || platform_run == "SUSE Linux ES9") {
+                        img_os = "https://w7.pngwing.com/pngs/829/735/png-transparent-suse-linux-distributions-opensuse-suse-linux-enterprise-suse-studio-kde-others-miscellaneous-logo-grass.png";
+                    } else if (platform_run == "Arch Linux") {
+                        img_os = "https://cdn0.iconfinder.com/data/icons/flat-round-system/512/archlinux-512.png";
+                    } else if (platform_run == "Gentoo Linux") {
+                        img_os = "https://freepngimg.com/thumb/ubuntu/62619-vector-gentoo-icons-graphics-scalable-computer-linux.png";
+                    } else if (platform_run == "Amazon Linux") {
+                        img_os = "https://user-images.githubusercontent.com/8889233/39822700-d9451aaa-5370-11e8-82ed-3bde137fa8d7.png";
+                    } else if (platform_run == "Raspbian") {
+                        img_os = "https://www.raspberrypi.org/app/uploads/2018/03/RPi-Logo-Reg-SCREEN.png";
+                    } else if (platform_run == "CentOS") {
+                        img_os = "https://seeklogo.com/images/C/centos-logo-494F57D973-seeklogo.com.png";
+                    }
+
                     Container.setColor([255, 0, 0])
                         .setTitle("Version Bot and Info Server Host")
                         .setThumbnail(img_os)
