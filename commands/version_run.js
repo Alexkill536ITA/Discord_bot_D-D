@@ -176,7 +176,7 @@ module.exports = {
                     var platform_run = os_linux["dist"];
                     var release_run = os_linux["release"];
                     //Kernell INFO
-                    var Name_run = osName(platform_run, release_run);
+                    var Name_run = osName(os.platform(), os.release());
                     var kernel_release_run = os.release();
                     var arch_run = os.arch();
                     Container.setColor([255, 0, 0])
