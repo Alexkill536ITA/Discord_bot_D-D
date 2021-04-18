@@ -173,10 +173,8 @@ module.exports = {
                 var getos = require('getos');
                 getos(function (e, os_linux) {
                     if (e) return console.log(e);
-                    var obj_linux = JSON.stringify(os_linux)
-                    console.log(typeof os_linux);
-                    var platform_run = obj_linux["dist"];
-                    var release_run = obj_linux["release"];
+                    var platform_run = os_linux["dist"];
+                    var release_run = os_linux["release"];
                     //Kernell INFO
                     var Name_run = osName(platform_run, release_run);
                     var kernel_release_run = os.release();
