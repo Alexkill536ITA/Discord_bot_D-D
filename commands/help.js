@@ -94,6 +94,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato] \n\n **OPZIONI**\n vendi = Crea offerta\n rimuovi = Rimuovi offerta\n compra = Aquista Oggetto da offerta\n\n Il comando scambio permette di vendere un oggetto del proprio inventario e comprare da un altro\n Il comando scambio con opzione **vendi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da mettre in vendita [Qunatità] il prezzo [Prezzo] e inserire il nome del oggetto [Nome oggetto] \n\n Il comando scambio con opzione **compra** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da comprare [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]\n\n  Il comando scambio con opzione **rimuovi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da rimuove [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]');
             message.channel.send(Container);
+        } else if (args[0] == "checkpoint") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help checkpoint')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'checkpoint** [Opzione][ID_Scheda] \n\n**OPZIONI**\n 1 = Livello 6 Money 500mo\n 2 = Livello 10 Money 750mo\n 3 = Livello 14 Money 1000mo\n\n Per settare il checkpoint inserire [Opzione] e [ID_Scheda]');
+            message.channel.send(Container);
         } else if (args[0] == "money") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Money')
@@ -175,7 +181,7 @@ module.exports = {
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
-                .addField("🟠 Comandi PG Master 🟠", "• **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
+                .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **ping**\n • **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
