@@ -26,17 +26,18 @@ module.exports = {
             var colrs_set = clor_gen.rand_Color();
             if (args[2] && args[2].length == 24) {
                 if (isNaN(parseInt(args[1])) == false) {
-                    if (args[0] == "forza") {
+                    var options = args[0].toLowerCase();
+                    if (options == "forza") {
                         update_stats(message, args[2], "Forza", args[1]);
-                    } else if (args[0] == "destrezza") {
+                    } else if (options == "destrezza") {
                         update_stats(message, args[2], "Destrezza", args[1]);
-                    } else if (args[0] == "costituzione") {
+                    } else if (options == "costituzione") {
                         update_stats(message, args[2], "Costituzione", args[1]);
-                    } else if (args[0] == "intelligenza") {
+                    } else if (options == "intelligenza") {
                         update_stats(message, args[2], "Intelligenza", args[1]);
-                    } else if (args[0] == "saggezza") {
+                    } else if (options == "saggezza") {
                         update_stats(message, args[2], "Saggezza", args[1]);
-                    } else if (args[0] == "carisma") {
+                    } else if (options == "carisma") {
                         update_stats(message, args[2], "Carisma", args[1]);
                     } else {
                         emit_print(message);
