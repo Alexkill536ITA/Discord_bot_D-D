@@ -106,6 +106,12 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'money** [Opzione][Valore][ID_Scheda] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire denaro inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
             message.channel.send(Container);
+        } else if (args[0] == "statsset") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help statsset')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'statsset** [Opzione][Valore][ID_Scheda] \n\n**OPZIONI**\n Forza\n Destrezza\n Costituzione\n Intelligenza\n Saggezza\n Carisma\n\n Per modificare le statisitche inserire [Opzione][Valore][ID_Scheda]');
+            message.channel.send(Container);
         } else if (args[0] == "milestone") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Milestone')
@@ -181,7 +187,7 @@ module.exports = {
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
-                .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
+                .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **ping**\n • **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");

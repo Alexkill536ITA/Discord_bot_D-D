@@ -131,6 +131,12 @@ exports.level_update = function (id_scheda, value_new) {
     return 0;
 }
 
+exports.stats_update = function (id_scheda, filter) {
+    id_scheda = mongo.ObjectID(id_scheda);
+    collection.updateOne({ '_id': id_scheda }, { $set: filter });
+    return 0;
+}
+
 exports.inventory_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, { $set: { Inventory: value_new } });
