@@ -24,15 +24,15 @@ module.exports = {
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
-            if (args[1].length == 24) {
+            if (args[1] && args[1].length == 24) {
                 if (args[0] == 1) {
-                    add_money(args[1], 12, 500);
+                    add_money(message, args[1], 12, 500, 6);
                     Manager_role_level(message, args[1], config.Level["Bronzo"]);
                 } else if (args[0] == 2) {
-                    add_money(args[1], 42, 750);
+                    add_money(message, args[1], 42, 750, 10);
                     Manager_role_level(message, args[1], config.Level["Argento"]);
                 } else if (args[0] == 3) {
-                    add_money(args[1], 83,1000);
+                    add_money(message, args[1], 83, 1000, 14);
                     Manager_role_level(message, args[1], config.Level["Oro"]);
                 } else {
                     emit_print(message);
@@ -71,27 +71,34 @@ function Manager_role_level(message, id_discord, level_select) {
     }
 }
 
-function add_money(id_Scheda, exe, value) {
+async function add_money(message, id_Scheda, exe, value, levl) {
     var colrs_set = clor_gen.rand_Color();
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
         methodDB.settab_db("Schede_PG");
         var cursor = methodDB.serachbyid(id_Scheda);
         cursor.then(function (result) {
-            if (result != null) {
+            if (result != null && result != []) {
                 var old_value_mo = result[0].Money;
                 var new_value_mo = old_value_mo + value;
                 methodDB.exp_update(result[0]._id, exe);
+                methodDB.level_update(result[0]._id, levl)
                 methodDB.money_update(result[0]._id, new_value_mo);
                 let member = message.guild.members.cache.get(result[0].Nome_Discord);
-                Container = new Discord.MessageEmbed();
+                var Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
-                    .setTitle('Checkpoint Scheda: ' + result[0].Nome_PG)
+                    .setTitle('Checkpoint ' + levl + ' Scheda: ' + result[0].Nome_PG)
                     .setThumbnail(member.user.displayAvatarURL(), true)
-                    .addField("Milestone: ", new_value_exe)
+                    .addField("Milestone: ", exe)
                     .addField("Money", new_value_mo)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL());
+                message.channel.send(Container);
+            } else {
+                var Container = new Discord.MessageEmbed();
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                    .setTitle('Errore Scheda non trovata');
                 message.channel.send(Container);
             }
         });

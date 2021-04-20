@@ -98,7 +98,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help checkpoint')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'checkpoint** [Opzione][ID_Scheda] \n\n**OPZIONI**\n 1 = Livello 6 Money 500mo\n 2 = Livello 10 Money 750mo\n 1 = Livello 14 Money 1000mo\n\n Per settare il checkpoint inserire [Opzione] e [ID_Scheda]');
+                .setDescription('Sintassi: **' + config.prefix + 'checkpoint** [Opzione][ID_Scheda] \n\n**OPZIONI**\n 1 = Livello 6 Money 500mo\n 2 = Livello 10 Money 750mo\n 3 = Livello 14 Money 1000mo\n\n Per settare il checkpoint inserire [Opzione] e [ID_Scheda]');
             message.channel.send(Container);
         } else if (args[0] == "money") {
             Container.setColor([255, 0, 0])
