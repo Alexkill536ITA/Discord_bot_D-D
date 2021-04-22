@@ -38,10 +38,15 @@ module.exports = {
                             if (result != null) {
                                 var js_result = JSON.stringify(result);
                                 js_result = JSON.parse(js_result);
+                                if (js_result['Avatar_pg'] == "Non Assegnata" || js_result['Avatar_pg'] == undefined) {
+                                    var avatar = autore.displayAvatarURL();
+                                } else {
+                                    var avatar = js_result['Avatar_pg'];
+                                }
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)
                                     .setTitle('📜 Scheda PG: ' + autore.username)
-                                    .setThumbnail(autore.displayAvatarURL(), true)
+                                    .setThumbnail(avatar, true)
                                     .addField("🆔 Scheda", js_result['_id'])
                                     .addField("Livello", js_result['Livello'], true)
                                     .addField("Milestone", js_result['Exp'], true)
