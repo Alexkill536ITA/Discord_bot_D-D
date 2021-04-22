@@ -40,12 +40,12 @@ module.exports = {
                                 js_result = JSON.parse(js_result);
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)
-                                    .setTitle('Scheda PG: ' + autore.username)
+                                    .setTitle('📜 Scheda PG: ' + autore.username)
                                     .setThumbnail(autore.displayAvatarURL(), true)
-                                    .addField("ID Scheda", js_result['_id'])
+                                    .addField("🆔 Scheda", js_result['_id'])
                                     .addField("Livello", js_result['Livello'], true)
                                     .addField("Milestone", js_result['Exp'], true)
-                                    .addField('\u200b', '**Anagrafe:**')
+                                    .addField('\u200b', '📝 **Anagrafe:**')
                                     .addField("Nome", js_result['Nome_PG'], true)
                                     .addField("Razza", js_result['Razza'], true)
                                     .addField("Classe", js_result['Classe'], true)
@@ -53,12 +53,12 @@ module.exports = {
                                     .addField("Background", js_result['Background'], true)
                                     .addField('\u200b', '**Statistiche:**')
                                     .addField("💪 Forza", js_result['Forza'], true)
-                                    .addField("🤹‍♂️ Destrezza", js_result['Destrezza'], true)
+                                    .addField("🤸‍♂️ Destrezza", js_result['Destrezza'], true)
                                     .addField("🛡 Costituzione", js_result['Costituzione'], true)
                                     .addField("🧠 Intelligenza", js_result['Intelligenza'], true)
-                                    .addField("Saggezza", js_result['Saggezza'], true)
-                                    .addField("😎 Carisma", js_result['Carisma'], true)
-                                    .addField("Money", js_result['Money']);
+                                    .addField("📚 Saggezza", js_result['Saggezza'], true)
+                                    .addField("🎭 Carisma", js_result['Carisma'], true)
+                                    .addField("💰 Money", js_result['Money']);
                                 message.channel.send(Container)
                             } else {
                                 Container.setColor([255, 0, 0])

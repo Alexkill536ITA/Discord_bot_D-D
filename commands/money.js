@@ -44,7 +44,7 @@ module.exports = {
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
                                             .setThumbnail(member.user.displayAvatarURL(), true)
-                                            .addField("Money", new_value)
+                                            .addField("💰 Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
                                         message.channel.send(Container);
@@ -81,7 +81,7 @@ module.exports = {
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
                                             .setThumbnail(member.user.displayAvatarURL(), true)
-                                            .addField("Money", new_value)
+                                            .addField("💰 Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
                                         message.channel.send(Container);
