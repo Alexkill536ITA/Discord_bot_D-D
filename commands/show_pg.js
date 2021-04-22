@@ -52,12 +52,12 @@ module.exports = {
                                     .addField("Sotto Classe", js_result['Sotto Classe'], true)
                                     .addField("Background", js_result['Background'], true)
                                     .addField('\u200b', '**Statistiche:**')
-                                    .addField("Forza", js_result['Forza'], true)
-                                    .addField("Destrezza", js_result['Destrezza'], true)
-                                    .addField("Costituzione", js_result['Costituzione'], true)
-                                    .addField("Intelligenza", js_result['Intelligenza'], true)
+                                    .addField("💪 Forza", js_result['Forza'], true)
+                                    .addField("🤹‍♂️ Destrezza", js_result['Destrezza'], true)
+                                    .addField("🛡 Costituzione", js_result['Costituzione'], true)
+                                    .addField("🧠 Intelligenza", js_result['Intelligenza'], true)
                                     .addField("Saggezza", js_result['Saggezza'], true)
-                                    .addField("Carisma", js_result['Carisma'], true)
+                                    .addField("😎 Carisma", js_result['Carisma'], true)
                                     .addField("Money", js_result['Money']);
                                 message.channel.send(Container)
                             } else {
