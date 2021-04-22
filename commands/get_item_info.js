@@ -101,7 +101,7 @@ async function emiter_output(client, message, cursor) {
         .setTitle('Oggetto: ' + cursor.nome)
         .addField('Id', cursor.Id, true)
         .addField('Rarità', cursor.rarita, true)
-        .addField('Costo', cursor.costo, true)
+        .addField('Costo', cursor.costo + 'mo', true)
         .addField('Unità/Note', note, true)
         .addField('Sinronia', sinc, true);
     if (text_obj != '' && text_obj.length <= 1024) {
