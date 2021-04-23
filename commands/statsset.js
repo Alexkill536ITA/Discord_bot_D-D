@@ -78,7 +78,7 @@ async function update_stats(message, id_Scheda, str_flt, filter, value) {
                 methodDB.stats_update(result[0]._id, query);
                 let member = message.guild.members.cache.get(result[0].Nome_Discord);
                 if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
-                    var avatar = member.displayAvatarURL();
+                    var avatar = member.user.displayAvatarURL();
                 } else {
                     var avatar = result[0].Avatar;
                 }
