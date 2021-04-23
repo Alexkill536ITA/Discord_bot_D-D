@@ -27,69 +27,63 @@ module.exports = {
             var colrs_set = clor_gen.rand_Color();
             if (args[0] == "show" || args[0] == "-v") {
                 if (args[1] && args[1].length == 24) {
-                    const cursor = await get_Scheda_pg(args[1]);
-                    cursor.then(function (result) {
-                        if (result != null) {
-                            var js_result = JSON.stringify(result);
-                            js_result = JSON.parse(js_result);
-                            let member = message.guild.members.cache.get(js_result['Nome_Discord']);
-                            if (js_result['Avatar_pg'] == "Non Assegnata" || js_result['Avatar_pg'] == undefined) {
-                                var avatar = member.user.displayAvatarURL();
-                            } else {
-                                var avatar = js_result['Avatar_pg'];
-                            }
-                            Container = new Discord.MessageEmbed();
-                            Container.setColor(colrs_set)
-                                .setTitle('Avatar PG di: ' + js_result['Nome_PG'])
-                                .setTimestamp()
-                                .setFooter("Data", message.author.displayAvatarURL())
-                                .setImage(avatar);
-                            message.channel.send(Container);
-                        } else {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda non trovata');
-                            message.channel.send(Container);
-                        }
-                    });
+                    var Scheda = await get_Scheda_pg(args[1]);
+                    var Scheda_PG = Scheda[0];
+                    if (Scheda_PG == 1) {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                            .setTitle('Errore Scheda PG non trovata');
+                        message.channel.send(Container);
+                        return 1;
+                    }
+                    let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+                    if (Scheda_PG.Avatar_pg == "Non Assegnata" || Scheda_PG.Avatar_pg == undefined) {
+                        var avatar = member.user.displayAvatarURL();
+                    } else {
+                        var avatar = Scheda_PG.Avatar_pg;
+                    }
+                    Container = new Discord.MessageEmbed();
+                    Container.setColor(colrs_set)
+                        .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
+                        .setTimestamp()
+                        .setFooter("Data", message.author.displayAvatarURL())
+                        .setImage(avatar);
+                    message.channel.send(Container);
                 } else {
                     emit_print(message);
                 }
             } else if (args[0] == "set" || args[0] == "-s") {
                 if (args[1]) {
-                    var cursor = await get_Scheda_pg(args[1]);
-                    cursor.then(function (result) {
-                        if (result != null) {
-                            var js_result = JSON.stringify(result);
-                            js_result = JSON.parse(js_result);
-                            if (message.author.id != js_result['Nome_Discord']) {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Utente non valido: ` + message.author.username)
-                                    .setTitle('Non puoi spacciarti per un altro');
-                                message.channel.send(Container);
-                                return 1
-                            }
-                            if (validURL(args[1])) {
-                                Container = new Discord.MessageEmbed();
-                                Container.setColor(colrs_set)
-                                    .setTitle('Avatar PG di: ' + js_result['Nome_PG'])
-                                    .setTimestamp()
-                                    .setFooter("Data", message.author.displayAvatarURL())
-                                    .setImage(avatar);
-                                message.channel.send(Container);
-                            } else {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore URL Non Valido');
-                                message.channel.send(Container);
-                            }
-                        } else {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda non trovata');
-                            message.channel.send(Container);
-                        }
-                    });
+                    var Scheda = await get_Scheda_pg(args[1]);
+                    var Scheda_PG = Scheda[0];
+                    if (Scheda_PG == 1) {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                            .setTitle('Errore Scheda PG non trovata');
+                        message.channel.send(Container);
+                        return 1;
+                    }
+                    if (message.author.id != Scheda_PG.Nome_Discord) {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Utente non valido: ` + message.author.username)
+                            .setTitle('Non puoi spacciarti per un altro');
+                        message.channel.send(Container);
+                        return 1
+                    }
+                    if (validURL(args[1])) {
+                        Container = new Discord.MessageEmbed();
+                        Container.setColor(colrs_set)
+                            .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
+                            .setTimestamp()
+                            .setFooter("Data", message.author.displayAvatarURL())
+                            .setImage(avatar);
+                        message.channel.send(Container);
+                    } else {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                            .setTitle('Errore URL Non Valido');
+                        message.channel.send(Container);
+                    }
                 } else {
                     emit_print(message);
                 }
