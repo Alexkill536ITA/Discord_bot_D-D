@@ -209,11 +209,16 @@ function add_item(message, args, Scheda_PG, result) {
             methodDB.settab_db("Schede_PG");
             methodDB.inventory_update(id_sheda, inventory);
             methodDB.money_update(id_sheda, money_pg);
-            // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+            let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+            if (Scheda_PG.Avatar == "Non Assegnata" || Scheda_PG.Avatar == undefined) {
+                var avatar = member.user.displayAvatarURL();
+            } else {
+                var avatar = Scheda_PG.Avatar;
+            };
             Container = new Discord.MessageEmbed();
             Container.setColor(colrs_set)
                 .setTitle('Schada: ' + Scheda_PG.Nome_PG)
-                // .setThumbnail(member.user.displayAvatarURL(),true)
+                .setThumbnail(avatar,true)
                 .addField("Costo Totale Sottratto", consto_fin)
                 .addField("Nome", result.nome)
                 .addField("Quantità", qut)
