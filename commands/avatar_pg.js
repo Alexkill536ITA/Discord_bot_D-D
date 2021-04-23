@@ -70,7 +70,7 @@ module.exports = {
                         message.channel.send(Container);
                         return 1
                     }
-                    if (validURL(args[2])) {
+                    if (validURL(args[2]) == true) {
                         methodDB.avatar_update(Scheda_PG._id, args[2]);
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
