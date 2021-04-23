@@ -28,17 +28,17 @@ module.exports = {
                 if (isNaN(parseInt(args[1])) == false) {
                     var options = args[0].toLowerCase();
                     if (options == "forza") {
-                        update_stats(message, args[2], "Forza", args[1]);
+                        update_stats(message, args[2], "💪 Forza", "Forza", args[1]);
                     } else if (options == "destrezza") {
-                        update_stats(message, args[2], "Destrezza", args[1]);
+                        update_stats(message, args[2], "🤸‍♂️ Destrezza", "Destrezza", args[1]);
                     } else if (options == "costituzione") {
-                        update_stats(message, args[2], "Costituzione", args[1]);
+                        update_stats(message, args[2], "🛡 Costituzione", "Costituzione", args[1]);
                     } else if (options == "intelligenza") {
-                        update_stats(message, args[2], "Intelligenza", args[1]);
+                        update_stats(message, args[2], "🧠 Intelligenza", "Intelligenza", args[1]);
                     } else if (options == "saggezza") {
-                        update_stats(message, args[2], "Saggezza", args[1]);
+                        update_stats(message, args[2], "📚 Saggezza", "Saggezza", args[1]);
                     } else if (options == "carisma") {
-                        update_stats(message, args[2], "Carisma", args[1]);
+                        update_stats(message, args[2], "🎭 Carisma", "Carisma", args[1]);
                     } else {
                         emit_print(message);
                     }
@@ -65,7 +65,7 @@ function emit_print(message) {
     message.channel.send(Container);
 }
 
-async function update_stats(message, id_Scheda, filter, value) {
+async function update_stats(message, id_Scheda, str_flt, filter, value) {
     var colrs_set = clor_gen.rand_Color();
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
@@ -79,9 +79,9 @@ async function update_stats(message, id_Scheda, filter, value) {
                 let member = message.guild.members.cache.get(result[0].Nome_Discord);
                 var Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
-                    .setTitle('Stats Scheda: ' + result[0].Nome_PG)
+                    .setTitle('📜 Stats Scheda: ' + result[0].Nome_PG)
                     .setThumbnail(member.user.displayAvatarURL(), true)
-                    .addField(filter + ": ", value)
+                    .addField(str_flt + ": ", value)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL());
                 message.channel.send(Container);
