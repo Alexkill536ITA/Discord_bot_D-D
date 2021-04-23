@@ -53,7 +53,7 @@ module.exports = {
                     emit_print(message);
                 }
             } else if (args[0] == "set" || args[0] == "-s") {
-                if (args[1]) {
+                if (args[1] && args[1].length == 24) {
                     var Scheda = await get_Scheda_pg(args[1]);
                     var Scheda_PG = Scheda[0];
                     if (Scheda_PG == 1) {
