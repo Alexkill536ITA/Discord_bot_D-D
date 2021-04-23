@@ -76,7 +76,7 @@ module.exports = {
                             .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
                             .setTimestamp()
                             .setFooter("Data", message.author.displayAvatarURL())
-                            .setImage(avatar);
+                            .setImage(args[2]);
                         message.channel.send(Container);
                     } else {
                         Container.setColor([255, 0, 0])

@@ -137,6 +137,11 @@ exports.stats_update = function (id_scheda, filter) {
     return 0;
 }
 
+exports.avatar_update = function (id_scheda, value_new) {
+    collection.updateOne({ '_id': id_scheda }, { $set: { Avatar: value_new } });
+    return 0;
+}
+
 exports.inventory_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, { $set: { Inventory: value_new } });
