@@ -97,6 +97,8 @@ function Discord_start() {
             client.commands.get('pg').execute(message, args);
         } else if (command == 'pglist') {
             client.commands.get('pglist').execute(message, args);
+        } else if (command == 'pgavatar') {
+            client.commands.get('pgavatar').execute(message, args);
         } else if (command == 'pgdescrizione') {
             client.commands.get('pgdescrizione').execute(client, message, args);
         } else if (command == 'pginventario') {

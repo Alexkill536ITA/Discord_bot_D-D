@@ -3,12 +3,15 @@
         "$oid": "60313a2a5dc0f45983c8cdf4"
     },
     "Nome_Discord": "188587744140853251",
+    "Avatar": "Non Assegnata",
     "Livello": 6,
     "Exp": 15,
     "Nome_PG": "kentorns",
     "Razza": "Vastaris",
     "Classe": "Monaco",
+    "Sotto Classe": "Non Assegnata",
     "Background": "Forestiero",
+    "Descrizione": "Non Asegnata",
     "Forza": 8,
     "Destrezza": 8,
     "Costituzione": 8,
@@ -20,8 +23,6 @@
         
     },
     "Inventory": {},
-    "Sotto Classe": "Non Assegnata",
-    "Descrizione": "Non asegnata",
     "Pbc_frag": {
         "Exp_get": 0,
         "Frammento": 0,

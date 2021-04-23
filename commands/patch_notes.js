@@ -25,7 +25,7 @@ module.exports = {
         Container.setColor([255, 0, 0])
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
-            .addField('Aggunte Nuove', "• add checkpoint Schede PG\n• add Ping latency")
+            .addField('Aggunte Nuove', "• add stats PG\n • add custom PG avatar")
             // .addField('Rework',"• Rebuild roll dice")
             // .addField('Correzioni', "• Edit system leveling\n • Fix Shop System and show list")
             .addField('Fix Bug Minori', '• Correzioni minori')
