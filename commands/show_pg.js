@@ -38,10 +38,10 @@ module.exports = {
                             if (result != null) {
                                 var js_result = JSON.stringify(result);
                                 js_result = JSON.parse(js_result);
-                                if (js_result['Avatar_pg'] == "Non Assegnata" || js_result['Avatar_pg'] == undefined) {
+                                if (js_result['Avatar'] == "Non Assegnata" || js_result['Avatar'] == undefined) {
                                     var avatar = autore.displayAvatarURL();
                                 } else {
-                                    var avatar = js_result['Avatar_pg'];
+                                    var avatar = js_result['Avatar'];
                                 }
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(colrs_set)

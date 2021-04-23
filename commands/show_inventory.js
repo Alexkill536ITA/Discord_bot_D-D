@@ -59,6 +59,11 @@ module.exports = {
                                     for (let i = 0; i <= obj_string.length; i++) {
                                         embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
                                     }
+                                    if (js_result['Avatar'] == "Non Assegnata" || js_result['Avatar'] == undefined) {
+                                        var avatar = autore.displayAvatarURL();
+                                    } else {
+                                        var avatar = js_result['Avatar'];
+                                    }
                                     const Embeds = new Pagination.Embeds()
                                         .setArray(embeds)
                                         .setAuthorizedUsers([message.author.id])
@@ -66,7 +71,7 @@ module.exports = {
                                         .setPageIndicator(false)
                                         .setColor(colrs_set)
                                         .setTitle('Scheda Inventario: ' + autore.username)
-                                        .setThumbnail(autore.displayAvatarURL(), true)
+                                        .setThumbnail(avatar, true)
                                         .addField("N:", obj_string.length, true)
                                         .addField("ID Scheda", js_result['_id'], true)
                                         .addField("Nome", js_result['Nome_PG'])
