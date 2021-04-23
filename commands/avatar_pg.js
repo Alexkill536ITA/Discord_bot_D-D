@@ -44,7 +44,7 @@ module.exports = {
                     }
                     Container = new Discord.MessageEmbed();
                     Container.setColor(colrs_set)
-                        .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
+                        .setTitle('Avatar PG: ' + Scheda_PG.Nome_PG)
                         .setTimestamp()
                         .setFooter("Data", message.author.displayAvatarURL())
                         .setImage(avatar);
