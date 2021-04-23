@@ -35,7 +35,7 @@ module.exports = {
                     var cursor = get_Scheda_pg(args[0]);
                     if (cursor != null && cursor != 1) {
                         cursor.then(function (result) {
-                            if (result != null && result != []) {
+                            if (result != null && result.length > 0) {
                                 var Scheda_PG = result[0]
                                 if (message.author.id == Scheda_PG['Nome_Discord']) {
                                     var inventory = Scheda_PG['Inventory'];
