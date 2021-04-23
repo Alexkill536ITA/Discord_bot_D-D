@@ -35,7 +35,7 @@ module.exports = {
                     var cursor = get_Scheda_pg(args[0]);
                     if (cursor != null && cursor != 1) {
                         cursor.then(function (result) {
-                            if (result != null) {
+                            if (result != null && result != []) {
                                 var Scheda_PG = result[0]
                                 if (message.author.id == Scheda_PG['Nome_Discord']) {
                                     var inventory = Scheda_PG['Inventory'];
@@ -96,6 +96,11 @@ module.exports = {
                                     message.channel.send(Container);
                                     return 1;
                                 }
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Scheda PG non trovata');
+                                message.channel.send(Container);
                             }
                         });
                     } else {
