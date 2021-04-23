@@ -27,7 +27,7 @@ module.exports = {
             var colrs_set = clor_gen.rand_Color();
             if (args[0] == "show" || args[0] == "-v") {
                 if (args[1] && args[1].length == 24) {
-                    var cursor = await get_Scheda_pg(args[1]);
+                    const cursor = await get_Scheda_pg(args[1]);
                     cursor.then(function (result) {
                         if (result != null) {
                             var js_result = JSON.stringify(result);
