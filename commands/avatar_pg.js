@@ -70,19 +70,26 @@ module.exports = {
                         message.channel.send(Container);
                         return 1
                     }
-                    if (validURL(args[2]) == true) {
-                        methodDB.avatar_update(Scheda_PG._id, args[2]);
-                        Container = new Discord.MessageEmbed();
-                        Container.setColor(colrs_set)
-                            .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL())
-                            .setImage(args[2]);
-                        message.channel.send(Container);
+                    if (args[2]) {
+                        if (validURL(args[2]) == true) {
+                            methodDB.avatar_update(Scheda_PG._id, args[2]);
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL())
+                                .setImage(args[2]);
+                            message.channel.send(Container);
+                        } else {
+                            Container.setColor([255, 0, 0])
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore URL Non Valido');
+                            message.channel.send(Container);
+                        }
                     } else {
                         Container.setColor([255, 0, 0])
-                            .setAuthor(`Richiesta di: ${message.author.username}`)
-                            .setTitle('Errore URL Non Valido');
+                            .setAuthor(`Comando pgavatar`)
+                            .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** set [ID_Scheda][URL Avatar]');
                         message.channel.send(Container);
                     }
                 } else {
@@ -104,7 +111,7 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgavatar`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda][URL Avatar]');
     message.channel.send(Container);
 }
 
