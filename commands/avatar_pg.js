@@ -71,6 +71,7 @@ module.exports = {
                         return 1
                     }
                     if (validURL(args[2])) {
+                        methodDB.avatar_update(Scheda_PG._id, args[2]);
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
                             .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
