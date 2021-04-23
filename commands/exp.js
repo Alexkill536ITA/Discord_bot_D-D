@@ -41,10 +41,15 @@ module.exports = {
                                         methodDB.exp_update(result[0]._id, new_value);
                                         LevelUP_auto(message, result[0].Nome_Discord, result[0]._id, new_value);
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = result[0].Avatar;
+                                        }
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(member.user.displayAvatarURL(), true)
+                                            .setThumbnail(avatar, true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
@@ -79,10 +84,15 @@ module.exports = {
                                         methodDB.exp_update(result[0]._id, new_value);
                                         LevelUP_auto(message, result[0].Nome_Discord, result[0]._id, new_value);
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = result[0].Avatar;
+                                        }
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(member.user.displayAvatarURL(), true)
+                                            .setThumbnail(avatar, true)
                                             .addField("Milestone: ", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());

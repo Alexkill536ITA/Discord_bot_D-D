@@ -43,7 +43,7 @@ module.exports = {
                     var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
                     var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
                     // if (ultima_asseganzione[0] == settimana_valida[0]) {
-                    if (ultima_asseganzione  == getmonthNumber(new Date())) {
+                    if (ultima_asseganzione == getmonthNumber(new Date())) {
                         if (Exp_get_attuale < 2) {
                             add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
                         } else {
@@ -81,7 +81,7 @@ function getWeekNumber(d) {
 
 function getmonthNumber(d) {
     let month = ("0" + (d.getMonth() + 1)).slice(-2);
-    return month; 
+    return month;
 }
 
 function add_exp_frag(message, frammenti, exp, Scheda_PG) {
@@ -103,10 +103,16 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
         methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);
 
         var colrs_set = clor_gen.rand_Color();
+        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+        if (Scheda_PG.Avatar == "Non Assegnata" || Scheda_PG.Avatar == undefined) {
+            var avatar = member.user.displayAvatarURL();
+        } else {
+            var avatar = Scheda_PG.Avatar;
+        }
         Container = new Discord.MessageEmbed();
         Container.setColor(colrs_set)
             .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
-            .setThumbnail(message.author.displayAvatarURL(), true)
+            .setThumbnail(avatar, true)
             .addField("Livello: ", level)
             .addField("Milestone ottenute: ", exp_value)
             .setTimestamp()

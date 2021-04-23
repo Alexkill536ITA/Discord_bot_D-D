@@ -40,10 +40,15 @@ module.exports = {
                                         var new_value = old_value + parseFloat(args[1]);
                                         methodDB.money_update(result[0]._id, new_value);
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = result[0].Avatar;
+                                        }
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(member.user.displayAvatarURL(), true)
+                                            .setThumbnail(avatar, true)
                                             .addField("💰 Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
@@ -77,10 +82,15 @@ module.exports = {
                                         }
                                         methodDB.money_update(result[0]._id, new_value);
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = result[0].Avatar;
+                                        }
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
                                             .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(member.user.displayAvatarURL(), true)
+                                            .setThumbnail(avatar, true)
                                             .addField("💰 Money", new_value)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());

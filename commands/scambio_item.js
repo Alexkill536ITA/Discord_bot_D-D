@@ -85,7 +85,7 @@ module.exports = {
                                 } else {
                                     var sinc = "No";
                                 }
-
+                                
                                 Container = new Discord.MessageEmbed();
                                 Container.setColor(clor_gen.rand_Color())
                                     .setTitle('Oggetto messo in vendita da: ' + Scheda_PG.Nome_PG)
