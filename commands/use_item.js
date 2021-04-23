@@ -44,7 +44,7 @@ module.exports = {
                                     num = num - parseInt(args[1]);
                                     if (num <= 0 || isNaN(num) == true) {
                                         var num_memory = "Non possiede più l'oggetto";
-                                        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+                                        let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
                                         if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
                                             var avatar = member.user.displayAvatarURL();
                                         } else {
@@ -53,7 +53,7 @@ module.exports = {
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(clor_gen.rand_Color())
                                             .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
-                                            .setThumbnail(Avatar,true)
+                                            .setThumbnail(avatar,true)
                                             .addField("Nome", nome)
                                             .addField("Quantità", num_memory)
                                             .addField("Sincronia", inventory[nome]['Sincronia'])
@@ -63,7 +63,7 @@ module.exports = {
                                     } else {
                                         inventory[nome]['Quantita'] = num;
                                         var num_memory = inventory[nome]['Quantita'];
-                                        let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
+                                        let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
                                         if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
                                             var avatar = member.user.displayAvatarURL();
                                         } else {
