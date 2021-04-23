@@ -84,7 +84,7 @@ module.exports = {
                                 } else {
                                     Container.setColor([255, 0, 0])
                                         .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovat0');
+                                        .setTitle('Errore Oggetto non trovato');
                                     message.channel.send(Container);
                                     return 1;
                                 }
