@@ -37,10 +37,10 @@ module.exports = {
                         return 1;
                     }
                     let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
-                    if (Scheda_PG.Avatar_pg == "Non Assegnata" || Scheda_PG.Avatar_pg == undefined) {
+                    if (Scheda_PG.Avatar == "Non Assegnata" || Scheda_PG.Avatar == undefined) {
                         var avatar = member.user.displayAvatarURL();
                     } else {
-                        var avatar = Scheda_PG.Avatar_pg;
+                        var avatar = Scheda_PG.Avatar;
                     }
                     Container = new Discord.MessageEmbed();
                     Container.setColor(colrs_set)
