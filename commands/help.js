@@ -80,7 +80,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Pgdescrizione')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda] \n\n **OPZIONI**\n show = Motra avatar\n set = Modifica avatar \n\nMostra avatar del personaggio o modifica\n Per usare pgavatar inserire show/set [Opzione] e [ID_Scheda]');
+                .setDescription('Sintassi: **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda][URL Avatar] \n\n **OPZIONI**\n show = Motra avatar\n set = Modifica avatar \n\nMostra avatar del personaggio o modifica\n Per usare pgavatar inserire show/set [Opzione] e [ID_Scheda], in caso di set inserire [URL Avatar]');
             message.channel.send(Container);
         } else if (args[0] == "pginventario") {
             Container.setColor([255, 0, 0])
@@ -191,7 +191,7 @@ module.exports = {
                 .addField("💬 Prefix 💬", "• **" + config.prefix + "**")
                 .addField(":question: Descrizione Comandi :question:", '• **help** [comando]')
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
-                .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgavatar** [Opzione][ID_Scheda]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
+                .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgavatar** [Opzione][ID_Scheda][URL Avatar]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
                 .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')

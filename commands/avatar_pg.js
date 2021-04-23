@@ -70,7 +70,7 @@ module.exports = {
                         message.channel.send(Container);
                         return 1
                     }
-                    if (validURL(args[1])) {
+                    if (validURL(args[2])) {
                         Container = new Discord.MessageEmbed();
                         Container.setColor(colrs_set)
                             .setTitle('Avatar PG di: ' + Scheda_PG.Nome_PG)
