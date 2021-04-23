@@ -77,10 +77,15 @@ async function update_stats(message, id_Scheda, str_flt, filter, value) {
                 query[filter] = parseInt(value);
                 methodDB.stats_update(result[0]._id, query);
                 let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
+                    var avatar = member.user.displayAvatarURL();
+                } else {
+                    var avatar = result[0].Avatar;
+                }
                 var Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
                     .setTitle('📜 Stats Scheda: ' + result[0].Nome_PG)
-                    .setThumbnail(member.user.displayAvatarURL(), true)
+                    .setThumbnail(avatar, true)
                     .addField(str_flt + ": ", value)
                     .setTimestamp()
                     .setFooter("Data", message.author.displayAvatarURL());
