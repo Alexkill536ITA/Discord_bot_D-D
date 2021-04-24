@@ -36,7 +36,7 @@ module.exports = {
                                 var cursor = methodDB.serachbyid(args[2]);
                                 cursor.then(function (result) {
                                     if (result != null) {
-                                        var old_value = result[0].Money;
+                                        var old_value = parseFloat(result[0].Money);
                                         var new_value = old_value + parseFloat(args[1]);
                                         methodDB.money_update(result[0]._id, new_value);
                                         let member = message.guild.members.cache.get(result[0].Nome_Discord);
