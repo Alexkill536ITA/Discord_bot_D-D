@@ -125,6 +125,8 @@ function Discord_start() {
             client.commands.get('scambio').execute(client, message, args);
         } else if (command == 'meteo') {
             client.commands.get('meteo').execute(client, message, args);
+        } else if (command == 'timeskip') {
+            client.commands.get('timeskip').execute(client, message, args);
         } else if (command == 'help') {
             client.commands.get('help').execute(client, message, args);
         } else if (command == 'clearchat') {

@@ -151,7 +151,7 @@ exports.inventory_update = function (id_scheda, value_new) {
 
 exports.inventory_pbc_frag = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
-    collection.updateOne({ '_id': id_scheda }, { $set: { "Pbc_frag" : value_new } });
+    collection.updateOne({ '_id': id_scheda }, { $set: { "Pbc_frag": value_new } });
     return 0;
 }
 
@@ -167,9 +167,35 @@ exports.password_update = function (id_user, value_new) {
     return 0;
 }
 
+exports.timeskip_pg_update = function (token, limit_av) {
+    collection.updateMany({}, { $set: { timeskip: { "token": token, limit_avventure: limit_av } } });
+    return 0;
+}
+
+exports.timeskip_pg_token_update = function (id_user, value_new) {
+    id_user = mongo.ObjectID(id_user);
+    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.token': value_new } } );
+    return 0;
+}
+
+exports.timeskip_control_update = function (value_new) {
+    collection.updateOne({ 'Id': "1" }, { $set: { Event_active: value_new } });
+    return 0;
+}
+
+exports.timeskip_config_update = function (filter, value_new) {
+    collection.updateOne({ 'Id': filter }, { $set: value_new });
+    return 0;
+}
+
 // MongoDB Delete
 exports.delete_db = function (id_scheda) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.deleteOne({ '_id': id_scheda });
+    return 0;
+}
+
+exports.timeskip_pg_token_delete = function () {
+    collection.updateMany({}, { $unset: { timeskip }});
     return 0;
 }
