@@ -93,6 +93,10 @@ exports.serachbylistpg = function (query) {
     return collection.find({ 'Nome_Discord': query }).toArray();
 }
 
+exports.serach_competenze = async function (query) {
+    return await collection.findOne({ 'nome': query });
+}
+
 exports.serachbyid_Object = async function (id_shop) {
     var cursor = await collection.find({ 'ID Shop': id_shop }).toArray();
     return cursor;
@@ -104,7 +108,9 @@ exports.getAll_Object = async function () {
 }
 
 exports.serachCustom = async function (query, Value) {
-    var cursor = await collection.find({ query: _Value }).toArray();
+    var obj = {};
+    obj[query] = Value
+    var cursor = await collection.find(obj).toArray();
     return cursor;
 }
 
@@ -149,9 +155,15 @@ exports.inventory_update = function (id_scheda, value_new) {
     return 0;
 }
 
+exports.competenze_update = function (id_scheda, value_new) {
+    id_scheda = mongo.ObjectID(id_scheda);
+    collection.updateOne({ '_id': id_scheda }, { $set: { Competenze: value_new } });
+    return 0;
+}
+
 exports.inventory_pbc_frag = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
-    collection.updateOne({ '_id': id_scheda }, { $set: { "Pbc_frag": value_new } });
+    collection.updateOne({ '_id': id_scheda }, { $set: { Pbc_frag: value_new } });
     return 0;
 }
 
@@ -175,6 +187,12 @@ exports.timeskip_pg_update = function (token, limit_av) {
 exports.timeskip_pg_token_update = function (id_user, value_new) {
     id_user = mongo.ObjectID(id_user);
     collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.token': value_new } } );
+    return 0;
+}
+
+exports.timeskip_pg_token_limit_avventure = function (id_user, value_new) {
+    id_user = mongo.ObjectID(id_user);
+    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.limit_avventure': value_new } } );
     return 0;
 }
 
