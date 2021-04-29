@@ -446,7 +446,7 @@ module.exports = {
                                                             Container.setColor(colrs_set)
                                                                 .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
                                                                 .setDescription("Hai Aquisito Questa Competenza")
-                                                                .addField("🛠/🎺 Competenza:", tool_result.nome)
+                                                                .addField("🛠 / 🎺 Competenza:", tool_result.nome)
                                                                 .setThumbnail(botavatar.displayAvatarURL(), true)
                                                                 .setTimestamp()
                                                                 .setFooter("Data", message.author.displayAvatarURL());
