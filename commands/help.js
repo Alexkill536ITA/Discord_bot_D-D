@@ -76,9 +76,9 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'pglist** [@utente] \n\nMostra le schede di un utente\n Per ottenerla menzionare il sestessi o un altro membro nel campo [@utente]');
             message.channel.send(Container);
-        } else if (args[0] == "pgdescrizione") {
+        } else if (args[0] == "pgavatar") {
             Container.setColor([255, 0, 0])
-                .setTitle('Help Pgdescrizione')
+                .setTitle('Help pgavatar')
                 .setThumbnail(botavatar.displayAvatarURL())
                 .setDescription('Sintassi: **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda][URL Avatar] \n\n **OPZIONI**\n show = Motra avatar\n set = Modifica avatar \n\nMostra avatar del personaggio o modifica\n Per usare pgavatar inserire show/set [Opzione] e [ID_Scheda], in caso di set inserire [URL Avatar]');
             message.channel.send(Container);
