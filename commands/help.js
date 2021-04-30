@@ -92,7 +92,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Shop')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n • emporio\n • numero42 \n\nLo shop permette di accquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] pervisualizare la vetrina [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
+                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop **O** ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n • emporio\n • numero42 \n\nLo shop permette di accquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] pervisualizare la vetrina [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
         } else if (args[0] == "scambio") {
             Container.setColor([255, 0, 0])
@@ -192,7 +192,7 @@ module.exports = {
                 .addField(":question: Descrizione Comandi :question:", '• **help** [comando]')
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
                 .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgavatar** [Opzione][ID_Scheda][URL Avatar]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]')
-                .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
+                .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop **O** ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
                 .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **ping**\n • **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
