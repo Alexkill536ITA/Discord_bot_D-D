@@ -92,7 +92,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Shop')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n • emporio\n • numero42 \n\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina. Per comprare Inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
+                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n • emporio\n • numero42 \n\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
         } else if (args[0] == "scambio") {
             Container.setColor([255, 0, 0])
