@@ -15,11 +15,11 @@ const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
 
 module.exports = {
-    name: 'pginventario',
-    description: "motra inventaryio pg",
+    name: 'pgcompetenze',
+    description: "motra Competenze pg",
     async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute show_inventrory');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute show_competenze');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
@@ -38,7 +38,7 @@ module.exports = {
                             if (result != null) {
                                 var js_result = JSON.stringify(result);
                                 js_result = JSON.parse(js_result);
-                                var obj_N = JSON.stringify(js_result['Inventory']);
+                                var obj_N = JSON.stringify(js_result['Competenze']);
                                 if (obj_N.length > 2) {
                                     obj_N = JSON.parse(obj_N);
                                     const obj_k = Object.keys(obj_N);
@@ -47,7 +47,7 @@ module.exports = {
                                     var x = 0;
                                     var obj_string = [];
                                     for (var i in obj_k) {
-                                        obj_string[j] += 'Nome: ' + obj_N[obj_k[i]]['Nome'] + '\nSincronia: ' + obj_N[obj_k[i]]['Sincronia'] + '\nQuantità: ' + obj_N[obj_k[i]]['Quantita'] + '\n\n';
+                                        obj_string[j] += 'Competenza: ' + obj_N[obj_k[i]]['Nome'];
                                         obj_string[j] = obj_string[j].replace("undefined", "");
                                         x++
                                         if (x == 5) {
@@ -75,8 +75,7 @@ module.exports = {
                                         .addField("N:", obj_string.length, true)
                                         .addField("🆔 Scheda", js_result['_id'], true)
                                         .addField("📝 Nome", js_result['Nome_PG'])
-                                        .addField("💰 Money", js_result['Money'])
-                                        .addField("🎒 Inventario", obj_string[0])
+                                        .addField("📄 Competenze", obj_string[0])
                                         .setDisabledNavigationEmojis(['all'])
                                         .setDeleteOnTimeout(false)
                                         .setFunctionEmojis({
@@ -114,9 +113,8 @@ module.exports = {
                                         .setTitle('📜 Scheda Inventario: ' + autore.username)
                                         .setThumbnail(autore.displayAvatarURL(), true)
                                         .addField("🆔 Scheda", js_result['_id'])
-                                        .addField("Nome", js_result['Nome_PG'],)
-                                        .addField("💰 Money", js_result['Money'])
-                                        .addField("🎒 Inventario", "Vuoto");
+                                        .addField("📝 Nome", js_result['Nome_PG'],)
+                                        .addField("📄 Competenze", "Vuoto");
                                     message.channel.send(Container);
                                 }
                             } else {
@@ -129,14 +127,14 @@ module.exports = {
                     }
                 } else {
                     Container.setColor([255, 0, 0])
-                        .setAuthor(`Comando Inventario`)
-                        .setTitle('Sintassi **' + config.prefix + 'pginventario** [@utente][ID_Scheda]');
+                        .setAuthor(`Comando Competenze`)
+                        .setTitle('Sintassi **' + config.prefix + 'pgCompetenze** [@utente][ID_Scheda]');
                     message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                    .setAuthor(`Comando Inventario`)
-                    .setTitle('Sintassi **' + config.prefix + 'pginventario** [@utente][ID_Scheda]');
+                    .setAuthor(`Comando Competenze`)
+                    .setTitle('Sintassi **' + config.prefix + 'pgCompetenze** [@utente][ID_Scheda]');
                 message.channel.send(Container);
             }
         } else {

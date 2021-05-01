@@ -186,13 +186,13 @@ exports.timeskip_pg_update = function (token, limit_av) {
 
 exports.timeskip_pg_token_update = function (id_user, value_new) {
     id_user = mongo.ObjectID(id_user);
-    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.token': value_new } } );
+    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.token': value_new } });
     return 0;
 }
 
 exports.timeskip_pg_token_limit_avventure = function (id_user, value_new) {
     id_user = mongo.ObjectID(id_user);
-    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.limit_avventure': value_new } } );
+    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.limit_avventure': value_new } });
     return 0;
 }
 
@@ -214,6 +214,6 @@ exports.delete_db = function (id_scheda) {
 }
 
 exports.timeskip_pg_token_delete = function () {
-    collection.updateMany({}, { $unset: { timeskip }});
+    collection.updateMany({}, { $unset: { timeskip: "" } });
     return 0;
 }

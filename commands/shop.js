@@ -187,7 +187,7 @@ function add_item(message, args, Scheda_PG, result) {
     var inventory = Scheda_PG['Inventory'];
     var money_pg = Scheda_PG['Money'];
     var check_nam = inventory[nome_var];
-    var consto_fin = costo * parseInt(args[1]);
+    var consto_fin = costo * parseFloat(args[1]);
     money_pg = parseFloat(money_pg) - consto_fin
     if (message.author.id == Scheda_PG['Nome_Discord']) {
         if (money_pg >= 0) {

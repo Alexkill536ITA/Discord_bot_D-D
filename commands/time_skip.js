@@ -33,19 +33,27 @@ module.exports = {
                     methodDB.timeskip_control_update(true);
                     var config_timeskip = await methodDB.serachbyid_obj("1");
                     if (config_timeskip != null && config_timeskip != undefined) {
-                        await connect_db("Schede_PG");
-                        methodDB.timeskip_pg_update(config_timeskip.Token_add, config_timeskip.Limit_avventure);
-                        Container = new Discord.MessageEmbed();
-                        Container.setColor([0, 255, 0])
-                            .setTitle('Time Skip Start')
-                            .setDescription('Time Skip Attivo')
-                            .setThumbnail(botavatar.displayAvatarURL(), true)
-                            .addField("Token:", config_timeskip.Token_add)
-                            .addField("Data:", get_date_now())
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL());
-                        message.channel.send(Container)
-                        client.channels.cache.get(config_timeskip.event_chat).send(Container)
+                        if (config_timeskip.Event_active == false) {
+                            await connect_db("Schede_PG");
+                            methodDB.timeskip_pg_update(config_timeskip.Token_add, config_timeskip.Limit_avventure);
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor([0, 255, 0])
+                                .setTitle('Time Skip Start')
+                                .setDescription('Time Skip Attivo')
+                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                .addField("Token:", config_timeskip.Token_add)
+                                .addField("Data:", get_date_now())
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container)
+                            client.channels.cache.get(config_timeskip.event_chat).send(Container)
+                        } else {
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor([255, 0, 0])
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore Timeskip Già Attivo');
+                            message.channel.send(Container);
+                        }
                     } else {
                         emit_print_err_internal(message);
                     }
@@ -121,19 +129,21 @@ module.exports = {
                             .addField("Token Value to Money", config_timeskip.Token_value, true)
                             .addField('\u200b', '**Parametri Eventi**')
                             .addField("Costo Event",
-                                "**In Oro**\nAvventure mo: " + config_timeskip.Cost_avventure_mo +
-                                "\nTalento mo: " + config_timeskip.Cost_talento_mo +
-                                "\nStrumenti mo: " + config_timeskip.Cost_strumenti_mo +
-                                "\nLingue mo: " + config_timeskip.Cost_lingue_mo +
-                                "\nRicerche mo: " + config_timeskip.cost_ricerche_mo +
-                                "\n**In Tempo**\nAvventure Token: " + config_timeskip.Cost_avventure_token +
-                                "\nTalento Token: " + config_timeskip.Cost_talento_token +
-                                "\nStrumenti Token: " + config_timeskip.Cost_strumenti_token +
-                                "\nLingue Token: " + config_timeskip.Cost_lingue_token +
-                                "\nRicerche Token: " + config_timeskip.cost_ricerche_token +
-                                "\nLavoro Token: " + config_timeskip.cost_lavoro_token, true)
+                                "**In Oro**\nAvventure mo: " + config_timeskip.config_avventure.Cost_avventure_mo +
+                                "\nTalento mo: " + config_timeskip.config_talento.Cost_talento_mo +
+                                "\nStrumenti mo: " + config_timeskip.config_strumenti.Cost_strumenti_mo +
+                                "\nLingue mo: " + config_timeskip.config_lingua.Cost_lingue_mo +
+                                "\nRicerche mo: " + "Varia inbase alla rarità" +
+                                "\nCreazione mo: " + "Varia inbase alla rarità" +
+                                "\n**In Tempo**\nAvventure Token: " + config_timeskip.config_avventure.Cost_avventure_token +
+                                "\nTalento Token: " + config_timeskip.config_talento.Cost_talento_token +
+                                "\nStrumenti Token: " + config_timeskip.config_strumenti.Cost_strumenti_token +
+                                "\nLingue Token: " + config_timeskip.config_lingua.Cost_lingue_token +
+                                "\nRicerche Token: " + "Varia inbase alla rarità" +
+                                "\nCreazione Token: " + "Varia inbase alla rarità" +
+                                "\nLavoro Token: " + config_timeskip.config_lavoro.Cost_lavoro_token, true)
                             .addField("Ritorno Event",
-                                "**In Oro**\nLavoro mo:" + config_timeskip.retun_lavoro_mo, true
+                                "**In Oro**\nLavoro mo:" + config_timeskip.config_lavoro.retun_lavoro_mo, true
                             )
                             .setTimestamp()
                             .setFooter("Data", message.author.displayAvatarURL());
@@ -190,7 +200,7 @@ module.exports = {
                 } else {
                     emit_print_denied(message);
                 }
-            } else if (args[0] == "talento") {                  // Event 1 OK
+            } else if (args[0] == "cambio_talento") {           // Event 1 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
@@ -202,43 +212,47 @@ module.exports = {
                                     var Scheda_pg = result_pg[0];
                                     if (Scheda_pg.Nome_Discord == message.author.id) {
                                         if (Scheda_pg.timeskip.token > 0) {
-                                            // if (args[2]) {
-                                            //     var nome = args[2];
-                                            //     for (let index = 3; index < args.length; index++) {
-                                            //         nome += " " + args[index];
-                                            //     }
-                                            //     var talento_richiesto = nome;
-                                            // } else {
-                                            //     var talento_richiesto = "Non Specificato Mettersi in accordo";
-                                            // }
-                                            var old_value = Scheda_pg.timeskip.token;
-                                            var new_value_tk = old_value - config_timeskip.Cost_talento_token;
-                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                var avatar = member.user.displayAvatarURL();
+                                            if (Scheda_pg.timeskip.token >= config_timeskip.config_talento.Cost_talento_token) {
+                                                // if (args[2]) {
+                                                //     var nome = args[2];
+                                                //     for (let index = 3; index < args.length; index++) {
+                                                //         nome += " " + args[index];
+                                                //     }
+                                                //     var talento_richiesto = nome;
+                                                // } else {
+                                                //     var talento_richiesto = "Non Specificato Mettersi in accordo";
+                                                // }
+                                                var old_value = Scheda_pg.timeskip.token;
+                                                var new_value_tk = old_value - config_timeskip.config_talento.Cost_talento_token;
+                                                methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                    var avatar = member.user.displayAvatarURL();
+                                                } else {
+                                                    var avatar = Scheda_pg.Avatar;
+                                                }
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor(colrs_set)
+                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                    .setDescription("📨 La tua richiesta **Talento** è stata in oltrata hai Master")
+                                                    // .addField("Talento Richiesto: ", talento_richiesto)
+                                                    .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                    .setTimestamp()
+                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                message.channel.send(Container);
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor(colrs_set)
+                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                    .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Talento Da: <@" + Scheda_pg.Nome_Discord + ">")
+                                                    .addField("🆔 Scheda", Scheda_pg._id)
+                                                    // .addField("Talento Richiesto: ", talento_richiesto)
+                                                    .setThumbnail(avatar, true)
+                                                    .setTimestamp()
+                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                client.channels.cache.get(config_timeskip.event_chat).send(Container)
                                             } else {
-                                                var avatar = Scheda_pg.Avatar;
+                                                emit_print_err_token_2(message);
                                             }
-                                            Container = new Discord.MessageEmbed();
-                                            Container.setColor(colrs_set)
-                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                .setDescription("📨 La tua richiesta **Talento** è stata in oltrata hai Master")
-                                                // .addField("Talento Richiesto: ", talento_richiesto)
-                                                .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                .setTimestamp()
-                                                .setFooter("Data", message.author.displayAvatarURL());
-                                            message.channel.send(Container);
-                                            Container = new Discord.MessageEmbed();
-                                            Container.setColor(colrs_set)
-                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Talento Da: <@" + Scheda_pg.Nome_Discord + ">")
-                                                .addField("🆔 Scheda", Scheda_pg._id)
-                                                // .addField("Talento Richiesto: ", talento_richiesto)
-                                                .setThumbnail(avatar, true)
-                                                .setTimestamp()
-                                                .setFooter("Data", message.author.displayAvatarURL());
-                                            client.channels.cache.get(config_timeskip.event_chat).send(Container)
                                         } else {
                                             emit_print_err_token(message);
                                         }
@@ -250,7 +264,7 @@ module.exports = {
                                 }
                             });
                         } else {
-                            emit_print(message);
+                            emit_print_err_custom(message, "cambio_talento** [ID_sheda]")
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -272,74 +286,78 @@ module.exports = {
                                         var Scheda_pg = result_pg[0];
                                         if (Scheda_pg.Nome_Discord == message.author.id) {
                                             if (Scheda_pg.timeskip.token > 0) {
-                                                if (Scheda_pg.timeskip.limit_avventure > 0) {
-                                                    var old_value_mo = Scheda_pg.Money;
-                                                    if (old_value_mo > config_timeskip.Cost_avventure_mo) {
-                                                        await connect_db("Schede_PG");
-                                                        var old_action = Scheda_pg.timeskip.limit_avventure;
-                                                        var new_action = old_action - 1;
-                                                        methodDB.timeskip_pg_token_limit_avventure(Scheda_pg._id, new_action);
-                                                        var old_value_tk = Scheda_pg.timeskip.token;
-                                                        var new_value_tk = old_value_tk - config_timeskip.Cost_talento_token;
-                                                        methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk);
-                                                        var stats = args[2];
-                                                        stats = stats.charAt(0).toUpperCase() + stats.slice(1)
-                                                        var roll_result = roll_dice_value(1, 100, Scheda_pg[stats]);
-                                                        if (roll_result > config_timeskip.config_avventure.val_high) {
-                                                            var value_result = config_timeskip.config_avventure.mo_base_1 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_1, 0);
-                                                            var new_value_mo = old_value_mo + value_result;
-                                                            var status = "Gran Successo"
-                                                            var message_result = "L'esplorazione che hai condotto, contro tutti i pronostici, ti ha portato ad un mirabolante successo fruttandoti ben **" + value_result + "** monete d'oro."
-                                                        } else if (roll_result > config_timeskip.config_avventure.val_mid && roll_result <= config_timeskip.config_avventure.val_high) {
-                                                            var value_result = config_timeskip.config_avventure.mo_base_2 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_2, 0);
-                                                            var new_value_mo = old_value_mo + value_result;
-                                                            var status = "Successo"
-                                                            var message_result = "L'esplorazione che hai condotto ha riscontrato proprio la fine che speravi ed il che ti ha fatto guadagnare **" + value_result + "** monete d'oro."
-                                                        } else if (roll_result > config_timeskip.config_avventure.val_low && roll_result <= config_timeskip.config_avventure.val_mid) {
-                                                            var value_result = config_timeskip.config_avventure.mo_base_3 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_3, 0);
-                                                            var new_value_mo = old_value_mo - value_result;
-                                                            var status = "Fallimento"
-                                                            var message_result = "L'esplorazione che hai condotto non ha ottenuto la fine che speravi ed il che ti ha fatto perdere **" + value_result + "** monete d'oro."
-                                                        } else if (roll_result <= config_timeskip.config_avventure.val_low) {
-                                                            var value_result = config_timeskip.config_avventure.mo_base_4 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_4, 0);
-                                                            var new_value_mo = old_value_mo - value_result;
-                                                            var status = "Fallimento Totale"
-                                                            var message_result = "L'esplorazione che hai condotto, purtroppo, ha ottenuto una devastante disfatta che ti è costata ben **" + value_result + "** monete d'oro."
-                                                        }
-                                                        methodDB.money_update(Scheda_pg._id, new_value_mo);
-                                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                            var avatar = member.user.displayAvatarURL();
+                                                if (Scheda_pg.timeskip.token >= config_timeskip.config_avventure.Cost_avventure_token) {
+                                                    if (Scheda_pg.timeskip.limit_avventure > 0) {
+                                                        var old_value_mo = Scheda_pg.Money;
+                                                        if (old_value_mo > config_timeskip.config_avventure.Cost_avventure_mo) {
+                                                            await connect_db("Schede_PG");
+                                                            var old_action = Scheda_pg.timeskip.limit_avventure;
+                                                            var new_action = old_action - 1;
+                                                            methodDB.timeskip_pg_token_limit_avventure(Scheda_pg._id, new_action);
+                                                            var old_value_tk = Scheda_pg.timeskip.token;
+                                                            var new_value_tk = old_value_tk - config_timeskip.config_avventure.Cost_avventure_token;
+                                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk);
+                                                            var stats = args[2];
+                                                            stats = stats.charAt(0).toUpperCase() + stats.slice(1)
+                                                            var roll_result = roll_dice_value(1, 100, Scheda_pg[stats]);
+                                                            if (roll_result > config_timeskip.config_avventure.val_high) {
+                                                                var value_result = config_timeskip.config_avventure.mo_base_1 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_1, 0);
+                                                                var new_value_mo = old_value_mo + value_result;
+                                                                var status = "Gran Successo"
+                                                                var message_result = "L'esplorazione che hai condotto, contro tutti i pronostici, ti ha portato ad un mirabolante successo fruttandoti ben **" + value_result + "** monete d'oro."
+                                                            } else if (roll_result > config_timeskip.config_avventure.val_mid && roll_result <= config_timeskip.config_avventure.val_high) {
+                                                                var value_result = config_timeskip.config_avventure.mo_base_2 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_2, 0);
+                                                                var new_value_mo = old_value_mo + value_result;
+                                                                var status = "Successo"
+                                                                var message_result = "L'esplorazione che hai condotto ha riscontrato proprio la fine che speravi ed il che ti ha fatto guadagnare **" + value_result + "** monete d'oro."
+                                                            } else if (roll_result > config_timeskip.config_avventure.val_low && roll_result <= config_timeskip.config_avventure.val_mid) {
+                                                                var value_result = config_timeskip.config_avventure.mo_base_3 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_3, 0);
+                                                                var new_value_mo = old_value_mo - value_result;
+                                                                var status = "Fallimento"
+                                                                var message_result = "L'esplorazione che hai condotto non ha ottenuto la fine che speravi ed il che ti ha fatto perdere **" + value_result + "** monete d'oro."
+                                                            } else if (roll_result <= config_timeskip.config_avventure.val_low) {
+                                                                var value_result = config_timeskip.config_avventure.mo_base_4 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_4, 0);
+                                                                var new_value_mo = old_value_mo - value_result;
+                                                                var status = "Fallimento Totale"
+                                                                var message_result = "L'esplorazione che hai condotto, purtroppo, ha ottenuto una devastante disfatta che ti è costata ben **" + value_result + "** monete d'oro."
+                                                            }
+                                                            methodDB.money_update(Scheda_pg._id, new_value_mo);
+                                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                var avatar = member.user.displayAvatarURL();
+                                                            } else {
+                                                                var avatar = Scheda_pg.Avatar;
+                                                            }
+                                                            Container = new Discord.MessageEmbed();
+                                                            Container.setColor(colrs_set)
+                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                .setDescription(message_result)
+                                                                .addField("🧾 Stato Spedizione:", status)
+                                                                .addField("⚪️ Risultato Spedizione:", value_result)
+                                                                .addField("💰 Money", new_value_mo)
+                                                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                .setTimestamp()
+                                                                .setFooter("Data", message.author.displayAvatarURL());
+                                                            message.channel.send(Container);
+                                                            Container = new Discord.MessageEmbed();
+                                                            Container.setColor(colrs_set)
+                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📯 Ha Fatto Una Spedizione: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                .addField("🧾 Esito:", status)
+                                                                .addField("Spedizioni Rimaneti:", new_action)
+                                                                .setThumbnail(avatar, true)
+                                                                .setTimestamp()
+                                                                .setFooter("Data", message.author.displayAvatarURL());
+                                                            client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                         } else {
-                                                            var avatar = Scheda_pg.Avatar;
+                                                            emit_print_err_money(message);
                                                         }
-                                                        Container = new Discord.MessageEmbed();
-                                                        Container.setColor(colrs_set)
-                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                            .setDescription(message_result)
-                                                            .addField("🧾 Stato Spedizione:", status)
-                                                            .addField("⚪️ Risultato Spedizione:", value_result)
-                                                            .addField("💰 Money", new_value_mo)
-                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                            .setTimestamp()
-                                                            .setFooter("Data", message.author.displayAvatarURL());
-                                                        message.channel.send(Container);
-                                                        Container = new Discord.MessageEmbed();
-                                                        Container.setColor(colrs_set)
-                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                            .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📯 Ha Fatto Una Spedizione: <@" + Scheda_pg.Nome_Discord + ">")
-                                                            .addField("🆔 Scheda:", Scheda_pg._id)
-                                                            .addField("🧾 Esito:", status)
-                                                            .addField("Spedizioni Rimaneti:", new_action)
-                                                            .setThumbnail(avatar, true)
-                                                            .setTimestamp()
-                                                            .setFooter("Data", message.author.displayAvatarURL());
-                                                        client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                     } else {
-                                                        emit_print_err_money(message);
+                                                        emit_print_err_limit(message);
                                                     }
                                                 } else {
-                                                    emit_print_err_limit(message);
+                                                    emit_print_err_token_2(message);
                                                 }
                                             } else {
                                                 emit_print_err_token(message);
@@ -352,10 +370,10 @@ module.exports = {
                                     }
                                 });
                             } else {
-                                emit_print(message);
+                                emit_print_err_custom(message, "sedizione** [ID_Scheda][Statisitca del PG]");
                             }
                         } else {
-                            emit_print(message);
+                            emit_print_err_custom(message, "sedizione** [ID_Scheda][Statisitca del PG]");
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -363,126 +381,115 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "allenamento") {              // Event 3
+            } else if (args[0] == "strumento") {                // Event 3 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
                     if (config_timeskip.Event_active == true) {
-                        if (args[1] && args[1].length == 24) {
-                            var cursor_Scheda = get_Scheda_pg(args[1]);
-                            cursor_Scheda.then(function (result_pg) {
-                                if (result_pg != null) {
-                                    var Scheda_pg = result_pg[0];
-                                    if (Scheda_pg.Nome_Discord == message.author.id) {
-                                        if (Scheda_pg.timeskip.token > 0) {
-
-                                        } else {
-                                            emit_print_err_token(message);
-                                        }
-                                    } else {
-                                        emit_print_err_author_not_mach(message);
-                                    }
-                                } else {
-                                    emit_print_err_notfound(message);
-                                }
-                            });
-                        } else {
-                            emit_print(message);
-                        }
-                    } else {
-                        emit_print_err_attive(message);
-                    }
-                } else {
-                    emit_print_err_internal(message);
-                }
-            } else if (args[0] == "strumenti") {                // Event 4 OK
-                await connect_db("Event_config");
-                var config_timeskip = await methodDB.serachbyid_obj("1");
-                if (config_timeskip != null && config_timeskip != undefined) {
-                    if (config_timeskip.Event_active == true) {
-                        if (args[1] && args[1].length == 24) {
-                            var cursor_Scheda = get_Scheda_pg(args[1]);
-                            cursor_Scheda.then(async function (result_pg) {
-                                if (result_pg != null) {
-                                    var Scheda_pg = result_pg[0];
-                                    if (Scheda_pg.Nome_Discord == message.author.id) {
-                                        if (Scheda_pg.timeskip.token > 0) {
-                                            if (Scheda_pg.Money > config_timeskip.Cost_strumenti_mo) {
-                                                if (args[2]) {
-                                                    var tool_richiesto = args[2];
-                                                    for (let index = 3; index < args.length; index++) {
-                                                        tool_richiesto += " " + args[index];
-                                                    }
-                                                    var filter_tool = config_timeskip.config_strumenti.filter_tool;
-                                                    if (filter_tool.includes(tool_richiesto)) {
-                                                        await connect_db("Lista_Strumenti");
-                                                        var cursor_tool = methodDB.serach_competenze(tool_richiesto);
-                                                        cursor_tool.then(async function (tool_result) {
-                                                            await connect_db("Schede_PG");
-                                                            var old_value_mo = Scheda_pg.Money;
-                                                            var new_value_mo = old_value_mo - config_timeskip.Cost_strumenti_mo;
-                                                            methodDB.money_update(Scheda_pg._id, new_value_mo);
-                                                            var old_value_tk = Scheda_pg.timeskip.token;
-                                                            var new_value_tk = old_value_tk - config_timeskip.Cost_talento_token;
-                                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                                            if (Scheda_pg.Competenze == undefined) {
-                                                                var obj_temp = {};
-                                                                obj_temp["Competenze"] = {};
-                                                                var competenze_old = obj_temp["Competenze"]
-                                                            } else {
-                                                                var competenze_old = Scheda_pg.Competenze;
+                        if (args[1]) {
+                            if (args[1].length == 24) {
+                                var cursor_Scheda = get_Scheda_pg(args[1]);
+                                cursor_Scheda.then(async function (result_pg) {
+                                    if (result_pg != null) {
+                                        var Scheda_pg = result_pg[0];
+                                        if (Scheda_pg.Nome_Discord == message.author.id) {
+                                            if (Scheda_pg.timeskip.token > 0) {
+                                                if (Scheda_pg.timeskip.token >= config_timeskip.config_strumenti.Cost_strumenti_token) {
+                                                    if (Scheda_pg.Money > config_timeskip.config_strumenti.Cost_strumenti_mo) {
+                                                        if (args[2]) {
+                                                            var tool_richiesto = args[2];
+                                                            for (let index = 3; index < args.length; index++) {
+                                                                tool_richiesto += " " + args[index];
                                                             }
-                                                            var ojb = {}
-                                                            ojb[tool_result.nome] = tool_result.nome
-                                                            Object.assign(competenze_old, ojb);
-                                                            methodDB.competenze_update(Scheda_pg._id, competenze_old);
-                                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                                var avatar = member.user.displayAvatarURL();
+                                                            var filter_tool = config_timeskip.config_strumenti.filter_tool;
+                                                            if (filter_tool.includes(tool_richiesto)) {
+                                                                await connect_db("Lista_Competenze");
+                                                                var cursor_tool = methodDB.serach_competenze(tool_richiesto);
+                                                                cursor_tool.then(async function (tool_result) {
+                                                                    await connect_db("Schede_PG");
+                                                                    var old_value_mo = Scheda_pg.Money;
+                                                                    var new_value_mo = old_value_mo - config_timeskip.config_strumenti.Cost_strumenti_mo;
+                                                                    methodDB.money_update(Scheda_pg._id, new_value_mo);
+                                                                    var old_value_tk = Scheda_pg.timeskip.token;
+                                                                    var new_value_tk = old_value_tk - config_timeskip.config_strumenti.Cost_strumenti_token;
+                                                                    methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                                    if (Scheda_pg.Competenze == undefined) {
+                                                                        var obj_temp = {};
+                                                                        obj_temp["Competenze"] = {};
+                                                                        var competenze_old = obj_temp["Competenze"]
+                                                                    } else {
+                                                                        var competenze_old = Scheda_pg.Competenze;
+                                                                    }
+                                                                    var ojb = {}
+                                                                    ojb[tool_result.nome] = tool_result.nome
+                                                                    Object.assign(competenze_old, ojb);
+                                                                    methodDB.competenze_update(Scheda_pg._id, competenze_old);
+                                                                    let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                                    if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                        var avatar = member.user.displayAvatarURL();
+                                                                    } else {
+                                                                        var avatar = Scheda_pg.Avatar;
+                                                                    }
+                                                                    Container = new Discord.MessageEmbed();
+                                                                    Container.setColor(colrs_set)
+                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                        .setDescription("Hai Aquisito Questa Competenza")
+                                                                        .addField("🛠 / 🎺 Competenza:", tool_result.nome)
+                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                        .setTimestamp()
+                                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                                    message.channel.send(Container);
+                                                                    Container = new Discord.MessageEmbed();
+                                                                    Container.setColor(colrs_set)
+                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                        .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                        .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                        .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
+                                                                        .setThumbnail(avatar, true)
+                                                                        .setTimestamp()
+                                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                                    client.channels.cache.get(config_timeskip.event_chat).send(Container);
+                                                                });
                                                             } else {
-                                                                var avatar = Scheda_pg.Avatar;
+                                                                emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
                                                             }
-                                                            Container = new Discord.MessageEmbed();
-                                                            Container.setColor(colrs_set)
-                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                .setDescription("Hai Aquisito Questa Competenza")
-                                                                .addField("🛠 / 🎺 Competenza:", tool_result.nome)
-                                                                .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                .setTimestamp()
-                                                                .setFooter("Data", message.author.displayAvatarURL());
-                                                            message.channel.send(Container);
-                                                            Container = new Discord.MessageEmbed();
-                                                            Container.setColor(colrs_set)
-                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
-                                                                .addField("🆔 Scheda:", Scheda_pg._id)
-                                                                .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
-                                                                .setThumbnail(avatar, true)
-                                                                .setTimestamp()
-                                                                .setFooter("Data", message.author.displayAvatarURL());
-                                                            client.channels.cache.get(config_timeskip.event_chat).send(Container);
-                                                        });
+                                                        } else {
+                                                            emit_print_err_custom(message, "strumento** [ID_Sheda][Strumento da acquisire]");
+                                                        }
                                                     } else {
-                                                        emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
+                                                        emit_print_err_money(message);
                                                     }
                                                 } else {
-                                                    emit_print(message);
+                                                    emit_print_err_token_2(message);
                                                 }
                                             } else {
-                                                emit_print_err_money(message);
+                                                emit_print_err_token(message);
                                             }
                                         } else {
-                                            emit_print_err_token(message);
+                                            emit_print_err_author_not_mach(message);
                                         }
                                     } else {
-                                        emit_print_err_author_not_mach(message);
+                                        emit_print_err_notfound(message);
                                     }
-                                } else {
-                                    emit_print_err_notfound(message);
-                                }
-                            });
+                                });
+                            } else {
+                                emit_print_err_custom(message, "strumento** [ID_Sheda][Strumento da acquisire]");
+                            }
                         } else {
-                            emit_print(message);
+                            var text = ""
+                            var temp_text = config_timeskip.config_strumenti.filter_tool;
+                            for (let index = 0; index < temp_text.length; index++) {
+                                text = text + "• " + temp_text[index] + "\n";
+                            }
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('📜 Lista Strumenti Disponibili')
+                                .setDescription(text)
+                                .addField("Sintassi", "**" + config.prefix + "timeskip strumento** [ID_Sheda][Strumento da acquisire]")
+                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container);
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -490,94 +497,115 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "lingua") {                   // Event 5 OK
+            } else if (args[0] == "lingua") {                   // Event 4 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
                     if (config_timeskip.Event_active == true) {
-                        if (args[1] && args[1].length == 24) {
-                            var cursor_Scheda = get_Scheda_pg(args[1]);
-                            cursor_Scheda.then(async function (result_pg) {
-                                if (result_pg != null) {
-                                    var Scheda_pg = result_pg[0];
-                                    if (Scheda_pg.Nome_Discord == message.author.id) {
-                                        if (Scheda_pg.timeskip.token > 0) {
-                                            if (Scheda_pg.Money > config_timeskip.Cost_lingue_mo) {
-                                                if (args[2]) {
-                                                    var lingua_richiesto = args[2];
-                                                    for (let index = 3; index < args.length; index++) {
-                                                        lingua_richiesto += " " + args[index];
-                                                    }
-                                                    var filter_lingua = config_timeskip.config_lingua.filter_lingua;
-                                                    if (filter_lingua.includes(lingua_richiesto)) {
-                                                        await connect_db("Lista_Lingue");
-                                                        var cursor_lingua = methodDB.serach_competenze(filter_lingua);
-                                                        cursor_lingua.then(async function (lingua_result) {
-                                                            await connect_db("Schede_PG");
-                                                            var old_value_mo = Scheda_pg.Money;
-                                                            var new_value_mo = old_value_mo - config_timeskip.Cost_lingue_mo;
-                                                            methodDB.money_update(Scheda_pg._id, new_value_mo);
-                                                            var old_value_tk = Scheda_pg.timeskip.token;
-                                                            var new_value_tk = old_value_tk - config_timeskip.Cost_lingue_token;
-                                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                                            if (Scheda_pg.Competenze == undefined) {
-                                                                var obj_temp = {};
-                                                                obj_temp["Competenze"] = {};
-                                                                var competenze_old = obj_temp["Competenze"]
-                                                            } else {
-                                                                var competenze_old = Scheda_pg.Competenze;
+                        if (args[1]) {
+                            if (args[1].length == 24) {
+                                var cursor_Scheda = get_Scheda_pg(args[1]);
+                                cursor_Scheda.then(async function (result_pg) {
+                                    if (result_pg != null) {
+                                        var Scheda_pg = result_pg[0];
+                                        if (Scheda_pg.Nome_Discord == message.author.id) {
+                                            if (Scheda_pg.timeskip.token > 0) {
+                                                if (Scheda_pg.timeskip.token >= config_timeskip.config_lingua.Cost_lingue_token) {
+                                                    if (Scheda_pg.Money >= config_timeskip.config_lingua.Cost_lingue_mo) {
+                                                        if (args[2]) {
+                                                            var lingua_richiesto = args[2];
+                                                            for (let index = 3; index < args.length; index++) {
+                                                                lingua_richiesto += " " + args[index];
                                                             }
-                                                            var ojb = {}
-                                                            ojb[lingua_result.nome] = lingua_result.nome
-                                                            Object.assign(competenze_old, ojb);
-                                                            methodDB.competenze_update(Scheda_pg._id, competenze_old);
-                                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                                var avatar = member.user.displayAvatarURL();
+                                                            var filter_lingua = config_timeskip.config_lingua.filter_lingua;
+                                                            if (filter_lingua.includes(lingua_richiesto)) {
+                                                                await connect_db("Lista_Competenze");
+                                                                var cursor_lingua = methodDB.serach_competenze(lingua_richiesto);
+                                                                cursor_lingua.then(async function (lingua_result) {
+                                                                    await connect_db("Schede_PG");
+                                                                    var old_value_mo = Scheda_pg.Money;
+                                                                    var new_value_mo = old_value_mo - config_timeskip.config_lingua.Cost_lingue_mo;
+                                                                    methodDB.money_update(Scheda_pg._id, new_value_mo);
+                                                                    var old_value_tk = Scheda_pg.timeskip.token;
+                                                                    var new_value_tk = old_value_tk - config_timeskip.config_lingua.Cost_lingue_token;
+                                                                    methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                                    if (Scheda_pg.Competenze == undefined) {
+                                                                        var obj_temp = {};
+                                                                        obj_temp["Competenze"] = {};
+                                                                        var competenze_old = obj_temp["Competenze"]
+                                                                    } else {
+                                                                        var competenze_old = Scheda_pg.Competenze;
+                                                                    }
+                                                                    var ojb = {}
+                                                                    ojb[lingua_result.nome] = lingua_result.nome
+                                                                    Object.assign(competenze_old, ojb);
+                                                                    methodDB.competenze_update(Scheda_pg._id, competenze_old);
+                                                                    let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                                    if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                        var avatar = member.user.displayAvatarURL();
+                                                                    } else {
+                                                                        var avatar = Scheda_pg.Avatar;
+                                                                    }
+                                                                    Container = new Discord.MessageEmbed();
+                                                                    Container.setColor(colrs_set)
+                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                        .setDescription("Hai Aquisito Questa Competenza")
+                                                                        .addField("💬 Competenza:", lingua_result.nome)
+                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                        .setTimestamp()
+                                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                                    message.channel.send(Container);
+                                                                    Container = new Discord.MessageEmbed();
+                                                                    Container.setColor(colrs_set)
+                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                        .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                        .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                        .addField("💬 Competenza Assegnata:", lingua_result.nome)
+                                                                        .setThumbnail(avatar, true)
+                                                                        .setTimestamp()
+                                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                                    client.channels.cache.get(config_timeskip.event_chat).send(Container);
+                                                                });
                                                             } else {
-                                                                var avatar = Scheda_pg.Avatar;
+                                                                emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
                                                             }
-                                                            Container = new Discord.MessageEmbed();
-                                                            Container.setColor(colrs_set)
-                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                .setDescription("Hai Aquisito Questa Competenza")
-                                                                .addField("💬 Competenza:", lingua_result.nome)
-                                                                .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                .setTimestamp()
-                                                                .setFooter("Data", message.author.displayAvatarURL());
-                                                            message.channel.send(Container);
-                                                            Container = new Discord.MessageEmbed();
-                                                            Container.setColor(colrs_set)
-                                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
-                                                                .addField("🆔 Scheda:", Scheda_pg._id)
-                                                                .addField("💬 Competenza Assegnata:", lingua_result.nome)
-                                                                .setThumbnail(avatar, true)
-                                                                .setTimestamp()
-                                                                .setFooter("Data", message.author.displayAvatarURL());
-                                                            client.channels.cache.get(config_timeskip.event_chat).send(Container);
-                                                        });
+                                                        } else {
+                                                            emit_print_err_custom(message, "lingua** [ID_Sheda][Lingua da acquisire]");
+                                                        }
                                                     } else {
-                                                        emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
+                                                        emit_print_err_money(message);
                                                     }
                                                 } else {
-                                                    emit_print(message);
+                                                    emit_print_err_token_2(message);
                                                 }
                                             } else {
-                                                emit_print_err_money(message);
+                                                emit_print_err_token(message);
                                             }
                                         } else {
-                                            emit_print_err_token(message);
+                                            emit_print_err_author_not_mach(message);
                                         }
                                     } else {
-                                        emit_print_err_author_not_mach(message);
+                                        emit_print_err_notfound(message);
                                     }
-                                } else {
-                                    emit_print_err_notfound(message);
-                                }
-                            });
+                                });
+                            } else {
+                                emit_print_err_custom(message, "lingua** [ID_Sheda][Lingua da acquisire]");
+                            }
                         } else {
-                            emit_print(message);
+                            var text = ""
+                            var temp_text = config_timeskip.config_lingua.filter_lingua;
+                            for (let index = 0; index < temp_text.length; index++) {
+                                text = text + "• " + temp_text[index] + "\n";
+                            }
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('📜 Lista Lingue Disponibili')
+                                .setDescription(text)
+                                .addField("Sintassi", "**" + config.prefix + "timeskip lingua** [ID_Sheda][Lingua da acquisire]")
+                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container);
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -585,31 +613,97 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "studio") {                   // Event 6
+            } else if (args[0] == "ricerca") {                  // Event 5 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
                     if (config_timeskip.Event_active == true) {
-                        if (args[1] && args[1].length == 24) {
-                            var cursor_Scheda = get_Scheda_pg(args[1]);
-                            cursor_Scheda.then(function (result_pg) {
-                                if (result_pg != null) {
-                                    var Scheda_pg = result_pg[0];
-                                    if (Scheda_pg.Nome_Discord == message.author.id) {
-                                        if (Scheda_pg.timeskip.token > 0) {
-
+                        if (args[1]) {
+                            if (args[1].length == 24) {
+                                var cursor_Scheda = get_Scheda_pg(args[1]);
+                                cursor_Scheda.then(function (result_pg) {
+                                    if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
+                                        var Scheda_pg = result_pg[0];
+                                        if (Scheda_pg.Nome_Discord == message.author.id) {
+                                            if (Scheda_pg.timeskip.token > 0) {
+                                                if (args[2]) {
+                                                    var nome = args[2];
+                                                    for (let index = 3; index < args.length; index++) {
+                                                        nome += " " + args[index];
+                                                    }
+                                                    var select_ricerche = nome.toLowerCase();
+                                                    if (select_ricerche == "comune") {
+                                                        var cost_token = config_timeskip.config_ricerche.Cost_comune
+                                                    } else if (select_ricerche == "non comune") {
+                                                        var cost_token = config_timeskip.config_ricerche.Cost_non_comune
+                                                    } else if (select_ricerche == "raro") {
+                                                        var cost_token = config_timeskip.config_ricerche.Cost_raro
+                                                    } else {
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                            .setTitle('Errore Rarità Non Valida');
+                                                        message.channel.send(Container);
+                                                        return
+                                                    }
+                                                    if (Scheda_pg.timeskip.token >= cost_token) {
+                                                        var old_value = Scheda_pg.timeskip.token;
+                                                        var new_value_tk = old_value - cost_token;
+                                                        methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                            var avatar = member.user.displayAvatarURL();
+                                                        } else {
+                                                            var avatar = Scheda_pg.Avatar;
+                                                        }
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor(colrs_set)
+                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                            .setDescription("📨 La tua richiesta **Ricerca/Studio** è stata in oltrata hai Master")
+                                                            .addField("Ricerca/Studio Richiesto: ", select_ricerche)
+                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                            .setTimestamp()
+                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                        message.channel.send(Container);
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor(colrs_set)
+                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                            .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Talento Da: <@" + Scheda_pg.Nome_Discord + ">")
+                                                            .addField("🆔 Scheda", Scheda_pg._id)
+                                                            .addField("Ricerca/Studio Richiesto: ", select_ricerche)
+                                                            .setThumbnail(avatar, true)
+                                                            .setTimestamp()
+                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                        client.channels.cache.get(config_timeskip.event_chat).send(Container)
+                                                    } else {
+                                                        emit_print_err_token_2(message);
+                                                    }
+                                                } else {
+                                                    emit_print_err_custom(message, "ricerca** [ID_Sheda][Rarità]");
+                                                }
+                                            } else {
+                                                emit_print_err_token(message);
+                                            }
                                         } else {
-                                            emit_print_err_token(message);
+                                            emit_print_err_author_not_mach(message);
                                         }
                                     } else {
-                                        emit_print_err_author_not_mach(message);
+                                        emit_print_err_notfound(message);
                                     }
-                                } else {
-                                    emit_print_err_notfound(message);
-                                }
-                            });
+                                });
+                            } else {
+                                emit_print_err_custom(message, "ricerca** [ID_Sheda][Rarità]");
+                            }
                         } else {
-                            emit_print(message);
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('📜 Lista Ricerche Disponibili')
+                                .setDescription("• comune\n• non comune\n• raro")
+                                .addField("Sintassi", "**" + config.prefix + "timeskip ricerca** [ID_Sheda][Rarità]")
+                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container);
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -617,31 +711,99 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "creazine") {                 // Event 7
+            } else if (args[0] == "creazione") {                // Event 6 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
                     if (config_timeskip.Event_active == true) {
-                        if (args[1] && args[1].length == 24) {
-                            var cursor_Scheda = get_Scheda_pg(args[1]);
-                            cursor_Scheda.then(function (result_pg) {
-                                if (result_pg != null) {
-                                    var Scheda_pg = result_pg[0];
-                                    if (Scheda_pg.Nome_Discord == message.author.id) {
-                                        if (Scheda_pg.timeskip.token > 0) {
-
+                        if (args[1]) {
+                            if (args[1].length == 24) {
+                                var cursor_Scheda = get_Scheda_pg(args[1]);
+                                cursor_Scheda.then(function (result_pg) {
+                                    if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
+                                        var Scheda_pg = result_pg[0];
+                                        if (Scheda_pg.Nome_Discord == message.author.id) {
+                                            if (Scheda_pg.timeskip.token > 0) {
+                                                if (args[2]) {
+                                                    var nome = args[2];
+                                                    for (let index = 3; index < args.length; index++) {
+                                                        nome += " " + args[index];
+                                                    }
+                                                    var select_Creazione = nome.toLowerCase();
+                                                    if (select_Creazione == "comune") {
+                                                        var cost_token = config_timeskip.config_creazione.Cost_comune
+                                                    } else if (select_Creazione == "non comune") {
+                                                        var cost_token = config_timeskip.config_creazione.Cost_non_comune
+                                                    } else if (select_Creazione == "raro") {
+                                                        var cost_token = config_timeskip.config_creazione.Cost_raro
+                                                    } else if (select_Creazione == "molto raro") {
+                                                        var cost_token = config_timeskip.config_creazione.Cost_molto_raro
+                                                    } else {
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                            .setTitle('Errore Rarità Non Valida');
+                                                        message.channel.send(Container);
+                                                        return
+                                                    }
+                                                    if (Scheda_pg.timeskip.token >= cost_token) {
+                                                        var old_value = Scheda_pg.timeskip.token;
+                                                        var new_value_tk = old_value - cost_token;
+                                                        methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                            var avatar = member.user.displayAvatarURL();
+                                                        } else {
+                                                            var avatar = Scheda_pg.Avatar;
+                                                        }
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor(colrs_set)
+                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                            .setDescription("📨 La tua richiesta **Creazione** è stata in oltrata hai Master")
+                                                            .addField("Creazione Richiesto: ", select_Creazione)
+                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                            .setTimestamp()
+                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                        message.channel.send(Container);
+                                                        Container = new Discord.MessageEmbed();
+                                                        Container.setColor(colrs_set)
+                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                            .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Talento Da: <@" + Scheda_pg.Nome_Discord + ">")
+                                                            .addField("🆔 Scheda", Scheda_pg._id)
+                                                            .addField("Creazione Richiesto: ", select_Creazione)
+                                                            .setThumbnail(avatar, true)
+                                                            .setTimestamp()
+                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                        client.channels.cache.get(config_timeskip.event_chat).send(Container)
+                                                    } else {
+                                                        emit_print_err_token_2(message);
+                                                    }
+                                                } else {
+                                                    emit_print_err_custom(message, "creazine** [ID_Sheda][Rarità]");
+                                                }
+                                            } else {
+                                                emit_print_err_token(message);
+                                            }
                                         } else {
-                                            emit_print_err_token(message);
+                                            emit_print_err_author_not_mach(message);
                                         }
                                     } else {
-                                        emit_print_err_author_not_mach(message);
+                                        emit_print_err_notfound(message);
                                     }
-                                } else {
-                                    emit_print_err_notfound(message);
-                                }
-                            });
+                                });
+                            } else {
+                                emit_print_err_custom(message, "creazine** [ID_Sheda][Rarità]");
+                            }
                         } else {
-                            emit_print(message);
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('📜 Lista Creazine Disponibile')
+                                .setDescription("• comune\n• non comune\n• raro\n• molto raro")
+                                .addField("Sintassi", "**" + config.prefix + "timeskip creazine** [ID_Sheda][Rarità]")
+                                .setThumbnail(botavatar.displayAvatarURL(), true)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL());
+                            message.channel.send(Container);
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -649,7 +811,7 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "lavoro") {                   // Event 8 OK
+            } else if (args[0] == "lavoro") {                   // Event 7 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
@@ -661,27 +823,31 @@ module.exports = {
                                     var Scheda_pg = result_pg[0];
                                     if (Scheda_pg.Nome_Discord == message.author.id) {
                                         if (Scheda_pg.timeskip.token > 0) {
-                                            var old_value = parseFloat(Scheda_pg.Money);
-                                            var new_value = old_value + parseFloat(config_timeskip.retun_lavoro_mo);
-                                            methodDB.money_update(Scheda_pg._id, new_value);
-                                            old_value = Scheda_pg.timeskip.token;
-                                            var new_value_tk = old_value - config_timeskip.cost_lavoro_token;
-                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                var avatar = member.user.displayAvatarURL();
+                                            if (Scheda_pg.timeskip.token >= config_timeskip.config_lavoro.Cost_avventure_token) {
+                                                var old_value = parseFloat(Scheda_pg.Money);
+                                                var new_value = old_value + parseFloat(config_timeskip.config_lavoro.retun_lavoro_mo);
+                                                methodDB.money_update(Scheda_pg._id, new_value);
+                                                old_value = Scheda_pg.timeskip.token;
+                                                var new_value_tk = old_value - config_timeskip.config_lavoro.cost_lavoro_token;
+                                                methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                    var avatar = member.user.displayAvatarURL();
+                                                } else {
+                                                    var avatar = Scheda_pg.Avatar;
+                                                }
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor(colrs_set)
+                                                    .setTitle('Scheda: ' + Scheda_pg.Nome_PG)
+                                                    .setDescription("Paga per il lavoro svolto per la città di Halomir")
+                                                    .setThumbnail(avatar, true)
+                                                    .addField("💰 Money", new_value)
+                                                    .setTimestamp()
+                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                message.channel.send(Container);
                                             } else {
-                                                var avatar = Scheda_pg.Avatar;
+                                                emit_print_err_token_2(message);
                                             }
-                                            Container = new Discord.MessageEmbed();
-                                            Container.setColor(colrs_set)
-                                                .setTitle('Scheda: ' + Scheda_pg.Nome_PG)
-                                                .setDescription("Paga per il lavoro svolto per la città di Halomir")
-                                                .setThumbnail(avatar, true)
-                                                .addField("💰 Money", new_value)
-                                                .setTimestamp()
-                                                .setFooter("Data", message.author.displayAvatarURL());
-                                            message.channel.send(Container);
                                         } else {
                                             emit_print_err_token(message);
                                         }
@@ -718,6 +884,14 @@ function emit_print(message) {
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Checkpoint`)
         .setTitle('Sintassi **' + config.prefix + 'timeskip** [Opzione][Valore]...');
+    message.channel.send(Container);
+}
+
+function emit_print_err_custom(message, obj) {
+    var Container = new Discord.MessageEmbed();
+    Container.setColor([255, 0, 0])
+        .setAuthor(`Comando Checkpoint`)
+        .setTitle('Sintassi **' + config.prefix + 'timeskip ' + obj);
     message.channel.send(Container);
 }
 
@@ -759,6 +933,14 @@ function emit_print_err_token(message) {
     Container.setColor([255, 0, 0])
         .setAuthor(`Richiesta di: ${message.author.username}`)
         .setTitle('Errore Non Hai Più Token a Disposizione');
+    message.channel.send(Container);
+}
+
+function emit_print_err_token_2(message) {
+    var Container = new Discord.MessageEmbed();
+    Container.setColor([255, 0, 0])
+        .setAuthor(`Richiesta di: ${message.author.username}`)
+        .setTitle('Errore Non Hai Token Sufficenti Per Questo Evento');
     message.channel.send(Container);
 }
 

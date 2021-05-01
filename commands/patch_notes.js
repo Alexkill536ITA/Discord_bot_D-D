@@ -25,9 +25,9 @@ module.exports = {
         Container.setColor([255, 0, 0])
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
-            .addField('Aggunte Nuove', "• add stats PG\n • add custom PG avatar")
+            .addField('Aggunte Nuove', "• Aggiunto timeskip")
             // .addField('Rework',"• Rebuild roll dice")
-            // .addField('Correzioni', "• Edit system leveling\n • Fix Shop System and show list")
+            .addField('Correzioni', "• Inventory add sub fix show avatar\n • shop fix errore float value nel aggoranre il DB")
             .addField('Fix Bug Minori', '• Correzioni minori')
             .setThumbnail(botavatar.displayAvatarURL())
             .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
