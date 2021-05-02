@@ -29,7 +29,7 @@ module.exports = {
                 var result = roll.roll(args[0]);
                 if (result['result'] !== undefined) {
                     Container.setColor(colrs_set)
-                        .setTitle('Roll dice')
+                        .setTitle('🎲 Roll dice')
                         .setThumbnail(botavatar.displayAvatarURL())
                         .addField("Risultato", args[0] + " = ```fix\nRolled: " + result.rolled + "``````css\nResult: " + result.result + "```");
                     message.reply(" ");
