@@ -342,7 +342,7 @@ module.exports = {
                                                             Container = new Discord.MessageEmbed();
                                                             Container.setColor(colrs_set)
                                                                 .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📯 Ha Fatto Una Spedizione: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                .setDescription("📯 Ha Fatto Una Spedizione: <@" + Scheda_pg.Nome_Discord + ">")
                                                                 .addField("🆔 Scheda:", Scheda_pg._id)
                                                                 .addField("🧾 Esito:", status)
                                                                 .addField("Spedizioni Rimaneti:", new_action)
