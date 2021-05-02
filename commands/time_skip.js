@@ -335,6 +335,7 @@ module.exports = {
                                                                 .addField("🧾 Stato Spedizione:", status)
                                                                 .addField("⚪️ Risultato Spedizione:", value_result)
                                                                 .addField("💰 Money", new_value_mo)
+                                                                .addField("Spedizioni Rimaneti:", new_action)
                                                                 .setThumbnail(botavatar.displayAvatarURL(), true)
                                                                 .setTimestamp()
                                                                 .setFooter("Data", message.author.displayAvatarURL());
