@@ -229,7 +229,7 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip token')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][ID_Scheda] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire milestone inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][ID_Scheda] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire token inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
                 message.channel.send(Container);
             } else if (nome == "timeskip cambio_talento") {
                 Container.setColor([255, 0, 0])
