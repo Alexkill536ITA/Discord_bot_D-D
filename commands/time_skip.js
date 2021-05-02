@@ -878,7 +878,20 @@ module.exports = {
                                 if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
                                     var Scheda_pg = result_pg[0];
                                     if (Scheda_pg.Nome_Discord == message.author.id) {
-
+                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = Scheda_pg.Avatar;
+                                        }
+                                        Container = new Discord.MessageEmbed();
+                                        Container.setColor(colrs_set)
+                                            .setTitle('Scheda: ' + Scheda_pg.Nome_PG)
+                                            .setThumbnail(avatar, true)
+                                            .addField("Token", Scheda_pg.timeskip.token)
+                                            .setTimestamp()
+                                            .setFooter("Data", message.author.displayAvatarURL());
+                                        message.channel.send(Container);
                                     } else {
                                         emit_print_err_author_not_mach(message);
                                     }
