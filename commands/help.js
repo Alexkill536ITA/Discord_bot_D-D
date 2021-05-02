@@ -225,17 +225,23 @@ module.exports = {
                     .setThumbnail(botavatar.displayAvatarURL())
                     .setDescription('Sintassi:\n **' + config.prefix + 'timeskip token** [ID_Sheda] \n\nEvento token mostra token rimaneti del PG\n\nPer usare timeskip token inserire [ID_Scheda]');
                 message.channel.send(Container);
+            } else if (nome == "timeskip set_token") {
+                Container.setColor([255, 0, 0])
+                    .setTitle('Help timeskip token')
+                    .setThumbnail(botavatar.displayAvatarURL())
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][ID_Scheda] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire milestone inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
+                message.channel.send(Container);
             } else if (nome == "timeskip cambio_talento") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip cambio_talento')
                     .setThumbnail(botavatar.displayAvatarURL())
                     .setDescription('Sintassi:\n **' + config.prefix + 'timeskip cambio_talento** [ID_Scheda]\n\n Invia Una notifica hai Master con la richiesta di asseganzione\n\n Per usare timeskip cambio_talento inserire [ID_Scheda]');
                 message.channel.send(Container);
-            } else if (nome == "timeskip sedizione") {
+            } else if (nome == "timeskip spedizione") {
                 Container.setColor([255, 0, 0])
-                    .setTitle('Help timeskip sedizione')
+                    .setTitle('Help timeskip spedizione')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip sedizione** [ID_Scheda][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip sedizione inserire [ID_Scheda] e inserire la caratteristica del PG in [Statisitca del PG]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [ID_Scheda][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [ID_Scheda] e inserire la caratteristica del PG in [Statisitca del PG]');
                 message.channel.send(Container);
             } else if (nome == "timeskip strumento") {
                 Container.setColor([255, 0, 0])

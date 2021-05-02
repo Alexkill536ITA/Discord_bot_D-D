@@ -424,32 +424,45 @@ module.exports = {
                                                                     var ojb = {}
                                                                     ojb[tool_result.nome] = tool_result.nome
                                                                     Object.assign(competenze_old, ojb);
-                                                                    methodDB.competenze_update(Scheda_pg._id, competenze_old);
-                                                                    let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                                    if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                                        var avatar = member.user.displayAvatarURL();
+                                                                    var check_nam = competenze_old[tool_result.nome];
+                                                                    if (check_nam == undefined) {
+                                                                        methodDB.competenze_update(Scheda_pg._id, competenze_old);
+                                                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                            var avatar = member.user.displayAvatarURL();
+                                                                        } else {
+                                                                            var avatar = Scheda_pg.Avatar;
+                                                                        }
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("Hai Aquisito Questa Competenza")
+                                                                            .addField("🛠 / 🎺 Competenza:", tool_result.nome)
+                                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        message.channel.send(Container);
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                            .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                            .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
+                                                                            .setThumbnail(avatar, true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                                     } else {
-                                                                        var avatar = Scheda_pg.Avatar;
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("Sei già in possesso di questa Competenza")
+                                                                            .addField("🛠 / 🎺 Competenza:", tool_result.nome)
+                                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        message.channel.send(Container);
                                                                     }
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("Hai Aquisito Questa Competenza")
-                                                                        .addField("🛠 / 🎺 Competenza:", tool_result.nome)
-                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    message.channel.send(Container);
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
-                                                                        .addField("🆔 Scheda:", Scheda_pg._id)
-                                                                        .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
-                                                                        .setThumbnail(avatar, true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                                 });
                                                             } else {
                                                                 emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
@@ -540,32 +553,46 @@ module.exports = {
                                                                     var ojb = {}
                                                                     ojb[lingua_result.nome] = lingua_result.nome
                                                                     Object.assign(competenze_old, ojb);
-                                                                    methodDB.competenze_update(Scheda_pg._id, competenze_old);
-                                                                    let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                                    if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                                        var avatar = member.user.displayAvatarURL();
+                                                                    var check_nam = competenze_old[lingua_result.nome];
+                                                                    if (check_nam == undefined) {
+                                                                        methodDB.competenze_update(Scheda_pg._id, competenze_old);
+                                                                        let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                            var avatar = member.user.displayAvatarURL();
+                                                                        } else {
+                                                                            var avatar = Scheda_pg.Avatar;
+                                                                        }
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("Hai Aquisito Questa Competenza")
+                                                                            .addField("💬 Competenza:", lingua_result.nome)
+                                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        message.channel.send(Container);
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                            .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                            .addField("💬 Competenza Assegnata:", lingua_result.nome)
+                                                                            .setThumbnail(avatar, true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                                     } else {
-                                                                        var avatar = Scheda_pg.Avatar;
+                                                                        Container = new Discord.MessageEmbed();
+                                                                        Container.setColor(colrs_set)
+                                                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                            .setDescription("Sei già in possesso di questa Competenza")
+                                                                            .addField("💬 Competenza:", lingua_result.nome)
+                                                                            .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                            .setTimestamp()
+                                                                            .setFooter("Data", message.author.displayAvatarURL());
+                                                                        message.channel.send(Container);
+                                                                        Container = new Discord.MessageEm
                                                                     }
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("Hai Aquisito Questa Competenza")
-                                                                        .addField("💬 Competenza:", lingua_result.nome)
-                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    message.channel.send(Container);
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
-                                                                        .addField("🆔 Scheda:", Scheda_pg._id)
-                                                                        .addField("💬 Competenza Assegnata:", lingua_result.nome)
-                                                                        .setThumbnail(avatar, true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    client.channels.cache.get(config_timeskip.event_chat).send(Container);
                                                                 });
                                                             } else {
                                                                 emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
@@ -909,8 +936,68 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
+            } else if (args[0] == "set_token") {
+                if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                    await connect_db("Event_config");
+                    var config_timeskip = await methodDB.serachbyid_obj("1");
+                    if (config_timeskip != null && config_timeskip != undefined) {
+                        if (config_timeskip.Event_active == true) {
+                            if (args[2]) {
+                                if (args[3] && args[3].length == 24) {
+                                    var cursor_Scheda = get_Scheda_pg(args[1]);
+                                    cursor_Scheda.then(function (result_pg) {
+                                        if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
+                                            var Scheda_pg = result_pg[0];
+                                            if (Scheda_pg.Nome_Discord == message.author.id) {
+                                                if (args[1] == "add" || args[1] == "-a") {
+                                                    var old_value = Scheda_pg.timeskip.token;
+                                                    var new_value = old_value + parseInt(args[2]);
+                                                } else if (args[1] == "sub" || args[1] == "-s") {
+                                                    var old_value = Scheda_pg.timeskip.token;
+                                                    var new_value = old_value - parseInt(args[2]);
+                                                } else {
+                                                    emit_print_err_custom(message, "set_token** [Opzione][Valore][ID_Scheda]");
+                                                    return
+                                                }
+                                                methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value);
+                                                let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                    var avatar = member.user.displayAvatarURL();
+                                                } else {
+                                                    var avatar = Scheda_pg.Avatar;
+                                                }
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor(colrs_set)
+                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                    .setThumbnail(avatar, true)
+                                                    .addField("🟡 Token", new_value)
+                                                    .setTimestamp()
+                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                message.channel.send(Container);
+                                            } else {
+                                                emit_print_err_author_not_mach(message);
+                                            }
+                                        } else {
+                                            emit_print_err_notfound(message);
+                                        }
+                                    });
+                                } else {
+                                    emit_print_err_custom(message, "set_token** [Opzione][Valore][ID_Scheda]");
+                                }
+                            } else {
+                                emit_print_err_custom(message, "set_token** [Opzione][Valore][ID_Scheda]");
+                            }
+                        } else {
+                            emit_print_err_attive(message);
+                        }
+                    } else {
+                        emit_print_err_internal(message);
+                    }
+                } else {
+                    emit_print(message);
+                }
             } else {
-                emit_print(message);
+                emit_print_denied(message);
             }
         } else {
             emit_print_denied(message);
