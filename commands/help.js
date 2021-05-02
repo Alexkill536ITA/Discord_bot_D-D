@@ -219,6 +219,12 @@ module.exports = {
                     .setThumbnail(botavatar.displayAvatarURL())
                     .setDescription('Sintassi:\n **' + config.prefix + 'timeskip show**  \n\n Mostra la conficurazione attuale del timeskip');
                 message.channel.send(Container);
+            } else if (nome == "timeskip token") {
+                Container.setColor([255, 0, 0])
+                    .setTitle('Help timeskip token')
+                    .setThumbnail(botavatar.displayAvatarURL())
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip token** [ID_Sheda] \n\nEvento token mostra token rimaneti del PG\n\nPer usare timeskip token inserire [ID_Scheda]');
+                message.channel.send(Container);
             } else if (nome == "timeskip cambio_talento") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip cambio_talento')
@@ -265,7 +271,7 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip** [Opzione][Valore]...\n\n **OPZIONI [Solo Master]**\n start = Avvia il timeskip\n stop = Stoppa il time skip\n show = Mostra la configurazione del timeskip\n set = Modificare la configurazione del timskip **[BETA]**\n\n **EVENTI**\n cambio_talento = Cambia talaneto. notifica i master\n spedizione = Evento randomico bonus malus\n strumento = Ottieni competenza strumento notifica i master\n lingua = Ottieni competenza lingua e notifica i master\n ricerca = Ottieni ricerca e notifica i master\n creazione = Crea oggetto notifica i master\n lavoro = Ottieni paga per lavoro svolto\n\n **PER MAGGIORI INFORMAZIONI USARE **\n' + config.prefix + 'help timeskip [Opzioni / Eventi]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip** [Opzione][Valore]...\n\n **OPZIONI [Solo Master]**\n start = Avvia il timeskip\n stop = Stoppa il time skip\n show = Mostra la configurazione del timeskip\n set = Modificare la configurazione del timskip **[BETA]**\n\n **EVENTI**\n token = Mostra Token rimasti\n cambio_talento = Cambia talaneto. notifica i master\n spedizione = Evento randomico bonus malus\n strumento = Ottieni competenza strumento notifica i master\n lingua = Ottieni competenza lingua e notifica i master\n ricerca = Ottieni ricerca e notifica i master\n creazione = Crea oggetto notifica i master\n lavoro = Ottieni paga per lavoro svolto\n\n **PER MAGGIORI INFORMAZIONI USARE **\n' + config.prefix + 'help timeskip [Opzioni / Eventi]');
                 message.channel.send(Container);
             }
         } else {

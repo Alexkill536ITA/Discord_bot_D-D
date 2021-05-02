@@ -838,7 +838,7 @@ module.exports = {
                                                 }
                                                 Container = new Discord.MessageEmbed();
                                                 Container.setColor(colrs_set)
-                                                    .setTitle('Scheda: ' + Scheda_pg.Nome_PG)
+                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
                                                     .setDescription("Paga per il lavoro svolto per la città di Halomir")
                                                     .setThumbnail(avatar, true)
                                                     .addField("💰 Money", new_value)
@@ -886,9 +886,9 @@ module.exports = {
                                         }
                                         Container = new Discord.MessageEmbed();
                                         Container.setColor(colrs_set)
-                                            .setTitle('Scheda: ' + Scheda_pg.Nome_PG)
+                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
                                             .setThumbnail(avatar, true)
-                                            .addField("Token", Scheda_pg.timeskip.token)
+                                            .addField("🟡 Token", Scheda_pg.timeskip.token)
                                             .setTimestamp()
                                             .setFooter("Data", message.author.displayAvatarURL());
                                         message.channel.send(Container);
