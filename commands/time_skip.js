@@ -859,7 +859,7 @@ module.exports = {
                                 }
                             });
                         } else {
-                            emit_print(message);
+                            emit_print_err_custom(message, "lavoro** [ID_Scheda]");
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -900,7 +900,7 @@ module.exports = {
                                 }
                             });
                         } else {
-                            emit_print_err_custom(message, );
+                            emit_print_err_custom(message, "token** [ID_Scheda]");
                         }
                     } else {
                         emit_print_err_attive(message);
