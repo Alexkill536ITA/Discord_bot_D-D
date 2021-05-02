@@ -272,7 +272,7 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "sedizione") {                // Event 2 OK
+            } else if (args[0] == "spedizione") {               // Event 2 OK
                 var list_stats = ["forza", "destrezza", "costituzione", "intelligenza", "saggezza", "carisma"];
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
@@ -900,7 +900,7 @@ module.exports = {
                                 }
                             });
                         } else {
-                            emit_print(message);
+                            emit_print_err_custom(message, );
                         }
                     } else {
                         emit_print_err_attive(message);
@@ -911,7 +911,6 @@ module.exports = {
             } else {
                 emit_print(message);
             }
-
         } else {
             emit_print_denied(message);
         }
