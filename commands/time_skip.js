@@ -823,7 +823,7 @@ module.exports = {
                                     var Scheda_pg = result_pg[0];
                                     if (Scheda_pg.Nome_Discord == message.author.id) {
                                         if (Scheda_pg.timeskip.token > 0) {
-                                            if (Scheda_pg.timeskip.token >= config_timeskip.config_lavoro.Cost_avventure_token) {
+                                            if (Scheda_pg.timeskip.token >= config_timeskip.config_lavoro.Cost_lavoro_token) {
                                                 var old_value = parseFloat(Scheda_pg.Money);
                                                 var new_value = old_value + parseFloat(config_timeskip.config_lavoro.retun_lavoro_mo);
                                                 methodDB.money_update(Scheda_pg._id, new_value);
@@ -867,9 +867,38 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
+            } else if (args[0] == "token") {                   // Event 8 OK
+                await connect_db("Event_config");
+                var config_timeskip = await methodDB.serachbyid_obj("1");
+                if (config_timeskip != null && config_timeskip != undefined) {
+                    if (config_timeskip.Event_active == true) {
+                        if (args[1] && args[1].length == 24) {
+                            var cursor_Scheda = get_Scheda_pg(args[1]);
+                            cursor_Scheda.then(function (result_pg) {
+                                if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
+                                    var Scheda_pg = result_pg[0];
+                                    if (Scheda_pg.Nome_Discord == message.author.id) {
+
+                                    } else {
+                                        emit_print_err_author_not_mach(message);
+                                    }
+                                } else {
+                                    emit_print_err_notfound(message);
+                                }
+                            });
+                        } else {
+                            emit_print(message);
+                        }
+                    } else {
+                        emit_print_err_attive(message);
+                    }
+                } else {
+                    emit_print_err_internal(message);
+                }
             } else {
                 emit_print(message);
             }
+
         } else {
             emit_print_denied(message);
         }
