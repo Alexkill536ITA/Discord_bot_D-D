@@ -944,7 +944,7 @@ module.exports = {
                         if (config_timeskip.Event_active == true) {
                             if (args[2]) {
                                 if (args[3] && args[3].length == 24) {
-                                    var cursor_Scheda = get_Scheda_pg(args[1]);
+                                    var cursor_Scheda = get_Scheda_pg(args[3]);
                                     cursor_Scheda.then(function (result_pg) {
                                         if (result_pg != null && result_pg != undefined && result_pg.length > 0) {
                                             var Scheda_pg = result_pg[0];
