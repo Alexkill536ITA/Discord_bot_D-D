@@ -828,7 +828,7 @@ module.exports = {
                                                 var new_value = old_value + parseFloat(config_timeskip.config_lavoro.retun_lavoro_mo);
                                                 methodDB.money_update(Scheda_pg._id, new_value);
                                                 var old_value_tk = parseInt(Scheda_pg.timeskip.token);
-                                                var new_value_tk = old_value_tk - parseInt(config_timeskip.config_lavoro.cost_lavoro_token);
+                                                var new_value_tk = old_value_tk - parseInt(config_timeskip.config_lavoro.Cost_lavoro_token);
                                                 methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
                                                 let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                                 if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
