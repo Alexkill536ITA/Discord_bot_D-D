@@ -235,13 +235,13 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip strumento')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [ID_Sheda][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\n Per usare timeskip strumento inserire [ID_Scheda] e inserire la competenza dello strumento in [Strumento da acquisire]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [ID_Sheda][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [ID_Scheda] e inserire la competenza dello strumento in [Strumento da acquisire]');
                 message.channel.send(Container);
             } else if (nome == "timeskip lingua") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip lingua')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip lingua** [ID_Sheda][Lingua da acquisire] \n\nEvento lingua assegna alla scheda PG la competneza nella lingua selezionata \n\n Per usare timeskip lingua inserire [ID_Scheda] e inserire la competenza della lingua in [Lingua da acquisire]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip lingua** [ID_Sheda][Lingua da acquisire] \n\nEvento lingua assegna alla scheda PG la competneza nella lingua selezionata \n\nPer mostrare la lista inserire solo **&timeskip lingua** \n\n Per usare timeskip lingua inserire [ID_Scheda] e inserire la competenza della lingua in [Lingua da acquisire]');
                 message.channel.send(Container);
             } else if (nome == "timeskip ricerca") {
                 Container.setColor([255, 0, 0])
