@@ -867,7 +867,7 @@ module.exports = {
                 } else {
                     emit_print_err_internal(message);
                 }
-            } else if (args[0] == "token") {                   // Event 8 OK
+            } else if (args[0] == "token") {                    // Event 8 OK
                 await connect_db("Event_config");
                 var config_timeskip = await methodDB.serachbyid_obj("1");
                 if (config_timeskip != null && config_timeskip != undefined) {
