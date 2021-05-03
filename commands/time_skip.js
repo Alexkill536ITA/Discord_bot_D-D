@@ -410,10 +410,8 @@ module.exports = {
                                                                     await connect_db("Schede_PG");
                                                                     var old_value_mo = Scheda_pg.Money;
                                                                     var new_value_mo = old_value_mo - config_timeskip.config_strumenti.Cost_strumenti_mo;
-                                                                    methodDB.money_update(Scheda_pg._id, new_value_mo);
                                                                     var old_value_tk = Scheda_pg.timeskip.token;
-                                                                    var new_value_tk = old_value_tk - config_timeskip.config_strumenti.Cost_strumenti_token;
-                                                                    methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                                    var new_value_tk = old_value_tk - config_timeskip.config_strumenti.Cost_strumenti_token;    
                                                                     if (Scheda_pg.Competenze == undefined) {
                                                                         var obj_temp = {};
                                                                         obj_temp["Competenze"] = {};
@@ -426,6 +424,8 @@ module.exports = {
                                                                     Object.assign(competenze_old, ojb);
                                                                     var check_nam = competenze_old[tool_result.nome];
                                                                     if (check_nam == undefined) {
+                                                                        methodDB.money_update(Scheda_pg._id, new_value_mo);
+                                                                        methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
                                                                         methodDB.competenze_update(Scheda_pg._id, competenze_old);
                                                                         let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                                                         if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
@@ -539,10 +539,8 @@ module.exports = {
                                                                     await connect_db("Schede_PG");
                                                                     var old_value_mo = Scheda_pg.Money;
                                                                     var new_value_mo = old_value_mo - config_timeskip.config_lingua.Cost_lingue_mo;
-                                                                    methodDB.money_update(Scheda_pg._id, new_value_mo);
                                                                     var old_value_tk = Scheda_pg.timeskip.token;
                                                                     var new_value_tk = old_value_tk - config_timeskip.config_lingua.Cost_lingue_token;
-                                                                    methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
                                                                     if (Scheda_pg.Competenze == undefined) {
                                                                         var obj_temp = {};
                                                                         obj_temp["Competenze"] = {};
@@ -555,6 +553,8 @@ module.exports = {
                                                                     Object.assign(competenze_old, ojb);
                                                                     var check_nam = competenze_old[lingua_result.nome];
                                                                     if (check_nam == undefined) {
+                                                                        methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                                        methodDB.money_update(Scheda_pg._id, new_value_mo);
                                                                         methodDB.competenze_update(Scheda_pg._id, competenze_old);
                                                                         let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                                                         if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
