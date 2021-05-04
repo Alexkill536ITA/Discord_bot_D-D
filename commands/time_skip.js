@@ -908,7 +908,11 @@ module.exports = {
                                     if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
                                         let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                         if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                            var avatar = member.user.displayAvatarURL();
+                                            try {
+                                                var avatar = member.user.displayAvatarURL();
+                                            } catch (error) {
+                                                var avatar = "";
+                                            }
                                         } else {
                                             var avatar = Scheda_pg.Avatar;
                                         }
