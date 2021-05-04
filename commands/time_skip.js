@@ -907,19 +907,19 @@ module.exports = {
                                     var Scheda_pg = result_pg[0];
                                     if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
                                         let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                var avatar = member.user.displayAvatarURL();
-                                            } else {
-                                                var avatar = Scheda_pg.Avatar;
-                                            }
-                                            Container = new Discord.MessageEmbed();
-                                            Container.setColor(colrs_set)
-                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                .setThumbnail(avatar, true)
-                                                .addField("🟡 Token", Scheda_pg.timeskip.token)
-                                                .setTimestamp()
-                                                .setFooter("Data", message.author.displayAvatarURL());
-                                            message.channel.send(Container);
+                                        if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                            var avatar = member.user.displayAvatarURL();
+                                        } else {
+                                            var avatar = Scheda_pg.Avatar;
+                                        }
+                                        Container = new Discord.MessageEmbed();
+                                        Container.setColor(colrs_set)
+                                            .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                            .setThumbnail(avatar, true)
+                                            .addField("🟡 Token", Scheda_pg.timeskip.token)
+                                            .setTimestamp()
+                                            .setFooter("Data", message.author.displayAvatarURL());
+                                        message.channel.send(Container);
                                     } else {
                                         if (Scheda_pg.Nome_Discord == message.author.id) {
                                             let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
