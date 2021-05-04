@@ -371,10 +371,10 @@ module.exports = {
                                     }
                                 });
                             } else {
-                                emit_print_err_custom(message, "sedizione** [ID_Scheda][Statisitca del PG]");
+                                emit_print_err_custom(message, "spedizione** [ID_Scheda][Statisitca del PG]");
                             }
                         } else {
-                            emit_print_err_custom(message, "sedizione** [ID_Scheda][Statisitca del PG]");
+                            emit_print_err_custom(message, "spedizione** [ID_Scheda][Statisitca del PG]");
                         }
                     } else {
                         emit_print_err_attive(message);
