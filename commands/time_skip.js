@@ -169,7 +169,7 @@ module.exports = {
                                         var Schede_PG = result[i];
                                         var token_values = config_timeskip['Token_value'];
                                         var old_value = Schede_PG['Money'];
-                                        if (Schede_PG.timeskip.token !== undefined) {
+                                        if (Schede_PG.timeskip.token != undefined) {
                                             var token_pg = Schede_PG.timeskip.token;
                                             var new_value = token_pg * token_values;
                                             new_value = old_value + new_value;
