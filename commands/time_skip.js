@@ -188,7 +188,7 @@ module.exports = {
                                         .setTimestamp()
                                         .setFooter("Data", message.author.displayAvatarURL());
                                     message.channel.send(Container)
-                                    client.channels.cache.get(config.event_chat).send(Container)
+                                    client.channels.cache.get(config_timeskip.event_chat).send(Container)
                                 } else {
                                     emit_print_err_attive(message);
                                 }
