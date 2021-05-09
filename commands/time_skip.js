@@ -169,10 +169,12 @@ module.exports = {
                                         var Schede_PG = result[i];
                                         var token_values = config_timeskip['Token_value'];
                                         var old_value = Schede_PG['Money'];
-                                        var token_pg = Schede_PG.timeskip.token;
-                                        var new_value = token_pg * token_values;
-                                        new_value = old_value + new_value;
-                                        methodDB.money_update(mongo.ObjectID(Schede_PG['_id']), new_value);
+                                        if (Schede_PG.timeskip.token !== undefined) {
+                                            var token_pg = Schede_PG.timeskip.token;
+                                            var new_value = token_pg * token_values;
+                                            new_value = old_value + new_value;
+                                            methodDB.money_update(mongo.ObjectID(Schede_PG['_id']), new_value);
+                                        }
                                     }
                                     methodDB.timeskip_pg_token_delete();
                                     await connect_db("Event_config");
