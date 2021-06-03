@@ -19,9 +19,8 @@
     "Saggezza": 8,
     "Carisma": 8,
     "Money": 50,
-    "Talenti": {
-        
-    },
+    "Talenti": {},
+    "Competenze":{},
     "Inventory": {},
     "Pbc_frag": {
         "Exp_get": 0,

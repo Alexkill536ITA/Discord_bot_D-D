@@ -173,7 +173,7 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop/ID_Scheda][Quantità][Id/Nome oggetto]')
+        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop **O** ID_Scheda][Quantità][Id/Nome oggetto]')
         .addField('Lista nomi shop', '• emporio\n• numero42');
     message.channel.send(Container);
 }
@@ -187,7 +187,7 @@ function add_item(message, args, Scheda_PG, result) {
     var inventory = Scheda_PG['Inventory'];
     var money_pg = Scheda_PG['Money'];
     var check_nam = inventory[nome_var];
-    var consto_fin = costo * parseInt(args[1]);
+    var consto_fin = costo * parseFloat(args[1]);
     money_pg = parseFloat(money_pg) - consto_fin
     if (message.author.id == Scheda_PG['Nome_Discord']) {
         if (money_pg >= 0) {

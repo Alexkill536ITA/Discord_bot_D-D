@@ -428,12 +428,14 @@ module.exports = {
                             for (let i = 0; i <= obj_string.length; i++) {
                                 embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
                             }
+                            let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
                             const Embeds = new Pagination.Embeds()
                                 .setArray(embeds)
                                 .setAuthorizedUsers([message.author.id])
                                 .setChannel(message.channel)
                                 .setPageIndicator(false)
                                 .setColor(clor_gen.rand_Color())
+                                .setDescription("<@&" + role_ping.id + ">")
                                 .setThumbnail(botavatar.displayAvatarURL())
                                 .setTitle('Vetrina Scambi')
                                 .addField("N:", obj_string.length, true)

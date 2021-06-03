@@ -101,8 +101,12 @@ function Discord_start() {
             client.commands.get('pgavatar').execute(message, args);
         } else if (command == 'pgdescrizione') {
             client.commands.get('pgdescrizione').execute(client, message, args);
+        } else if (command == 'pgcompetenze') {
+            client.commands.get('pgcompetenze').execute(message, args);
         } else if (command == 'pginventario') {
             client.commands.get('pginventario').execute(message, args);
+        } else if (command == 'competenza') {
+            client.commands.get('competenza').execute(message, args)
         } else if (command == 'money') {
             client.commands.get('money').execute(message, args);
         } else if (command == 'milestone') {
