@@ -43,14 +43,18 @@ module.exports = {
                     var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
                     var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
                     // if (ultima_asseganzione[0] == settimana_valida[0]) {
-                    if (ultima_asseganzione == getmonthNumber(new Date())) {
-                        if (Exp_get_attuale < 2) {
-                            add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
+                    if (config.Level_Chat_reset == true) {
+                        if (ultima_asseganzione == getmonthNumber(new Date())) {
+                            if (Exp_get_attuale < 2) {
+                                add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
+                            } else {
+                                return 1;
+                            }
                         } else {
-                            return 1;
+                            reset_frag(message, Scheda_PG);
                         }
                     } else {
-                        reset_frag(message, Scheda_PG);
+                        add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
                     }
                 }
             }
