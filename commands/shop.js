@@ -25,94 +25,43 @@ module.exports = {
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            var argos_0 = String(args[0]).toLowerCase();
-            if (argos_0 == "emporio") {
-                var cursor = get_List('Emporio');
-                cursor.then(async function (result) {
-                    if (result) {
-                        if (result == null || result == undefined) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Oggetto non trovato');
-                            message.channel.send(Container);
-                            return 1;
-                        } else {
-                            show_list(message, botavatar, result);
-                        }
+            if (args[0]) {
+                var nome_shop = args[0];
+                    for (let index = 1; index < args.length; index++) {
+                        nome_shop += " " + args[index];
                     }
-                });
-            } else if (argos_0 == "numero42") {
-                var cursor = get_List('Numero42');
-                cursor.then(async function (result) {
-                    if (result) {
-                        if (result == null || result == undefined) {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Oggetto non trovato');
-                            message.channel.send(Container);
-                            return 1;
-                        } else {
-                            show_list(message, botavatar, result);
-                        }
-                    }
-                });
-            } else if (String(args[0].length) == 24) {
-                if (args[2]) {
-                    if (isNaN(parseInt(args[2]))) {
-                        var nome = args[2];
-                        if (args.length > 3) {
-                            for (let index = 3; index < args.length; index++) {
-                                nome += " " + args[index];
+                var argos_0 = String(nome_shop).toLowerCase();
+                if (config.shop_name.includes(argos_0)) {
+                    var cursor = get_List(argos_0);
+                    cursor.then(async function (result) {
+                        if (result) {
+                            if (result == null || result == undefined) {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Oggetto non trovato');
+                                message.channel.send(Container);
+                                return 1;
+                            } else {
+                                show_list(message, botavatar, result);
                             }
                         }
-                        nome = String(nome).toLowerCase();
-                        var on_sevice_db = await methodDB.open_db();
-                        if (on_sevice_db != 1) {
-                            methodDB.settab_db("Oggeti_Di_Gioco");
-                            var cursor = methodDB.serachbynome_obj(nome);
-                            cursor.then(async function (result) {
-                                if (result == null || result == undefined) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                    return 1;
-                                } else {
-                                    if (String(args[0]).length == 24) {
-                                        var Scheda = await get_Scheda_pg(args[0]);
-                                        if (Scheda != null) {
-                                            var complete = add_item(message, args, Scheda[0], result);
-                                            if (complete == 1) {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                    .setTitle('Non puoi spacciarti per un altro');
-                                                message.channel.send(Container);
-                                                return 1;
-                                            } else {
-                                                return 0;
-                                            }
-                                        } else {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                .setTitle('Errore Scheda PG non trovata');
-                                            message.channel.send(Container);
-                                            return 1;
-                                        }
-                                    } else {
-                                        emit_print(message);
-                                        return 1;
-                                    }
+                    });
+                } else if (String(args[0].length) == 24) {
+                    if (args[2]) {
+                        if (isNaN(parseInt(args[2]))) {
+                            var nome = args[2];
+                            if (args.length > 3) {
+                                for (let index = 3; index < args.length; index++) {
+                                    nome += " " + args[index];
                                 }
-                            });
-                        }
-                    } else {
-                        var on_sevice_db = await methodDB.open_db();
-                        if (on_sevice_db != 1) {
-                            methodDB.settab_db("Oggeti_Di_Gioco");
-                            var cursor = methodDB.serachbyid_obj(args[2]);
-                            cursor.then(async function (result) {
-                                if (result) {
-                                    if (result == null) {
+                            }
+                            nome = String(nome).toLowerCase();
+                            var on_sevice_db = await methodDB.open_db();
+                            if (on_sevice_db != 1) {
+                                methodDB.settab_db("Oggeti_Di_Gioco");
+                                var cursor = methodDB.serachbynome_obj(nome);
+                                cursor.then(async function (result) {
+                                    if (result == null || result == undefined) {
                                         Container.setColor([255, 0, 0])
                                             .setAuthor(`Richiesta di: ${message.author.username}`)
                                             .setTitle('Errore Oggetto non trovato');
@@ -144,16 +93,60 @@ module.exports = {
                                             return 1;
                                         }
                                     }
-                                } else {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                }
-                            });
+                                });
+                            }
+                        } else {
+                            var on_sevice_db = await methodDB.open_db();
+                            if (on_sevice_db != 1) {
+                                methodDB.settab_db("Oggeti_Di_Gioco");
+                                var cursor = methodDB.serachbyid_obj(args[2]);
+                                cursor.then(async function (result) {
+                                    if (result) {
+                                        if (result == null) {
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                .setTitle('Errore Oggetto non trovato');
+                                            message.channel.send(Container);
+                                            return 1;
+                                        } else {
+                                            if (String(args[0]).length == 24) {
+                                                var Scheda = await get_Scheda_pg(args[0]);
+                                                if (Scheda != null) {
+                                                    var complete = add_item(message, args, Scheda[0], result);
+                                                    if (complete == 1) {
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                            .setTitle('Non puoi spacciarti per un altro');
+                                                        message.channel.send(Container);
+                                                        return 1;
+                                                    } else {
+                                                        return 0;
+                                                    }
+                                                } else {
+                                                    Container.setColor([255, 0, 0])
+                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                        .setTitle('Errore Scheda PG non trovata');
+                                                    message.channel.send(Container);
+                                                    return 1;
+                                                }
+                                            } else {
+                                                emit_print(message);
+                                                return 1;
+                                            }
+                                        }
+                                    } else {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                    }
+                                });
+                            }
                         }
-                    }
 
+                    } else {
+                        emit_print(message);
+                    }
                 } else {
                     emit_print(message);
                 }
@@ -171,10 +164,14 @@ module.exports = {
 
 function emit_print(message) {
     var Container = new Discord.MessageEmbed();
+    message_shop = ""
+    for (index of config.shop_name) {
+        message_shop = message_shop + "• " + index + "\n"
+    }
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
         .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop **O** ID_Scheda][Quantità][Id/Nome oggetto]')
-        .addField('Lista nomi shop', '• emporio\n• numero42');
+        .addField('Lista nomi shop', message_shop);
     message.channel.send(Container);
 }
 
@@ -218,7 +215,7 @@ function add_item(message, args, Scheda_PG, result) {
             Container = new Discord.MessageEmbed();
             Container.setColor(colrs_set)
                 .setTitle('Schada: ' + Scheda_PG.Nome_PG)
-                .setThumbnail(avatar,true)
+                .setThumbnail(avatar, true)
                 .addField("Costo Totale Sottratto", consto_fin)
                 .addField("Nome", result.nome)
                 .addField("Quantità", qut)
