@@ -95,10 +95,14 @@ module.exports = {
                 .setDescription('Sintassi: **' + config.prefix + 'pginventario** [@utente][ID_Scheda] \n\nMostra l\'inventario del personaggio\n Per ottenerla menzionare il sestessi o un altro membro nel campo [@utente]\ne inserire ID della scheda nel campo [ID_Scheda]');
             message.channel.send(Container);
         } else if (args[0] == "shop") {
+            message_shop = ""
+            for (index of config.shop_name) {
+                message_shop = message_shop + "• " + index + "\n"
+            }
             Container.setColor([255, 0, 0])
                 .setTitle('Help Shop')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n • emporio\n • numero42 \n\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
+                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
         } else if (args[0] == "scambio") {
             Container.setColor([255, 0, 0])
