@@ -129,6 +129,17 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
         ogg_temp['Data'] = new Date();
         methodDB.settab_db("Schede_PG");
         methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);
+        if (exp % config.Level_Chat_allert === 0) {
+            Container = new Discord.MessageEmbed();
+            Container.setColor(colrs_set)
+                .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
+                .setThumbnail(avatar, true)
+                .addField("Milestone ottenute: ", exp)
+                .addField("", "Che squillino le trombe signori spettatori! \nInizia la commedia, che parlino gli attori. \nP.S.: hai ottenuto un frammento di milestone!")
+                .setTimestamp()
+                .setFooter("Data", message.author.displayAvatarURL());
+            message.delete({ timeout: 5000 }).channel.send(Container);
+        }
     }
 }
 

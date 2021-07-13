@@ -75,6 +75,36 @@ module.exports = {
                         .setTitle('Sintassi **' + config.prefix + 'setconfig random_color [true/false]');
                     message.channel.send(Container);
                 }
+            } else if (args[0] == "pbc_min_char") {
+                if (isNaN(int(args[1])) == false) {
+                    setconfig.Level_Chat_min_char = args[1]
+                    // reboot_bot.execute(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando setconfig pbc_min_char`)
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig pbc_min_char [Valore]');
+                    message.channel.send(Container);
+                }
+            } else if (args[0] == "pbc_level_max") {
+                if (isNaN(int(args[1])) == false) {
+                    setconfig.set_Level_Chat_max = args[1]
+                    // reboot_bot.execute(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando setconfig pbc_level_max`)
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig pbc_level_max [Valore]');
+                    message.channel.send(Container);
+                }
+            } else if (args[0] == "pbc_chat_reset") {
+                if (isNaN(int(args[1])) == false) {
+                    setconfig.set_Level_Chat_reset = args[1]
+                    // reboot_bot.execute(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando setconfig pbc_chat_reset`)
+                        .setTitle('Sintassi **' + config.prefix + 'setconfig pbc_chat_reset [true/false]');
+                    message.channel.send(Container);
+                }
             } else {
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando setconfig`)

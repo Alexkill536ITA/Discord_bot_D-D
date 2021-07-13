@@ -59,6 +59,7 @@
     "Level_Chat_min_char": 100,
     "Level_Chat_max": 100,
     "Level_Chat_reset": false,
+    "Level_Chat_allert": 10,
     "Level": {
         "Rame": "752574293224849539",
         "Bronzo": "752574190565195877",
