@@ -28,6 +28,17 @@ module.exports = {
                 .addField("Ping:", `\`\`\`${Date.now() - message.createdTimestamp}ms\`\`\``, true)
                 .addField("Websocket API:", `\`\`\`${Math.round(client.ws.ping)}ms\`\`\``, true);
             message.channel.send(Container);
+            if (args[0] == "-t") {
+                for (let index = 0; index < 3; index++) {
+                    var Container = new Discord.MessageEmbed();
+                    Container.setColor(colrs_set)
+                        .setTitle('Ping BOT')
+                        .setThumbnail(botavatar.displayAvatarURL())
+                        .addField("Ping:", `\`\`\`${Date.now() - message.createdTimestamp}ms\`\`\``, true)
+                        .addField("Websocket API:", `\`\`\`${Math.round(client.ws.ping)}ms\`\`\``, true);
+                    message.channel.send(Container);
+                }
+            }
         } else {
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
