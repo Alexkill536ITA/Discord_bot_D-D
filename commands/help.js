@@ -186,7 +186,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help setconfig')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi:\n **' + config.prefix + 'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n prefix = [Nuvo Prefix]\n event_meteo_enable = [true/false]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n random_color = [true/false]');
+                .setDescription('Sintassi:\n **' + config.prefix + 'setconfig** [Opzione][Valore]\n\n **OPZIONI**\n Nickname_Bot = [Nuvo Nick]\n prefix = [Nuvo Prefix]\n role_base = [Option][Nome Ruolo]\n role_avance = [Option][Nome Ruolo]\n role_admin = [Option][Nome Ruolo]\n Level_Chat_Lissener = [Option][ID Chat]\n Level_Chat_min_char = [Value]\n Level_Chat_max = [Value]\n Level_Chat_reset = [true/false]\n Level_Chat_allert = [Value]\n Level = [Select Level][ID Ruolo]\n event_meteo_enable = [true/false]\n ora_event_meteo = [hh:mm]\n chat_event_meteo = [ID TextChat]\n chat_scambi_chat = [ID Chat]\n chat_scambi_ping = [Nome Ruolo]\n random_color = [true/false]');
             message.channel.send(Container);
         } else if (args[0] == "version") {
             Container.setColor([255, 0, 0])

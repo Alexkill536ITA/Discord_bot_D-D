@@ -340,10 +340,11 @@ module.exports = {
                             // Controllo Presenza già a inventario
                             var check_nam = inventory[Scheda_Object['Nome']];
                             if (check_nam !== undefined) {
-                                var num = parseInt(inventory[nome_var]['Quantita']);
+                                var num = 0
+                                num = parseInt(inventory[nome_var]['Quantita']);
                                 num = num + parseInt(args[3]);
                                 inventory[nome_var]['Quantita'] = num;
-                                qut = num;
+                                var qut = num;
                             } else {
                                 var oggetto = {};
                                 var ogg_temp = {};
@@ -351,7 +352,7 @@ module.exports = {
                                 ogg_temp['Quantita'] = parseInt(args[3]);
                                 ogg_temp['Sincronia'] = Scheda_Object['Sincronia'];
                                 oggetto[nome_var] = ogg_temp;
-                                qut = parseInt(args[2]);
+                                var qut = parseInt(args[2]);
                                 Object.assign(inventory, oggetto);
                             }
 

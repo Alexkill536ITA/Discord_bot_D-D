@@ -35,7 +35,8 @@ module.exports = {
                 }
             } else if (args[0] == "event_meteo_enable") {
                 boll = args[1].toLowerCase();
-                if (boll == "true" || boll == "false") {
+                boll = (boll === 'true');
+                if (boll == true || boll == false) {
                     setconfig.set_event_meteo_enable(boll);
                     // reboot_bot.execute(client, message, args);
                 } else {
@@ -66,7 +67,8 @@ module.exports = {
                 }
             } else if (args[0] == "random_color") {
                 boll = args[1].toLowerCase();
-                if (boll == "true" || boll == "false") {
+                boll = (boll === 'true');
+                if (boll == true || boll == false) {
                     setconfig.set_random_color(boll);
                     // reboot_bot.execute(client, message, args);
                 } else {
@@ -96,8 +98,10 @@ module.exports = {
                     message.channel.send(Container);
                 }
             } else if (args[0] == "pbc_chat_reset") {
-                if (isNaN(int(args[1])) == false) {
-                    setconfig.set_Level_Chat_reset = args[1]
+                boll = args[1].toLowerCase();
+                boll = (boll === 'true');
+                if (boll == true || boll == false) {
+                    setconfig.set_Level_Chat_reset(boll)
                     // reboot_bot.execute(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
