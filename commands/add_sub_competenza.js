@@ -42,21 +42,28 @@ module.exports = {
                                 message.channel.send(Container);
                                 return 1;
                             } else {
-                                if (args[1].length == 24) {
-                                    var Scheda = await get_Scheda_pg(args[1]);
-                                    if (Scheda != null) {
-                                        var complete = add_sub(message, args, Scheda[0], result);
-                                        if (complete == 1) {
-                                            emit_print(message);
-                                            return 1;
+                                if (args[1]) {
+                                    try {
+                                        var autore = message.mentions.users.first();
+                                        // var Scheda = await get_Scheda_pg(args[1]);
+                                        var Scheda = await get_Scheda_pg(autore.id);
+                                        if (Scheda != null) {
+                                            var complete = add_sub(message, args, Scheda, result);
+                                            if (complete == 1) {
+                                                emit_print(message);
+                                                return 1;
+                                            } else {
+                                                return 0;
+                                            }
                                         } else {
-                                            return 0;
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                .setTitle('Errore Scheda PG non trovata');
+                                            message.channel.send(Container);
+                                            return 1;
                                         }
-                                    } else {
-                                        Container.setColor([255, 0, 0])
-                                            .setAuthor(`Richiesta di: ${message.author.username}`)
-                                            .setTitle('Errore Scheda PG non trovata');
-                                        message.channel.send(Container);
+                                    } catch {
+                                        emit_print(message);
                                         return 1;
                                     }
                                 } else {
@@ -160,7 +167,8 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Competenza`)
-        .setTitle('Sintassi:\n **' + config.prefix + 'competenza** [Opzione][ID_Scheda][Id/Nome Competenza]');
+        // .setTitle('Sintassi:\n **' + config.prefix + 'competenza** [Opzione][ID_Scheda][Id/Nome Competenza]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'competenza** [Opzione][@utente][Id/Nome Competenza]');
     message.channel.send(Container);
 }
 
@@ -168,7 +176,8 @@ async function get_Scheda_pg(id_serach) {
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
         methodDB.settab_db("Schede_PG");
-        var cursor = methodDB.serachbyid(id_serach);
+        // var cursor = methodDB.serachbyid(id_serach);
+        var cursor = methodDB.load_pg(id_serach);
     } else {
         return 1;
     }

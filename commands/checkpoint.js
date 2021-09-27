@@ -24,17 +24,22 @@ module.exports = {
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             var colrs_set = clor_gen.rand_Color();
-            if (args[1] && args[1].length == 24) {
-                if (args[0] == 1) {
-                    add_money(message, args[1], 12, 500, 6);
-                    Manager_role_level(message, args[1], config.Level["Bronzo"]);
-                } else if (args[0] == 2) {
-                    add_money(message, args[1], 42, 750, 10);
-                    Manager_role_level(message, args[1], config.Level["Argento"]);
-                } else if (args[0] == 3) {
-                    add_money(message, args[1], 83, 1000, 14);
-                    Manager_role_level(message, args[1], config.Level["Oro"]);
-                } else {
+            if (args[1]) {
+                var autore = message.mentions.users.first();
+                try {
+                    if (args[0] == 1) {
+                        add_money(message, autore.id, 12, 500, 6);
+                        Manager_role_level(message, autore.id, config.Level["Bronzo"]);
+                    } else if (args[0] == 2) {
+                        add_money(message, autore.id, 42, 750, 10);
+                        Manager_role_level(message, autore.id, config.Level["Argento"]);
+                    } else if (args[0] == 3) {
+                        add_money(message, autore.id, 83, 1000, 14);
+                        Manager_role_level(message, autore.id, config.Level["Oro"]);
+                    } else {
+                        emit_print(message);
+                    }
+                } catch {
                     emit_print(message);
                 }
             } else {
@@ -53,7 +58,8 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Checkpoint`)
-        .setTitle('Sintassi **' + config.prefix + 'checkpoint** [Opzione][ID_Scheda]');
+        // .setTitle('Sintassi **' + config.prefix + 'checkpoint** [Opzione][ID_Scheda]');
+        .setTitle('Sintassi **' + config.prefix + 'checkpoint** [Opzione][@utente]');
     message.channel.send(Container);
 }
 
@@ -76,18 +82,19 @@ async function add_money(message, id_Scheda, exe, value, levl) {
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
         methodDB.settab_db("Schede_PG");
-        var cursor = methodDB.serachbyid(id_Scheda);
+        // var cursor = methodDB.serachbyid(id_Scheda);
+        var cursor = methodDB.load_pg(id_Scheda);
         cursor.then(function (result) {
             if (result != null && result != []) {
-                var old_value_mo = result[0].Money;
+                var old_value_mo = result.Money;
                 var new_value_mo = old_value_mo + value;
-                methodDB.exp_update(result[0]._id, exe);
-                methodDB.level_update(result[0]._id, levl)
-                methodDB.money_update(result[0]._id, new_value_mo);
-                let member = message.guild.members.cache.get(result[0].Nome_Discord);
+                methodDB.exp_update(result._id, exe);
+                methodDB.level_update(result._id, levl)
+                methodDB.money_update(result._id, new_value_mo);
+                let member = message.guild.members.cache.get(result.Nome_Discord);
                 var Container = new Discord.MessageEmbed();
                 Container.setColor(colrs_set)
-                    .setTitle('Checkpoint ' + levl + ' Scheda: ' + result[0].Nome_PG)
+                    .setTitle('Checkpoint ' + levl + ' Scheda: ' + result.Nome_PG)
                     .setThumbnail(member.user.displayAvatarURL(), true)
                     .addField("Milestone: ", exe)
                     .addField("Money", new_value_mo)

@@ -71,9 +71,14 @@ exports.serachbyid_user = async function (id_discord) {
     return cursor;
 }
 
-exports.load_pg = async function (id_discord, id_scheda) {
-    id_scheda = mongo.ObjectID(id_scheda);
-    var cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
+// exports.load_pg = async function (id_discord, id_scheda) {
+//     id_scheda = mongo.ObjectID(id_scheda);
+//     var cursor = await collection.findOne({ '_id': id_scheda, 'Nome_Discord': id_discord });
+//     return cursor;
+// }
+
+exports.load_pg = async function (id_discord) {
+    var cursor = await collection.findOne({'Nome_Discord': id_discord });
     return cursor;
 }
 

@@ -25,10 +25,10 @@ module.exports = {
         Container.setColor([255, 0, 0])
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
-            .addField('Aggunte Nuove', "• Aggiunto timeskip")
-            // .addField('Rework',"• Rebuild roll dice")
-            .addField('Correzioni', "• Inventory add sub fix show avatar\n • shop fix errore float value nel aggoranre il DB")
-            .addField('Fix Bug Minori', '• Correzioni minori')
+            // .addField('Aggunte Nuove', "• Aggiunto timeskip")
+            .addField('Rework', "• All System Select Shede PG and Use comand")
+            // .addField('Correzioni', "• Inventory add sub fix show avatar\n • shop fix errore float value nel aggoranre il DB")
+            // .addField('Fix Bug Minori', '• Correzioni minori')
             .setThumbnail(botavatar.displayAvatarURL())
             .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
         message.channel.send(Container);

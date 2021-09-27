@@ -26,39 +26,44 @@ module.exports = {
             var colrs_set = clor_gen.rand_Color();
             if (args[0] == "add" || args[0] == "-a") {
                 if (args[2]) {
-                    if (args[1] && args[2].length == 24) {
-                        if (isNaN(parseInt(args[1]))) {
-                            emit_print(message);
-                        } else {
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {
-                                methodDB.settab_db("Schede_PG");
-                                var cursor = methodDB.serachbyid(args[2]);
-                                cursor.then(function (result) {
-                                    if (result != null) {
-                                        var old_value = result[0].Exp;
-                                        var new_value = old_value + parseInt(args[1]);
-                                        methodDB.exp_update(result[0]._id, new_value);
-                                        LevelUP_auto(message, result[0].Nome_Discord, result[0]._id, new_value);
-                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
-                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
-                                            var avatar = member.user.displayAvatarURL();
-                                        } else {
-                                            var avatar = result[0].Avatar;
+                    var autore = message.mentions.users.first();
+                    try {
+                        if (args[1]) {
+                            if (isNaN(parseInt(args[1]))) {
+                                emit_print(message);
+                            } else {
+                                var on_sevice_db = await methodDB.open_db();
+                                if (on_sevice_db != 1) {
+                                    methodDB.settab_db("Schede_PG");
+                                    var cursor = methodDB.load_pg(autore.id);
+                                    cursor.then(function (result) {
+                                        if (result != null) {
+                                            var old_value = result.Exp;
+                                            var new_value = old_value + parseInt(args[1]);
+                                            methodDB.exp_update(result._id, new_value);
+                                            LevelUP_auto(message, result.Nome_Discord, result._id, new_value);
+                                            let member = message.guild.members.cache.get(result.Nome_Discord);
+                                            if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
+                                                var avatar = member.user.displayAvatarURL();
+                                            } else {
+                                                var avatar = result.Avatar;
+                                            }
+                                            Container = new Discord.MessageEmbed();
+                                            Container.setColor(colrs_set)
+                                                .setTitle('Scheda: ' + result.Nome_PG)
+                                                .setThumbnail(avatar, true)
+                                                .addField("Milestone: ", new_value)
+                                                .setTimestamp()
+                                                .setFooter("Data", message.author.displayAvatarURL());
+                                            message.channel.send(Container);
                                         }
-                                        Container = new Discord.MessageEmbed();
-                                        Container.setColor(colrs_set)
-                                            .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(avatar, true)
-                                            .addField("Milestone: ", new_value)
-                                            .setTimestamp()
-                                            .setFooter("Data", message.author.displayAvatarURL());
-                                        message.channel.send(Container);
-                                    }
-                                });
+                                    });
+                                }
                             }
+                        } else {
+                            emit_print(message);
                         }
-                    } else {
+                    } catch {
                         emit_print(message);
                     }
                 } else {
@@ -66,42 +71,47 @@ module.exports = {
                 }
             } else if (args[0] == "sub" || args[0] == "-s") {
                 if (args[2]) {
-                    if (args[1] && args[2].length == 24) {
-                        if (isNaN(parseInt(args[1]))) {
-                            emit_print(message);
-                        } else {
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {
-                                methodDB.settab_db("Schede_PG");
-                                var cursor = methodDB.serachbyid(args[2]);
-                                cursor.then(function (result) {
-                                    if (result != null) {
-                                        var old_value = result[0].Exp;
-                                        var new_value = old_value - parseInt(args[1]);
-                                        if (new_value < 0) {
-                                            new_value = 0;
+                    var autore = message.mentions.users.first();
+                    try {
+                        if (args[1]) {
+                            if (isNaN(parseInt(args[1]))) {
+                                emit_print(message);
+                            } else {
+                                var on_sevice_db = await methodDB.open_db();
+                                if (on_sevice_db != 1) {
+                                    methodDB.settab_db("Schede_PG");
+                                    var cursor = methodDB.load_pg(autore.id);
+                                    cursor.then(function (result) {
+                                        if (result != null) {
+                                            var old_value = result.Exp;
+                                            var new_value = old_value - parseInt(args[1]);
+                                            if (new_value < 0) {
+                                                new_value = 0;
+                                            }
+                                            methodDB.exp_update(result._id, new_value);
+                                            LevelUP_auto(message, result.Nome_Discord, result._id, new_value);
+                                            let member = message.guild.members.cache.get(result.Nome_Discord);
+                                            if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
+                                                var avatar = member.user.displayAvatarURL();
+                                            } else {
+                                                var avatar = result.Avatar;
+                                            }
+                                            Container = new Discord.MessageEmbed();
+                                            Container.setColor(colrs_set)
+                                                .setTitle('Scheda: ' + result.Nome_PG)
+                                                .setThumbnail(avatar, true)
+                                                .addField("Milestone: ", new_value)
+                                                .setTimestamp()
+                                                .setFooter("Data", message.author.displayAvatarURL());
+                                            message.channel.send(Container);
                                         }
-                                        methodDB.exp_update(result[0]._id, new_value);
-                                        LevelUP_auto(message, result[0].Nome_Discord, result[0]._id, new_value);
-                                        let member = message.guild.members.cache.get(result[0].Nome_Discord);
-                                        if (result[0].Avatar == "Non Assegnata" || result[0].Avatar == undefined) {
-                                            var avatar = member.user.displayAvatarURL();
-                                        } else {
-                                            var avatar = result[0].Avatar;
-                                        }
-                                        Container = new Discord.MessageEmbed();
-                                        Container.setColor(colrs_set)
-                                            .setTitle('Scheda: ' + result[0].Nome_PG)
-                                            .setThumbnail(avatar, true)
-                                            .addField("Milestone: ", new_value)
-                                            .setTimestamp()
-                                            .setFooter("Data", message.author.displayAvatarURL());
-                                        message.channel.send(Container);
-                                    }
-                                });
+                                    });
+                                }
                             }
+                        } else {
+                            emit_print(message);
                         }
-                    } else {
+                    } catch {
                         emit_print(message);
                     }
                 } else {
@@ -123,7 +133,8 @@ function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando Milestone`)
-        .setTitle('Sintassi **' + config.prefix + 'milestone** [Opzione][Valore][ID_Scheda]');
+        // .setTitle('Sintassi **' + config.prefix + 'milestone** [Opzione][Valore][ID_Scheda]');
+        .setTitle('Sintassi **' + config.prefix + 'milestone** [Opzione][Valore][@utente]');
     message.channel.send(Container);
 }
 
@@ -140,7 +151,7 @@ function LevelUP_auto(message, id_discord, id, exp) {
     } else if (exp >= 12 && exp < 18) {
         methodDB.level_update(id, 6);           // 15
         Manager_role_level(message, id_discord, config.Level["Bronzo"])
-    } else if (exp >=18 && exp < 25) {
+    } else if (exp >= 18 && exp < 25) {
         methodDB.level_update(id, 7);           // 22
         Manager_role_level(message, id_discord, config.Level["Bronzo"])
     } else if (exp >= 25 && exp < 33) {
@@ -173,7 +184,7 @@ function LevelUP_auto(message, id_discord, id, exp) {
     } else if (exp >= 122 && exp < 137) {
         methodDB.level_update(id, 17);          // 135
         Manager_role_level(message, id_discord, config.Level["Platino"])
-    } else if (exp >= 137 && exp <153 ) {
+    } else if (exp >= 137 && exp < 153) {
         methodDB.level_update(id, 18);          // 151
         Manager_role_level(message, id_discord, config.Level["Mithril"])
     } else if (exp >= 153 && exp < 172) {
