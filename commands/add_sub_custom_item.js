@@ -40,9 +40,9 @@ module.exports = {
                         }
                         nome = String(nome).toLowerCase();
 
-                        if (args[3] == "Si" || args[3] == "si" || args[3] == "SI") {
+                        if (args[3] == "Si" || args[3] == "si" || args[3] == "SI" || args[3] == "sI") {
                             sinc = 1;
-                        } else if (args[3] == "No" || args[3] == "no" || args[3] == "NO") {
+                        } else if (args[3] == "No" || args[3] == "no" || args[3] == "NO" || args[3] == "nO") {
                             sinc = 0;
                         } else {
                             emit_print(message);
@@ -76,7 +76,7 @@ module.exports = {
                                 Object.assign(inventory, oggetto);
                             }
                             methodDB.settab_db("Schede_PG");
-                            methodDB.inventory_update(args[1], inventory);
+                            methodDB.inventory_update(Scheda_PG._id, inventory);
                             // let member = message.guild.members.cache.get(Scheda_PG.Nome_Discord);
                             Container = new Discord.MessageEmbed();
                             Container.setColor(colrs_set)
@@ -122,7 +122,7 @@ module.exports = {
                                         .setTimestamp()
                                         .setFooter("Data", message.author.displayAvatarURL());
                                 }
-                                methodDB.inventory_update(args[1], inventory);
+                                methodDB.inventory_update(Scheda_PG._id, inventory);
                                 message.channel.send(Container);
                             } else {
                                 Container = new Discord.MessageEmbed();
