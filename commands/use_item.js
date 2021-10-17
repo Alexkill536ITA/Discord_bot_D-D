@@ -22,113 +22,126 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            var autore = message.mentions.users.first();
-            try {
-                if (autore != null && args[1] && args[2]) {
-                    if (isNaN(parseInt(args[1])) == false && parseInt(args[1]) > 0) {
-                        var nome = args[2];
-                        if (args.length > 3) {
-                            for (let index = 3; index < args.length; index++) {
-                                nome += " " + args[index];
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                var autore = message.mentions.users.first();
+                try {
+                    if (autore != null && args[1] && args[2]) {
+                        if (isNaN(parseInt(args[1])) == false && parseInt(args[1]) > 0) {
+                            var nome = args[2];
+                            if (args.length > 3) {
+                                for (let index = 3; index < args.length; index++) {
+                                    nome += " " + args[index];
+                                }
                             }
-                        }
-                        nome = String(nome).toLowerCase();
-                        // var cursor = get_Scheda_pg(args[0]);
-                        var cursor = get_Scheda_pg(autore.id);
-                        if (cursor != null && cursor != 1) {
-                            cursor.then(function (result) {
-                                if (result != null) {
-                                    // var Scheda_PG = result[0]
-                                    var Scheda_PG = result
-                                    if (message.author.id == Scheda_PG['Nome_Discord']) {
-                                        var inventory = Scheda_PG['Inventory'];
-                                        var check_nam = inventory[nome];
-                                        if (check_nam !== undefined) {
-                                            var num = parseInt(inventory[nome]['Quantita']);
-                                            num = num - parseInt(args[1]);
-                                            if (num <= 0 || isNaN(num) == true) {
-                                                var num_memory = "Non possiede più l'oggetto";
-                                                let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
-                                                if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
-                                                    var avatar = member.user.displayAvatarURL();
+                            nome = String(nome).toLowerCase();
+                            // var cursor = get_Scheda_pg(args[0]);
+                            var cursor = get_Scheda_pg(autore.id);
+                            if (cursor != null && cursor != 1) {
+                                cursor.then(function (result) {
+                                    if (result != null) {
+                                        // var Scheda_PG = result[0]
+                                        var Scheda_PG = result
+                                        if (message.author.id == Scheda_PG['Nome_Discord']) {
+                                            var inventory = Scheda_PG['Inventory'];
+                                            var check_nam = inventory[nome];
+                                            if (check_nam !== undefined) {
+                                                var num = parseInt(inventory[nome]['Quantita']);
+                                                num = num - parseInt(args[1]);
+                                                if (num <= 0 || isNaN(num) == true) {
+                                                    var num_memory = "Non possiede più l'oggetto";
+                                                    let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
+                                                    if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
+                                                        var avatar = member.user.displayAvatarURL();
+                                                    } else {
+                                                        var avatar = Scheda_PG['Avatar'];
+                                                    };
+                                                    Container = new Discord.MessageEmbed();
+                                                    Container.setColor(clor_gen.rand_Color())
+                                                        .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
+                                                        .setThumbnail(avatar, true)
+                                                        .addField("Nome", nome)
+                                                        .addField("Quantità", num_memory)
+                                                        .addField("Sincronia", inventory[nome]['Sincronia'])
+                                                        .setTimestamp()
+                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                    delete inventory[nome];
                                                 } else {
-                                                    var avatar = Scheda_PG['Avatar'];
-                                                };
-                                                Container = new Discord.MessageEmbed();
-                                                Container.setColor(clor_gen.rand_Color())
-                                                    .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
-                                                    .setThumbnail(avatar, true)
-                                                    .addField("Nome", nome)
-                                                    .addField("Quantità", num_memory)
-                                                    .addField("Sincronia", inventory[nome]['Sincronia'])
-                                                    .setTimestamp()
-                                                    .setFooter("Data", message.author.displayAvatarURL());
-                                                delete inventory[nome];
+                                                    inventory[nome]['Quantita'] = num;
+                                                    var num_memory = inventory[nome]['Quantita'];
+                                                    let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
+                                                    if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
+                                                        var avatar = member.user.displayAvatarURL();
+                                                    } else {
+                                                        var avatar = Scheda_PG['Avatar'];
+                                                    };
+                                                    Container = new Discord.MessageEmbed();
+                                                    Container.setColor(clor_gen.rand_Color())
+                                                        .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
+                                                        .setThumbnail(avatar, true)
+                                                        .addField("Nome", nome)
+                                                        .addField("Quantità", num_memory)
+                                                        .addField("Sincronia", inventory[nome]['Sincronia'])
+                                                        .setTimestamp()
+                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                }
+                                                // methodDB.inventory_update(args[0], inventory);
+                                                methodDB.inventory_update(result._id, inventory);
+                                                message.channel.send(Container);
                                             } else {
-                                                inventory[nome]['Quantita'] = num;
-                                                var num_memory = inventory[nome]['Quantita'];
-                                                let member = message.guild.members.cache.get(Scheda_PG['Nome_Discord']);
-                                                if (Scheda_PG['Avatar'] == "Non Assegnata" || Scheda_PG['Avatar'] == undefined) {
-                                                    var avatar = member.user.displayAvatarURL();
-                                                } else {
-                                                    var avatar = Scheda_PG['Avatar'];
-                                                };
-                                                Container = new Discord.MessageEmbed();
-                                                Container.setColor(clor_gen.rand_Color())
-                                                    .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
-                                                    .setThumbnail(avatar, true)
-                                                    .addField("Nome", nome)
-                                                    .addField("Quantità", num_memory)
-                                                    .addField("Sincronia", inventory[nome]['Sincronia'])
-                                                    .setTimestamp()
-                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                    .setTitle('Errore Oggetto non trovato');
+                                                message.channel.send(Container);
+                                                return 1;
                                             }
-                                            // methodDB.inventory_update(args[0], inventory);
-                                            methodDB.inventory_update(result._id, inventory);
-                                            message.channel.send(Container);
                                         } else {
                                             Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                .setTitle('Errore Oggetto non trovato');
+                                                .setAuthor(`Utenete non valido: ` + message.author.username)
+                                                .setTitle('Non puoi spacciarti per un altro');
                                             message.channel.send(Container);
                                             return 1;
                                         }
                                     } else {
                                         Container.setColor([255, 0, 0])
-                                            .setAuthor(`Utenete non valido: ` + message.author.username)
-                                            .setTitle('Non puoi spacciarti per un altro');
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Scheda PG non trovata');
                                         message.channel.send(Container);
-                                        return 1;
                                     }
-                                } else {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Scheda PG non trovata');
-                                    message.channel.send(Container);
-                                }
-                            });
+                                });
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Scheda PG non trovata');
+                                message.channel.send(Container);
+                                return 1;
+                            }
                         } else {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Scheda PG non trovata');
-                            message.channel.send(Container);
-                            return 1;
+                            emit_print(Container, message);
                         }
                     } else {
                         emit_print(Container, message);
                     }
-                } else {
+                } catch {
                     emit_print(Container, message);
                 }
-            } catch {
-                emit_print(Container, message);
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete()
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

@@ -24,90 +24,47 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (args[0]) {
-                var autore = message.mentions.users.first();
-                var nome_shop = args[0];
-                for (let index = 1; index < args.length; index++) {
-                    nome_shop += " " + args[index];
-                }
-                var argos_0 = String(nome_shop).toLowerCase();
-                if (config.shop_name.includes(argos_0)) {
-                    var cursor = get_List(argos_0);
-                    cursor.then(async function (result) {
-                        if (result) {
-                            if (result == null || result == undefined) {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                message.channel.send(Container);
-                                return 1;
-                            } else {
-                                show_list(message, botavatar, result);
-                            }
-                        }
-                    });
-                    // } else if (String(args[0].length) == 24) {
-                } else if (message.author.id == autore.id) {
-                    if (args[2]) {
-                        if (isNaN(parseInt(args[2]))) {
-                            var nome = args[2];
-                            if (args.length > 3) {
-                                for (let index = 3; index < args.length; index++) {
-                                    nome += " " + args[index];
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                if (args[0]) {
+                    var autore = message.mentions.users.first();
+                    var nome_shop = args[0];
+                    for (let index = 1; index < args.length; index++) {
+                        nome_shop += " " + args[index];
+                    }
+                    var argos_0 = String(nome_shop).toLowerCase();
+                    if (config.shop_name.includes(argos_0)) {
+                        var cursor = get_List(argos_0);
+                        cursor.then(async function (result) {
+                            if (result) {
+                                if (result == null || result == undefined) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetto non trovato');
+                                    message.channel.send(Container);
+                                    return 1;
+                                } else {
+                                    show_list(message, botavatar, result);
                                 }
                             }
-                            nome = String(nome).toLowerCase();
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {
-                                methodDB.settab_db("Oggeti_Di_Gioco");
-                                var cursor = methodDB.serachbynome_obj(nome);
-                                cursor.then(async function (result) {
-                                    if (result == null || result == undefined) {
-                                        Container.setColor([255, 0, 0])
-                                            .setAuthor(`Richiesta di: ${message.author.username}`)
-                                            .setTitle('Errore Oggetto non trovato');
-                                        message.channel.send(Container);
-                                        return 1;
-                                    } else {
-                                        // if (String(args[0]).length == 24) {
-                                        if (args[0] == message.mentions.users.first()) {
-                                            // var Scheda = await get_Scheda_pg(args[0]);
-                                            var Scheda = await get_Scheda_pg(autore.id);
-                                            if (Scheda != null) {
-                                                // var complete = add_item(message, args, Scheda[0], result);
-                                                var complete = add_item(message, args, Scheda, result);
-                                                if (complete == 1) {
-                                                    Container.setColor([255, 0, 0])
-                                                        .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                        .setTitle('Non puoi spacciarti per un altro');
-                                                    message.channel.send(Container);
-                                                    return 1;
-                                                } else {
-                                                    return 0;
-                                                }
-                                            } else {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                    .setTitle('Errore Scheda PG non trovata');
-                                                message.channel.send(Container);
-                                                return 1;
-                                            }
-                                        } else {
-                                            emit_print(message);
-                                            return 1;
-                                        }
+                        });
+                        // } else if (String(args[0].length) == 24) {
+                    } else if (message.author.id == autore.id) {
+                        if (args[2]) {
+                            if (isNaN(parseInt(args[2]))) {
+                                var nome = args[2];
+                                if (args.length > 3) {
+                                    for (let index = 3; index < args.length; index++) {
+                                        nome += " " + args[index];
                                     }
-                                });
-                            }
-                        } else {
-                            var on_sevice_db = await methodDB.open_db();
-                            if (on_sevice_db != 1) {
-                                methodDB.settab_db("Oggeti_Di_Gioco");
-                                var cursor = methodDB.serachbyid_obj(args[2]);
-                                cursor.then(async function (result) {
-                                    if (result) {
-                                        if (result == null) {
+                                }
+                                nome = String(nome).toLowerCase();
+                                var on_sevice_db = await methodDB.open_db();
+                                if (on_sevice_db != 1) {
+                                    methodDB.settab_db("Oggeti_Di_Gioco");
+                                    var cursor = methodDB.serachbynome_obj(nome);
+                                    cursor.then(async function (result) {
+                                        if (result == null || result == undefined) {
                                             Container.setColor([255, 0, 0])
                                                 .setAuthor(`Richiesta di: ${message.author.username}`)
                                                 .setTitle('Errore Oggetto non trovato');
@@ -115,38 +72,85 @@ module.exports = {
                                             return 1;
                                         } else {
                                             // if (String(args[0]).length == 24) {
-                                            // var Scheda = await get_Scheda_pg(args[0]);
-                                            var Scheda = await get_Scheda_pg(autore.id);
-                                            if (Scheda != null) {
-                                                // var complete = add_item(message, args, Scheda[0], result);
-                                                var complete = add_item(message, args, Scheda, result);
-                                                if (complete == 1) {
+                                            if (args[0] == message.mentions.users.first()) {
+                                                // var Scheda = await get_Scheda_pg(args[0]);
+                                                var Scheda = await get_Scheda_pg(autore.id);
+                                                if (Scheda != null) {
+                                                    // var complete = add_item(message, args, Scheda[0], result);
+                                                    var complete = add_item(message, args, Scheda, result);
+                                                    if (complete == 1) {
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                            .setTitle('Non puoi spacciarti per un altro');
+                                                        message.channel.send(Container);
+                                                        return 1;
+                                                    } else {
+                                                        return 0;
+                                                    }
+                                                } else {
                                                     Container.setColor([255, 0, 0])
-                                                        .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                        .setTitle('Non puoi spacciarti per un altro');
+                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                        .setTitle('Errore Scheda PG non trovata');
                                                     message.channel.send(Container);
                                                     return 1;
-                                                } else {
-                                                    return 0;
                                                 }
                                             } else {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                    .setTitle('Errore Scheda PG non trovata');
-                                                message.channel.send(Container);
+                                                emit_print(message);
                                                 return 1;
                                             }
                                         }
-                                    } else {
-                                        Container.setColor([255, 0, 0])
-                                            .setAuthor(`Richiesta di: ${message.author.username}`)
-                                            .setTitle('Errore Oggetto non trovato');
-                                        message.channel.send(Container);
-                                    }
-                                });
+                                    });
+                                }
+                            } else {
+                                var on_sevice_db = await methodDB.open_db();
+                                if (on_sevice_db != 1) {
+                                    methodDB.settab_db("Oggeti_Di_Gioco");
+                                    var cursor = methodDB.serachbyid_obj(args[2]);
+                                    cursor.then(async function (result) {
+                                        if (result) {
+                                            if (result == null) {
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                    .setTitle('Errore Oggetto non trovato');
+                                                message.channel.send(Container);
+                                                return 1;
+                                            } else {
+                                                // if (String(args[0]).length == 24) {
+                                                // var Scheda = await get_Scheda_pg(args[0]);
+                                                var Scheda = await get_Scheda_pg(autore.id);
+                                                if (Scheda != null) {
+                                                    // var complete = add_item(message, args, Scheda[0], result);
+                                                    var complete = add_item(message, args, Scheda, result);
+                                                    if (complete == 1) {
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                            .setTitle('Non puoi spacciarti per un altro');
+                                                        message.channel.send(Container);
+                                                        return 1;
+                                                    } else {
+                                                        return 0;
+                                                    }
+                                                } else {
+                                                    Container.setColor([255, 0, 0])
+                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                        .setTitle('Errore Scheda PG non trovata');
+                                                    message.channel.send(Container);
+                                                    return 1;
+                                                }
+                                            }
+                                        } else {
+                                            Container.setColor([255, 0, 0])
+                                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                .setTitle('Errore Oggetto non trovato');
+                                            message.channel.send(Container);
+                                        }
+                                    });
+                                }
                             }
-                        }
 
+                        } else {
+                            emit_print(message);
+                        }
                     } else {
                         emit_print(message);
                     }
@@ -154,13 +158,22 @@ module.exports = {
                     emit_print(message);
                 }
             } else {
-                emit_print(message);
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete()
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

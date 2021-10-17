@@ -20,29 +20,42 @@ module.exports = {
         }
         const Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            var colrs_set = clor_gen.rand_Color();
-            if (args[0]) {
-                const user = message.mentions.users.first();
-                Container.setColor(colrs_set)
-                    .setTitle('Avatar di: ' + user.username)
-                    .setTimestamp()
-                    .setFooter("Data", message.author.displayAvatarURL())
-                    .setImage(user.displayAvatarURL({ dynamic: true }));
-                message.reply(Container);
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                var colrs_set = clor_gen.rand_Color();
+                if (args[0]) {
+                    const user = message.mentions.users.first();
+                    Container.setColor(colrs_set)
+                        .setTitle('Avatar di: ' + user.username)
+                        .setTimestamp()
+                        .setFooter("Data", message.author.displayAvatarURL())
+                        .setImage(user.displayAvatarURL({ dynamic: true }));
+                    message.reply(Container);
+                } else {
+                    Container.setColor(colrs_set)
+                        .setTitle('Avatar di: ' + message.author.username)
+                        .setTimestamp()
+                        .setFooter("Data", message.author.displayAvatarURL())
+                        .setImage(message.author.displayAvatarURL({ dynamic: true }));
+                    message.reply(Container);
+                }
             } else {
-                Container.setColor(colrs_set)
-                    .setTitle('Avatar di: ' + message.author.username)
-                    .setTimestamp()
-                    .setFooter("Data", message.author.displayAvatarURL())
-                    .setImage(message.author.displayAvatarURL({ dynamic: true }));
-                message.reply(Container);
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

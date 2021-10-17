@@ -20,6 +20,10 @@ module.exports = {
         if (config.Debug_Level == "DEBUG") {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_help');
         }
+        if (message.author.bot) {
+            message.delete();
+            return;
+        }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         Container.setColor([255, 0, 0])

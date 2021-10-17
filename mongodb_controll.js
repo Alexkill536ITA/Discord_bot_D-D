@@ -78,7 +78,7 @@ exports.serachbyid_user = async function (id_discord) {
 // }
 
 exports.load_pg = async function (id_discord) {
-    var cursor = await collection.findOne({'Nome_Discord': id_discord });
+    var cursor = await collection.findOne({ 'Nome_Discord': id_discord });
     return cursor;
 }
 
@@ -116,6 +116,11 @@ exports.serachCustom = async function (query, Value) {
     var obj = {};
     obj[query] = Value
     var cursor = await collection.find(obj).toArray();
+    return cursor;
+}
+
+exports.load_mission = async function (id_mission) {
+    var cursor = await collection.findOne({ 'ID': id_mission });
     return cursor;
 }
 
@@ -208,6 +213,16 @@ exports.timeskip_control_update = function (value_new) {
 
 exports.timeskip_config_update = function (filter, value_new) {
     collection.updateOne({ 'Id': filter }, { $set: value_new });
+    return 0;
+}
+
+exports.mission_update = function (id_scheda, value_new) {
+    collection.updateOne({ 'ID': id_scheda }, { $set: value_new });
+    return 0;
+}
+
+exports.mission_update_remove = function (id_scheda, value) {
+    collection.updateOne({ 'ID': id_scheda }, { $pull: { Player_list: value } });
     return 0;
 }
 

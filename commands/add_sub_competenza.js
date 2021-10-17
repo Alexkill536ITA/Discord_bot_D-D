@@ -22,73 +22,86 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-            if (args[2]) {
-                var nome = args[2];
-                for (let index = 3; index < args.length; index++) {
-                    nome += " " + args[index];
-                }
-                nome = String(nome).toLowerCase();
-                var on_sevice_db = await methodDB.open_db();
-                if (on_sevice_db != 1) {
-                    methodDB.settab_db("Lista_Competenze");
-                    var cursor = methodDB.serachbynome_obj(nome);
-                    cursor.then(async function (result) {
-                        if (result) {
-                            if (result == null) {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Talento non trovato');
-                                message.channel.send(Container);
-                                return 1;
-                            } else {
-                                if (args[1]) {
-                                    try {
-                                        var autore = message.mentions.users.first();
-                                        // var Scheda = await get_Scheda_pg(args[1]);
-                                        var Scheda = await get_Scheda_pg(autore.id);
-                                        if (Scheda != null) {
-                                            var complete = add_sub(message, args, Scheda, result);
-                                            if (complete == 1) {
-                                                emit_print(message);
-                                                return 1;
+        try {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                if (args[2]) {
+                    var nome = args[2];
+                    for (let index = 3; index < args.length; index++) {
+                        nome += " " + args[index];
+                    }
+                    nome = String(nome).toLowerCase();
+                    var on_sevice_db = await methodDB.open_db();
+                    if (on_sevice_db != 1) {
+                        methodDB.settab_db("Lista_Competenze");
+                        var cursor = methodDB.serachbynome_obj(nome);
+                        cursor.then(async function (result) {
+                            if (result) {
+                                if (result == null) {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Talento non trovato');
+                                    message.channel.send(Container);
+                                    return 1;
+                                } else {
+                                    if (args[1]) {
+                                        try {
+                                            var autore = message.mentions.users.first();
+                                            // var Scheda = await get_Scheda_pg(args[1]);
+                                            var Scheda = await get_Scheda_pg(autore.id);
+                                            if (Scheda != null) {
+                                                var complete = add_sub(message, args, Scheda, result);
+                                                if (complete == 1) {
+                                                    emit_print(message);
+                                                    return 1;
+                                                } else {
+                                                    return 0;
+                                                }
                                             } else {
-                                                return 0;
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                    .setTitle('Errore Scheda PG non trovata');
+                                                message.channel.send(Container);
+                                                return 1;
                                             }
-                                        } else {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                .setTitle('Errore Scheda PG non trovata');
-                                            message.channel.send(Container);
+                                        } catch {
+                                            emit_print(message);
                                             return 1;
                                         }
-                                    } catch {
+                                    } else {
                                         emit_print(message);
                                         return 1;
                                     }
-                                } else {
-                                    emit_print(message);
-                                    return 1;
                                 }
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Oggetto non trovato');
+                                message.channel.send(Container);
                             }
-                        } else {
-                            Container.setColor([255, 0, 0])
-                                .setAuthor(`Richiesta di: ${message.author.username}`)
-                                .setTitle('Errore Oggetto non trovato');
-                            message.channel.send(Container);
-                        }
-                    });
+                        });
+                    }
+                } else {
+                    emit_print(message);
+                    return 1;
                 }
-            } else {
-                emit_print(message);
-                return 1;
-            }
 
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+            }
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

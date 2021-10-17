@@ -22,49 +22,62 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute Recover_Password');
         }
         var Container = new Discord.MessageEmbed();
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            var colrs_set = clor_gen.rand_Color();
-            var on_sevice_db = await methodDB.open_db();
-            if (on_sevice_db != 1) {
-                methodDB.settab_db("Utenti_web")
-                var cursor = methodDB.serachbyid_user(message.author.id);
-                cursor.then(async function (result) {
-                    if (result != null) {
-                        var temp_pass = generatePassword();
-                        let hashedPassword = await bcrypt.hash(temp_pass, 8)
-                        methodDB.password_update(result._id, hashedPassword);
-                        Container.setColor(colrs_set)
-                            .setTitle('Richiesta Completata')
-                            .setDescription(`🆔 Richiesta di: ${message.author.username}`)
-                            .setTimestamp()
-                            .setFooter("Data", message.author.displayAvatarURL())
-                            .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
-                        message.channel.send(Container);
-                        Container = new Discord.MessageEmbed();
-                        Container.setColor(colrs_set)
-                            .setTitle('Reset Password')
-                            .setDescription(message.author.username + ": " + message.author + "\n Usare la Password appena generata per loggarsi")
-                            .addField("Username", result.username)
-                            .addField("Password Temp", temp_pass);
-                        message.author.send(Container);
-                    } else {
-                        Container.setColor([255, 0, 0])
-                            .setTitle('ERROR Reset Password')
-                            .setDescription("ERRORE Impossibile Trovare Utente o Non esiste");
-                        message.author.send(Container);
-                    }
-                });
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                var colrs_set = clor_gen.rand_Color();
+                var on_sevice_db = await methodDB.open_db();
+                if (on_sevice_db != 1) {
+                    methodDB.settab_db("Utenti_web")
+                    var cursor = methodDB.serachbyid_user(message.author.id);
+                    cursor.then(async function (result) {
+                        if (result != null) {
+                            var temp_pass = generatePassword();
+                            let hashedPassword = await bcrypt.hash(temp_pass, 8)
+                            methodDB.password_update(result._id, hashedPassword);
+                            Container.setColor(colrs_set)
+                                .setTitle('Richiesta Completata')
+                                .setDescription(`🆔 Richiesta di: ${message.author.username}`)
+                                .setTimestamp()
+                                .setFooter("Data", message.author.displayAvatarURL())
+                                .setThumbnail(message.author.displayAvatarURL({ dynamic: true }));
+                            message.channel.send(Container);
+                            Container = new Discord.MessageEmbed();
+                            Container.setColor(colrs_set)
+                                .setTitle('Reset Password')
+                                .setDescription(message.author.username + ": " + message.author + "\n Usare la Password appena generata per loggarsi")
+                                .addField("Username", result.username)
+                                .addField("Password Temp", temp_pass);
+                            message.author.send(Container);
+                        } else {
+                            Container.setColor([255, 0, 0])
+                                .setTitle('ERROR Reset Password')
+                                .setDescription("ERRORE Impossibile Trovare Utente o Non esiste");
+                            message.author.send(Container);
+                        }
+                    });
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setTitle('ERROR Reset Password')
+                        .setDescription("ERRORE Impossibile completare operazione contttatare il tecnico **@Tecnico Discord**");
+                    message.author.send(Container);
+                }
             } else {
                 Container.setColor([255, 0, 0])
-                    .setTitle('ERROR Reset Password')
-                    .setDescription("ERRORE Impossibile completare operazione contttatare il tecnico **@Tecnico Discord**");
-                message.author.send(Container);
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autoriazato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autoriazato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete()
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }
