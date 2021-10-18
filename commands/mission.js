@@ -79,9 +79,11 @@ module.exports = {
                             .addField("Scadenza iscrizione", format_date(mission['Data_scadenza']), true)
                             .setTimestamp()
                             .setFooter("ID:" + mission['ID']);
-                        // var exspire_time = exspire_date(mission['Data_scadenza']);
-                        // let messageEmbed = await message.channel.send(role_ping, Container).then(msg=>msg.delete({ timeout: exspire_time }));
+                        var exspire_time = exspire_date(mission['Data_scadenza']);
+                        // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
                         let messageEmbed = await message.channel.send(role_ping, Container);
+                        messageEmbed.react(emoji_check);
+                        messageEmbed.delete({ timeout: exspire_time });
 
                         client.on('messageReactionAdd', async (reaction, user) => {
                             if (reaction.message.partial) await reaction.message.fetch();
@@ -99,7 +101,8 @@ module.exports = {
                                         "Status": "Attesa"
                                     }
                                     mission['Player_list'].push(template);
-                                    await methodDB.mission_update(mission['ID'], mission);
+                                    methodDB.settab_db("Registro_missioni");
+                                    methodDB.mission_update(mission['ID'], mission);
                                 }
                             }
                         });
@@ -113,12 +116,12 @@ module.exports = {
                             if (reaction.message.channel.id == config.chat_missioni) {
                                 if (reaction.emoji.name === emoji_check) {
                                     var id_player = await reaction.message.guild.member.cache.get(user.id);
-                                    var Player_list = mission['Player_list']; 
+                                    var Player_list = mission['Player_list'];
                                     for (let index = 0; index < mission['Player_list'].length; index++) {
                                         if (Player_list[index]['ID_Discord'] == id_player) {
                                             methodDB.mission_update_remove(mission['ID'], index);
                                             break;
-                                        }              
+                                        }
                                     }
                                 }
                             } else {
@@ -171,9 +174,22 @@ function format_date(date_int) {
     var today = new Date(date_int);
     var year = today.getFullYear();
     var month = today.getMonth();
-    var day = today.getDay();
+    var day = today.getDate();
     var ora = today.getHours();
     var minuti = today.getMinutes();
+    month = String(parseInt(month)+1);
+    if (day < 10) {
+        day = "0" + day;
+    }
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (ora < 10) {
+        ora = "0" + ora;
+    }
+    if (minuti < 10) {
+        minuti = "0" + minuti;
+    }
     return day + "/" + month + "/" + year + " " + ora + ":" + minuti
 }
 
@@ -184,9 +200,9 @@ function exspire_date(date_int) {
         ext_date.setDate(ext_date.getDate() + 1);
     }
     var diff = ext_date - today;
-    if (diff < 0) {       
+    if (diff < 0) {
         diff = today.setDate(today.getDate() + 7);
     }
-    diff = parseInt(diff/1000)
+    diff = parseInt(diff / 1000)
     return diff;
 }
