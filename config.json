@@ -68,8 +68,10 @@
     "set_event_meteo": "10:00",
     "event_chat_meteo": "784136487544553543",
     "chat_missioni": "210080047636283402",
+    "chat_missioni_ping": "210080047636283402",
     "chat_scambi": "770795462584041543",
     "chat_scambi_ping": "Gildano",
+    "player_ping": "Gildano",
     "shop_name": [
         "ampolla d'oro",
         "incudine di godor",

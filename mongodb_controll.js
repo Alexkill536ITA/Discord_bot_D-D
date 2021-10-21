@@ -222,7 +222,7 @@ exports.mission_update = function (id_scheda, value_new) {
 }
 
 exports.mission_update_remove = function (id_scheda, value) {
-    collection.updateOne({ 'ID': id_scheda }, { $pull: { Player_list: value } });
+    collection.updateOne({ 'ID': id_scheda }, { $pull: { Player_list: { ID_Discord: value } } });
     return 0;
 }
 
