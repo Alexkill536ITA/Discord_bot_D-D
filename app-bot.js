@@ -131,6 +131,8 @@ function Discord_start() {
             //     client.commands.get('scambio').execute(client, message, args);
         } else if (command == 'mission') {
             client.commands.get('mission').execute(client, message, args);
+        } else if (command == 'disprezzo') {
+            client.commands.get('disprezzo').execute(message, args);
         } else if (command == 'meteo') {
             client.commands.get('meteo').execute(client, message, args);
         } else if (command == 'timeskip') {

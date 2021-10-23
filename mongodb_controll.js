@@ -221,8 +221,48 @@ exports.mission_update = function (id_scheda, value_new) {
     return 0;
 }
 
-exports.mission_update_remove = function (id_scheda, value) {
-    collection.updateOne({ 'ID': id_scheda }, { $pull: { Player_list: { ID_Discord: value } } });
+exports.mission_update_status = function (id_scheda, value_new) {
+    collection.updateOne({ 'ID': id_scheda }, { $set: { Status_missione: value_new } });
+    return 0;
+}
+
+exports.mission_update_remove = function (id_scheda, value_new) {
+    collection.updateOne({ 'ID': id_scheda }, { $pull: { Player_list: { ID_Discord: value_new } } });
+    return 0;
+}
+
+exports.pryority_control = function (id_discord, value_new) {
+    collection.updateOne({ 'Id_discord': id_discord }, { $inc: { Priority: value_new } });
+    return 0;
+}
+
+exports.pryority_control_bis = function (id_discord, value_new) {
+    collection.updateOne({ 'Id_discord': id_discord }, { $set: { Priority: value_new } });
+    return 0;
+}
+
+exports.pryority_reset = function (id_discord) {
+    collection.updateOne({ 'Id_discord': id_discord }, { $set: { Priority: 0 } });
+    return 0;
+}
+
+exports.pryority_reset_all = function () {
+    collection.updateOne({}, { $set: { Priority: 0 } });
+    return 0;
+}
+
+exports.block_control = function (id_discord, value_new) {
+    collection.updateOne({ 'Id_discord': id_discord }, { $set: { Block_enable: value_new } });
+    return 0;
+}
+
+exports.block_reset = function (id_discord) {
+    collection.updateOne({ 'Id_discord': id_discord }, { $set: { Block_enable: 0 } });
+    return 0;
+}
+
+exports.block_reset_all = function () {
+    collection.updateOne({}, { $set: { Block_enable: 0 } });
     return 0;
 }
 
