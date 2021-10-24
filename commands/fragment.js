@@ -24,7 +24,6 @@ module.exports = {
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         try {
             if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-                var colrs_set = clor_gen.rand_Color();
                 if (args[0] == "add" || args[0] == "-a") {
                     if (args[2]) {
                         var autore = message.mentions.users.first();
@@ -33,38 +32,36 @@ module.exports = {
                                 if (isNaN(parseInt(args[1]))) {
                                     emit_print(message);
                                 } else {
-                                    if (result != null) {
-                                        var Scheda = await get_Scheda_pg(autore.id);
-                                        var Scheda_PG = Scheda[0];
-                                        if (Scheda_PG == 1) {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${autore.username}`)
-                                                .setTitle('Errore Scheda PG non trovata');
-                                            message.channel.send(Container);
-                                            return 1;
-                                        }
+                                    var Scheda = await get_Scheda_pg(autore.id);
+                                    var Scheda_PG = Scheda[0];
+                                    if (Scheda_PG == 1) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${autore.username}`)
+                                            .setTitle('Errore Scheda PG non trovata');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    }
 
-                                        if (Scheda_PG["Pbc_frag"] == undefined) {
-                                            reset_frag(message, Scheda_PG);
-                                        } else {
-                                            var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
-                                            var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
-                                            var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
-                                            if (config.Level_Chat_reset == true) {
-                                                if (ultima_asseganzione == getmonthNumber(new Date())) {
-                                                    if (Exp_get_attuale < 2) {
-                                                        add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
-                                                    } else {
-                                                        return 1;
-                                                    }
+                                    if (Scheda_PG["Pbc_frag"] == undefined) {
+                                        reset_frag(message, Scheda_PG);
+                                    } else {
+                                        var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
+                                        var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
+                                        var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
+                                        if (config.Level_Chat_reset == true) {
+                                            if (ultima_asseganzione == getmonthNumber(new Date())) {
+                                                if (Exp_get_attuale < 2) {
+                                                    add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                                 } else {
-                                                    reset_frag(message, Scheda_PG);
+                                                    return 1;
                                                 }
                                             } else {
-                                                add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
+                                                reset_frag(message, Scheda_PG);
                                             }
-
+                                        } else {
+                                            add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                         }
+
                                     }
                                 }
                             }
@@ -156,6 +153,22 @@ function emit_print(message) {
     message.channel.send(Container);
 }
 
+async function get_Scheda_pg(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Schede_PG");
+        var cursor = methodDB.serachbylistpg(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+function getmonthNumber(d) {
+    let month = ("0" + (d.getMonth() + 1)).slice(-2);
+    return month;
+}
+
 function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
     var ogg_temp = {};
     if (type == "add" || type == "-a") {
@@ -215,6 +228,15 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
             message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
         }
     }
+}
+
+function reset_frag(message, Scheda_PG) {
+    var ogg_temp = {};
+    ogg_temp['Exp_get'] = 0;
+    ogg_temp['Frammento'] = 1;
+    ogg_temp['Data'] = new Date();
+    methodDB.settab_db("Schede_PG");
+    methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);
 }
 
 function LevelUP_auto(message, id_discord, id, exp) {
