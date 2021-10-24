@@ -58,6 +58,8 @@ module.exports = {
                                         .addField("Razza", js_result['Razza'], true)
                                         .addField("Classe", js_result['Classe'], true)
                                         .addField("Sotto Classe", js_result['Sotto Classe'], true)
+                                        .addField("Multi Classe", js_result['Multi Classe'], true)
+                                        .addField("Multi Sotto Classe", js_result['Multi Sotto Classe'], true)
                                         .addField("Background", js_result['Background'], true)
                                         .addField('\u200b', '**Statistiche:**')
                                         .addField("💪 Forza", js_result['Forza'], true)
