@@ -21,20 +21,27 @@ module.exports = {
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            var colrs_set = clor_gen.rand_Color();
-            if (args[0]) {
-                var check = Check_Num(args[0]);
-                if (check == true) {
-                    var result = eval(args[0]);
-                    if (isNaN(result)) {
-                        result = "Ma si Scemo";
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                var colrs_set = clor_gen.rand_Color();
+                if (args[0]) {
+                    var check = Check_Num(args[0]);
+                    if (check == true) {
+                        var result = eval(args[0]);
+                        if (isNaN(result)) {
+                            result = "Ma si Scemo";
+                        }
+                        Container.setColor(colrs_set)
+                            .setTitle('Calcolatrice')
+                            .setThumbnail(botavatar.displayAvatarURL())
+                            .addField("Risultato", args[0] + " = ```" + result + "```");
+                        message.channel.send(Container);
+                    } else {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Calcolatrice`)
+                            .setTitle('Sintassi **' + config.prefix + 'math** Es:[2+2*5-10/2]');
+                        message.channel.send(Container);
                     }
-                    Container.setColor(colrs_set)
-                        .setTitle('Calcolatrice')
-                        .setThumbnail(botavatar.displayAvatarURL())
-                        .addField("Risultato", args[0] + " = ```" + result + "```");
-                    message.channel.send(Container);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Calcolatrice`)
@@ -43,15 +50,21 @@ module.exports = {
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                    .setAuthor(`Calcolatrice`)
-                    .setTitle('Sintassi **' + config.prefix + 'math** Es:[2+2*5-10/2]');
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
                 message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

@@ -22,34 +22,47 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-            var colrs_set = clor_gen.rand_Color();
-            if (args[1]) {
-                var autore = message.mentions.users.first();
-                try {
-                    if (args[0] == 1) {
-                        add_money(message, autore.id, 12, 500, 6);
-                        Manager_role_level(message, autore.id, config.Level["Bronzo"]);
-                    } else if (args[0] == 2) {
-                        add_money(message, autore.id, 42, 750, 10);
-                        Manager_role_level(message, autore.id, config.Level["Argento"]);
-                    } else if (args[0] == 3) {
-                        add_money(message, autore.id, 83, 1000, 14);
-                        Manager_role_level(message, autore.id, config.Level["Oro"]);
-                    } else {
+        try {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                var colrs_set = clor_gen.rand_Color();
+                if (args[1]) {
+                    var autore = message.mentions.users.first();
+                    try {
+                        if (args[0] == 1) {
+                            add_money(message, autore.id, 12, 500, 6);
+                            Manager_role_level(message, autore.id, config.Level["Bronzo"]);
+                        } else if (args[0] == 2) {
+                            add_money(message, autore.id, 42, 750, 10);
+                            Manager_role_level(message, autore.id, config.Level["Argento"]);
+                        } else if (args[0] == 3) {
+                            add_money(message, autore.id, 83, 1000, 14);
+                            Manager_role_level(message, autore.id, config.Level["Oro"]);
+                        } else {
+                            emit_print(message);
+                        }
+                    } catch {
                         emit_print(message);
                     }
-                } catch {
+                } else {
                     emit_print(message);
                 }
             } else {
-                emit_print(message);
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

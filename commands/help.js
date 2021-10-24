@@ -20,6 +20,10 @@ module.exports = {
         if (config.Debug_Level == "DEBUG") {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute get_help');
         }
+        if (message.author.bot) {
+            message.delete();
+            return;
+        }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         if (args[0] == "id") {
@@ -143,6 +147,18 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 // .setDescription('Sintassi: **' + config.prefix + 'milestone** [Opzione][Valore][ID_Scheda] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire milestone inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
                 .setDescription('Sintassi: **' + config.prefix + 'milestone** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire milestone inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]');
+            message.channel.send(Container);
+        } else if (args[0] == "mission") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help Mission')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'mission** [Opzione][ID_MISSIONE] \n\n**OPZIONI**\n init = inizilaizza misione\n response = chiudi missione\n unlock = sblcca player\n\n Opzione **init** per inizializare la missione con reaction role inserire [ID_MISSIONE]\n Opzione **response** Manda Il messagio di riepiloco della missione conclusa inserire [ID_MISSIONE]\n Opzione **unlock** Rimuove il blocco sul player che inpedisce di parttecipare a più missione in contemporanea inseire [@utente]');
+            message.channel.send(Container);
+        } else if (args[0] == "disprezzo") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help Disprezzo')
+                .setThumbnail(botavatar.displayAvatarURL())
+                .setDescription('Sintassi: **' + config.prefix + 'Disprezzo** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire disprezzo inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]');
             message.channel.send(Container);
         } else if (args[0] == "oggetto") {
             Container.setColor([255, 0, 0])
@@ -310,7 +326,7 @@ module.exports = {
                 // .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [@utente][Quantità][Nome oggetto]\n • **shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]")
                 // .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **competenza** [Opzione][ID_Scheda][Id/Nome Competenza]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
-                .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][@utente]\n • **statsset** [Opzione][Valore][@utente]\n • **money** [Opzione][Valore][@utente]\n • **milestone** [Opzione][Valore][@utente]\n • **competenza** [Opzione][@utente][Id/Nome Competenza]\n • **pgoggetto** [Opzione][@utente][Quantità][Id/Nome]\n • **pgcustom** [Opzione][@utente][Quantità][Sincronia][Nome]")
+                .addField("🟠 Comandi PG Master 🟠", "• **mission** [Opzione][ID_MISSIONE]\n • **disprezzo** [Opzione][Valore][@utente]\n • **checkpoint** [Opzione][@utente]\n • **statsset** [Opzione][Valore][@utente]\n • **money** [Opzione][Valore][@utente]\n • **milestone** [Opzione][Valore][@utente]\n • **competenza** [Opzione][@utente][Id/Nome Competenza]\n • **pgoggetto** [Opzione][@utente][Quantità][Id/Nome]\n • **pgcustom** [Opzione][@utente][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **timeskip** [Opzione][Valore]...\n • **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **ping**\n • **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");

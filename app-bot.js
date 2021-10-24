@@ -11,7 +11,7 @@ const dotenv = require('dotenv');
 const Event_time = require('./event/clock_timer_event');
 const CheckSum = require('./tools/CheckSum-Code');
 const vers = require("./CheckSum.json");
-const client = new Discord.Client();
+const client = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 
 var hit_msg = 0;
 
@@ -67,7 +67,9 @@ function Discord_start() {
     // Lissener Message/Commands
     client.on('message', message => {
         if (message.author.bot) {
-            return;
+            if (message.author.id != config.webhooks) {
+                return;
+            }
         } else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
             if (config.Debug_Level == "DEBUG") {
                 console.log("[ " + color.magenta('DEBUG') + " ] Triger Hit " + hit_msg + " Channel " + message.channel.name);
@@ -125,8 +127,12 @@ function Discord_start() {
             client.commands.get('pgcustom').execute(client, message, args);
         } else if (command == 'shop') {
             client.commands.get('shop').execute(client, message, args);
-        // } else if (command == 'scambio') {
-        //     client.commands.get('scambio').execute(client, message, args);
+            // } else if (command == 'scambio') {
+            //     client.commands.get('scambio').execute(client, message, args);
+        } else if (command == 'mission') {
+            client.commands.get('mission').execute(client, message, args);
+        } else if (command == 'disprezzo') {
+            client.commands.get('disprezzo').execute(message, args);
         } else if (command == 'meteo') {
             client.commands.get('meteo').execute(client, message, args);
         } else if (command == 'timeskip') {
@@ -150,7 +156,11 @@ function Discord_start() {
             //         client.commands.get('debug').execute(client, message, args);
             //     }
         } else {
-            message.channel.send('Usare il comando **' + config.prefix + 'help** per la lista dei comandi');
+            if (message.author.bot) {
+                message.delete();
+            } else {
+                message.channel.send('Usare il comando **' + config.prefix + 'help** per la lista dei comandi');
+            }
         };
     });
 }
