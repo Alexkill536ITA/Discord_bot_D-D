@@ -28,7 +28,7 @@ function check_date(client) {
     var today = new Date();
     var year = today.getFullYear();
     var month = today.getMonth();
-    var day = today.getDay();
+    var day = today.getDate();
     var ora = today.getHours();
     var minuti = today.getMinutes();
     var sec = today.getSeconds();

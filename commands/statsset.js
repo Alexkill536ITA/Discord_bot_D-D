@@ -22,39 +22,52 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-            var colrs_set = clor_gen.rand_Color();
-            // if (args[2] && args[2].length == 24) {
-            var autore = message.mentions.users.first();
-            try {
-                if (isNaN(parseInt(args[1])) == false) {
-                    var options = args[0].toLowerCase();
-                    if (options == "forza") {
-                        update_stats(message, autore.id, "💪 Forza", "Forza", args[1]);
-                    } else if (options == "destrezza") {
-                        update_stats(message, autore.id, "🤸‍♂️ Destrezza", "Destrezza", args[1]);
-                    } else if (options == "costituzione") {
-                        update_stats(message, autore.id, "🛡 Costituzione", "Costituzione", args[1]);
-                    } else if (options == "intelligenza") {
-                        update_stats(message, autore.id, "🧠 Intelligenza", "Intelligenza", args[1]);
-                    } else if (options == "saggezza") {
-                        update_stats(message, autore.id, "📚 Saggezza", "Saggezza", args[1]);
-                    } else if (options == "carisma") {
-                        update_stats(message, autore.id, "🎭 Carisma", "Carisma", args[1]);
+        try {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                var colrs_set = clor_gen.rand_Color();
+                // if (args[2] && args[2].length == 24) {
+                var autore = message.mentions.users.first();
+                try {
+                    if (isNaN(parseInt(args[1])) == false) {
+                        var options = args[0].toLowerCase();
+                        if (options == "forza") {
+                            update_stats(message, autore.id, "💪 Forza", "Forza", args[1]);
+                        } else if (options == "destrezza") {
+                            update_stats(message, autore.id, "🤸‍♂️ Destrezza", "Destrezza", args[1]);
+                        } else if (options == "costituzione") {
+                            update_stats(message, autore.id, "🛡 Costituzione", "Costituzione", args[1]);
+                        } else if (options == "intelligenza") {
+                            update_stats(message, autore.id, "🧠 Intelligenza", "Intelligenza", args[1]);
+                        } else if (options == "saggezza") {
+                            update_stats(message, autore.id, "📚 Saggezza", "Saggezza", args[1]);
+                        } else if (options == "carisma") {
+                            update_stats(message, autore.id, "🎭 Carisma", "Carisma", args[1]);
+                        } else {
+                            emit_print(message);
+                        }
                     } else {
                         emit_print(message);
                     }
-                } else {
+                } catch {
                     emit_print(message);
                 }
-            } catch {
-                emit_print(message);
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete()
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

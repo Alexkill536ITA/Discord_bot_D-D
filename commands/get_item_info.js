@@ -21,60 +21,73 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
-            if (args[0]) {
-                if (isNaN(parseInt(args[0]))) {
-                    var nome = args[0];
-                    for (let index = 1; index < args.length; index++) {
-                        nome += " " + args[index];
-                    }
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Oggeti_Di_Gioco");
-                        var cursor = methodDB.serachbynome_obj(nome);
-                        cursor.then(function (result) {
-                            if (result) {
-                                if (result == null) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    emiter_output(client, message, result);
+        try {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                if (args[0]) {
+                    if (isNaN(parseInt(args[0]))) {
+                        var nome = args[0];
+                        for (let index = 1; index < args.length; index++) {
+                            nome += " " + args[index];
+                        }
+                        var on_sevice_db = await methodDB.open_db();
+                        if (on_sevice_db != 1) {
+                            methodDB.settab_db("Oggeti_Di_Gioco");
+                            var cursor = methodDB.serachbynome_obj(nome);
+                            cursor.then(function (result) {
+                                if (result) {
+                                    if (result == null) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                    } else {
+                                        emiter_output(client, message, result);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+                    } else {
+                        var on_sevice_db = await methodDB.open_db();
+                        if (on_sevice_db != 1) {
+                            methodDB.settab_db("Oggeti_Di_Gioco");
+                            var cursor = methodDB.serachbyid_obj(args[0]);
+                            cursor.then(function (result) {
+                                if (result) {
+                                    if (result == null) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                    } else {
+                                        emiter_output(client, message, result);
+                                    }
+                                }
+                            });
+                        }
                     }
                 } else {
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Oggeti_Di_Gioco");
-                        var cursor = methodDB.serachbyid_obj(args[0]);
-                        cursor.then(function (result) {
-                            if (result) {
-                                if (result == null) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                } else {
-                                    emiter_output(client, message, result);
-                                }
-                            }
-                        });
-                    }
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando Oggetto`)
+                        .setTitle('Sintassi **' + config.prefix + 'oggetto** [Id/Nome]');
+                    message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
-                    .setAuthor(`Comando Oggetto`)
-                    .setTitle('Sintassi **' + config.prefix + 'oggetto** [Id/Nome]');
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
                 message.channel.send(Container);
             }
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }

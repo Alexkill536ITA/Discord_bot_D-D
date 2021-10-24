@@ -14,11 +14,11 @@ const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
 
 module.exports = {
-    name: 'milestone',
-    description: "Aggiungi o togli Milestone",
+    name: 'disprezzo',
+    description: "Aggiungi o togli disprezzo",
     async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
-            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_exp');
+            console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute disprezzo');
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
@@ -30,19 +30,18 @@ module.exports = {
                         var autore = message.mentions.users.first();
                         try {
                             if (args[1]) {
-                                if (isNaN(parseInt(args[1]))) {
+                                if (isNaN(parseFloat(args[1]))) {
                                     emit_print(message);
                                 } else {
                                     var on_sevice_db = await methodDB.open_db();
                                     if (on_sevice_db != 1) {
-                                        methodDB.settab_db("Schede_PG");
-                                        var cursor = methodDB.load_pg(autore.id);
+                                        methodDB.settab_db("Utenti_web");
+                                        var cursor = methodDB.serachbyid_user(autore.id);
                                         cursor.then(function (result) {
                                             if (result != null) {
-                                                var old_value = result.Exp;
-                                                var new_value = old_value + parseInt(args[1]);
-                                                methodDB.exp_update(result._id, new_value);
-                                                LevelUP_auto(message, result.Nome_Discord, result._id, new_value);
+                                                var old_value = parseFloat(result.Priority);
+                                                var new_value = old_value + parseFloat(args[1]);
+                                                methodDB.pryority_control_bis(result._id, new_value);
                                                 let member = message.guild.members.cache.get(result.Nome_Discord);
                                                 if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
                                                     var avatar = member.user.displayAvatarURL();
@@ -51,9 +50,9 @@ module.exports = {
                                                 }
                                                 Container = new Discord.MessageEmbed();
                                                 Container.setColor(colrs_set)
-                                                    .setTitle('Scheda: ' + result.Nome_PG)
+                                                    .setTitle('Utente: ' + autore.name)
                                                     .setThumbnail(avatar, true)
-                                                    .addField("Milestone: ", new_value)
+                                                    .addField("Disprezzo", new_value)
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
                                                 message.channel.send(Container);
@@ -75,22 +74,21 @@ module.exports = {
                         var autore = message.mentions.users.first();
                         try {
                             if (args[1]) {
-                                if (isNaN(parseInt(args[1]))) {
+                                if (isNaN(parseFloat(args[1]))) {
                                     emit_print(message);
                                 } else {
                                     var on_sevice_db = await methodDB.open_db();
                                     if (on_sevice_db != 1) {
-                                        methodDB.settab_db("Schede_PG");
-                                        var cursor = methodDB.load_pg(autore.id);
+                                        methodDB.settab_db("Utenti_web");
+                                        var cursor = methodDB.serachbyid_user(autore.id);
                                         cursor.then(function (result) {
                                             if (result != null) {
-                                                var old_value = result.Exp;
-                                                var new_value = old_value - parseInt(args[1]);
+                                                var old_value = result.Priority;
+                                                var new_value = old_value - parseFloat(args[1]);
                                                 if (new_value < 0) {
                                                     new_value = 0;
                                                 }
-                                                methodDB.exp_update(result._id, new_value);
-                                                LevelUP_auto(message, result.Nome_Discord, result._id, new_value);
+                                                methodDB.pryority_control_bis(result._id, new_value);
                                                 let member = message.guild.members.cache.get(result.Nome_Discord);
                                                 if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
                                                     var avatar = member.user.displayAvatarURL();
@@ -99,9 +97,9 @@ module.exports = {
                                                 }
                                                 Container = new Discord.MessageEmbed();
                                                 Container.setColor(colrs_set)
-                                                    .setTitle('Scheda: ' + result.Nome_PG)
+                                                    .setTitle('Utente: ' + autore.name)
                                                     .setThumbnail(avatar, true)
-                                                    .addField("Milestone: ", new_value)
+                                                    .addField("Disprezzo", new_value)
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
                                                 message.channel.send(Container);
@@ -145,80 +143,7 @@ module.exports = {
 function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     Container.setColor([255, 0, 0])
-        .setAuthor(`Comando Milestone`)
-        // .setTitle('Sintassi **' + config.prefix + 'milestone** [Opzione][Valore][ID_Scheda]');
-        .setTitle('Sintassi **' + config.prefix + 'milestone** [Opzione][Valore][@utente]');
+        .setAuthor(`Comando Disprezzo`)
+        .setTitle('Sinstassi **' + config.prefix + 'disprezzo** [Opzione][Valore][@utente]');
     message.channel.send(Container);
-}
-
-function LevelUP_auto(message, id_discord, id, exp) {
-    if (exp >= 0 && exp < 3) {
-        methodDB.level_update(id, 3);           // 0
-        Manager_role_level(message, id_discord, config.Level["Rame"])
-    } else if (exp >= 3 && exp < 7) {
-        methodDB.level_update(id, 4);           // 4
-        Manager_role_level(message, id_discord, config.Level["Rame"])
-    } else if (exp >= 7 && exp < 12) {
-        methodDB.level_update(id, 5);           // 9
-        Manager_role_level(message, id_discord, config.Level["Rame"])
-    } else if (exp >= 12 && exp < 18) {
-        methodDB.level_update(id, 6);           // 15
-        Manager_role_level(message, id_discord, config.Level["Bronzo"])
-    } else if (exp >= 18 && exp < 25) {
-        methodDB.level_update(id, 7);           // 22
-        Manager_role_level(message, id_discord, config.Level["Bronzo"])
-    } else if (exp >= 25 && exp < 33) {
-        methodDB.level_update(id, 8);           // 30
-        Manager_role_level(message, id_discord, config.Level["Ferro"])
-    } else if (exp >= 33 && exp < 42) {
-        methodDB.level_update(id, 9);           // 39
-        Manager_role_level(message, id_discord, config.Level["Ferro"])
-    } else if (exp >= 42 && exp < 51) {
-        methodDB.level_update(id, 10);          // 48
-        Manager_role_level(message, id_discord, config.Level["Argento"])
-    } else if (exp >= 51 && exp < 61) {
-        methodDB.level_update(id, 11);          // 58
-        Manager_role_level(message, id_discord, config.Level["Argento"])
-    } else if (exp >= 61 && exp < 72) {
-        methodDB.level_update(id, 12);          // 69
-        Manager_role_level(message, id_discord, config.Level["Electrum"])
-    } else if (exp >= 72 && exp < 83) {
-        methodDB.level_update(id, 13);          // 81
-        Manager_role_level(message, id_discord, config.Level["Electrum"])
-    } else if (exp >= 83 && exp < 95) {
-        methodDB.level_update(id, 14);          // 93
-        Manager_role_level(message, id_discord, config.Level["Oro"])
-    } else if (exp >= 95 && exp < 108) {
-        methodDB.level_update(id, 15);          // 106
-        Manager_role_level(message, id_discord, config.Level["Oro"])
-    } else if (exp >= 108 && exp < 122) {
-        methodDB.level_update(id, 16);          // 120
-        Manager_role_level(message, id_discord, config.Level["Platino"])
-    } else if (exp >= 122 && exp < 137) {
-        methodDB.level_update(id, 17);          // 135
-        Manager_role_level(message, id_discord, config.Level["Platino"])
-    } else if (exp >= 137 && exp < 153) {
-        methodDB.level_update(id, 18);          // 151
-        Manager_role_level(message, id_discord, config.Level["Mithril"])
-    } else if (exp >= 153 && exp < 172) {
-        methodDB.level_update(id, 19);          // 168
-        Manager_role_level(message, id_discord, config.Level["Mithril"])
-    } else if (exp >= 182) {
-        methodDB.level_update(id, 20);          // 185
-        Manager_role_level(message, id_discord, config.Level["Adamantio"])
-    }
-}
-
-function Manager_role_level(message, id_discord, level_select) {
-    let member = message.guild.members.cache.get(id_discord);
-    let Role_select = message.guild.roles.cache.get(level_select)
-    if (!member.roles.cache.some(role => role === Role_select)) {
-        for (index in config.Level) {
-            let Role = message.guild.roles.cache.get(config.Level[index]);
-            if (member.roles.cache.some(role => role === Role)) {
-                member.roles.remove(Role).catch(console.error);
-            }
-        }
-        member.roles.add(Role_select).catch(console.error);
-    }
 }

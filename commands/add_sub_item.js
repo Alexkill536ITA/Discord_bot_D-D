@@ -22,137 +22,150 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
-            // get itemes 
-            if (args[3]) {
-                if (isNaN(parseInt(args[3]))) {
-                    var nome = args[3];
-                    for (let index = 4; index < args.length; index++) {
-                        nome += " " + args[index];
-                    }
-                    nome = String(nome).toLowerCase();
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Oggeti_Di_Gioco");
-                        var cursor = methodDB.serachbynome_obj(nome);
-                        cursor.then(async function (result) {
-                            if (result) {
-                                if (result == null) {
+        try {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                // get itemes 
+                if (args[3]) {
+                    if (isNaN(parseInt(args[3]))) {
+                        var nome = args[3];
+                        for (let index = 4; index < args.length; index++) {
+                            nome += " " + args[index];
+                        }
+                        nome = String(nome).toLowerCase();
+                        var on_sevice_db = await methodDB.open_db();
+                        if (on_sevice_db != 1) {
+                            methodDB.settab_db("Oggeti_Di_Gioco");
+                            var cursor = methodDB.serachbynome_obj(nome);
+                            cursor.then(async function (result) {
+                                if (result) {
+                                    if (result == null) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    } else {
+                                        if (args[1]) {
+                                            var autore = message.mentions.users.first();
+                                            try {
+                                                var Scheda = await get_Scheda_pg(autore.id);
+                                                if (Scheda != null) {
+                                                    var complete = add_sub(message, args, Scheda, result);
+                                                    if (complete == 1) {
+                                                        emit_print(message);
+                                                        return 1;
+                                                    } else if (complete == 2) {
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Ogetto non rovato: ` + message.author.username)
+                                                            .setTitle('Ogetto non è prensente nel\'inventario');
+                                                        message.channel.send(Container);
+                                                        return 1;
+                                                    } else {
+                                                        return 0;
+                                                    }
+                                                } else {
+                                                    Container.setColor([255, 0, 0])
+                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                        .setTitle('Errore Scheda PG non trovata');
+                                                    message.channel.send(Container);
+                                                    return 1;
+                                                }
+                                            } catch {
+                                                emit_print(message);
+                                                return 1;
+                                            }
+                                        } else {
+                                            emit_print(message);
+                                            return 1;
+                                        }
+                                    }
+                                } else {
                                     Container.setColor([255, 0, 0])
                                         .setAuthor(`Richiesta di: ${message.author.username}`)
                                         .setTitle('Errore Oggetto non trovato');
                                     message.channel.send(Container);
-                                    return 1;
-                                } else {
-                                    if (args[1]) {
-                                        var autore = message.mentions.users.first();
-                                        try {
-                                            var Scheda = await get_Scheda_pg(autore.id);
-                                            if (Scheda != null) {
-                                                var complete = add_sub(message, args, Scheda, result);
-                                                if (complete == 1) {
-                                                    emit_print(message);
-                                                    return 1;
-                                                } else if (complete == 2) {
+                                }
+                            });
+                        }
+                    } else {
+                        var on_sevice_db = await methodDB.open_db();
+                        if (on_sevice_db != 1) {
+                            methodDB.settab_db("Oggeti_Di_Gioco");
+                            var cursor = methodDB.serachbyid_obj(args[3]);
+                            cursor.then(async function (result) {
+                                if (result) {
+                                    if (result == null) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    } else {
+                                        if (args[1]) {
+                                            var autore = message.mentions.users.first();
+                                            try {
+                                                var Scheda = await get_Scheda_pg(autore.id);
+                                                if (Scheda != null) {
+                                                    var complete = add_sub(message, args, Scheda, result);
+                                                    if (complete == 1) {
+                                                        emit_print(message);
+                                                        return 1;
+                                                    } else if (complete == 2) {
+                                                        Container.setColor([255, 0, 0])
+                                                            .setAuthor(`Ogetto non rovato: ` + message.author.username)
+                                                            .setTitle('Ogetto non è prensente nel\'inventario');
+                                                        message.channel.send(Container);
+                                                        return 1;
+                                                    } else {
+                                                        return 0;
+                                                    }
+                                                } else {
                                                     Container.setColor([255, 0, 0])
-                                                        .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                                        .setTitle('Ogetto non è prensente nel\'inventario');
+                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                        .setTitle('Errore Scheda PG non trovata');
                                                     message.channel.send(Container);
                                                     return 1;
-                                                } else {
-                                                    return 0;
                                                 }
-                                            } else {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                    .setTitle('Errore Scheda PG non trovata');
-                                                message.channel.send(Container);
+                                            } catch {
+                                                emit_print(message);
                                                 return 1;
                                             }
-                                        } catch {
+                                        } else {
                                             emit_print(message);
                                             return 1;
                                         }
-                                    } else {
-                                        emit_print(message);
-                                        return 1;
                                     }
+                                } else {
+                                    Container.setColor([255, 0, 0])
+                                        .setAuthor(`Richiesta di: ${message.author.username}`)
+                                        .setTitle('Errore Oggetto non trovato');
+                                    message.channel.send(Container);
                                 }
-                            } else {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                message.channel.send(Container);
-                            }
-                        });
+                            });
+                        }
                     }
                 } else {
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Oggeti_Di_Gioco");
-                        var cursor = methodDB.serachbyid_obj(args[3]);
-                        cursor.then(async function (result) {
-                            if (result) {
-                                if (result == null) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Oggetto non trovato');
-                                    message.channel.send(Container);
-                                    return 1;
-                                } else {
-                                    if (args[1]) {
-                                        var autore = message.mentions.users.first();
-                                        try {
-                                            var Scheda = await get_Scheda_pg(autore.id);
-                                            if (Scheda != null) {
-                                                var complete = add_sub(message, args, Scheda, result);
-                                                if (complete == 1) {
-                                                    emit_print(message);
-                                                    return 1;
-                                                } else if (complete == 2) {
-                                                    Container.setColor([255, 0, 0])
-                                                        .setAuthor(`Ogetto non rovato: ` + message.author.username)
-                                                        .setTitle('Ogetto non è prensente nel\'inventario');
-                                                    message.channel.send(Container);
-                                                    return 1;
-                                                } else {
-                                                    return 0;
-                                                }
-                                            } else {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                    .setTitle('Errore Scheda PG non trovata');
-                                                message.channel.send(Container);
-                                                return 1;
-                                            }
-                                        } catch {
-                                            emit_print(message);
-                                            return 1;
-                                        }
-                                    } else {
-                                        emit_print(message);
-                                        return 1;
-                                    }
-                                }
-                            } else {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                message.channel.send(Container);
-                            }
-                        });
-                    }
+                    emit_print(message);
+                    return 1;
                 }
-            } else {
-                emit_print(message);
-                return 1;
-            }
 
-        } else {
-            Container.setColor([255, 0, 0])
-                .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
-                .setTitle('Non sei autorizzato a usare questo comando');
-            message.channel.send(Container);
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+            }
+        } catch (error) {
+            if (message.author.bot) {
+                message.delete();
+                return;
+            } else {
+                Container.setColor([255, 0, 0])
+                    .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
+                    .setTitle('Non sei autorizzato a usare questo comando');
+                message.channel.send(Container);
+                console.log(error);
+            }
         }
     }
 }
