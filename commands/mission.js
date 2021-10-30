@@ -180,6 +180,7 @@ async function Make_mission_message(client, message, args) {
                     var user_web = get_User_web(user.id);
                     if (user_web != 1) {
                         mission = await get_Mission(args[1]);
+
                         for (let index = 0; index < mission['Player_list'].length; index++) {
                             if (mission['Player_list'][index]['ID_Discord'] == user.id) {
                                 methodDB.settab_db("Registro_missioni");
@@ -228,6 +229,10 @@ async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
     var player = [];
     var reserve = [];
 
+    if (mission['Player_list'] == null) {
+        return 1;
+    }
+
     for (let index = 0; index < mission['Player_list'].length; index++) {
         if (mission['Player_list'][index]['Status'] == 'Accettato') {
             player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
@@ -270,6 +275,10 @@ async function Make_mission_response(client, message, args) {
 
     var player = [];
     var reserve = [];
+
+    if (mission['Player_list'] == null) {
+        return 1;
+    }
 
     for (let index = 0; index < mission['Player_list'].length; index++) {
         if (mission['Player_list'][index]['Status'] == 'Accettato') {
