@@ -221,6 +221,11 @@ exports.mission_update = function (id_scheda, value_new) {
     return 0;
 }
 
+exports.mission_id_message_update = function (id_scheda, value_new) {
+    collection.updateOne({ 'ID': id_scheda }, { $set: { Discord_id_message: value_new } });
+    return 0;
+}
+
 exports.mission_update_status = function (id_scheda, value_new) {
     collection.updateOne({ 'ID': id_scheda }, { $set: { Status_missione: value_new } });
     return 0;

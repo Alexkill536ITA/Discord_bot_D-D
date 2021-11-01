@@ -31,6 +31,10 @@ module.exports = {
                 if (args[1].length == 6) {
                     Make_mission_response(client, message, args);
                 }
+            } else if (args[0] == 'edit') {
+                if (args[1].length == 6) {
+                    Make_mission_message(client, message, args);
+                }
             }
         } else if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
             if (args[0] == 'init') {
@@ -162,9 +166,18 @@ async function Make_mission_message(client, message, args) {
             .setFooter("ID:" + mission['ID']);
         var exspire_time = exspire_date(mission['Data_scadenza']);
         // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
-        let messageEmbed = await message.channel.send(role_ping, Container);
-        messageEmbed.react(emoji_check);
-        messageEmbed.delete({ timeout: exspire_time });
+        if (args[0] == 'init') {
+            var messageEmbed = await message.channel.send(role_ping, Container);
+            messageEmbed.react(emoji_check);
+            messageEmbed.delete({ timeout: exspire_time });
+            methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
+        } else {
+            var channel = await client.channels.fetch(config.chat_missioni);
+            var message_old = await channel.messages.fetch(mission['Discord_id_message']);
+            message_old.edit(Container);
+            message_old.delete({ timeout: exspire_time });
+        }
+        
 
         print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
 
