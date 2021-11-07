@@ -64,6 +64,84 @@
         "Mithril": "753003889166647326",
         "Adamantio": "752573613311393842"
     },
+    "event_day_list": [
+        {
+            "data": "23-1",
+            "text": "Festa della Notte"
+        },
+        {
+            "data": "28-2",
+            "text": "Festa del Tributi"
+        },
+        {
+            "data": "29-2",
+            "text": "Festa del Tributi"
+        },
+        {
+            "data": "22-3",
+            "text": "Festa dei Silenti e dei Pazzi"
+        },
+        {
+            "data": "17-4",
+            "text": "1° del Senham"
+        },
+        {
+            "data": "18-4",
+            "text": "2° del Senham"
+        },
+        {
+            "data": "14-5",
+            "text": "Festa della Semina"
+        },
+        {
+            "data": "15-6",
+            "text": "1° Giorno dei Giochi"
+        },
+        {
+            "data": "16-6",
+            "text": "2° Giorno dei Giochi"
+        },
+        {
+            "data": "17-6",
+            "text": "3° Giorno dei Giochi"
+        },
+        {
+            "data": "18-6",
+            "text": "4° Giorno dei Giochi"
+        },
+        {
+            "data": "19-6",
+            "text": "5° Giorno dei Giochi"
+        },
+        {
+            "data": "20-6",
+            "text": "6° Giorno dei Giochi"
+        },
+        {
+            "data": "21-6",
+            "text": "Festa dei Re"
+        },
+        {
+            "data": "18-8",
+            "text": "Festa della Luce"
+        },
+        {
+            "data": "21-9",
+            "text": "Festa del Raccolto"
+        },
+        {
+            "data": "11-10",
+            "text": "Festa dell'Offerta"
+        },
+        {
+            "data": "5-11",
+            "text": "Festa del Vincaldo"
+        },
+        {
+            "data": "21-12",
+            "text": "Giorno della Caduta"
+        }
+    ],
     "event_meteo_enable": true,
     "set_event_meteo": "10:00",
     "event_chat_meteo": "784136487544553543",
