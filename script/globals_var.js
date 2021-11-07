@@ -6,9 +6,11 @@
 \**----------------------------------------------------**/
 
 const Discord = require('discord.js');
+const { config } = require('dotenv');
+const config_json = require('../config.json');
 var Container_meteo = new Discord.MessageEmbed();
 
-exports.setMeteo = function (Data_int) {
+exports.setMeteo = function (Data_int, year, month, day) {
     Container_meteo = new Discord.MessageEmbed();
     if (Data_int[0] == 1) {
         if (Data_int[1] == 1) {
@@ -51,6 +53,20 @@ exports.setMeteo = function (Data_int) {
             Container_meteo.setColor(255, 0, 0).setTitle('🌐 Il Meteo giornaliero:').setDescription(':cloud_snow: Nevicata');
         }
     }
+
+    month = month+1;
+    var data_compose = day + "-" + month;
+    for (var x=0; x<config_json.event_day_list.length; x++) {
+        if (data_compose == config_json.event_day_list[x]['data']) {
+            Container_meteo.addField(config_json.event_day_list[x]['text'], "\u200b"); 
+        }
+    }
+    year = year - 2020
+    if (data_compose == "10-10") {
+        Container_meteo.addField("🎉 Un Giorno Specile per Il Maggiordomo 🎉", "Da ben " + year + " anni sempre al vostro servizio"); 
+    }
+
+
 }
 
 exports.getMeteo = function () {

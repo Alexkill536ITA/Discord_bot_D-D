@@ -48,73 +48,73 @@ exports.set_meteo_out = function () {
 		if (rand_number >= 1 && rand_number <= 29) {
 			// console.log("Primavera "+1);
 			data_set = [1, 1];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 30 && rand_number <= 59) {
 			// console.log("Primavera "+2);
 			data_set = [1, 2];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 60 && rand_number <= 89) {
 			// console.log("Primavera "+3);
 			data_set = [1, 3];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 90 && rand_number <= 100) {
 			// console.log("Primavera "+4);
 			data_set = [1, 4];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		}
 	} else if (today.getTime() >= i_Estate.getTime() && today.getTime() <= f_Estate.getTime()) {
 		if (rand_number >= 1 && rand_number <= 29) {
 			// console.log("Estate "+1);
 			data_set = [2, 1];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 30 && rand_number <= 59) {
 			// console.log("Estate "+2);
 			data_set = [2, 2];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 60 && rand_number <= 89) {
 			// console.log("Estate "+3);
 			data_set = [2, 3];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 90 && rand_number <= 100) {
 			// console.log("Estate "+4);
 			data_set = [2, 4];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		}
 	} else if (today.getTime() >= i_Autunno.getTime() && today.getTime() <= f_Autunno.getTime()) {
 		if (rand_number >= 1 && rand_number <= 29) {
 			// console.log("Autunno "+1);
 			data_set = [3, 1];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 30 && rand_number <= 59) {
 			// console.log("Autunno "+2);
 			data_set = [3, 2];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 60 && rand_number <= 89) {
 			// console.log("Autunno "+3);
 			data_set = [3, 3];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 90 && rand_number <= 100) {
 			// console.log("Autunno "+4);
 			data_set = [3, 4];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		}
 	} else {
 		if (rand_number >= 1 && rand_number <= 29) {
 			// console.log("Inverno "+1);
 			data_set = [4, 1];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 30 && rand_number <= 59) {
 			// console.log("Inverno "+2);
 			data_set = [4, 2];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 60 && rand_number <= 89) {
 			// console.log("Inverno "+3);
 			data_set = [4, 3];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		} else if (rand_number >= 90 && rand_number <= 100) {
 			// console.log("Inverno "+4);
 			data_set = [4, 4];
-			goglas_var.setMeteo(data_set);
+			goglas_var.setMeteo(data_set, year, month, day);
 		}
 	}
 	if (config.Debug_Level == "DEBUG") {
