@@ -165,7 +165,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Disprezzo')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'Disprezzo** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire disprezzo inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]');
+                .setDescription('Sintassi: **' + config.prefix + 'Disprezzo** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n show = Mostra\n\n Per aggiungere o toglire disprezzo inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]\n Per visualizare inserire **show** in [Opzione] e taggare utente Discord in [@utente]');
             message.channel.send(Container);
         } else if (args[0] == "oggetto") {
             Container.setColor([255, 0, 0])

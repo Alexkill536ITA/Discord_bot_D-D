@@ -42,20 +42,20 @@ module.exports = {
                                                 var old_value = parseFloat(result.Priority);
                                                 var new_value = old_value + parseFloat(args[1]);
                                                 methodDB.pryority_control_bis(result._id, new_value);
-                                                let member = message.guild.members.cache.get(result.Nome_Discord);
-                                                if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                                                    var avatar = member.user.displayAvatarURL();
-                                                } else {
-                                                    var avatar = result.Avatar;
-                                                }
                                                 Container = new Discord.MessageEmbed();
                                                 Container.setColor(colrs_set)
-                                                    .setTitle('Utente: ' + autore.name)
-                                                    .setThumbnail(avatar, true)
+                                                    .setTitle('Utente: ' + autore.username)
+                                                    .setThumbnail(autore.displayAvatarURL(), true)
                                                     .addField("Disprezzo", new_value)
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
-                                                message.channel.send(Container);
+                                                message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
+                                            } else {
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                    .setTitle('Errore Utente non trovato');
+                                                message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
                                             }
                                         });
                                     }
@@ -89,26 +89,59 @@ module.exports = {
                                                     new_value = 0;
                                                 }
                                                 methodDB.pryority_control_bis(result._id, new_value);
-                                                let member = message.guild.members.cache.get(result.Nome_Discord);
-                                                if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                                                    var avatar = member.user.displayAvatarURL();
-                                                } else {
-                                                    var avatar = result.Avatar;
-                                                }
                                                 Container = new Discord.MessageEmbed();
                                                 Container.setColor(colrs_set)
-                                                    .setTitle('Utente: ' + autore.name)
-                                                    .setThumbnail(avatar, true)
+                                                    .setTitle('Utente: ' + autore.username)
+                                                    .setThumbnail(autore.displayAvatarURL(), true)
                                                     .addField("Disprezzo", new_value)
                                                     .setTimestamp()
-                                                    .setFooter("Data", message.author.displayAvatarURL());
-                                                message.channel.send(Container);
+                                                    .setFooter("Data", autore.displayAvatarURL());
+                                                message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
+                                            } else {
+                                                Container = new Discord.MessageEmbed();
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                                    .setTitle('Errore Utente non trovato');
+                                                message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
                                             }
                                         });
                                     }
                                 }
                             } else {
                                 emit_print(message);
+                            }
+                        } catch {
+                            emit_print(message);
+                        }
+                    } else {
+                        emit_print(message);
+                    }
+                } else if (args[0] == "show" || args[0] == "-v") {
+                    if (args[1]) {
+                        var autore = message.mentions.users.first();
+                        try {
+                            var on_sevice_db = await methodDB.open_db();
+                            if (on_sevice_db != 1) {
+                                methodDB.settab_db("Utenti_web");
+                                var cursor = methodDB.serachbyid_user(autore.id);
+                                cursor.then(function (result) {
+                                    if (result != null) {
+                                        Container = new Discord.MessageEmbed();
+                                        Container.setColor(colrs_set)
+                                            .setTitle('Utente: ' + autore.username)
+                                            .setThumbnail(autore.displayAvatarURL(), true)
+                                            .addField("Disprezzo", result.Priority)
+                                            .setTimestamp()
+                                            .setFooter("Data", message.author.displayAvatarURL());
+                                        message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
+                                    } else {
+                                        Container = new Discord.MessageEmbed();
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Utente non trovato');
+                                        message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
+                                    }
+                                });
                             }
                         } catch {
                             emit_print(message);
@@ -137,6 +170,7 @@ module.exports = {
                 console.log(error);
             }
         }
+        message.delete();
     }
 }
 

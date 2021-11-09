@@ -53,6 +53,7 @@ module.exports = {
                                         .addField("🆔 Scheda", js_result['_id'])
                                         .addField("Livello", js_result['Livello'], true)
                                         .addField("Milestone", js_result['Exp'], true)
+                                        .addField("Frammenti", js_result['Pbc_frag']['Frammento'], true)
                                         .addField('\u200b', '📝 **Anagrafe:**')
                                         .addField("Nome", js_result['Nome_PG'], true)
                                         .addField("Razza", js_result['Razza'], true)
@@ -61,6 +62,8 @@ module.exports = {
                                         .addField("Multi Classe", js_result['Multi Classe'], true)
                                         .addField("Multi Sotto Classe", js_result['Multi Sotto Classe'], true)
                                         .addField("Background", js_result['Background'], true)
+                                        .addField("Casata", js_result['Casata'], true)
+                                        .addField("Punti Fama", js_result['Punti_Fama'], true)
                                         .addField('\u200b', '**Statistiche:**')
                                         .addField("💪 Forza", js_result['Forza'], true)
                                         .addField("🤸‍♂️ Destrezza", js_result['Destrezza'], true)
@@ -69,6 +72,9 @@ module.exports = {
                                         .addField("📚 Saggezza", js_result['Saggezza'], true)
                                         .addField("🎭 Carisma", js_result['Carisma'], true)
                                         .addField("💰 Money", js_result['Money']);
+                                        // Campo libero 23
+                                        // Campo libero 24
+                                        // Campo libero 25
                                     message.channel.send(Container)
                                 } else {
                                     Container.setColor([255, 0, 0])

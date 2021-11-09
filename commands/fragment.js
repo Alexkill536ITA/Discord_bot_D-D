@@ -43,20 +43,32 @@ module.exports = {
                                     }
 
                                     if (Scheda_PG["Pbc_frag"] == undefined) {
-                                        reset_frag(message, Scheda_PG);
+                                        reset_frag(message, Scheda_PG, args[1]);
                                     } else {
                                         var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
                                         var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
                                         var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
                                         if (config.Level_Chat_reset == true) {
                                             if (ultima_asseganzione == getmonthNumber(new Date())) {
-                                                if (Exp_get_attuale < 2) {
+                                                if (Exp_get_attuale < config.Level_milestone_max) {
                                                     add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                                 } else {
+                                                    if (Scheda_PG["Avatar"] == "Non Assegnata" || Scheda_PG["Avatar"] == undefined) {
+                                                        var avatar = autore.displayAvatarURL();
+                                                    } else {
+                                                        var avatar = Scheda_PG["Avatar"];
+                                                    }
+                                                    Container.setColor(colrs_set)
+                                                        .setTitle('Scheda: ' + Scheda_PG["Nome_PG"])
+                                                        .setThumbnail(avatar, true)
+                                                        .setDescription("Ha ragiunto il massimo di Milestone di questo mese")
+                                                        .setTimestamp()
+                                                        .setFooter("Data", message.author.displayAvatarURL());
+                                                    message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
                                                     return 1;
                                                 }
                                             } else {
-                                                reset_frag(message, Scheda_PG);
+                                                reset_frag(message, Scheda_PG, args[1]);
                                             }
                                         } else {
                                             add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
@@ -91,20 +103,20 @@ module.exports = {
                                         }
 
                                         if (Scheda_PG["Pbc_frag"] == undefined) {
-                                            reset_frag(message, Scheda_PG);
+                                            reset_frag(message, Scheda_PG, 0);
                                         } else {
                                             var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
                                             var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
                                             var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
                                             if (config.Level_Chat_reset == true) {
                                                 if (ultima_asseganzione == getmonthNumber(new Date())) {
-                                                    if (Exp_get_attuale < 2) {
+                                                    if (Exp_get_attuale < config.Level_milestone_max) {
                                                         add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                                     } else {
                                                         return 1;
                                                     }
                                                 } else {
-                                                    reset_frag(message, Scheda_PG);
+                                                    reset_frag(message, Scheda_PG, 0);
                                                 }
                                             } else {
                                                 add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
@@ -172,9 +184,9 @@ function getmonthNumber(d) {
 function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
     var ogg_temp = {};
     if (type == "add" || type == "-a") {
-        frammenti = frammenti + value;
+        frammenti = parseInt(frammenti) + parseInt(value);
     } else if (type == "sub" || type == "-s") {
-        frammenti = frammenti - value;
+        frammenti = parseInt(frammenti) - parseInt(value);
     }
 
     if (frammenti == config.Level_Chat_max) {
@@ -230,10 +242,13 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
     }
 }
 
-function reset_frag(message, Scheda_PG) {
+function reset_frag(message, Scheda_PG, value) {
     var ogg_temp = {};
+    if (value > config.Level_Chat_max) {
+        value = value - config.Level_Chat_max;
+    }
     ogg_temp['Exp_get'] = 0;
-    ogg_temp['Frammento'] = 1;
+    ogg_temp['Frammento'] = value;
     ogg_temp['Data'] = new Date();
     methodDB.settab_db("Schede_PG");
     methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);
