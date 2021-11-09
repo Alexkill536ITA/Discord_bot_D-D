@@ -48,6 +48,18 @@ module.exports = {
                             if (Exp_get_attuale < config.Level_milestone_max) {
                                 add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
                             } else {
+                                if (Scheda_PG["Avatar"] == "Non Assegnata" || Scheda_PG["Avatar"] == undefined) {
+                                    var avatar = autore.displayAvatarURL();
+                                } else {
+                                    var avatar = Scheda_PG["Avatar"];
+                                }
+                                Container.setColor(colrs_set)
+                                    .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
+                                    .setThumbnail(avatar, true)
+                                    .setDescription("Hai ragiunto il massimo di Milestone di questo mese")
+                                    .setTimestamp()
+                                    .setFooter("Data", message.author.displayAvatarURL());
+                                message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
                                 return 1;
                             }
                         } else {
@@ -139,7 +151,7 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
                 .addField("\u200B", "Che squillino le trombe signori spettatori! \nInizia la commedia, che parlino gli attori. \nP.S.: hai ottenuto un frammento di milestone!")
                 .setTimestamp()
                 .setFooter("Data", message.author.displayAvatarURL());
-            message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000}));
+            message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
         }
     }
 }
