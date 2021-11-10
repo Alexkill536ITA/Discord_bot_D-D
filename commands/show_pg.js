@@ -53,6 +53,7 @@ module.exports = {
                                         .addField("🆔 Scheda", js_result['_id'])
                                         .addField("Livello", js_result['Livello'], true)
                                         .addField("Milestone", js_result['Exp'], true);
+                                    console.log(js_result['Pbc_frag']['Frammento'])
                                     if (js_result['Pbc_frag']['Frammento']) {
                                         Container.addField("Frammenti", js_result['Pbc_frag']['Frammento'], true);
                                     }
