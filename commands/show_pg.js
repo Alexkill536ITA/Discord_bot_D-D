@@ -37,10 +37,10 @@ module.exports = {
                             methodDB.settab_db("Schede_PG");
                             // const cursor = methodDB.load_pg(autore.id, id_discord);
                             const cursor = methodDB.load_pg(autore.id);
-                            cursor.then(function (result) {
+                            cursor.then(async function (result) {
                                 if (result != null) {
-                                    var js_result = JSON.stringify(result);
-                                    js_result = JSON.parse(js_result);
+                                    var js_result = await JSON.stringify(result);
+                                    js_result = await JSON.parse(js_result);
                                     if (js_result['Avatar'] == "Non Assegnata" || js_result['Avatar'] == undefined) {
                                         var avatar = autore.displayAvatarURL();
                                     } else {
