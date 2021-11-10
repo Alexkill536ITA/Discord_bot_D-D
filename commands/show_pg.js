@@ -56,7 +56,7 @@ module.exports = {
                                     try {
                                        Container.addField("Frammenti", js_result['Pbc_frag']['Frammento'], true); 
                                     } catch (error) {
-                                        
+                                        Container.addField("Frammenti", 0, true); 
                                     }
                                     Container.addField('\u200b', '📝 **Anagrafe:**')
                                         .addField("Nome", js_result['Nome_PG'], true)
