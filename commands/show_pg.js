@@ -52,9 +52,11 @@ module.exports = {
                                         .setThumbnail(avatar, true)
                                         .addField("🆔 Scheda", js_result['_id'])
                                         .addField("Livello", js_result['Livello'], true)
-                                        .addField("Milestone", js_result['Exp'], true)
-                                        .addField("Frammenti", js_result['Pbc_frag']['Frammento'], true)
-                                        .addField('\u200b', '📝 **Anagrafe:**')
+                                        .addField("Milestone", js_result['Exp'], true);
+                                    if (js_result['Pbc_frag']['Frammento']) {
+                                        Container.addField("Frammenti", js_result['Pbc_frag']['Frammento'], true);
+                                    }
+                                    Container.addField('\u200b', '📝 **Anagrafe:**')
                                         .addField("Nome", js_result['Nome_PG'], true)
                                         .addField("Razza", js_result['Razza'], true)
                                         .addField("Classe", js_result['Classe'], true)
@@ -72,9 +74,9 @@ module.exports = {
                                         .addField("📚 Saggezza", js_result['Saggezza'], true)
                                         .addField("🎭 Carisma", js_result['Carisma'], true)
                                         .addField("💰 Money", js_result['Money']);
-                                        // Campo libero 23
-                                        // Campo libero 24
-                                        // Campo libero 25
+                                    // Campo libero 23
+                                    // Campo libero 24
+                                    // Campo libero 25
                                     message.channel.send(Container)
                                 } else {
                                     Container.setColor([255, 0, 0])
