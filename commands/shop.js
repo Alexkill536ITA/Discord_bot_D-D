@@ -28,6 +28,7 @@ module.exports = {
             if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
                 if (args[0]) {
                     var autore = message.mentions.users.first();
+                    console.log(autore)
                     var nome_shop = args[0];
                     for (let index = 1; index < args.length; index++) {
                         nome_shop += " " + args[index];
@@ -49,7 +50,7 @@ module.exports = {
                             }
                         });
                         // } else if (String(args[0].length) == 24) {
-                    } else if (message.author.id == autore.id) {
+                    } else if (message.author.id == autore['id']) {
                         if (args[2]) {
                             if (isNaN(parseInt(args[2]))) {
                                 var nome = args[2];
@@ -62,44 +63,38 @@ module.exports = {
                                 var on_sevice_db = await methodDB.open_db();
                                 if (on_sevice_db != 1) {
                                     methodDB.settab_db("Oggeti_Di_Gioco");
-                                    var cursor = methodDB.serachbynome_obj(nome);
-                                    cursor.then(async function (result) {
-                                        if (result == null || result == undefined) {
+                                    var result = await methodDB.serachbynome_obj(nome);
+                                    console.log(result);
+                                    if (result == null || result == undefined) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Oggetto non trovato');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    } else {
+                                        // if (String(args[0]).length == 24) {
+                                        // var Scheda = await get_Scheda_pg(args[0]);
+                                        var Scheda = await get_Scheda_pg(autore.id);
+                                        if (Scheda != null) {
+                                            // var complete = add_item(message, args, Scheda[0], result);
+                                            var complete = add_item(message, args, Scheda, result);
+                                            if (complete == 1) {
+                                                Container.setColor([255, 0, 0])
+                                                    .setAuthor(`Acquirente non valido: ` + message.author.username)
+                                                    .setTitle('Non puoi spacciarti per un altro');
+                                                message.channel.send(Container);
+                                                return 1;
+                                            } else {
+                                                return 0;
+                                            }
+                                        } else {
                                             Container.setColor([255, 0, 0])
                                                 .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                .setTitle('Errore Oggetto non trovato');
+                                                .setTitle('Errore Scheda PG non trovata');
                                             message.channel.send(Container);
                                             return 1;
-                                        } else {
-                                            // if (String(args[0]).length == 24) {
-                                            if (args[0] == message.mentions.users.first()) {
-                                                // var Scheda = await get_Scheda_pg(args[0]);
-                                                var Scheda = await get_Scheda_pg(autore.id);
-                                                if (Scheda != null) {
-                                                    // var complete = add_item(message, args, Scheda[0], result);
-                                                    var complete = add_item(message, args, Scheda, result);
-                                                    if (complete == 1) {
-                                                        Container.setColor([255, 0, 0])
-                                                            .setAuthor(`Acquirente non valido: ` + message.author.username)
-                                                            .setTitle('Non puoi spacciarti per un altro');
-                                                        message.channel.send(Container);
-                                                        return 1;
-                                                    } else {
-                                                        return 0;
-                                                    }
-                                                } else {
-                                                    Container.setColor([255, 0, 0])
-                                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                        .setTitle('Errore Scheda PG non trovata');
-                                                    message.channel.send(Container);
-                                                    return 1;
-                                                }
-                                            } else {
-                                                emit_print(message);
-                                                return 1;
-                                            }
                                         }
-                                    });
+                                    }
                                 }
                             } else {
                                 var on_sevice_db = await methodDB.open_db();
@@ -169,6 +164,7 @@ module.exports = {
                 return;
             } else {
                 emit_print(message);
+                console.log(error)
             }
         }
     }
