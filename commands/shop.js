@@ -28,7 +28,6 @@ module.exports = {
             if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
                 if (args[0]) {
                     var autore = message.mentions.users.first();
-                    console.log(autore)
                     var nome_shop = args[0];
                     for (let index = 1; index < args.length; index++) {
                         nome_shop += " " + args[index];
@@ -64,7 +63,6 @@ module.exports = {
                                 if (on_sevice_db != 1) {
                                     methodDB.settab_db("Oggeti_Di_Gioco");
                                     var result = await methodDB.serachbynome_obj(nome);
-                                    console.log(result);
                                     if (result == null || result == undefined) {
                                         Container.setColor([255, 0, 0])
                                             .setAuthor(`Richiesta di: ${message.author.username}`)
@@ -164,7 +162,6 @@ module.exports = {
                 return;
             } else {
                 emit_print(message);
-                console.log(error)
             }
         }
     }
