@@ -92,6 +92,39 @@ module.exports = {
                         message.channel.send(Container);
                     }
                 }
+            } else if (args[0] == 'lock') {
+                if (args[1]) {
+                    var autore = message.mentions.users.first();
+                    var on_sevice_db = await methodDB.open_db();
+                    if (on_sevice_db != 1) {
+                        methodDB.settab_db("Utenti_web");
+                        var cursor = methodDB.serachbyid_user(autore.id);
+                        cursor.then(function (result) {
+                            if (result != null) {
+                                methodDB.block_control(result._id, 1);
+                                let member = message.guild.members.cache.get(result.Nome_Discord);
+                                if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
+                                    var avatar = member.user.displayAvatarURL();
+                                } else {
+                                    var avatar = result.Avatar;
+                                }
+                                Container = new Discord.MessageEmbed();
+                                Container.setColor(colrs_set)
+                                    .setDescription("Utente bloccato")
+                                    .setTitle('Utente: ' + autore.name)
+                                    .setThumbnail(avatar, true)
+                                    .setTimestamp()
+                                    .setFooter("Data", message.author.displayAvatarURL());
+                                message.channel.send(Container);
+                            }
+                        });
+                    } else {
+                        Container.setColor([255, 0, 0])
+                            .setAuthor(`Comando mission`)
+                            .setTitle('Sintassi **' + config.prefix + 'mission lock** [@utente]');
+                        message.channel.send(Container);
+                    }
+                }
             } else {
                 Container.setColor([255, 0, 0])
                     .setAuthor(`Comando mission`)
@@ -169,15 +202,14 @@ async function Make_mission_message(client, message, args) {
         if (args[0] == 'init') {
             var messageEmbed = await message.channel.send(role_ping, Container);
             messageEmbed.react(emoji_check);
-            messageEmbed.delete({ timeout: exspire_time });
+            // messageEmbed.delete({ timeout: exspire_time });
             methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
         } else {
             var channel = await client.channels.fetch(config.chat_missioni);
             var message_old = await channel.messages.fetch(mission['Discord_id_message']);
             message_old.edit(Container);
-            message_old.delete({ timeout: exspire_time });
+            // message_old.delete({ timeout: exspire_time });
         }
-        
 
         print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
 
@@ -501,6 +533,18 @@ function exspire_date(date_int) {
         diff = today.setDate(today.getDate() + 7);
     }
     diff = parseInt(diff / 1000)
+    // var msec = diff;
+    // var hh = Math.floor(msec / 1000 / 60 / 60);
+    // msec -= hh * 1000 * 60 * 60;
+    // var mm = Math.floor(msec / 1000 / 60);  
+    // msec -= mm * 1000 * 60;
+    // var ss = Math.floor(msec / 1000);
+    // msec -= ss * 1000;
+
+    // console.log("Ora:"+hh+" Minuti:"+mm+" Secondi:"+ss+" Millisecondi:"+msec);
+    // console.log(typeof diff);
+    // console.log(diff);
+
     return diff;
 }
 
