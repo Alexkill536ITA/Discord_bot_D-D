@@ -152,6 +152,7 @@
     "chat_scambi": "770795462584041543",
     "chat_scambi_ping": "Gildano",
     "player_ping": "Gildano",
+    "register_anonymous_enable": false,
     "shop_name": [
         "ampolla d'oro",
         "incudine di godor",
