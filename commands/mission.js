@@ -258,6 +258,52 @@ async function Make_mission_message(client, message, args) {
                 }
             }
         });
+
+        client.on('messageReactionRemove', async (reaction, user) => {
+            if (reaction.message.partial) await reaction.message.fetch();
+            if (reaction.partial) await reaction.fetch();
+            if (user.bot) return;
+            if (!reaction.message.guild) return;
+
+            if (reaction.message.channel.id == config.chat_missioni) {
+                if (reaction.emoji.name === emoji_check) {
+                    // var id_player = await reaction.message.guild.members.cache.get(user.id);
+                    var user_web = get_User_web(user.id);
+                    if (user_web != 1) {
+                        mission = await get_Mission(args[1]);
+
+                        for (let index = 0; index < mission['Player_list'].length; index++) {
+                            if (mission['Player_list'][index]['ID_Discord'] == user.id) {
+                                methodDB.settab_db("Registro_missioni");
+                                methodDB.mission_update_remove(mission['ID'], user.id);
+                                if (config.register_anonymous_enable == true) {
+                                   reaction.users.remove(user.id);
+                                }
+                                return;
+                            }
+                        }
+                        var scheda_player = await get_Scheda_pg(user.id);
+                        var template = {
+                            "ID_Discord": user.id,
+                            "Nome_PG": scheda_player['Nome_PG'],
+                            "Status": "Attesa"
+                        }
+                        if (mission['Player_list'].length == 0) {
+                            mission['Player_list'][0] = template;
+                        } else {
+                            mission['Player_list'].push(template);
+                        }
+                        methodDB.settab_db("Registro_missioni");
+                        methodDB.mission_update(mission['ID'], mission);
+                        if (config.register_anonymous_enable == true) {
+                            reaction.users.remove(user.id);
+                        }
+                    } else {
+
+                    }
+                }
+            }
+        });
         message.delete();
     } else {
         Container.setColor([255, 0, 0])
