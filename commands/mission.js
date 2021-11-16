@@ -202,13 +202,13 @@ async function Make_mission_message(client, message, args) {
         if (args[0] == 'init') {
             var messageEmbed = await message.channel.send(role_ping, Container);
             messageEmbed.react(emoji_check);
-            // messageEmbed.delete({ timeout: exspire_time });
+            messageEmbed.delete({ timeout: exspire_time });
             methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
         } else {
             var channel = await client.channels.fetch(config.chat_missioni);
             var message_old = await channel.messages.fetch(mission['Discord_id_message']);
             message_old.edit(Container);
-            // message_old.delete({ timeout: exspire_time });
+            message_old.delete({ timeout: exspire_time });
         }
 
         print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
@@ -230,7 +230,9 @@ async function Make_mission_message(client, message, args) {
                             if (mission['Player_list'][index]['ID_Discord'] == user.id) {
                                 methodDB.settab_db("Registro_missioni");
                                 methodDB.mission_update_remove(mission['ID'], user.id);
-                                reaction.users.remove(user.id);
+                                if (config.register_anonymous_enable == true) {
+                                   reaction.users.remove(user.id);
+                                }
                                 return;
                             }
                         }
@@ -247,7 +249,9 @@ async function Make_mission_message(client, message, args) {
                         }
                         methodDB.settab_db("Registro_missioni");
                         methodDB.mission_update(mission['ID'], mission);
-                        reaction.users.remove(user.id);
+                        if (config.register_anonymous_enable == true) {
+                            reaction.users.remove(user.id);
+                        }
                     } else {
 
                     }
@@ -532,8 +536,10 @@ function exspire_date(date_int) {
     if (diff < 0) {
         diff = today.setDate(today.getDate() + 7);
     }
-    diff = parseInt(diff / 1000)
+    // console.log(diff);
     // var msec = diff;
+    // var gg = Math.floor(msec / 1000 / 60 / 60 / 24);
+    // msec -= gg * 1000 * 60 * 60 * 24;
     // var hh = Math.floor(msec / 1000 / 60 / 60);
     // msec -= hh * 1000 * 60 * 60;
     // var mm = Math.floor(msec / 1000 / 60);  
@@ -541,9 +547,7 @@ function exspire_date(date_int) {
     // var ss = Math.floor(msec / 1000);
     // msec -= ss * 1000;
 
-    // console.log("Ora:"+hh+" Minuti:"+mm+" Secondi:"+ss+" Millisecondi:"+msec);
-    // console.log(typeof diff);
-    // console.log(diff);
+    // console.log("Giorni:"+gg+" Ora:"+hh+" Minuti:"+mm+" Secondi:"+ss+" Millisecondi:"+msec);
 
     return diff;
 }
