@@ -91,37 +91,34 @@ module.exports = {
                                 if (isNaN(parseInt(args[1]))) {
                                     emit_print(message);
                                 } else {
-                                    if (result != null) {
-                                        var Scheda = await get_Scheda_pg(autore.id);
-                                        var Scheda_PG = Scheda[0];
-                                        if (Scheda_PG == 1) {
-                                            Container.setColor([255, 0, 0])
-                                                .setAuthor(`Richiesta di: ${autore.username}`)
-                                                .setTitle('Errore Scheda PG non trovata');
-                                            message.channel.send(Container);
-                                            return 1;
-                                        }
+                                    var Scheda = await get_Scheda_pg(autore.id);
+                                    var Scheda_PG = Scheda[0];
+                                    if (Scheda_PG == 1) {
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${autore.username}`)
+                                            .setTitle('Errore Scheda PG non trovata');
+                                        message.channel.send(Container);
+                                        return 1;
+                                    }
 
-                                        if (Scheda_PG["Pbc_frag"] == undefined) {
-                                            reset_frag(message, Scheda_PG, 0);
-                                        } else {
-                                            var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
-                                            var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
-                                            var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
-                                            if (config.Level_Chat_reset == true) {
-                                                if (ultima_asseganzione == getmonthNumber(new Date())) {
-                                                    if (Exp_get_attuale < config.Level_milestone_max) {
-                                                        add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
-                                                    } else {
-                                                        return 1;
-                                                    }
+                                    if (Scheda_PG["Pbc_frag"] == undefined) {
+                                        reset_frag(message, Scheda_PG, 0);
+                                    } else {
+                                        var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
+                                        var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
+                                        var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
+                                        if (config.Level_Chat_reset == true) {
+                                            if (ultima_asseganzione == getmonthNumber(new Date())) {
+                                                if (Exp_get_attuale < config.Level_milestone_max) {
+                                                    add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                                 } else {
-                                                    reset_frag(message, Scheda_PG, 0);
+                                                    return 1;
                                                 }
                                             } else {
-                                                add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
+                                                reset_frag(message, Scheda_PG, 0);
                                             }
-
+                                        } else {
+                                            add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
                                         }
                                     }
                                 }
@@ -233,7 +230,7 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
             Container.setColor(colrs_set)
                 .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
                 .setThumbnail(avatar, true)
-                .addField("Frammenti ottenute: ", frammenti)
+                .addField("Frammenti: ", frammenti)
                 .addField("\u200B", "Che squillino le trombe signori spettatori! \nInizia la commedia, che parlino gli attori. \nP.S.: hai ottenuto un frammento di milestone!")
                 .setTimestamp()
                 .setFooter("Data", message.author.displayAvatarURL());
