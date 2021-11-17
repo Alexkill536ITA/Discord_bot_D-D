@@ -117,7 +117,7 @@
     },
     "set_casata.js": {
         "name": "set_casata.js",
-        "SHA512": "a878916aace2d73180bc1d3d1ba48c28d8b2697767bdc7bf2fe3292b40f5ac99c67d1e58b8cca4c56582559bbf5c9e9ad74226577ad037b07ce64dfc19d66817"
+        "SHA512": "0c84e92ee508aacf8096b9930fd389f2b9e1d782f205dd945690f3b406a5d482c9cb401b7d36d2300fb41688b23ed03efd5965a46a5ec96aadc581caa5f9de31"
     },
     "set_config.js": {
         "name": "set_config.js",
@@ -182,7 +182,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.2.4",
-        "Date Check": "17/11/2021 11:47"
+        "Version": "1.2.5",
+        "Date Check": "17/11/2021 11:51"
     }
 }

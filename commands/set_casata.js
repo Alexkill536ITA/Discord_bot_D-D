@@ -35,7 +35,7 @@ module.exports = {
                             }
                             nome = String(nome).toLowerCase();
                         }
-                        if (nome.some(r => config.list_casate.includes(r.nome))) {
+                        if (config.list_casate.includes(nome)) {
                             var Scheda = await get_Scheda_pg(autore.id);
                             if (Scheda != null) {
                                 methodDB.casata_update(Scheda._id, capitalizeFirstLetter(nome))
