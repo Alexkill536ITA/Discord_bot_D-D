@@ -105,7 +105,7 @@ module.exports = {
             message.channel.send(Container);
         } else if (args[0] == "pgcasata") {
             message_casata = ""
-            for (index of config.message_casata) {
+            for (index of config.list_casate) {
                 message_casata = message_casata + "• " + index + "\n"
             }
             Container.setColor([255, 0, 0])
