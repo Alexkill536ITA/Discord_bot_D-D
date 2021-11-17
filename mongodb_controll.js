@@ -177,6 +177,12 @@ exports.inventory_pbc_frag = function (id_scheda, value_new) {
     return 0;
 }
 
+exports.casata_update = function (id_scheda, value_new) {
+    id_scheda = mongo.ObjectID(id_scheda);
+    collection.updateOne({ '_id': id_scheda }, { $set: { Casata : value_new } });
+    return 0;
+}
+
 exports.Object_scambio_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, { $set: value_new });
