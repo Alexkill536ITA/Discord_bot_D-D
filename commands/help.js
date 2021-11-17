@@ -103,7 +103,7 @@ module.exports = {
                 // .setDescription('Sintassi: **' + config.prefix + 'pginventario** [@utente][ID_Scheda] \n\nMostra l\'inventario del personaggio\n Per ottenerla menzionare il sestessi o un altro membro nel campo [@utente]\ne inserire ID della scheda nel campo [ID_Scheda]');
                 .setDescription('Sintassi: **' + config.prefix + 'pginventario** [@utente] \n\nMostra l\'inventario del personaggio\n Per ottenerla menzionare il sestessi o un altro membro nel campo [@utente]');
             message.channel.send(Container);
-        } else if (args[0] == "casata") {
+        } else if (args[0] == "pgcasata") {
             message_casata = ""
             for (index of config.message_casata) {
                 message_casata = message_casata + "• " + index + "\n"
@@ -111,8 +111,8 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Shop')
                 .setThumbnail(botavatar.displayAvatarURL())
-                // .setDescription('Sintassi: **' + config.prefix + 'casata** [ID_Scheda][Nome casata]\n\n **Nomi casate:**\n' + message_casata + '\nIl comando casata permette di selezionare una casata a cuoi appartenere. Per usare il comando insereire [ID_Scheda] e il nome della casata [Nome casata]');
-                .setDescription('Sintassi: **' + config.prefix + 'casata** [@utente][Nome casata]\n\n **Nomi casate:**\n' + message_casata + '\nIl comando casata permette di selezionare una casata a cuoi appartenere. Per usare il comando insereire [@utene] e il nome della casata [Nome casata]');
+                // .setDescription('Sintassi: **' + config.prefix + 'pgcasata** [ID_Scheda][Nome casata]\n\n **Nomi casate:**\n' + message_casata + '\nIl comando casata permette di selezionare una casata a cuoi appartenere. Per usare il comando insereire [ID_Scheda] e il nome della casata [Nome casata]');
+                .setDescription('Sintassi: **' + config.prefix + 'pgcasata** [@utente][Nome casata]\n\n **Nomi casate:**\n' + message_casata + '\nIl comando pgcasata permette di selezionare una casata a cuoi appartenere. Per usare il comando insereire [@utene] e il nome della casata [Nome casata]');
             message.channel.send(Container);
         } else if (args[0] == "shop") {
             message_shop = ""
@@ -339,8 +339,8 @@ module.exports = {
                 .addField("💬 Prefix 💬", "• **" + config.prefix + "**")
                 .addField(":question: Descrizione Comandi :question:", '• **help** [comando]')
                 .addField("👤 Utente 👤", '• **id**\n• **avatar** [@utente]\n • **register** \n • **resetpassword**')
-                // .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgavatar** [Opzione][ID_Scheda][URL Avatar]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pgcompetenze** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **casata** [ID_Scheda][Nome casata]')
-                .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente]\n • **pgavatar** [Opzione][@utente][URL Avatar]\n • **pgdescrizione** [@utente]\n • **pgcompetenze** [@utente]\n • **pginventario** [@utente]\n • **casata** [@utente][Nome casata]')
+                // .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente][ID_Scheda]\n • **pgavatar** [Opzione][ID_Scheda][URL Avatar]\n • **pgdescrizione** [@utente][ID_Scheda]\n • **pgcompetenze** [@utente][ID_Scheda]\n • **pginventario** [@utente][ID_Scheda]\n • **pgcasata** [ID_Scheda][Nome casata]')
+                .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente]\n • **pgavatar** [Opzione][@utente][URL Avatar]\n • **pgdescrizione** [@utente]\n • **pgcompetenze** [@utente]\n • **pginventario** [@utente]\n • **pgcasata** [@utente][Nome casata]')
                 // .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [@utente][Quantità][Nome oggetto]\n • **shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]")
                 // .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **fragment** [Opzione][Valore][ID_Scheda]\n • **competenza** [Opzione][ID_Scheda][Id/Nome Competenza]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")

@@ -1,7 +1,7 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "5eee36e4b30ac0cf7ed11da6c5a56696081cebfd6f1cfb7def6502a8a92be0056ad6b0ecb3008bcb0a403a8a8c13255e1be7f213616d91647f21eb3ef851a13a"
+        "SHA512": "8b41b7f34b81890581767a9934876ec91951f475966f51defb40e578a2b08a512653ff76195b6b2c73ed6c2beb65b3405ad817675738e57df63fcda0c4bf35db"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
@@ -69,7 +69,7 @@
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "1419e69635fc658a193d77a10807739f8e5cde4fbb71a844b2784020008957b4ab71b27ab5e5b91e55bd4d1a14c25d0db7cf3b73eee8284852e05af2eed828d9"
+        "SHA512": "42a51d06e45492fbfd514ff519326f4bce69a37cd65a8aaaeae1c3afa4db79ff1783d57a20f1a7256b0053b1dee75104f0f13d8f6dce4791583fb7b2ef86ea6c"
     },
     "id.js": {
         "name": "id.js",
@@ -117,7 +117,7 @@
     },
     "set_casata.js": {
         "name": "set_casata.js",
-        "SHA512": "0c84e92ee508aacf8096b9930fd389f2b9e1d782f205dd945690f3b406a5d482c9cb401b7d36d2300fb41688b23ed03efd5965a46a5ec96aadc581caa5f9de31"
+        "SHA512": "e277452ffe83370bf15608b2893cb933cadf842cb8ad029fbb521238c501fa2066a5e83d22941a8cda9b1202df1d1124335741efa8ad1d578d2d710574f09fee"
     },
     "set_config.js": {
         "name": "set_config.js",
@@ -183,6 +183,6 @@
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
         "Version": "1.2.5",
-        "Date Check": "17/11/2021 11:51"
+        "Date Check": "17/11/2021 11:57"
     }
 }
