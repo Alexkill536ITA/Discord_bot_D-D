@@ -158,6 +158,11 @@
         "incudine di godor",
         "banco del kraken"
     ],
+    "list_casate": [
+        "arcana",
+        "milizia",
+        "diplomatica"
+    ],
     "random_color_enable": "true",
     "Debug_Level": "INFO"
 }

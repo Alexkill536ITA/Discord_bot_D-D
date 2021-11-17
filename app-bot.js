@@ -107,6 +107,8 @@ function Discord_start() {
             client.commands.get('pgcompetenze').execute(message, args);
         } else if (command == 'pginventario') {
             client.commands.get('pginventario').execute(message, args);
+        } else if (command == 'casata') {
+            client.commands.get('casata').execute(message, args);
         } else if (command == 'competenza') {
             client.commands.get('competenza').execute(message, args)
         } else if (command == 'money') {
