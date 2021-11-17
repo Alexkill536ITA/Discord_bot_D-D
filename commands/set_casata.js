@@ -14,7 +14,7 @@ const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
 
 module.exports = {
-    name: 'casata',
+    name: 'pgcasata',
     description: "Seleziona Casata",
     async execute(message, args) {
         if (config.Debug_Level == "DEBUG") {
@@ -88,9 +88,9 @@ function emit_print(message) {
         message_casata = message_casata + "• " + index + "\n"
     }
     Container.setColor([255, 0, 0])
-        .setAuthor(`Comando casata`)
-        // .setTitle('Sintassi:\n **' + config.prefix + 'pgoggetto** [ID_Scheda][Nome casata]');
-        .setTitle('Sintassi:\n **' + config.prefix + 'casata** [@utente][Nome casata]')
+        .setAuthor(`Comando pgcasata`)
+        // .setTitle('Sintassi:\n **' + config.prefix + 'pgcasata** [@utente][Nome casata]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'pgcasata** [@utente][Nome casata]')
         .addField('Lista Casate', message_casata);
     message.channel.send(Container);
 }
