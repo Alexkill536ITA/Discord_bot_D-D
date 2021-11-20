@@ -53,6 +53,7 @@ module.exports = {
                                 } else {
                                     var avatar = Scheda_PG["Avatar"];
                                 }
+                                var colrs_set = clor_gen.rand_Color();
                                 Container.setColor(colrs_set)
                                     .setTitle('Scheda: ' + Scheda_PG['Nome_PG'])
                                     .setThumbnail(avatar, true)

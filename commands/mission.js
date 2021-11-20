@@ -206,9 +206,9 @@ async function Make_mission_message(client, message, args) {
             methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
         } else {
             var channel = await client.channels.fetch(config.chat_missioni);
-            var message_old = await channel.messages.fetch(mission['Discord_id_message']);
-            message_old.edit(Container);
-            message_old.delete({ timeout: exspire_time });
+            var message = await channel.messages.fetch(mission['Discord_id_message']);
+            message.edit(Container);
+            message.delete({ timeout: exspire_time });
         }
 
         print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
