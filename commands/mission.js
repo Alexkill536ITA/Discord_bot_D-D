@@ -46,6 +46,12 @@ module.exports = {
                         .setTitle('Sintassi **' + config.prefix + 'mission** [Opzione][ID_MISSIONE]');
                     message.channel.send(Container);
                 }
+            } else if (args[0] == 'edit') {
+                if (message.author.id == config.owner) {
+                    if (args[1].length == 6) {
+                        Make_mission_message(client, message, args);
+                    }
+                }
                 // } else if (args[0] == 'close') {
                 //     if (args[1].length == 6) {
                 //         if (args[2] && args[3]) {
@@ -206,9 +212,9 @@ async function Make_mission_message(client, message, args) {
             methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
         } else {
             var channel = await client.channels.fetch(config.chat_missioni);
-            var message = await channel.messages.fetch(mission['Discord_id_message']);
-            message.edit(Container);
-            message.delete({ timeout: exspire_time });
+            var message_old = await channel.messages.fetch(mission['Discord_id_message']);
+            message_old.edit(Container);
+            message_old.delete({ timeout: exspire_time });
         }
 
         print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
@@ -336,6 +342,12 @@ async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
         } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
             reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
         }
+    }
+
+    if (player.length == 0) {
+        methodDB.settab_db("Registro_missioni");
+        methodDB.mission_update_status(mission['ID'], 'disable');
+        return;
     }
 
     Container.setColor(colrs_set)
