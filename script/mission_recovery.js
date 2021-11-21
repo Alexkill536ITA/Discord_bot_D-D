@@ -15,7 +15,7 @@ const color = require("ansi-colors");
 
 exports.mission_recovey = async function (client) {
     try {
-        var cursor_ar = await get_Mission();
+        var cursor_ar = await get_Mission_all();
         var fail = 0;
         cursor_ar.forEach(async (element) => {
             try {
@@ -46,11 +46,22 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function get_Mission() {
+async function get_Mission_all() {
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
         methodDB.settab_db("Registro_missioni");
         var cursor = await methodDB.recoverymission();
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+async function get_Mission(id_mission) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Registro_missioni");
+        var cursor = methodDB.load_mission(id_mission);
     } else {
         return 1;
     }
