@@ -375,7 +375,7 @@ async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
         .setTimestamp()
         .setFooter("ID:" + mission['ID']);
 
-    if (reserve != []) {
+    if (reserve.length > 0) {
         Container.addField("Reserve", reserve, true);
     }
 
