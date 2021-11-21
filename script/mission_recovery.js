@@ -10,6 +10,7 @@ const { MongoClient, Cursor } = require("mongodb");
 const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
+const clor_gen = require("../script/color_gen.js");
 const color = require("ansi-colors");
 
 exports.mission_recovey = async function (client) {
