@@ -71,7 +71,7 @@ async function get_Mission(id_mission) {
 async function Make_mission_message(client, args) {
     var Container = new Discord.MessageEmbed();
     var colrs_set = clor_gen.rand_Color();
-    var mission = await get_Mission(args[1]);
+    var mission = await get_Mission(args);
     if (mission != null && mission != 1) {
         const avatar_DM = await client.users.fetch(mission['Master_id'])
         const emoji_check = '✅';
@@ -130,7 +130,7 @@ async function Make_mission_message(client, args) {
         message_old.delete({ timeout: exspire_time });
 
 
-        print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
+        print_call_allert(client, args, avatar_DM, exspire_date(mission['Data_ora_missione']));
 
         client.on('messageReactionAdd', async (reaction, user) => {
             if (reaction.message.partial) await reaction.message.fetch();
@@ -143,7 +143,7 @@ async function Make_mission_message(client, args) {
                     // var id_player = await reaction.message.guild.members.cache.get(user.id);
                     var user_web = get_User_web(user.id);
                     if (user_web != 1) {
-                        mission = await get_Mission(args[1]);
+                        mission = await get_Mission(args);
 
                         for (let index = 0; index < mission['Player_list'].length; index++) {
                             if (mission['Player_list'][index]['ID_Discord'] == user.id) {
@@ -189,7 +189,7 @@ async function Make_mission_message(client, args) {
                     // var id_player = await reaction.message.guild.members.cache.get(user.id);
                     var user_web = get_User_web(user.id);
                     if (user_web != 1) {
-                        mission = await get_Mission(args[1]);
+                        mission = await get_Mission(args);
 
                         for (let index = 0; index < mission['Player_list'].length; index++) {
                             if (mission['Player_list'][index]['ID_Discord'] == user.id) {
