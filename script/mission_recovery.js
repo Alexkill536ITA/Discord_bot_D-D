@@ -5,7 +5,9 @@
 *?       Prodotto Registrato sotto Bjarka Energy®      **|
 \**----------------------------------------------------**/
 
+const { DiscordAPIError } = require("discord.js");
 const { MongoClient, Cursor } = require("mongodb");
+const Discord = require('discord.js');
 const methodDB = require("../mongodb_controll");
 const config = require("../config.json");
 const color = require("ansi-colors");
