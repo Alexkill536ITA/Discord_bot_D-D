@@ -274,3 +274,53 @@ async function Make_mission_message(client, args) {
         client.channels.cache.get(config.chat_missioni).send(Container);
     }
 }
+
+async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
+    await sleep(exspire_time);
+    var mission = await get_Mission(mission_id);
+    var Container = new Discord.MessageEmbed();
+    var colrs_set = clor_gen.rand_Color();
+
+    var player = [];
+    var reserve = [];
+
+    if (mission['Player_list'] == null) {
+        return 1;
+    }
+
+    for (let index = 0; index < mission['Player_list'].length; index++) {
+        if (mission['Player_list'][index]['Status'] == 'Accettato') {
+            player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+            increment_pryority(mission['Player_list'][index]['ID_Discord']);
+            block_control(mission['Player_list'][index]['ID_Discord'], 1);
+        } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
+            reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+        }
+    }
+
+    if (player.length == 0) {
+        methodDB.settab_db("Registro_missioni");
+        methodDB.mission_update_status(mission['ID'], 'disable');
+        return;
+    }
+
+    Container.setColor(colrs_set)
+        .setTitle(mission['Nome'])
+        .setDescription(mission['Descrizione'])
+        .setThumbnail(avatar_DM.displayAvatarURL())
+        .addField("🏷 Tag", mission['Tag'], true)
+        .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
+        .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']))
+        .addField("👥 Player", player, true)
+        .setTimestamp()
+        .setFooter("ID:" + mission['ID']);
+
+    if (reserve != []) {
+        Container.addField("Reserve", reserve, true);
+    }
+
+    methodDB.settab_db("Registro_missioni");
+    methodDB.mission_update_status(mission['ID'], 'execute');
+
+    client.channels.cache.get(config.chat_missioni_ping).send(Container);
+}
