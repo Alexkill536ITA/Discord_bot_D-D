@@ -22,18 +22,20 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.author.bot && message.author.id != config.webhooks || message.author.id != client.user.id) {
-            if (args[0] == 'init') {
-                if (args[1].length == 6) {
-                    Make_mission_message(client, message, args);
-                }
-            } else if (args[0] == 'response') {
-                if (args[1].length == 6) {
-                    Make_mission_response(client, message, args);
-                }
-            } else if (args[0] == 'edit') {
-                if (args[1].length == 6) {
-                    Make_mission_message(client, message, args);
+        if (message.author.bot) {
+            if (message.author.id == config.webhooks || message.author.id == client.user.id) {
+                if (args[0] == 'init') {
+                    if (args[1].length == 6) {
+                        Make_mission_message(client, message, args);
+                    }
+                } else if (args[0] == 'response') {
+                    if (args[1].length == 6) {
+                        Make_mission_response(client, message, args);
+                    }
+                } else if (args[0] == 'edit') {
+                    if (args[1].length == 6) {
+                        Make_mission_message(client, message, args);
+                    }
                 }
             }
         } else if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
@@ -51,6 +53,10 @@ module.exports = {
                     if (args[1].length == 6) {
                         Make_mission_message(client, message, args);
                     }
+                }
+            } else if (args[0] == 'response') {
+                if (args[1].length == 6) {
+                    Make_mission_response(client, message, args);
                 }
                 // } else if (args[0] == 'close') {
                 //     if (args[1].length == 6) {
@@ -237,7 +243,7 @@ async function Make_mission_message(client, message, args) {
                                 methodDB.settab_db("Registro_missioni");
                                 methodDB.mission_update_remove(mission['ID'], user.id);
                                 if (config.register_anonymous_enable == true) {
-                                   reaction.users.remove(user.id);
+                                    reaction.users.remove(user.id);
                                 }
                                 return;
                             }
@@ -283,7 +289,7 @@ async function Make_mission_message(client, message, args) {
                                 methodDB.settab_db("Registro_missioni");
                                 methodDB.mission_update_remove(mission['ID'], user.id);
                                 if (config.register_anonymous_enable == true) {
-                                   reaction.users.remove(user.id);
+                                    reaction.users.remove(user.id);
                                 }
                                 return;
                             }
