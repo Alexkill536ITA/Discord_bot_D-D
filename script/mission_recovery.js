@@ -197,10 +197,16 @@ async function Make_mission_message(client, args) {
             var exspire_time = exspire_date(mission['Data_scadenza']);
             // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
             var channel = await client.channels.fetch(config.chat_missioni);
-            var message = await channel.messages.fetch(mission['Discord_id_message']);
-            message.edit(Container);
-            message.delete({ timeout: exspire_time });
-
+            try {
+                var message = await channel.messages.fetch(mission['Discord_id_message']);
+                message.edit(Container);
+                message.delete({ timeout: exspire_time });
+            } catch (error) {
+                var messageEmbed = await client.channels.cache.get(config.chat_missioni).send(Container);
+                messageEmbed.react(emoji_check);
+                messageEmbed.delete({ timeout: exspire_time });
+                methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
+            }
 
             print_call_allert(client, args, avatar_DM, exspire_date(mission['Data_ora_missione']));
 
