@@ -197,7 +197,7 @@ async function Make_mission_message(client, message, args) {
         if (mission['URL_Image'] != "" && mission['URL_Image'] != "Non Aseganata") {
             var immage = mission['URL_Image'];
         } else {
-            var immage = "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
+            var immage = "https://cdn.discordapp.com/attachments/759699249947869184/912053846359023666/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png";
         }
 
         Container.setColor(colrs_set)
@@ -215,7 +215,7 @@ async function Make_mission_message(client, message, args) {
             .addField("📝 Scadenza iscrizione", format_date(mission['Data_scadenza']), true)
             .setImage(immage)
             .setTimestamp()
-            .setFooter("ID:" + mission['ID']);
+            .setFooter("ID: " + mission['ID']);
         var exspire_time = exspire_date(mission['Data_scadenza']);
         // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
         if (args[0] == 'init') {
