@@ -112,6 +112,10 @@ function exspire_date(date_int) {
     return diff;
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function Make_mission_message(client, args) {
     var Container = new Discord.MessageEmbed();
     var colrs_set = clor_gen.rand_Color();
