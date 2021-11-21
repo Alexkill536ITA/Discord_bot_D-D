@@ -207,6 +207,7 @@ async function Make_mission_message(client, message, args) {
             .addField("\u200b", "\u200b")
             .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']), true)
             .addField("📝 Scadenza iscrizione", format_date(mission['Data_scadenza']), true)
+            .setImage(mission['URL_Image'])
             .setTimestamp()
             .setFooter("ID:" + mission['ID']);
         var exspire_time = exspire_date(mission['Data_scadenza']);
