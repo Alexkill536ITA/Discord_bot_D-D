@@ -22,7 +22,7 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-        if (message.author.bot && message.author.id == config.webhooks) {
+        if (message.author.bot && message.author.id != config.webhooks || message.author.id != client.user.id) {
             if (args[0] == 'init') {
                 if (args[1].length == 6) {
                     Make_mission_message(client, message, args);
@@ -288,22 +288,22 @@ async function Make_mission_message(client, message, args) {
                                 return;
                             }
                         }
-                        var scheda_player = await get_Scheda_pg(user.id);
-                        var template = {
-                            "ID_Discord": user.id,
-                            "Nome_PG": scheda_player['Nome_PG'],
-                            "Status": "Attesa"
-                        }
-                        if (mission['Player_list'].length == 0) {
-                            mission['Player_list'][0] = template;
-                        } else {
-                            mission['Player_list'].push(template);
-                        }
-                        methodDB.settab_db("Registro_missioni");
-                        methodDB.mission_update(mission['ID'], mission);
-                        if (config.register_anonymous_enable == true) {
-                            reaction.users.remove(user.id);
-                        }
+                        // var scheda_player = await get_Scheda_pg(user.id);
+                        // var template = {
+                        //     "ID_Discord": user.id,
+                        //     "Nome_PG": scheda_player['Nome_PG'],
+                        //     "Status": "Attesa"
+                        // }
+                        // if (mission['Player_list'].length == 0) {
+                        //     mission['Player_list'][0] = template;
+                        // } else {
+                        //     mission['Player_list'].push(template);
+                        // }
+                        // methodDB.settab_db("Registro_missioni");
+                        // methodDB.mission_update(mission['ID'], mission);
+                        // if (config.register_anonymous_enable == true) {
+                        //     reaction.users.remove(user.id);
+                        // }
                     } else {
 
                     }
