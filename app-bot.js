@@ -70,7 +70,7 @@ function Discord_start() {
     // Lissener Message/Commands
     client.on('message', message => {
         if (message.author.bot) {
-            if (message.author.id != config.webhooks || message.author.id != client.user.id) {
+            if (message.author.id != config.webhooks) {
                 return;
             }
         } else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
