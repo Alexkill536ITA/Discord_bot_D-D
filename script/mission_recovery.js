@@ -17,6 +17,7 @@ exports.mission_recovey = async function (client) {
         cursor_ar.forEach(async (element) => {
             try {
                 client.channels.cache.get(config.chat_missioni).send(config.prefix + "mission edit " + element['ID']);
+                await sleep(5000);
             } catch (error) {
                 console.log("[ " + color.red('ERROR') + " ] Recovery Mission Faill");
                 if (config.Debug_Level == 'DEBUG') {
@@ -25,7 +26,6 @@ exports.mission_recovey = async function (client) {
                 fail = 1;
                 return;
             }
-            await sleep(5000);
         });
         if (fail != 1) {
             console.info('[  ' + color.green('OK') + '   ] Recovery Mission success');
