@@ -19,8 +19,7 @@ exports.mission_recovey = async function (client) {
         var fail = 0;
         cursor_ar.forEach(async (element) => {
             try {
-                Make_mission_message(client, element)
-                await sleep(5000);
+                Make_mission_message(client, element['ID'])
             } catch (error) {
                 console.log("[ " + color.red('ERROR') + " ] Recovery Mission Faill");
                 if (config.Debug_Level == 'DEBUG') {
@@ -40,10 +39,6 @@ exports.mission_recovey = async function (client) {
         }
     }
 
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 async function get_Mission_all() {
@@ -66,6 +61,55 @@ async function get_Mission(id_mission) {
         return 1;
     }
     return cursor;
+}
+
+function format_date(date_int) {
+    var today = new Date(date_int);
+    var year = today.getFullYear();
+    var month = today.getMonth();
+    var day = today.getDate();
+    var ora = today.getHours();
+    var minuti = today.getMinutes();
+    month = String(parseInt(month) + 1);
+    if (day < 10) {
+        day = "0" + day;
+    }
+    if (month < 10) {
+        month = "0" + month;
+    }
+    if (ora < 10) {
+        ora = "0" + ora;
+    }
+    if (minuti < 10) {
+        minuti = "0" + minuti;
+    }
+    return day + "/" + month + "/" + year + " " + ora + ":" + minuti
+}
+
+function exspire_date(date_int) {
+    var ext_date = new Date(date_int);
+    var today = new Date();
+    if (ext_date < today) {
+        ext_date.setDate(ext_date.getDate() + 1);
+    }
+    var diff = ext_date - today;
+    if (diff < 0) {
+        diff = today.setDate(today.getDate() + 7);
+    }
+    // console.log(diff);
+    // var msec = diff;
+    // var gg = Math.floor(msec / 1000 / 60 / 60 / 24);
+    // msec -= gg * 1000 * 60 * 60 * 24;
+    // var hh = Math.floor(msec / 1000 / 60 / 60);
+    // msec -= hh * 1000 * 60 * 60;
+    // var mm = Math.floor(msec / 1000 / 60);  
+    // msec -= mm * 1000 * 60;
+    // var ss = Math.floor(msec / 1000);
+    // msec -= ss * 1000;
+
+    // console.log("Giorni:"+gg+" Ora:"+hh+" Minuti:"+mm+" Secondi:"+ss+" Millisecondi:"+msec);
+
+    return diff;
 }
 
 async function Make_mission_message(client, args) {
