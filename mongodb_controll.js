@@ -124,6 +124,11 @@ exports.load_mission = async function (id_mission) {
     return cursor;
 }
 
+exports.recoverymission = async function () {
+    var cursor = await collection.find({Status_missione:"enable"},{"ID":1}).toArray();
+    return cursor;
+}
+
 // MongoDB Insert
 exports.insert_db = function (Data_value) {
     collection.insertOne(Data_value);

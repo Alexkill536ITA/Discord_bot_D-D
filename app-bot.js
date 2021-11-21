@@ -54,6 +54,9 @@ function Discord_start() {
         console.info('[  ' + color.green('OK') + '   ] Service Online');
         console.info('[ ' + color.blue('INFO') + '  ] Logged in as [' + color.cyan(client.user.tag) + ']');
         Event_time.timer(client);
+        console.info('[ ' + color.blue('INFO') + '  ] Recovey Mission Message Start');
+        const mission_recovey = require('./script/mission_recovery.js');
+        mission_recovey.mission_recovey(client);
     });
 
     // Load File Commands
@@ -67,7 +70,7 @@ function Discord_start() {
     // Lissener Message/Commands
     client.on('message', message => {
         if (message.author.bot) {
-            if (message.author.id != config.webhooks) {
+            if (message.author.id != config.webhooks || message.author.id != client.user.id) {
                 return;
             }
         } else if (config.Level_Chat_Lissener.includes(message.channel.id)) {
