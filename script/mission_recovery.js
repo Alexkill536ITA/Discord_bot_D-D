@@ -225,7 +225,7 @@ async function Make_mission_message(client, args) {
         });
     } else {
         Container.setColor([255, 0, 0])
-            .setAuthor(`Richiesta di: ${message.author.username}`)
+            .setAuthor(`Richiesta di: ${config.Nickname_Bot}`)
             .setTitle('Errore Missione non trovata');
         client.channels.cache.get(config.chat_missioni).send(Container);
     }
