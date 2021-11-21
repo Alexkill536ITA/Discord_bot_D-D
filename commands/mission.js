@@ -452,7 +452,7 @@ async function Make_mission_response(client, message, args) {
         .setTimestamp()
         .setFooter("ID:" + mission['ID']);
 
-    if (reserve != []) {
+    if (reserve.length > 0) {
         Container.addField("Reserve", reserve, true);
     }
 
