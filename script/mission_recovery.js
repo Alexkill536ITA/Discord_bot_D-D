@@ -197,6 +197,7 @@ async function Make_mission_message(client, args) {
             var exspire_time = exspire_date(mission['Data_scadenza']);
             // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
             var channel = await client.channels.fetch(config.chat_missioni);
+            console.log(mission['Discord_id_message']);
             var message = await channel.messages.fetch(mission['Discord_id_message']);
             message.edit(Container);
             message.delete({ timeout: exspire_time });
