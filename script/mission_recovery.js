@@ -63,6 +63,29 @@ async function get_Mission(id_mission) {
     return cursor;
 }
 
+async function get_Scheda_pg(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Schede_PG");
+        // var cursor = methodDB.serachbyid(id_serach);
+        var cursor = methodDB.load_pg(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+async function get_User_web(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Schede_PG");
+        var cursor = methodDB.serachbyid_user(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
 function format_date(date_int) {
     var today = new Date(date_int);
     var year = today.getFullYear();
