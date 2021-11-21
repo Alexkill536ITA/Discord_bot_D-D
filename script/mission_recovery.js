@@ -25,7 +25,7 @@ exports.mission_recovey = async function (client) {
                 fail = 1;
                 return;
             }
-            await sleep(1000);
+            await sleep(5000);
         });
         if (fail != 1) {
             console.info('[  ' + color.green('OK') + '   ] Recovery Mission success');
