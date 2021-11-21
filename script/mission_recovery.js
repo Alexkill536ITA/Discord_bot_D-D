@@ -202,10 +202,11 @@ async function Make_mission_message(client, args) {
                 message.edit(Container);
                 message.delete({ timeout: exspire_time });
             } catch (error) {
-                var messageEmbed = await client.channels.cache.get(config.chat_missioni).send(Container);
-                messageEmbed.react(emoji_check);
-                messageEmbed.delete({ timeout: exspire_time });
-                methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
+                let role_ping = client.guild.roles.cache.find(role => role.name === config.player_ping);
+                var message = await client.channels.cache.get(config.chat_missioni).send(role_ping, Container);
+                message.react(emoji_check);
+                message.delete({ timeout: exspire_time });
+                methodDB.mission_id_message_update(mission['ID'], message.id);
             }
 
             print_call_allert(client, args, avatar_DM, exspire_date(mission['Data_ora_missione']));
