@@ -389,74 +389,78 @@ async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
 // Make Message Response Mission
 async function Make_mission_response(client, message, args) {
     message.delete();
-    var mission = await get_Mission(args[1]);
-    const avatar_DM = await client.users.fetch(mission['Master_id'])
-    var Container = new Discord.MessageEmbed();
-    var colrs_set = clor_gen.rand_Color();
+    try {
+        var mission = await get_Mission(args[1]);
+        const avatar_DM = await client.users.fetch(mission['Master_id'])
+        var Container = new Discord.MessageEmbed();
+        var colrs_set = clor_gen.rand_Color();
 
-    var player = [];
-    var reserve = [];
+        var player = [];
+        var reserve = [];
 
-    if (mission['Player_list'] == null) {
-        return 1;
+        if (mission['Player_list'] == null) {
+            return 1;
+        }
+
+        for (let index = 0; index < mission['Player_list'].length; index++) {
+            if (mission['Player_list'][index]['Status'] == 'Accettato') {
+                player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+            } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
+                reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+            }
+        }
+
+        var grado = [];
+        for (let index = 0; index < mission['Grado'].length; index++) {
+            if (mission['Grado'][index] == "Rame") {
+                grado.push("<@&" + config.Level.Rame + ">")
+            }
+            if (mission['Grado'][index] == "Bronzo") {
+                grado.push("<@&" + config.Level.Bronzo + ">")
+            }
+            if (mission['Grado'][index] == "Ferro") {
+                grado.push("<@&" + config.Level.Ferro + ">")
+            }
+            if (mission['Grado'][index] == "Argento") {
+                grado.push("<@&" + config.Level.Argento + ">")
+            }
+            if (mission['Grado'][index] == "Electrum") {
+                grado.push("<@&" + config.Level.Electrum + ">")
+            }
+            if (mission['Grado'][index] == "Oro") {
+                grado.push("<@&" + config.Level.Oro + ">")
+            }
+            if (mission['Grado'][index] == "Platino") {
+                grado.push("<@&" + config.Level.Platino + ">")
+            }
+            if (mission['Grado'][index] == "Mithril") {
+                grado.push("<@&" + config.Level.Mithril + ">")
+            }
+            if (mission['Grado'][index] == "Adamantio") {
+                grado.push("<@&" + config.Level.Adamantio + ">")
+            }
+        }
+
+        Container.setColor(colrs_set)
+            .setTitle("Esito della Missione " + mission['Nome'])
+            .setDescription(mission['Esito_missione'])
+            .setThumbnail(avatar_DM.displayAvatarURL())
+            .addField("🏷 Tag", mission['Tag'], true)
+            .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
+            .addField("🎖 Grado", grado, true)
+            .addField("\u200b", "\u200b")
+            .addField("👥 Player", player, true)
+            .setTimestamp()
+            .setFooter("ID:" + mission['ID']);
+
+        if (reserve.length > 0) {
+            Container.addField("Reserve", reserve, true);
+        }
+
+        client.channels.cache.get(config.chat_missioni_esito).send(Container);
+    } catch (error) {
+        console.log(error);
     }
-
-    for (let index = 0; index < mission['Player_list'].length; index++) {
-        if (mission['Player_list'][index]['Status'] == 'Accettato') {
-            player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-        } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
-            reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-        }
-    }
-
-    var grado = [];
-    for (let index = 0; index < mission['Grado'].length; index++) {
-        if (mission['Grado'][index] == "Rame") {
-            grado.push("<@&" + config.Level.Rame + ">")
-        }
-        if (mission['Grado'][index] == "Bronzo") {
-            grado.push("<@&" + config.Level.Bronzo + ">")
-        }
-        if (mission['Grado'][index] == "Ferro") {
-            grado.push("<@&" + config.Level.Ferro + ">")
-        }
-        if (mission['Grado'][index] == "Argento") {
-            grado.push("<@&" + config.Level.Argento + ">")
-        }
-        if (mission['Grado'][index] == "Electrum") {
-            grado.push("<@&" + config.Level.Electrum + ">")
-        }
-        if (mission['Grado'][index] == "Oro") {
-            grado.push("<@&" + config.Level.Oro + ">")
-        }
-        if (mission['Grado'][index] == "Platino") {
-            grado.push("<@&" + config.Level.Platino + ">")
-        }
-        if (mission['Grado'][index] == "Mithril") {
-            grado.push("<@&" + config.Level.Mithril + ">")
-        }
-        if (mission['Grado'][index] == "Adamantio") {
-            grado.push("<@&" + config.Level.Adamantio + ">")
-        }
-    }
-
-    Container.setColor(colrs_set)
-        .setTitle("Esito della Missione " + mission['Nome'])
-        .setDescription(mission['Esito_missione'])
-        .setThumbnail(avatar_DM.displayAvatarURL())
-        .addField("🏷 Tag", mission['Tag'], true)
-        .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
-        .addField("🎖 Grado", grado, true)
-        .addField("\u200b", "\u200b")
-        .addField("👥 Player", player, true)
-        .setTimestamp()
-        .setFooter("ID:" + mission['ID']);
-
-    if (reserve.length > 0) {
-        Container.addField("Reserve", reserve, true);
-    }
-
-    client.channels.cache.get(config.chat_missioni_esito).send(Container);
 }
 
 /*---------------------------------------------------------------------------------*/
