@@ -86,6 +86,26 @@ async function get_User_web(id_serach) {
     return cursor;
 }
 
+async function increment_pryority(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Utenti_web");
+        methodDB.pryority_control(id_serach, 1);
+    } else {
+        return 1;
+    }
+}
+
+async function block_control(id_serach, value) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Utenti_web");
+        methodDB.block_control(id_serach, value);
+    } else {
+        return 1;
+    }
+}
+
 function format_date(date_int) {
     var today = new Date(date_int);
     var year = today.getFullYear();
@@ -221,6 +241,7 @@ async function Make_mission_message(client, args) {
 
             client.on('messageReactionAdd', async (reaction, user) => {
                 try {
+                    if (config.chat_missioni != reaction.message.channel.id) return;
                     if (reaction.message.partial) await reaction.message.fetch();
                     if (reaction.partial) await reaction.fetch();
                     if (user.bot) return;
@@ -271,6 +292,7 @@ async function Make_mission_message(client, args) {
 
             client.on('messageReactionRemove', async (reaction, user) => {
                 try {
+                    if (config.chat_missioni != reaction.message.channel.id) return;
                     if (reaction.message.partial) await reaction.message.fetch();
                     if (reaction.partial) await reaction.fetch();
                     if (user.bot) return;
