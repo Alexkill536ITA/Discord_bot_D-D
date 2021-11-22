@@ -234,6 +234,7 @@ async function Make_mission_message(client, message, args) {
 
         client.on('messageReactionAdd', async (reaction, user) => {
             try {
+                if (config.chat_missioni != reaction.message.channel.id) return;
                 if (reaction.message.partial) await reaction.message.fetch();
                 if (reaction.partial) await reaction.fetch();
                 if (user.bot) return;
@@ -284,6 +285,7 @@ async function Make_mission_message(client, message, args) {
 
         client.on('messageReactionRemove', async (reaction, user) => {
             try {
+                if (config.chat_missioni != reaction.message.channel.id) return;
                 if (reaction.message.partial) await reaction.message.fetch();
                 if (reaction.partial) await reaction.fetch();
                 if (user.bot) return;
