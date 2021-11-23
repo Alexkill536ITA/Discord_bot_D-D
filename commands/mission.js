@@ -247,16 +247,16 @@ async function Make_mission_message(client, message, args) {
                         if (user_web != 1) {
                             mission = await get_Mission(args[1]);
 
-                            for (let index = 0; index < mission['Player_list'].length; index++) {
-                                if (mission['Player_list'][index]['ID_Discord'] == user.id) {
-                                    methodDB.settab_db("Registro_missioni");
-                                    methodDB.mission_update_remove(mission['ID'], user.id);
-                                    if (config.register_anonymous_enable == true) {
-                                        reaction.users.remove(user.id);
-                                    }
-                                    return;
-                                }
-                            }
+                            // for (let index = 0; index < mission['Player_list'].length; index++) {
+                            //     if (mission['Player_list'][index]['ID_Discord'] == user.id) {
+                            //         methodDB.settab_db("Registro_missioni");
+                            //         methodDB.mission_update_remove(mission['ID'], user.id);
+                            //         if (config.register_anonymous_enable == true) {
+                            //             reaction.users.remove(user.id);
+                            //         }
+                            //         return;
+                            //     }
+                            // }
                             var scheda_player = await get_Scheda_pg(user.id);
                             var template = {
                                 "ID_Discord": user.id,
