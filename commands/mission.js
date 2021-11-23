@@ -230,7 +230,7 @@ async function Make_mission_message(client, message, args) {
             message_old.delete({ timeout: exspire_time });
         }
 
-        print_call_allert(client, args[1], avatar_DM, exspire_date(mission['Data_ora_missione']));
+        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
 
         client.on('messageReactionAdd', async (reaction, user) => {
             try {
@@ -635,6 +635,14 @@ function exspire_date(date_int) {
     // console.log("Giorni:"+gg+" Ora:"+hh+" Minuti:"+mm+" Secondi:"+ss+" Millisecondi:"+msec);
 
     return diff;
+}
+
+function check_limt_32bit(ms) {
+    if (ms > 2147483647) {
+        return 1;
+    } else {
+        return ms;
+    }
 }
 
 function sleep(ms) {

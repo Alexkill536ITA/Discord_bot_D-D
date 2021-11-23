@@ -155,6 +155,14 @@ function exspire_date(date_int) {
     return diff;
 }
 
+function check_limt_32bit(ms) {
+    if (ms > 2147483647) {
+        return 1;
+    } else {
+        return ms;
+    }
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -237,7 +245,7 @@ async function Make_mission_message(client, args) {
                 methodDB.mission_id_message_update(mission['ID'], message.id);
             }
 
-            print_call_allert(client, args, avatar_DM, exspire_date(mission['Data_ora_missione']));
+            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
 
             client.on('messageReactionAdd', async (reaction, user) => {
                 try {
