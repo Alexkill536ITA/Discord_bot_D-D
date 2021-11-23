@@ -155,6 +155,17 @@ function exspire_date(date_int) {
     return diff;
 }
 
+function dateCompare(ms) {
+    var preimpostata = new Date(ms);   
+    var oggi = new Date(); 
+    var diff = preimpostata.getTime() - oggi.getTime();
+    if (diff <= 0) {
+        return 1;
+    } else {
+        return 0;
+    }
+};
+
 function check_limt_32bit(ms) {
     if (ms > 2147483647) {
         return 1;
@@ -173,6 +184,9 @@ async function Make_mission_message(client, args) {
         var colrs_set = clor_gen.rand_Color();
         var mission = await get_Mission(args);
         if (mission != null && mission != 1) {
+            if (dateCompare(mission['Data_scadenza']) == 1) {
+                return;
+            }
             const avatar_DM = await client.users.fetch(mission['Master_id'])
             const emoji_check = '✅';
 
@@ -229,7 +243,7 @@ async function Make_mission_message(client, args) {
                 .setImage(immage)
                 .setTimestamp()
                 .setFooter("ID: " + mission['ID']);
-            var exspire_time = exspire_date(mission['Data_scadenza']);
+            var exspire_time = check_limt_32bit(exspire_date(mission['Data_scadenza']));
             // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
             var channel = await client.channels.fetch(config.chat_missioni);
             try {
