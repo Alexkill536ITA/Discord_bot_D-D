@@ -156,15 +156,15 @@ function exspire_date(date_int) {
 }
 
 function dateCompare(ms) {
-    var preimpostata = new Date(ms);   
-    var oggi = new Date(); 
+    var preimpostata = new Date(ms);
+    var oggi = new Date();
     var diff = preimpostata.getTime() - oggi.getTime();
     if (diff <= 0) {
         return 1;
     } else {
         return 0;
     }
-};
+}
 
 function check_limt_32bit(ms) {
     if (ms > 2147483647) {
