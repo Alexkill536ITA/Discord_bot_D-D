@@ -189,7 +189,6 @@ async function Make_mission_message(client, args) {
             print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
         
             if (dateCompare(mission['Data_scadenza']) == 1) {
-                message.delete();
                 return;
             }
             
