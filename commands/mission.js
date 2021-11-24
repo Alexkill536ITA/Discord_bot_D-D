@@ -159,11 +159,16 @@ async function Make_mission_message(client, message, args) {
     var colrs_set = clor_gen.rand_Color();
     var mission = await get_Mission(args[1]);
     if (mission != null && mission != 1) {
-        if (dateCompare(mission['Data_scadenza']) == 1) {
-            return;
-        }
         let role_ping = message.guild.roles.cache.find(role => role.name === config.player_ping);
         const avatar_DM = await client.users.fetch(mission['Master_id'])
+        
+        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
+        
+        if (dateCompare(mission['Data_scadenza']) == 1) {
+            message.delete();
+            return;
+        }
+        
         const emoji_check = '✅';
 
         var grado = [];
@@ -232,8 +237,6 @@ async function Make_mission_message(client, message, args) {
             message_old.edit(Container);
             message_old.delete({ timeout: exspire_time });
         }
-
-        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
 
         client.on('messageReactionAdd', async (reaction, user) => {
             try {
