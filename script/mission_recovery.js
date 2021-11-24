@@ -184,10 +184,15 @@ async function Make_mission_message(client, args) {
         var colrs_set = clor_gen.rand_Color();
         var mission = await get_Mission(args);
         if (mission != null && mission != 1) {
+            const avatar_DM = await client.users.fetch(mission['Master_id'])
+            
+            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
+        
             if (dateCompare(mission['Data_scadenza']) == 1) {
+                message.delete();
                 return;
             }
-            const avatar_DM = await client.users.fetch(mission['Master_id'])
+            
             const emoji_check = '✅';
 
             var grado = [];
@@ -258,8 +263,6 @@ async function Make_mission_message(client, args) {
                 message.delete({ timeout: exspire_time });
                 methodDB.mission_id_message_update(mission['ID'], message.id);
             }
-
-            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
 
             client.on('messageReactionAdd', async (reaction, user) => {
                 try {
