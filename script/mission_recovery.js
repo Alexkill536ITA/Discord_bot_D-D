@@ -276,7 +276,8 @@ async function Make_mission_message(client, args) {
                             // var id_player = await reaction.message.guild.members.cache.get(user.id);
                             var user_web = get_User_web(user.id);
                             if (user_web != 1) {
-                                mission = await get_Mission(args);
+                                var args_id = reaction.message.embeds[0]['footer']['text'].replace("ID: ", "");
+                                mission = await get_Mission(args_id);
 
                                 // for (let index = 0; index < mission['Player_list'].length; index++) {
                                 //     if (mission['Player_list'][index]['ID_Discord'] == user.id) {
@@ -327,7 +328,8 @@ async function Make_mission_message(client, args) {
                             // var id_player = await reaction.message.guild.members.cache.get(user.id);
                             var user_web = get_User_web(user.id);
                             if (user_web != 1) {
-                                mission = await get_Mission(args);
+                                var args_id = reaction.message.embeds[0]['footer']['text'].replace("ID: ", "");
+                                mission = await get_Mission(args_id);
 
                                 for (let index = 0; index < mission['Player_list'].length; index++) {
                                     if (mission['Player_list'][index]['ID_Discord'] == user.id) {
