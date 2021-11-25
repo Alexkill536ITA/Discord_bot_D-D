@@ -185,13 +185,13 @@ async function Make_mission_message(client, args) {
         var mission = await get_Mission(args);
         if (mission != null && mission != 1) {
             const avatar_DM = await client.users.fetch(mission['Master_id'])
-            
+
             print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
-        
+
             if (dateCompare(mission['Data_scadenza']) == 1) {
                 return;
             }
-            
+
             const emoji_check = '✅';
 
             var grado = [];
@@ -277,7 +277,13 @@ async function Make_mission_message(client, args) {
                             var user_web = get_User_web(user.id);
                             if (user_web != 1) {
                                 var args_id = reaction.message.embeds[0]['footer']['text'].replace("ID: ", "");
-                                mission = await get_Mission(args_id);
+                                if (args == args_id) {
+                                    var id_mis = args;
+                                } else {
+                                    var id_mis = args_id;
+                                }
+
+                                mission = await get_Mission(id_mis);
 
                                 // for (let index = 0; index < mission['Player_list'].length; index++) {
                                 //     if (mission['Player_list'][index]['ID_Discord'] == user.id) {
@@ -329,7 +335,13 @@ async function Make_mission_message(client, args) {
                             var user_web = get_User_web(user.id);
                             if (user_web != 1) {
                                 var args_id = reaction.message.embeds[0]['footer']['text'].replace("ID: ", "");
-                                mission = await get_Mission(args_id);
+                                if (args == args_id) {
+                                    var id_mis = args;
+                                } else {
+                                    var id_mis = args_id;
+                                }
+
+                                mission = await get_Mission(id_mis);
 
                                 for (let index = 0; index < mission['Player_list'].length; index++) {
                                     if (mission['Player_list'][index]['ID_Discord'] == user.id) {
