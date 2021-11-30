@@ -373,7 +373,7 @@ async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
     var player = [];
     var reserve = [];
 
-    if (mission['Player_list'] == null) {
+    if (mission['Player_list'] === null) {
         return 1;
     }
 
