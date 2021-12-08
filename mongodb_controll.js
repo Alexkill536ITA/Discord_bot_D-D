@@ -222,6 +222,12 @@ exports.timeskip_pg_token_limit_avventure = function (id_user, value_new) {
     return 0;
 }
 
+exports.timeskip_pg_token_limit_fama = function (id_user, value_new) {
+    id_user = mongo.ObjectID(id_user);
+    collection.updateOne({ '_id': id_user }, { $set: { 'timeskip.limit_fama': value_new } });
+    return 0;
+}
+
 exports.timeskip_control_update = function (value_new) {
     collection.updateOne({ 'Id': "1" }, { $set: { Event_active: value_new } });
     return 0;
