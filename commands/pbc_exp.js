@@ -40,8 +40,8 @@ module.exports = {
                     // var settimana_valida = getWeekNumber(new Date());
                     // var ultima_asseganzione = getWeekNumber(Scheda_PG["Pbc_frag"]["Data"]);
                     var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
-                    var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
-                    var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
+                    var frammenti_attuale = parseInt(Scheda_PG["Pbc_frag"]["Frammento"]);
+                    var Exp_get_attuale = parseInt(Scheda_PG["Pbc_frag"]["Exp_get"]);
                     // if (ultima_asseganzione[0] == settimana_valida[0]) {
                     if (config.Level_Chat_reset == true) {
                         if (ultima_asseganzione == getmonthNumber(new Date())) {
