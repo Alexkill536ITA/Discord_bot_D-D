@@ -5,7 +5,7 @@
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "eb21cb30c8903a6e02d0eb6664900131ba24fd2a01df4e7a31fa4b988e27e0393b59d1e7681950c1b924cd05ec00b72ccfcc62938021d7ecd384a895e3698f67"
+        "SHA512": "41c8ab02d4ac82528d8bcfd06d81cbf04e57814ba5c2c03672ac513d8826068b6d8e3030abbba4f5c4594a25e0bf9af0df4f32898c85d3ef6f8ae47e54d2e470"
     },
     "add_sub_competenza.js": {
         "name": "add_sub_competenza.js",
@@ -157,7 +157,7 @@
     },
     "time_skip.js": {
         "name": "time_skip.js",
-        "SHA512": "756a1c7fc32645c2a41847be861eaf70ad0ed3a9b047bfad19d74be97efa49ee12224f3d828e3406b7d40ad4409c6dc7ef603c4bb45722d566d9efe5d0b20fae"
+        "SHA512": "901bf70873adab590047ab050b81ac7f9d403de4595a53e131c926c9af73f1fe7756b0817ea1fb85f6c98cab372154ac7de1be21ed67ec9e076cb8890910fd22"
     },
     "use_item.js": {
         "name": "use_item.js",
@@ -190,7 +190,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.2.6",
-        "Date Check": "08/12/2021 18:04"
+        "Version": "1.2.7",
+        "Date Check": "08/12/2021 22:48"
     }
 }
