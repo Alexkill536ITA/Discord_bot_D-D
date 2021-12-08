@@ -427,7 +427,7 @@ async function Make_mission_response(client, message, args) {
         var player = [];
         var reserve = [];
 
-        if (mission['Player_list'] == null) {
+        if (mission['Player_list'] === null) {
             return 1;
         }
 
