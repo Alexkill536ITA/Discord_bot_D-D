@@ -125,7 +125,7 @@ exports.load_mission = async function (id_mission) {
 }
 
 exports.recoverymission = async function () {
-    var cursor = await collection.find({Status_missione:"enable"},{"ID":1}).toArray();
+    var cursor = await collection.find({ Status_missione: "enable" }, { "ID": 1 }).toArray();
     return cursor;
 }
 
@@ -158,6 +158,11 @@ exports.stats_update = function (id_scheda, filter) {
     return 0;
 }
 
+exports.fama_update = function (id_scheda, value_new) {
+    collection.updateOne({ '_id': id_scheda }, { $set: { Punti_Fama: value_new } });
+    return 0;
+}
+
 exports.avatar_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, { $set: { Avatar: value_new } });
@@ -184,7 +189,7 @@ exports.inventory_pbc_frag = function (id_scheda, value_new) {
 
 exports.casata_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
-    collection.updateOne({ '_id': id_scheda }, { $set: { Casata : value_new } });
+    collection.updateOne({ '_id': id_scheda }, { $set: { Casata: value_new } });
     return 0;
 }
 
@@ -200,8 +205,8 @@ exports.password_update = function (id_user, value_new) {
     return 0;
 }
 
-exports.timeskip_pg_update = function (token, limit_av) {
-    collection.updateMany({}, { $set: { timeskip: { "token": token, limit_avventure: limit_av } } });
+exports.timeskip_pg_update = function (token, limit_av, limt_fa) {
+    collection.updateMany({}, { $set: { timeskip: { "token": token, limit_avventure: limit_av, limit_fama: limt_fa } } });
     return 0;
 }
 

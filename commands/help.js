@@ -125,12 +125,12 @@ module.exports = {
                 // .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
                 .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [@utente] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
-        // } else if (args[0] == "scambio") {
-        //     Container.setColor([255, 0, 0])
-        //         .setTitle('Help scambio')
-        //         .setThumbnail(botavatar.displayAvatarURL())
-        //         .setDescription('Sintassi: **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato] \n\n **OPZIONI**\n vendi = Crea offerta\n rimuovi = Rimuovi offerta\n compra = Aquista Oggetto da offerta\n\n Il comando scambio permette di vendere un oggetto del proprio inventario e comprare da un altro\n Il comando scambio con opzione **vendi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da mettre in vendita [Qunatità] il prezzo [Prezzo] e inserire il nome del oggetto [Nome oggetto] \n\n Il comando scambio con opzione **compra** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da comprare [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]\n\n  Il comando scambio con opzione **rimuovi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da rimuove [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]');
-        //     message.channel.send(Container);
+            // } else if (args[0] == "scambio") {
+            //     Container.setColor([255, 0, 0])
+            //         .setTitle('Help scambio')
+            //         .setThumbnail(botavatar.displayAvatarURL())
+            //         .setDescription('Sintassi: **' + config.prefix + 'scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato] \n\n **OPZIONI**\n vendi = Crea offerta\n rimuovi = Rimuovi offerta\n compra = Aquista Oggetto da offerta\n\n Il comando scambio permette di vendere un oggetto del proprio inventario e comprare da un altro\n Il comando scambio con opzione **vendi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da mettre in vendita [Qunatità] il prezzo [Prezzo] e inserire il nome del oggetto [Nome oggetto] \n\n Il comando scambio con opzione **compra** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da comprare [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]\n\n  Il comando scambio con opzione **rimuovi** ha bisgono di menzionare sestessi [@user] ID scheda del personaggio [ID_scheda] la quantità da rimuove [Qunatità] e inserire il ID aqquisto del oggetto [ID_aqquisto]');
+            //     message.channel.send(Container);
         } else if (args[0] == "checkpoint") {
             Container.setColor([255, 0, 0])
                 .setTitle('Help checkpoint')
@@ -165,6 +165,13 @@ module.exports = {
                 .setThumbnail(botavatar.displayAvatarURL())
                 // .setDescription('Sintassi: **' + config.prefix + 'fragment** [Opzione][Valore][ID_Scheda] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire fragment inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
                 .setDescription('Sintassi: **' + config.prefix + 'fragment** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire fragment inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]');
+            message.channel.send(Container);
+        } else if (args[0] == "fama") {
+            Container.setColor([255, 0, 0])
+                .setTitle('Help Fama')
+                .setThumbnail(botavatar.displayAvatarURL())
+                // .setDescription('Sintassi: **' + config.prefix + 'fama** [Opzione][Valore][ID_Scheda] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire fama inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
+                .setDescription('Sintassi: **' + config.prefix + 'fama** [Opzione][Valore][@utente] \n\n**OPZIONI**\n add = Aggiungi\n sub = Rimuovi\n\n Per aggiungere o toglire fama inserire opzione [Opzione], ammontare in [Valore], utente Discord in [@utente]');
             message.channel.send(Container);
         } else if (args[0] == "mission") {
             Container.setColor([255, 0, 0])
@@ -275,49 +282,63 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip token')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip token** [ID_Sheda] \n\nEvento token mostra token rimaneti del PG\n\nPer usare timeskip token inserire [ID_Scheda]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip token** [ID_Sheda] \n\nEvento token mostra token rimaneti del PG\n\nPer usare timeskip token inserire [ID_Scheda]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip token** [@utente] \n\nEvento token mostra token rimaneti del PG\n\nPer usare timeskip token inserire [@utente]');
                 message.channel.send(Container);
             } else if (nome == "timeskip set_token") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip token')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][ID_Scheda] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire token inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][ID_Scheda] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire token inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [ID_Scheda]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip set_token** [Opzione][Valore][@utente] \n\nset_token metti togli token al PG \n\n**OPZIONI**\n add = Aggiungi\n sub = Togli \n\nPer aggiungere o toglire token inserire opzione [Opzione], ammontare in [Valore], ID scheda utente in [@utente]');
                 message.channel.send(Container);
             } else if (nome == "timeskip cambio_talento") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip cambio_talento')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip cambio_talento** [ID_Scheda]\n\n Invia Una notifica hai Master con la richiesta di asseganzione\n\n Per usare timeskip cambio_talento inserire [ID_Scheda]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip cambio_talento** [ID_Scheda]\n\n Invia Una notifica hai Master con la richiesta di asseganzione\n\n Per usare timeskip cambio_talento inserire [ID_Scheda]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip cambio_talento** [@utente]\n\n Invia Una notifica hai Master con la richiesta di asseganzione\n\n Per usare timeskip cambio_talento inserire [@utente]');
                 message.channel.send(Container);
             } else if (nome == "timeskip spedizione") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip spedizione')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [ID_Scheda][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [ID_Scheda] e inserire la caratteristica del PG in [Statisitca del PG]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [ID_Scheda][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [ID_Scheda] e inserire la caratteristica del PG in [Statisitca del PG]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [@utente][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [@utente] e inserire la caratteristica del PG in [Statisitca del PG]');
                 message.channel.send(Container);
             } else if (nome == "timeskip strumento") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip strumento')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [ID_Sheda][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [ID_Scheda] e inserire la competenza dello strumento in [Strumento da acquisire]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [ID_Sheda][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [ID_Scheda] e inserire la competenza dello strumento in [Strumento da acquisire]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [@utente][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [@utente] e inserire la competenza dello strumento in [Strumento da acquisire]');
                 message.channel.send(Container);
             } else if (nome == "timeskip lingua") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip lingua')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip lingua** [ID_Sheda][Lingua da acquisire] \n\nEvento lingua assegna alla scheda PG la competneza nella lingua selezionata \n\nPer mostrare la lista inserire solo **&timeskip lingua** \n\n Per usare timeskip lingua inserire [ID_Scheda] e inserire la competenza della lingua in [Lingua da acquisire]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip lingua** [ID_Sheda][Lingua da acquisire] \n\nEvento lingua assegna alla scheda PG la competneza nella lingua selezionata \n\nPer mostrare la lista inserire solo **&timeskip lingua** \n\n Per usare timeskip lingua inserire [ID_Scheda] e inserire la competenza della lingua in [Lingua da acquisire]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip lingua** [@utente][Lingua da acquisire] \n\nEvento lingua assegna alla scheda PG la competneza nella lingua selezionata \n\nPer mostrare la lista inserire solo **&timeskip lingua** \n\n Per usare timeskip lingua inserire [@utente] e inserire la competenza della lingua in [Lingua da acquisire]');
                 message.channel.send(Container);
-            } else if (nome == "timeskip ricerca") {
-                Container.setColor([255, 0, 0])
-                    .setTitle('Help timeskip ricerca')
-                    .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip ricerca** [ID_Sheda][Rarità] \n\nEvento ricerca notifica i master di ricontattarti della tua richiesta \n\n**Rarità:**\n comune\n non comune\n raro\n\n Per usare timeskip ricerca inserire [ID_Scheda] e inserire la rarità in [Rarità]');
-                message.channel.send(Container);
+                // } else if (nome == "timeskip ricerca") {
+                //     Container.setColor([255, 0, 0])
+                //         .setTitle('Help timeskip ricerca')
+                //         .setThumbnail(botavatar.displayAvatarURL())
+                //         .setDescription('Sintassi:\n **' + config.prefix + 'timeskip ricerca** [ID_Sheda][Rarità] \n\nEvento ricerca notifica i master di ricontattarti della tua richiesta \n\n**Rarità:**\n comune\n non comune\n raro\n\n Per usare timeskip ricerca inserire [ID_Scheda] e inserire la rarità in [Rarità]');
+                //     message.channel.send(Container);
             } else if (nome == "timeskip creazione") {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip creazione')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip creazione** [ID_Sheda][Rarità] \n\nEvento crezione notifica i master di ricontattarti della tua richiesta \n\n**Rarità:**\n comune\n non comune\n raro\n molto raro\n\n Per usare timeskip creazione inserire [ID_Scheda] e inserire la rarità in [Rarità]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip creazione** [ID_Sheda][Rarità] \n\nEvento crezione notifica i master di ricontattarti della tua richiesta \n\n**Rarità:**\n comune\n non comune\n raro\n molto raro\n\n Per usare timeskip creazione inserire [ID_Scheda] e inserire la rarità in [Rarità]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip creazione** [@utente][Rarità] \n\nEvento crezione notifica i master di ricontattarti della tua richiesta \n\n**Rarità:**\n comune\n non comune\n raro\n molto raro\n\n Per usare timeskip creazione inserire [@utente] e inserire la rarità in [Rarità]');
+                message.channel.send(Container);
+            } else if (nome == "timeskip fama") {
+                Container.setColor([255, 0, 0])
+                    .setTitle('Help timeskip Fama')
+                    .setThumbnail(botavatar.displayAvatarURL())
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip fama** [ID_Sheda] \n\nEvento Fama Usa token e MO per ottenre fama\n\nPer usare timeskip fama inserire [ID_Scheda]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip fama** [@utente] \n\nEvento Fama Usa token e MO per ottenre fama\n\nPer usare timeskip fama inserire [@utente]');
                 message.channel.send(Container);
             } else if (nome == "timeskip lavoro") {
                 Container.setColor([255, 0, 0])
@@ -329,7 +350,8 @@ module.exports = {
                 Container.setColor([255, 0, 0])
                     .setTitle('Help timeskip')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip** [Opzione][Valore]...\n\n **OPZIONI [Solo Master]**\n start = Avvia il timeskip\n stop = Stoppa il time skip\n show = Mostra la configurazione del timeskip\n set = Modificare la configurazione del timskip **[BETA]**\n set_token = Aggiungi o togli token\n\n **EVENTI**\n token = Mostra Token rimasti\n cambio_talento = Cambia talaneto. notifica i master\n spedizione = Evento randomico bonus malus\n strumento = Ottieni competenza strumento notifica i master\n lingua = Ottieni competenza lingua e notifica i master\n ricerca = Ottieni ricerca e notifica i master\n creazione = Crea oggetto notifica i master\n lavoro = Ottieni paga per lavoro svolto\n\n **PER MAGGIORI INFORMAZIONI USARE **\n' + config.prefix + 'help timeskip [Opzioni / Eventi]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip** [Opzione][Valore]...\n\n **OPZIONI [Solo Master]**\n start = Avvia il timeskip\n stop = Stoppa il time skip\n show = Mostra la configurazione del timeskip\n set = Modificare la configurazione del timskip **[BETA]**\n set_token = Aggiungi o togli token\n\n **EVENTI**\n token = Mostra Token rimasti\n cambio_talento = Cambia talaneto. notifica i master\n spedizione = Evento randomico bonus malus\n strumento = Ottieni competenza strumento notifica i master\n lingua = Ottieni competenza lingua e notifica i master\n ricerca = Ottieni ricerca e notifica i master\n creazione = Crea oggetto notifica i master\n lavoro = Ottieni paga per lavoro svolto\n\n **PER MAGGIORI INFORMAZIONI USARE **\n' + config.prefix + 'help timeskip [Opzioni / Eventi]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip** [Opzione][Valore]...\n\n **OPZIONI [Solo Master]**\n start = Avvia il timeskip\n stop = Stoppa il time skip\n show = Mostra la configurazione del timeskip\n set = Modificare la configurazione del timskip **[BETA]**\n set_token = Aggiungi o togli token\n\n **EVENTI**\n token = Mostra Token rimasti\n cambio_talento = Cambia talaneto. notifica i master\n spedizione = Evento randomico bonus malus\n strumento = Ottieni competenza strumento notifica i master\n lingua = Ottieni competenza lingua e notifica i master\n fama = Ottieni fama e notifica i master\n creazione = Crea oggetto notifica i master\n lavoro = Ottieni paga per lavoro svolto\n\n **PER MAGGIORI INFORMAZIONI USARE **\n' + config.prefix + 'help timeskip [Opzioni / Eventi]');
                 message.channel.send(Container);
             }
         } else {
@@ -343,8 +365,8 @@ module.exports = {
                 .addField("🟡 PG 🟡", '• **pglist** [@utente]\n • **pg** [@utente]\n • **pgavatar** [Opzione][@utente][URL Avatar]\n • **pgdescrizione** [@utente]\n • **pgcompetenze** [@utente]\n • **pginventario** [@utente]\n • **pgcasata** [@utente][Nome casata]')
                 // .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [ID_Scheda][Quantità][Nome oggetto]\n • **shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n • **scambio** [Opzione][@utente][ID_Scheda][Quantità][ID/Nome oggetto/ID_Assegnato]")
                 .addField("🔵 Oggetti e Shop 🔵", "• **oggetto** [Id/Nome]\n • **consuma** [@utente][Quantità][Nome oggetto]\n • **shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]")
-                // .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **fragment** [Opzione][Valore][ID_Scheda]\n • **competenza** [Opzione][ID_Scheda][Id/Nome Competenza]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
-                .addField("🟠 Comandi PG Master 🟠", "• **mission** [Opzione][ID_MISSIONE]\n • **disprezzo** [Opzione][Valore][@utente]\n • **checkpoint** [Opzione][@utente]\n • **statsset** [Opzione][Valore][@utente]\n • **money** [Opzione][Valore][@utente]\n • **milestone** [Opzione][Valore][@utente]\n • **fragment** [Opzione][Valore][@utente]\n • **competenza** [Opzione][@utente][Id/Nome Competenza]\n • **pgoggetto** [Opzione][@utente][Quantità][Id/Nome]\n • **pgcustom** [Opzione][@utente][Quantità][Sincronia][Nome]")
+                // .addField("🟠 Comandi PG Master 🟠", "• **checkpoint** [Opzione][ID_Scheda]\n • **statsset** [Opzione][Valore][ID_Scheda]\n • **money** [Opzione][Valore][ID_Scheda]\n • **milestone** [Opzione][Valore][ID_Scheda]\n • **fragment** [Opzione][Valore][ID_Scheda]\n • **fama** [Opzione][Valore][@utente]\n • **competenza** [Opzione][ID_Scheda][Id/Nome Competenza]\n • **pgoggetto** [Opzione][ID_Scheda][Quantità][Id/Nome]\n • **pgcustom** [Opzione][ID_Scheda][Quantità][Sincronia][Nome]")
+                .addField("🟠 Comandi PG Master 🟠", "• **mission** [Opzione][ID_MISSIONE]\n • **disprezzo** [Opzione][Valore][@utente]\n • **checkpoint** [Opzione][@utente]\n • **statsset** [Opzione][Valore][@utente]\n • **money** [Opzione][Valore][@utente]\n • **milestone** [Opzione][Valore][@utente]\n • **fragment** [Opzione][Valore][@utente]\n • **fama** [Opzione][Valore][@utente]\n • **competenza** [Opzione][@utente][Id/Nome Competenza]\n • **pgoggetto** [Opzione][@utente][Quantità][Id/Nome]\n • **pgcustom** [Opzione][@utente][Quantità][Sincronia][Nome]")
                 .addField("🧰 Tools 🧰", '• **timeskip** [Opzione][Valore]...\n • **meteo**[Opzione][Valore]\n • **roll** Es:[1d20+5]\n • **math** Es:[2+2*5-10/2]\n • **clearchat** [Opzione/Valore]\n')
                 .addField("⚙️ Impostazioni ⚙️", '• **ping**\n • **patchnotes** \n • **setconfig** [Opzione][Valore]\n • **version**')
                 .setFooter("Bot by Alexkill ITA#3593                                                                                                Version " + vers.Create.Version, "https://cdn.discordapp.com/avatars/188587744140853251/7b4f42c2dd6de8acf3dccfc694e35b9f.webp");
