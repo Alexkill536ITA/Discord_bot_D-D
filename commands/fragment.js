@@ -46,8 +46,8 @@ module.exports = {
                                         reset_frag(message, Scheda_PG, args[1]);
                                     } else {
                                         var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
-                                        var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
-                                        var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
+                                        var frammenti_attuale = parseInt(Scheda_PG["Pbc_frag"]["Frammento"]);
+                                        var Exp_get_attuale = parseInt(Scheda_PG["Pbc_frag"]["Exp_get"]);
                                         if (config.Level_Chat_reset == true) {
                                             if (ultima_asseganzione == getmonthNumber(new Date())) {
                                                 if (Exp_get_attuale < config.Level_milestone_max) {
@@ -105,8 +105,8 @@ module.exports = {
                                         reset_frag(message, Scheda_PG, 0);
                                     } else {
                                         var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
-                                        var frammenti_attuale = Scheda_PG["Pbc_frag"]["Frammento"];
-                                        var Exp_get_attuale = Scheda_PG["Pbc_frag"]["Exp_get"];
+                                        var frammenti_attuale = parseInt(Scheda_PG["Pbc_frag"]["Frammento"]);
+                                        var Exp_get_attuale = parseInt(Scheda_PG["Pbc_frag"]["Exp_get"]);
                                         if (config.Level_Chat_reset == true) {
                                             if (ultima_asseganzione == getmonthNumber(new Date())) {
                                                 if (Exp_get_attuale < config.Level_milestone_max) {
