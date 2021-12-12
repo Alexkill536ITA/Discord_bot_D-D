@@ -175,6 +175,11 @@ exports.inventory_update = function (id_scheda, value_new) {
     return 0;
 }
 
+exports.ispirazione_update = function (id_scheda, value_new) {
+    collection.updateOne({ '_id': id_scheda }, { $set: { Ispirazione: value_new } });
+    return 0;
+}
+
 exports.competenze_update = function (id_scheda, value_new) {
     id_scheda = mongo.ObjectID(id_scheda);
     collection.updateOne({ '_id': id_scheda }, { $set: { Competenze: value_new } });

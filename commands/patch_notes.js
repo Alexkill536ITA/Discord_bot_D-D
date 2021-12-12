@@ -29,7 +29,7 @@ module.exports = {
         Container.setColor([255, 0, 0])
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
-            .addField('Aggunte Nuove', "• Aggiunto la possipilità aggiungere e togliere punti fama ")
+            .addField('Aggunte Nuove', "• Aggiunto la possipilità aggiungere e togliere punti fama\n  Aggiunto la possipilità aggiungere e togliere Ispirazione ai PG")
             .addField('Rework', "• System TimeSkip")
             .addField('Correzioni', "• Nel sistema di gestione missioni")
             .addField('Fix Bug Minori', '• Correzioni minori')
