@@ -120,6 +120,7 @@ module.exports = {
                                             .addField("🆔 Scheda", js_result['_id'])
                                             .addField("Nome", js_result['Nome_PG'],)
                                             .addField("💰 Money", js_result['Money'])
+                                            .addField("💡 Ispirazione", js_result['Ispirazione'])
                                             .addField("🎒 Inventario", "Vuoto");
                                         message.channel.send(Container);
                                     }
