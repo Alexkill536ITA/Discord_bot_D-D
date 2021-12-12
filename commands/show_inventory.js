@@ -79,6 +79,7 @@ module.exports = {
                                             .addField("🆔 Scheda", js_result['_id'], true)
                                             .addField("📝 Nome", js_result['Nome_PG'])
                                             .addField("💰 Money", js_result['Money'])
+                                            .addField("💡 Ispirazione", js_result['Ispirazione'])
                                             .addField("🎒 Inventario", obj_string[0])
                                             .setDisabledNavigationEmojis(['all'])
                                             .setDeleteOnTimeout(false)
