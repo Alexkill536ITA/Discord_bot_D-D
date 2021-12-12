@@ -90,7 +90,7 @@ module.exports = {
                                                         e--;
                                                         if (e >= 0) {
                                                             embed.fields[0].value = e;
-                                                            embed.fields[5].value = obj_string[e];
+                                                            embed.fields[6].value = obj_string[e];
                                                         }
                                                     }
                                                 },
@@ -100,7 +100,7 @@ module.exports = {
                                                         e++;
                                                         if (e < embed.fields[1].value) {
                                                             embed.fields[0].value = e;
-                                                            embed.fields[5].value = obj_string[e];
+                                                            embed.fields[6].value = obj_string[e];
                                                         }
                                                     }
                                                 }
