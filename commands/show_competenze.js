@@ -36,21 +36,23 @@ module.exports = {
                             // id_discord = id_discord.replace('>', '');
                             methodDB.settab_db("Schede_PG");
                             // const cursor = methodDB.load_pg(autore.id, id_discord);
-                            const cursor = methodDB.load_pg(autore.id);
-                            cursor.then(function (result) {
-                                if (result != null) {
-                                    var js_result = JSON.stringify(result);
-                                    js_result = JSON.parse(js_result);
-                                    var obj_N = JSON.stringify(js_result['Competenze']);
-                                    if (obj_N.length > 2) {
-                                        obj_N = JSON.parse(obj_N);
-                                        const obj_k = Object.keys(obj_N);
-                                        var i = 0;
-                                        var j = 0;
-                                        var x = 0;
-                                        var obj_string = [];
+                            var result = await get_Scheda_pg(autore.id);
+                            if (result != null) {
+                                var js_result = JSON.stringify(result);
+                                js_result = JSON.parse(js_result);
+                                var obj_N = JSON.stringify(js_result['Competenze']);
+                                if (obj_N.length > 2 && obj_N != null) {
+                                    obj_N = JSON.parse(obj_N);
+                                    const obj_k = Object.keys(obj_N);
+                                    var i = 0;
+                                    var j = 0;
+                                    var x = 0;
+                                    var obj_string = [];
+                                    if (obj_k.length == 1) {
+                                        obj_string[0] = 'Competenza: ' + obj_N[obj_k[0]];
+                                    } else {
                                         for (var i in obj_k) {
-                                            obj_string[j] += 'Competenza: ' + obj_N[obj_k[i]]['Nome'];
+                                            obj_string[j] += 'Competenza: ' + obj_N[obj_k[i]];
                                             obj_string[j] = obj_string[j].replace("undefined", "");
                                             x++
                                             if (x == 5) {
@@ -58,75 +60,75 @@ module.exports = {
                                                 j++
                                             }
                                         }
-                                        const embeds = [];
-                                        for (let i = 0; i <= obj_string.length; i++) {
-                                            embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
-                                        }
-                                        if (js_result['Avatar'] == "Non Assegnata" || js_result['Avatar'] == undefined) {
-                                            var avatar = autore.displayAvatarURL();
-                                        } else {
-                                            var avatar = js_result['Avatar'];
-                                        }
-                                        const Embeds = new Pagination.Embeds()
-                                            .setArray(embeds)
-                                            .setAuthorizedUsers([message.author.id])
-                                            .setChannel(message.channel)
-                                            .setPageIndicator(false)
-                                            .setColor(colrs_set)
-                                            .setTitle('📜 Scheda Competenze: ' + autore.username)
-                                            .setThumbnail(avatar, true)
-                                            .addField("N:", obj_string.length, true)
-                                            .addField("🆔 Scheda", js_result['_id'], true)
-                                            .addField("📝 Nome", js_result['Nome_PG'])
-                                            .addField("📄 Competenze", obj_string[0])
-                                            .setDisabledNavigationEmojis(['all'])
-                                            .setDeleteOnTimeout(false)
-                                            .setFunctionEmojis({
-                                                '◀️': (_, instance) => {
-                                                    for (const embed of instance.array) {
-                                                        var e = embed.fields[0].value;
-                                                        e--;
-                                                        if (e >= 0) {
-                                                            embed.fields[0].value = e;
-                                                            embed.fields[5].value = obj_string[e];
-                                                        }
-                                                    }
-                                                },
-                                                '▶️': (_, instance) => {
-                                                    for (const embed of instance.array) {
-                                                        var e = embed.fields[0].value;
-                                                        e++;
-                                                        if (e < embed.fields[1].value) {
-                                                            embed.fields[0].value = e;
-                                                            embed.fields[5].value = obj_string[e];
-                                                        }
+                                    }
+                                    const embeds = [];
+                                    for (let i = 0; i <= obj_string.length; i++) {
+                                        embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
+                                    }
+                                    if (js_result['Avatar'] == "Non Assegnata" || js_result['Avatar'] == undefined) {
+                                        var avatar = autore.displayAvatarURL();
+                                    } else {
+                                        var avatar = js_result['Avatar'];
+                                    }
+                                    const Embeds = new Pagination.Embeds()
+                                        .setArray(embeds)
+                                        .setAuthorizedUsers([message.author.id])
+                                        .setChannel(message.channel)
+                                        .setPageIndicator(false)
+                                        .setColor(colrs_set)
+                                        .setTitle('📜 Scheda Competenze: ' + autore.username)
+                                        .setThumbnail(avatar, true)
+                                        .addField("N:", obj_string.length, true)
+                                        .addField("🆔 Scheda", js_result['_id'], true)
+                                        .addField("📝 Nome", js_result['Nome_PG'])
+                                        .addField("📄 Competenze", obj_string[0])
+                                        .setDisabledNavigationEmojis(['all'])
+                                        .setDeleteOnTimeout(false)
+                                        .setFunctionEmojis({
+                                            '◀️': (_, instance) => {
+                                                for (const embed of instance.array) {
+                                                    var e = embed.fields[0].value;
+                                                    e--;
+                                                    if (e >= 0) {
+                                                        embed.fields[0].value = e;
+                                                        embed.fields[5].value = obj_string[e];
                                                     }
                                                 }
-                                            });
-                                        // Debug embeds function
-                                        // .on('start', () => console.log('Started!'))
-                                        // .on('finish', (user) => console.log(`Finished! User: ${user.username}`))
-                                        // .on('react', (user, emoji) => console.log(`Reacted! User: ${user.username} | Emoji: ${emoji.name} (${emoji.id})`))
-                                        // .on('expire', () => console.warn('Expired!'))
-                                        // .on('error', console.error);
-                                        Embeds.build();
-                                    } else {
-                                        Container = new Discord.MessageEmbed();
-                                        Container.setColor(colrs_set)
-                                            .setTitle('📜 Scheda Competenze: ' + autore.username)
-                                            .setThumbnail(autore.displayAvatarURL(), true)
-                                            .addField("🆔 Scheda", js_result['_id'])
-                                            .addField("📝 Nome", js_result['Nome_PG'],)
-                                            .addField("📄 Competenze", "Vuoto");
-                                        message.channel.send(Container);
-                                    }
+                                            },
+                                            '▶️': (_, instance) => {
+                                                for (const embed of instance.array) {
+                                                    var e = embed.fields[0].value;
+                                                    e++;
+                                                    if (e < embed.fields[1].value) {
+                                                        embed.fields[0].value = e;
+                                                        embed.fields[5].value = obj_string[e];
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    // Debug embeds function
+                                    // .on('start', () => console.log('Started!'))
+                                    // .on('finish', (user) => console.log(`Finished! User: ${user.username}`))
+                                    // .on('react', (user, emoji) => console.log(`Reacted! User: ${user.username} | Emoji: ${emoji.name} (${emoji.id})`))
+                                    // .on('expire', () => console.warn('Expired!'))
+                                    // .on('error', console.error);
+                                    Embeds.build();
                                 } else {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Scheda non trovata');
+                                    Container = new Discord.MessageEmbed();
+                                    Container.setColor(colrs_set)
+                                        .setTitle('📜 Scheda Competenze: ' + autore.username)
+                                        .setThumbnail(autore.displayAvatarURL(), true)
+                                        .addField("🆔 Scheda", js_result['_id'])
+                                        .addField("📝 Nome", js_result['Nome_PG'],)
+                                        .addField("📄 Competenze", "Vuoto");
                                     message.channel.send(Container);
                                 }
-                            });
+                            } else {
+                                Container.setColor([255, 0, 0])
+                                    .setAuthor(`Richiesta di: ${message.author.username}`)
+                                    .setTitle('Errore Scheda non trovata');
+                                message.channel.send(Container);
+                            }
                         }
                     } catch {
                         Container.setColor([255, 0, 0])
@@ -160,4 +162,16 @@ module.exports = {
             }
         }
     }
+}
+
+async function get_Scheda_pg(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Schede_PG");
+        // var cursor = methodDB.serachbyid(id_serach);
+        var cursor = methodDB.load_pg(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
 }

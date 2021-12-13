@@ -5,7 +5,8 @@
   "main": "app-bot.js",
   "scripts": {
     "start": "node app-bot.js",
-    "dev": "nodemon app-bot.js"
+    "dev": "nodemon app-bot.js",
+    "tool": "node .\\tools\\Tool_mongodb.js"
   },
   "author": "Alexkill536ITA",
   "license": "ISC",
