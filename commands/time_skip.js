@@ -303,24 +303,28 @@ module.exports = {
                                                             methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk);
                                                             var stats = args[2];
                                                             stats = stats.charAt(0).toUpperCase() + stats.slice(1)
-                                                            var roll_result = roll_dice_value(1, 100, decode_mod(Scheda_pg[stats]));
+                                                            if (config_timeskip.config_avventure.mode_20 == false) {
+                                                                var roll_result = roll_dice_value(1, 100, Scheda_pg[stats]);
+                                                            } else {
+                                                                var roll_result = roll_dice_value(1, 20, decode_mod(Scheda_pg[stats]));
+                                                            }
                                                             if (roll_result > config_timeskip.config_avventure.val_high) {
-                                                                var value_result = config_timeskip.config_avventure.mo_base_1 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_1, 0);
+                                                                var value_result = config_timeskip.config_avventure.mo_base_1 + (roll_dice_value(0, config_timeskip.config_avventure.mo_base_1, 0) * config_timeskip.config_avventure.mo_mod_1);
                                                                 var new_value_mo = old_value_mo + value_result;
                                                                 var status = "Gran Successo"
                                                                 var message_result = "L'esplorazione che hai condotto, contro tutti i pronostici, ti ha portato ad un mirabolante successo fruttandoti ben **" + value_result + "** monete d'oro."
                                                             } else if (roll_result > config_timeskip.config_avventure.val_mid && roll_result <= config_timeskip.config_avventure.val_high) {
-                                                                var value_result = config_timeskip.config_avventure.mo_base_2 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_2, 0);
+                                                                var value_result = config_timeskip.config_avventure.mo_base_2 + (roll_dice_value(0, config_timeskip.config_avventure.mo_base_2, 0) * config_timeskip.config_avventure.mo_mod_2);
                                                                 var new_value_mo = old_value_mo + value_result;
                                                                 var status = "Successo"
                                                                 var message_result = "L'esplorazione che hai condotto ha riscontrato proprio la fine che speravi ed il che ti ha fatto guadagnare **" + value_result + "** monete d'oro."
                                                             } else if (roll_result > config_timeskip.config_avventure.val_low && roll_result <= config_timeskip.config_avventure.val_mid) {
-                                                                var value_result = config_timeskip.config_avventure.mo_base_3 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_3, 0);
+                                                                var value_result = config_timeskip.config_avventure.mo_base_3 + (roll_dice_value(0, config_timeskip.config_avventure.mo_base_3, 0) * config_timeskip.config_avventure.mo_mod_3);
                                                                 var new_value_mo = old_value_mo - value_result;
                                                                 var status = "Fallimento"
                                                                 var message_result = "L'esplorazione che hai condotto non ha ottenuto la fine che speravi ed il che ti ha fatto perdere **" + value_result + "** monete d'oro."
                                                             } else if (roll_result <= config_timeskip.config_avventure.val_low) {
-                                                                var value_result = config_timeskip.config_avventure.mo_base_4 + roll_dice_value(0, config_timeskip.config_avventure.mo_base_4, 0);
+                                                                var value_result = config_timeskip.config_avventure.mo_base_4 + (roll_dice_value(0, config_timeskip.config_avventure.mo_base_4, 0) * config_timeskip.config_avventure.mo_mod_4);
                                                                 var new_value_mo = old_value_mo - value_result;
                                                                 var status = "Fallimento Totale"
                                                                 var message_result = "L'esplorazione che hai condotto, purtroppo, ha ottenuto una devastante disfatta che ti è costata ben **" + value_result + "** monete d'oro."
