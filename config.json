@@ -5,7 +5,8 @@
     "owner": "188587744140853251",
     "webhooks": "901616598819950663",
     "role_base": [
-        "Admin",
+        "🦝Capo gilda 🦝",
+        "Consiglieri",
         "Moderatori",
         "Helper",
         "Dungeon Master",
@@ -13,14 +14,16 @@
         "Gildano"
     ],
     "role_avance": [
-        "Admin",
+        "🦝Capo gilda 🦝",
+        "Consiglieri",
         "Moderatori",
         "Helper",
         "DM in Prova",
         "Dungeon Master"
     ],
     "role_admin": [
-        "Admin"
+        "🦝Capo gilda 🦝",
+        "Consiglieri"
     ],
     "Level_Chat_Lissener": [
         "864053775596257290",
