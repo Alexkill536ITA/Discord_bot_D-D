@@ -21,7 +21,7 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_competenze');
         }
         var Container = new Discord.MessageEmbed();
-        // let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         try {
             if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
                 if (args[2]) {
