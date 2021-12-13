@@ -86,8 +86,9 @@ exports.serachbyid_obj = function (query) {
     return collection.findOne({ 'Id': query });
 }
 
-exports.serachbynome_obj = function (query) {
-    return collection.findOne({ 'nome': query });
+exports.serachbynome_obj = async function (query) {
+    var cursor = await collection.findOne({ 'nome': query });
+    return cursor;
 }
 
 exports.serachbynome_shop = function (query) {

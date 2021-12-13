@@ -32,53 +32,43 @@ module.exports = {
                     nome = String(nome).toLowerCase();
                     var on_sevice_db = await methodDB.open_db();
                     if (on_sevice_db != 1) {
-                        methodDB.settab_db("Lista_Competenze");
-                        var cursor = methodDB.serachbynome_obj(nome);
-                        cursor.then(async function (result) {
-                            if (result) {
-                                if (result == null) {
-                                    Container.setColor([255, 0, 0])
-                                        .setAuthor(`Richiesta di: ${message.author.username}`)
-                                        .setTitle('Errore Talento non trovato');
-                                    message.channel.send(Container);
-                                    return 1;
-                                } else {
-                                    if (args[1]) {
-                                        try {
-                                            var autore = message.mentions.users.first();
-                                            // var Scheda = await get_Scheda_pg(args[1]);
-                                            var Scheda = await get_Scheda_pg(autore.id);
-                                            if (Scheda != null) {
-                                                var complete = add_sub(message, args, Scheda, result);
-                                                if (complete == 1) {
-                                                    emit_print(message);
-                                                    return 1;
-                                                } else {
-                                                    return 0;
-                                                }
-                                            } else {
-                                                Container.setColor([255, 0, 0])
-                                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                                    .setTitle('Errore Scheda PG non trovata');
-                                                message.channel.send(Container);
-                                                return 1;
-                                            }
-                                        } catch {
+                        var result = await get_competenza(nome);
+                        if (result == null) {
+                            Container.setColor([255, 0, 0])
+                                .setAuthor(`Richiesta di: ${message.author.username}`)
+                                .setTitle('Errore Talento non trovato');
+                            message.channel.send(Container);
+                            return 1;
+                        } else {
+                            if (args[1]) {
+                                try {
+                                    var autore = message.mentions.users.first();
+                                    // var Scheda = await get_Scheda_pg(args[1]);
+                                    var Scheda = await get_Scheda_pg(autore.id);
+                                    if (Scheda != null) {
+                                        var complete = add_sub(message, args, Scheda, result);
+                                        if (complete == 1) {
                                             emit_print(message);
                                             return 1;
+                                        } else {
+                                            return 0;
                                         }
                                     } else {
-                                        emit_print(message);
+                                        Container.setColor([255, 0, 0])
+                                            .setAuthor(`Richiesta di: ${message.author.username}`)
+                                            .setTitle('Errore Scheda PG non trovata');
+                                        message.channel.send(Container);
                                         return 1;
                                     }
+                                } catch {
+                                    emit_print(message);
+                                    return 1;
                                 }
                             } else {
-                                Container.setColor([255, 0, 0])
-                                    .setAuthor(`Richiesta di: ${message.author.username}`)
-                                    .setTitle('Errore Oggetto non trovato');
-                                message.channel.send(Container);
+                                emit_print(message);
+                                return 1;
                             }
-                        });
+                        }
                     }
                 } else {
                     emit_print(message);
@@ -132,8 +122,8 @@ function add_sub(message, args, Scheda_PG, result) {
                 .addField("Competenza", nome_var)
                 .setTimestamp()
                 .setFooter("Data", message.author.displayAvatarURL());
+            methodDB.competenze_update(Scheda_PG['_id'], talento);
         }
-        methodDB.competenze_update(Scheda_PG['_id'], talento);
         message.channel.send(Container);
     } else if (args[0] == "sub" || args[0] == "-s") {
         var nome_var = result.nome;
@@ -163,8 +153,8 @@ function add_sub(message, args, Scheda_PG, result) {
                 .addField("Competenza", nome_var)
                 .setTimestamp()
                 .setFooter("Data", message.author.displayAvatarURL());
+                methodDB.competenze_update(Scheda_PG['_id'], talento_pg);
         }
-        methodDB.competenze_update(Scheda_PG['_id'], talento_pg);
         message.channel.send(Container);
     } else {
         return 1;
@@ -186,6 +176,18 @@ async function get_Scheda_pg(id_serach) {
         methodDB.settab_db("Schede_PG");
         // var cursor = methodDB.serachbyid(id_serach);
         var cursor = methodDB.load_pg(id_serach);
+    } else {
+        return 1;
+    }
+    return cursor;
+}
+
+async function get_competenza(id_serach) {
+    var on_sevice_db = await methodDB.open_db();
+    if (on_sevice_db != 1) {
+        methodDB.settab_db("Lista_Competenze");
+        // var cursor = methodDB.serachbyid(id_serach);
+        var cursor = methodDB.serachbynome_obj(id_serach);
     } else {
         return 1;
     }
