@@ -1003,7 +1003,7 @@ module.exports = {
                     } else {
                         emit_print_err_internal(message);
                     }
-                } else if (args[0] == "set_token") {                // funtion 1 fare
+                } else if (args[0] == "set_token") {                // funtion 1 OK
                     if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
                         await connect_db("Event_config");
                         var config_timeskip = await methodDB.serachbyid_obj("1");
