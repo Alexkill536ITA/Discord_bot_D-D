@@ -92,11 +92,11 @@ module.exports = {
                 message.channel.send(Container);
             }
         } catch (error) {
+            console.log(error);
             Container.setColor([255, 0, 0])
                 .setAuthor(`🚫 Access denied ` + message.author.username + " 🚫")
                 .setTitle('Non sei autorizzato a usare questo comando');
             message.channel.send(Container);
-            console.log(error);
         }
     }
 }
