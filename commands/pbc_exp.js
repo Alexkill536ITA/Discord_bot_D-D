@@ -104,12 +104,11 @@ function getmonthNumber(d) {
 function add_exp_frag(message, frammenti, exp, Scheda_PG) {
     var ogg_temp = {};
     frammenti = frammenti + 1;
-    if (frammenti == config.Level_Chat_max) {
+    if (frammenti >= config.Level_Chat_max) {
         exp = exp + 1;
-        frammenti = 0;
 
         ogg_temp['Exp_get'] = exp;
-        ogg_temp['Frammento'] = frammenti;
+        ogg_temp['Frammento'] = frammenti - 100;
         ogg_temp['Data'] = new Date();
 
         var exp_value = Scheda_PG.Exp;
