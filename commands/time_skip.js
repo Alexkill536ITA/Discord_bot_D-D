@@ -778,7 +778,7 @@ module.exports = {
                                                     Container = new Discord.MessageEmbed();
                                                     Container.setColor(colrs_set)
                                                         .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                        .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Talento Da: <@" + Scheda_pg.Nome_Discord + ">")
+                                                        .setDescription("<@&" + config_timeskip.ping_role + ">\n\n📫 Richiesta Per Crafting Da: <@" + Scheda_pg.Nome_Discord + ">")
                                                         .addField("🆔 Scheda", Scheda_pg._id)
                                                         .addField("Creazione Richiesto: ", select_Creazione)
                                                         .setThumbnail(avatar, true)
