@@ -743,12 +743,44 @@ module.exports = {
                                                 var select_Creazione = nome.toLowerCase();
                                                 if (select_Creazione == "comune") {
                                                     var cost_token = config_timeskip.config_creazione.Cost_comune
+                                                    if (Scheda_pg.Money >= config_timeskip.config_creazione.Cost_comune_mo) {
+                                                        var money = Scheda_pg.Money;
+                                                        money = parseFloat(money) - parseFloat(config_timeskip.config_creazione.Cost_comune_mo);
+                                                        methodDB.money_update(Scheda_pg._id, money);
+                                                    } else {
+                                                        emit_print_err_money(message);
+                                                        return
+                                                    }
                                                 } else if (select_Creazione == "non comune") {
                                                     var cost_token = config_timeskip.config_creazione.Cost_non_comune
+                                                    if (Scheda_pg.Money >= config_timeskip.config_creazione.Cost_non_comune_mo) {
+                                                        var money = Scheda_pg.Money;
+                                                        money = parseFloat(money) - parseFloat(config_timeskip.config_creazione.Cost_non_comune_mo);
+                                                        methodDB.money_update(Scheda_pg._id, money);
+                                                    } else {
+                                                        emit_print_err_money(message);
+                                                        return
+                                                    }
                                                 } else if (select_Creazione == "raro") {
                                                     var cost_token = config_timeskip.config_creazione.Cost_raro
+                                                    if (Scheda_pg.Money >= config_timeskip.config_creazione.Cost_raro_mo) {
+                                                        var money = Scheda_pg.Money;
+                                                        money = parseFloat(money) - parseFloat(config_timeskip.config_creazione.Cost_raro_mo);
+                                                        methodDB.money_update(Scheda_pg._id, money);
+                                                    } else {
+                                                        emit_print_err_money(message);
+                                                        return
+                                                    }
                                                 } else if (select_Creazione == "molto raro") {
                                                     var cost_token = config_timeskip.config_creazione.Cost_molto_raro
+                                                    if (Scheda_pg.Money >= config_timeskip.config_creazione.Cost_molto_raro_mo) {
+                                                        var money = Scheda_pg.Money;
+                                                        money = parseFloat(money) - parseFloat(config_timeskip.config_creazione.Cost_molto_raro_mo);
+                                                        methodDB.money_update(Scheda_pg._id, money);
+                                                    } else {
+                                                        emit_print_err_money(message);
+                                                        return
+                                                    }
                                                 } else {
                                                     Container = new Discord.MessageEmbed();
                                                     Container.setColor([255, 0, 0])
