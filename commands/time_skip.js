@@ -429,10 +429,10 @@ module.exports = {
                                                                 if (check_nam == undefined) {
                                                                     var ojb = {}
                                                                     ojb[tool_result.nome] = tool_result.nome
-                                                                    Object.assign(competenze_old, ojb);
+                                                                    var temp_obf = Object.assign(competenze_old, ojb);
                                                                     methodDB.money_update(Scheda_pg._id, new_value_mo);
                                                                     methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                                                    methodDB.competenze_update(Scheda_pg._id, competenze_old);
+                                                                    methodDB.competenze_update(Scheda_pg._id, temp_obf);
                                                                     let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                                                     if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
                                                                         var avatar = member.user.displayAvatarURL();

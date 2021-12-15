@@ -114,7 +114,7 @@ function add_sub(message, args, Scheda_PG, result) {
         } else {
             var talento = {};
             talento[nome_var] = nome_var;
-            Object.assign(talento_pg, talento);
+            var temp_obf = Object.assign(talento_pg, talento);
             Container = new Discord.MessageEmbed();
             Container.setColor(colrs_set)
                 .setTitle('Scheda: ' + Scheda_PG.Nome_PG)
@@ -122,7 +122,7 @@ function add_sub(message, args, Scheda_PG, result) {
                 .addField("Competenza", nome_var)
                 .setTimestamp()
                 .setFooter("Data", message.author.displayAvatarURL());
-            methodDB.competenze_update(Scheda_PG['_id'], talento);
+            methodDB.competenze_update(Scheda_PG['_id'], temp_obf);
         }
         message.channel.send(Container);
     } else if (args[0] == "sub" || args[0] == "-s") {
