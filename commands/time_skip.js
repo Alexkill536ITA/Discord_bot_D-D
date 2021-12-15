@@ -354,6 +354,7 @@ module.exports = {
                                                                 .setDescription("📯 Ha Fatto Una Spedizione: <@" + Scheda_pg.Nome_Discord + ">")
                                                                 .addField("🆔 Scheda:", Scheda_pg._id)
                                                                 .addField("🧾 Esito:", status)
+                                                                .addField("🎲 Dado:", roll_result)
                                                                 .addField("Spedizioni Rimaneti:", new_action)
                                                                 .setThumbnail(avatar, true)
                                                                 .setTimestamp()
