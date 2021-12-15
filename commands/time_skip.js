@@ -1220,7 +1220,7 @@ function roll_dice_value(min, max, mod) {
     var min = Math.ceil(min);
     var max = Math.floor(max);
     var result = Math.floor(Math.random() * (max - min + 1)) + min;
-    return result + mod;
+    return parseInt(result) + parseInt(mod);
 }
 
 function decode_mod(mod) {
