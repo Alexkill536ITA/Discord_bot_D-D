@@ -190,7 +190,7 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG, value, type) {
         exp = exp + 1;
 
         ogg_temp['Exp_get'] = exp;
-        ogg_temp['Frammento'] = frammenti - 100;
+        ogg_temp['Frammento'] = frammenti - parseInt(config.Level_Chat_max);
         ogg_temp['Data'] = new Date();
 
         var exp_value = Scheda_PG.Exp;
