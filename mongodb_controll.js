@@ -100,7 +100,8 @@ exports.serachbylistpg = function (query) {
 }
 
 exports.serach_competenze = async function (query) {
-    return await collection.findOne({ 'nome': query });
+    var cursor = await collection.findOne({ 'nome': query });
+    return cursor
 }
 
 exports.serachbyid_Object = async function (id_shop) {

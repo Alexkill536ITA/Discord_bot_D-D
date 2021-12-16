@@ -313,12 +313,12 @@ module.exports = {
                     // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [ID_Scheda][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [ID_Scheda] e inserire la caratteristica del PG in [Statisitca del PG]');
                     .setDescription('Sintassi:\n **' + config.prefix + 'timeskip spedizione** [@utente][Statisitca del PG] \n\nEvento Randomico di esplorazione \n\n**Statistiche PG:**\n forza\n destrezza\n costituzione\n intelligenza\n saggezza\n carisma \n\n Per usare timeskip spedizione inserire [@utente] e inserire la caratteristica del PG in [Statisitca del PG]');
                 message.channel.send(Container);
-            } else if (nome == "timeskip strumento") {
+            } else if (nome == "timeskip competenza") {
                 Container.setColor([255, 0, 0])
-                    .setTitle('Help timeskip strumento')
+                    .setTitle('Help timeskip competenza')
                     .setThumbnail(botavatar.displayAvatarURL())
-                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [ID_Sheda][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [ID_Scheda] e inserire la competenza dello strumento in [Strumento da acquisire]');
-                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip strumento** [@utente][Strumento da acquisire] \n\nEvento trumento assegna alla scheda PG la competneza trumento selezionata \n\nPer mostrare la lista inserire solo **&timeskip strumento** \n\n Per usare timeskip strumento inserire [@utente] e inserire la competenza dello strumento in [Strumento da acquisire]');
+                    // .setDescription('Sintassi:\n **' + config.prefix + 'timeskip competenza** [ID_Sheda][Competenza da acquisire] \n\nEvento competenza assegna alla scheda PG la competneza competenza selezionata \n\nPer mostrare la lista inserire solo **&timeskip competenza** \n\n Per usare timeskip competenza inserire [ID_Scheda] e inserire la competenza dello strumento in [Competenza da acquisire]');
+                    .setDescription('Sintassi:\n **' + config.prefix + 'timeskip competenza** [@utente][Competenza da acquisire] \n\nEvento competenza assegna alla scheda PG la competneza competenza selezionata \n\nPer mostrare la lista inserire solo **&timeskip competenza** \n\n Per usare timeskip competenza inserire [@utente] e inserire la competenza dello strumento in [Competenza da acquisire]');
                 message.channel.send(Container);
             } else if (nome == "timeskip lingua") {
                 Container.setColor([255, 0, 0])
