@@ -135,7 +135,7 @@ function add_sub(message, args, Scheda_PG, result) {
         } else {
             var avatar = Scheda_PG['Avatar'];
         }
-        if (check_nam !== undefined) {
+        if (check_nam == undefined) {
             Container = new Discord.MessageEmbed();
             Container.setColor(colrs_set)
                 .setTitle('Scheda: ' + Scheda_PG.Nome_PG)

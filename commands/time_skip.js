@@ -390,7 +390,7 @@ module.exports = {
                     } else {
                         emit_print_err_internal(message);
                     }
-                } else if (args[0] == "strumento") {                // Event 3 OK
+                } else if (args[0] == "competenza") {                // Event 3 OK
                     await connect_db("Event_config");
                     var config_timeskip = await methodDB.serachbyid_obj("1");
                     if (config_timeskip != null && config_timeskip != undefined) {
@@ -411,70 +411,68 @@ module.exports = {
                                                         var filter_tool = config_timeskip.config_strumenti.filter_tool;
                                                         if (filter_tool.includes(tool_richiesto)) {
                                                             await connect_db("Lista_Competenze");
-                                                            var cursor_tool = methodDB.serach_competenze(tool_richiesto);
-                                                            cursor_tool.then(async function (tool_result) {
-                                                                await connect_db("Schede_PG");
-                                                                var old_value_mo = Scheda_pg.Money;
-                                                                var new_value_mo = old_value_mo - config_timeskip.config_strumenti.Cost_strumenti_mo;
-                                                                var old_value_tk = Scheda_pg.timeskip.token;
-                                                                var new_value_tk = old_value_tk - config_timeskip.config_strumenti.Cost_strumenti_token;
-                                                                if (Scheda_pg.Competenze == undefined) {
-                                                                    var obj_temp = {};
-                                                                    obj_temp["Competenze"] = {};
-                                                                    var competenze_old = obj_temp["Competenze"]
+                                                            var tool_result = await methodDB.serach_competenze(tool_richiesto);
+                                                            await connect_db("Schede_PG");
+                                                            var old_value_mo = Scheda_pg.Money;
+                                                            var new_value_mo = old_value_mo - config_timeskip.config_strumenti.Cost_strumenti_mo;
+                                                            var old_value_tk = Scheda_pg.timeskip.token;
+                                                            var new_value_tk = old_value_tk - config_timeskip.config_strumenti.Cost_strumenti_token;
+                                                            if (Scheda_pg.Competenze == undefined) {
+                                                                var obj_temp = {};
+                                                                obj_temp["Competenze"] = {};
+                                                                var competenze_old = obj_temp["Competenze"]
+                                                            } else {
+                                                                var competenze_old = Scheda_pg.Competenze;
+                                                            }
+                                                            var check_nam = competenze_old[tool_result.nome];
+                                                            if (check_nam == undefined) {
+                                                                var ojb = {}
+                                                                ojb[tool_result.nome] = tool_result.nome
+                                                                var temp_obf = Object.assign(competenze_old, ojb);
+                                                                methodDB.money_update(Scheda_pg._id, new_value_mo);
+                                                                methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
+                                                                methodDB.competenze_update(Scheda_pg._id, temp_obf);
+                                                                let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                                                if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                                    var avatar = member.user.displayAvatarURL();
                                                                 } else {
-                                                                    var competenze_old = Scheda_pg.Competenze;
+                                                                    var avatar = Scheda_pg.Avatar;
                                                                 }
-                                                                var check_nam = competenze_old[tool_result.nome];
-                                                                if (check_nam == undefined) {
-                                                                    var ojb = {}
-                                                                    ojb[tool_result.nome] = tool_result.nome
-                                                                    var temp_obf = Object.assign(competenze_old, ojb);
-                                                                    methodDB.money_update(Scheda_pg._id, new_value_mo);
-                                                                    methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value_tk)
-                                                                    methodDB.competenze_update(Scheda_pg._id, temp_obf);
-                                                                    let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                                    if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                                        var avatar = member.user.displayAvatarURL();
-                                                                    } else {
-                                                                        var avatar = Scheda_pg.Avatar;
-                                                                    }
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("Hai Aquisito Questa Competenza")
-                                                                        .addField("🛠 / 🎺 Competenza:", tool_result.nome)
-                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    message.channel.send(Container);
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
-                                                                        .addField("🆔 Scheda:", Scheda_pg._id)
-                                                                        .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
-                                                                        .setThumbnail(avatar, true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    client.channels.cache.get(config_timeskip.event_chat).send(Container);
-                                                                } else {
-                                                                    Container = new Discord.MessageEmbed();
-                                                                    Container.setColor(colrs_set)
-                                                                        .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                                        .setDescription("Sei già in possesso di questa Competenza")
-                                                                        .addField("🛠 / 🎺 Competenza:", tool_result.nome)
-                                                                        .setThumbnail(botavatar.displayAvatarURL(), true)
-                                                                        .setTimestamp()
-                                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                                    message.channel.send(Container);
-                                                                }
-                                                            });
+                                                                Container = new Discord.MessageEmbed();
+                                                                Container.setColor(colrs_set)
+                                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                    .setDescription("Hai Aquisito Questa Competenza")
+                                                                    .addField("🛠 / 🎺 Competenza:", tool_result.nome)
+                                                                    .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                    .setTimestamp()
+                                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                                message.channel.send(Container);
+                                                                Container = new Discord.MessageEmbed();
+                                                                Container.setColor(colrs_set)
+                                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                    .setDescription("📯 Ha Acquisito Una Competenza: <@" + Scheda_pg.Nome_Discord + ">")
+                                                                    .addField("🆔 Scheda:", Scheda_pg._id)
+                                                                    .addField("🛠/🎺 Competenza Assegnata:", tool_result.nome)
+                                                                    .setThumbnail(avatar, true)
+                                                                    .setTimestamp()
+                                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                                client.channels.cache.get(config_timeskip.event_chat).send(Container);
+                                                            } else {
+                                                                Container = new Discord.MessageEmbed();
+                                                                Container.setColor(colrs_set)
+                                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                                    .setDescription("Sei già in possesso di questa Competenza")
+                                                                    .addField("🛠 / 🎺 Competenza:", tool_result.nome)
+                                                                    .setThumbnail(botavatar.displayAvatarURL(), true)
+                                                                    .setTimestamp()
+                                                                    .setFooter("Data", message.author.displayAvatarURL());
+                                                                message.channel.send(Container);
+                                                            }
                                                         } else {
-                                                            emit_print_err_obj(message, "Errore Strumento Inserito Non Valido");
+                                                            emit_print_err_obj(message, "Errore Competenza Inserito Non Valido");
                                                         }
                                                     } else {
-                                                        emit_print_err_custom(message, "strumento** [@utente][Strumento da acquisire]");
+                                                        emit_print_err_custom(message, "competenza** [@utente][Competenza da acquisire]");
                                                     }
                                                 } else {
                                                     emit_print_err_money(message);
@@ -501,7 +499,7 @@ module.exports = {
                                 Container.setColor(colrs_set)
                                     .setTitle('📜 Lista Strumenti Disponibili')
                                     .setDescription(text)
-                                    .addField("Sintassi", "**" + config.prefix + "timeskip strumento** [@utente][Strumento da acquisire]")
+                                    .addField("Sintassi", "**" + config.prefix + "timeskip competenza** [@utente][Competenza da acquisire]")
                                     .setThumbnail(botavatar.displayAvatarURL(), true)
                                     .setTimestamp()
                                     .setFooter("Data", message.author.displayAvatarURL());
