@@ -1045,35 +1045,31 @@ module.exports = {
                                         var autore = message.mentions.users.first();
                                         var Scheda_pg = await get_Scheda_pg(autore.id);
                                         if (Scheda_pg != 1) {
-                                            if (Scheda_pg.Nome_Discord == message.author.id) {
-                                                if (args[1] == "add" || args[1] == "-a") {
-                                                    var old_value = Scheda_pg.timeskip.token;
-                                                    var new_value = old_value + parseInt(args[2]);
-                                                } else if (args[1] == "sub" || args[1] == "-s") {
-                                                    var old_value = Scheda_pg.timeskip.token;
-                                                    var new_value = old_value - parseInt(args[2]);
-                                                } else {
-                                                    emit_print_err_custom(message, "set_token** [Opzione][Valore][@utente]");
-                                                    return
-                                                }
-                                                methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value);
-                                                let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
-                                                if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
-                                                    var avatar = member.user.displayAvatarURL();
-                                                } else {
-                                                    var avatar = Scheda_pg.Avatar;
-                                                }
-                                                Container = new Discord.MessageEmbed();
-                                                Container.setColor(colrs_set)
-                                                    .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
-                                                    .setThumbnail(avatar, true)
-                                                    .addField("🟡 Token", new_value)
-                                                    .setTimestamp()
-                                                    .setFooter("Data", message.author.displayAvatarURL());
-                                                message.channel.send(Container);
+                                            if (args[1] == "add" || args[1] == "-a") {
+                                                var old_value = Scheda_pg.timeskip.token;
+                                                var new_value = old_value + parseInt(args[2]);
+                                            } else if (args[1] == "sub" || args[1] == "-s") {
+                                                var old_value = Scheda_pg.timeskip.token;
+                                                var new_value = old_value - parseInt(args[2]);
                                             } else {
-                                                emit_print_err_author_not_mach(message);
+                                                emit_print_err_custom(message, "set_token** [Opzione][Valore][@utente]");
+                                                return
                                             }
+                                            methodDB.timeskip_pg_token_update(Scheda_pg._id, new_value);
+                                            let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
+                                            if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
+                                                var avatar = member.user.displayAvatarURL();
+                                            } else {
+                                                var avatar = Scheda_pg.Avatar;
+                                            }
+                                            Container = new Discord.MessageEmbed();
+                                            Container.setColor(colrs_set)
+                                                .setTitle('📜 Scheda: ' + Scheda_pg.Nome_PG)
+                                                .setThumbnail(avatar, true)
+                                                .addField("🟡 Token", new_value)
+                                                .setTimestamp()
+                                                .setFooter("Data", message.author.displayAvatarURL());
+                                            message.channel.send(Container);
                                         } else {
                                             emit_print_err_notfound(message);
                                         }
