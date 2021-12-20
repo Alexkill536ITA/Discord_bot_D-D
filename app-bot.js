@@ -114,6 +114,8 @@ function Discord_start() {
             client.commands.get('pgcasata').execute(message, args);
         } else if (command == 'competenza') {
             client.commands.get('competenza').execute(client, message, args)
+        } else if (command == 'fama') {
+            client.commands.get('fama').execute(message, args)
         } else if (command == 'money') {
             client.commands.get('money').execute(message, args);
         } else if (command == 'milestone') {
