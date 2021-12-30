@@ -21,6 +21,7 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_fragment');
         }
         var Container = new Discord.MessageEmbed();
+        var colrs_set = clor_gen.rand_Color();
         let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
         try {
             if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
@@ -48,32 +49,32 @@ module.exports = {
                                         var ultima_asseganzione = getmonthNumber(Scheda_PG["Pbc_frag"]["Data"]);
                                         var frammenti_attuale = parseInt(Scheda_PG["Pbc_frag"]["Frammento"]);
                                         var Exp_get_attuale = parseInt(Scheda_PG["Pbc_frag"]["Exp_get"]);
-                                        if (config.Level_Chat_reset == true) {
-                                            if (ultima_asseganzione == getmonthNumber(new Date())) {
-                                                if (Exp_get_attuale < config.Level_milestone_max) {
-                                                    add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
-                                                } else {
-                                                    if (Scheda_PG["Avatar"] == "Non Assegnata" || Scheda_PG["Avatar"] == undefined) {
-                                                        var avatar = autore.displayAvatarURL();
-                                                    } else {
-                                                        var avatar = Scheda_PG["Avatar"];
-                                                    }
-                                                    Container.setColor(colrs_set)
-                                                        .setTitle('Scheda: ' + Scheda_PG["Nome_PG"])
-                                                        .setThumbnail(avatar, true)
-                                                        .setDescription("Ha ragiunto il massimo di Milestone di questo mese")
-                                                        .setTimestamp()
-                                                        .setFooter("Data", message.author.displayAvatarURL());
-                                                    message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
-                                                    return 1;
-                                                }
-                                            } else {
-                                                reset_frag(message, Scheda_PG, args[1]);
-                                            }
-                                        } else {
+                                        // if (config.Level_Chat_reset == true) {
+                                        //     if (ultima_asseganzione == getmonthNumber(new Date())) {
+                                                
+                                        //         if (Exp_get_attuale < config.Level_milestone_max) {
+                                        //             add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
+                                        //         } else {
+                                        //             if (Scheda_PG["Avatar"] == "Non Assegnata" || Scheda_PG["Avatar"] == undefined) {
+                                        //                 var avatar = autore.displayAvatarURL();
+                                        //             } else {
+                                        //                 var avatar = Scheda_PG["Avatar"];
+                                        //             }
+                                        //             Container.setColor(colrs_set)
+                                        //                 .setTitle('Scheda: ' + Scheda_PG["Nome_PG"])
+                                        //                 .setThumbnail(avatar, true)
+                                        //                 .setDescription("Ha ragiunto il massimo di Milestone di questo mese")
+                                        //                 .setTimestamp()
+                                        //                 .setFooter("Data", message.author.displayAvatarURL());
+                                        //             message.channel.send(Container).then((msg) => msg.delete({ timeout: 20000 }));
+                                        //             return 1;
+                                        //         }
+                                        //     } else {
+                                        //         reset_frag(message, Scheda_PG, args[1]);
+                                        //     }
+                                        // } else {
                                             add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG, args[1], args[0]);
-                                        }
-
+                                        // }
                                     }
                                 }
                             }
