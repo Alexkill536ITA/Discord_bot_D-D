@@ -136,7 +136,7 @@ function emit_print(message) {
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgavatar`)
         // .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** [Opzione][ID_Scheda][URL Avatar]');
-        .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** [Opzione][@utente][URL Avatar]');
+        .setTitle('Sintassi:\n **' + config.prefix + 'pgavatar** [Opzione][@utente][URL Avatar]\n **OPZIONI** • show = Mostra avatar pg\n • set = Imposta Avatar pg');
     message.channel.send(Container);
 }
 
