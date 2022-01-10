@@ -162,7 +162,7 @@ async function Make_mission_message(client, message, args) {
         let role_ping = message.guild.roles.cache.find(role => role.name === config.player_ping);
         const avatar_DM = await client.users.fetch(mission['Master_id'])
         
-        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
+        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_scadenza'])));
         
         if (dateCompare(mission['Data_scadenza']) == 1) {
             message.delete();
@@ -666,7 +666,7 @@ function check_limt_32bit(ms) {
 }
 
 function dateCompare(ms) {
-    var preimpostata = new Date(ms);   
+    var preimpostata = new Date(ms);
     var oggi = new Date(); 
     var diff = preimpostata.getTime() - oggi.getTime();
     if (diff <= 0) {
