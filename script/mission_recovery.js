@@ -186,7 +186,7 @@ async function Make_mission_message(client, args) {
         if (mission != null && mission != 1) {
             const avatar_DM = await client.users.fetch(mission['Master_id'])
 
-            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_ora_missione'])));
+            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_scadenza'])));
 
             if (dateCompare(mission['Data_scadenza']) == 1) {
                 return;
