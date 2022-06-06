@@ -41,7 +41,7 @@ module.exports = {
                                             if (result != null) {
                                                 var old_value = parseFloat(result.Money);
                                                 var new_value = old_value + parseFloat(args[1]);
-                                                methodDB.money_update(result._id, new_value);
+                                                methodDB.money_update(result._id, new_value.toFixed(2));
                                                 let member = message.guild.members.cache.get(result.Nome_Discord);
                                                 if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
                                                     var avatar = member.user.displayAvatarURL();
@@ -52,7 +52,7 @@ module.exports = {
                                                 Container.setColor(colrs_set)
                                                     .setTitle('Scheda: ' + result.Nome_PG)
                                                     .setThumbnail(avatar, true)
-                                                    .addField("💰 Money", new_value)
+                                                    .addField("💰 Money", new_value.toFixed(2))
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
                                                 message.channel.send(Container);
@@ -88,7 +88,7 @@ module.exports = {
                                                 if (new_value < 0) {
                                                     new_value = 0;
                                                 }
-                                                methodDB.money_update(result._id, new_value);
+                                                methodDB.money_update(result._id, new_value.toFixed(2));
                                                 let member = message.guild.members.cache.get(result.Nome_Discord);
                                                 if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
                                                     var avatar = member.user.displayAvatarURL();
@@ -99,7 +99,7 @@ module.exports = {
                                                 Container.setColor(colrs_set)
                                                     .setTitle('Scheda: ' + result.Nome_PG)
                                                     .setThumbnail(avatar, true)
-                                                    .addField("💰 Money", new_value)
+                                                    .addField("💰 Money", new_value.toFixed(2))
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
                                                 message.channel.send(Container);
