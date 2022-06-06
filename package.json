@@ -11,7 +11,7 @@
   "author": "Alexkill536ITA",
   "license": "ISC",
   "dependencies": {
-    "ansi-colors": "^4.1.1",
+    "ansi-colors": "^4.1.2",
     "bcryptjs": "^2.4.3",
     "cli-progress": "^3.10.0",
     "crypto-random-string": "^3.3.1",
