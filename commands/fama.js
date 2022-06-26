@@ -21,9 +21,9 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_fama');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_avance);
         try {
-            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 if (args[0] == "add" || args[0] == "-a") {
                     if (args[2]) {
@@ -52,6 +52,7 @@ module.exports = {
                                                 Container.setColor(colrs_set)
                                                     .setTitle('Scheda: ' + result.Nome_PG)
                                                     .setThumbnail(avatar, true)
+                                                    .addField("Grado", getgrado(result.Casata, new_value))
                                                     .addField("Fama", new_value)
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
@@ -99,6 +100,7 @@ module.exports = {
                                                 Container.setColor(colrs_set)
                                                     .setTitle('Scheda: ' + result.Nome_PG)
                                                     .setThumbnail(avatar, true)
+                                                    .addField("Grado", getgrado(result.Casata, new_value))
                                                     .addField("Fama", new_value)
                                                     .setTimestamp()
                                                     .setFooter("Data", message.author.displayAvatarURL());
@@ -147,4 +149,14 @@ function emit_print(message) {
         // .setTitle('Sinstassi **' + config.prefix + 'fama** [Opzione][Valore][ID_Scheda]');
         .setTitle('Sinstassi **' + config.prefix + 'fama** [Opzione][Valore][@utente]');
     message.channel.send(Container);
+}
+
+function getgrado(casata, punti) {
+    casata = casata.toLowerCase();
+    var gradi = config.list_gradi[casata];
+    for (const key in gradi) {
+        if (punti >= gradi[key]['value_min'] && punti <= gradi[key]['value_max']) {
+            return gradi[key]['name'];
+        }
+    }
 }

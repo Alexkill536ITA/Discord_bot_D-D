@@ -22,8 +22,8 @@ module.exports = {
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         try {
             if (args[0] == 'set') {
-                let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
-                if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                let myRole = message.guild.roles.cache.find(role => role.id === config.role_avance);
+                if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                     if (args[1] == 1 || args[1] == 2 || args[1] == 3 || args[1] == 4) {
                         if (args[1] == 1) {
                             var value = [1, 1]
@@ -54,8 +54,8 @@ module.exports = {
                     message.channel.send(Container);
                 }
             } else {
-                let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-                if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+                let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
+                if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                     var out = globals_var.getMeteo();
                     var check_out = out['title'];
                     if (check_out == null) {

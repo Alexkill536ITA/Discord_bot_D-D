@@ -31,8 +31,8 @@
         "Adamantio": "752573613311393842"
     },
     "event_meteo_enable": true,
-    "set_event_meteo": "10:00",
-    "event_chat_meteo": "784136487544553543",
+    "set_event_ora": "10:00",
+    "event_chat_output": "784136487544553543",
     "chat_scambi": "770795462584041543",
     "chat_scambi_ping": "Gildano",
     "random_color_enable": "true",

@@ -21,9 +21,9 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute set_casata');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 if (args[0]) {
                     var autore = message.mentions.users.first();
@@ -35,7 +35,7 @@ module.exports = {
                             }
                             nome = String(nome).toLowerCase();
                         }
-                        if (config.list_casate.includes(nome)) {
+                        if (config.list_casate[nome] !== undefined) {
                             var Scheda = await get_Scheda_pg(autore.id);
                             if (Scheda != null) {
                                 methodDB.casata_update(Scheda._id, capitalizeFirstLetter(nome))
@@ -53,6 +53,8 @@ module.exports = {
                                     .setTimestamp()
                                     .setFooter("Data", message.author.displayAvatarURL());
                                 message.channel.send(Container);
+
+                                Manager_set_role(message, autore.id, nome);
                             } else {
                                 Container.setColor([255, 0, 0])
                                     .setAuthor(`Richiesta di: ${message.author.username}`)
@@ -84,8 +86,8 @@ module.exports = {
 function emit_print(message) {
     var Container = new Discord.MessageEmbed();
     message_casata = ""
-    for (index of config.list_casate) {
-        message_casata = message_casata + "• " + index + "\n"
+    for (index in config.list_casate) {
+        message_casata = message_casata + "• " + config.list_casate[index] + "\n"
     }
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgcasata`)
@@ -109,4 +111,12 @@ async function get_Scheda_pg(id_serach) {
         return 1;
     }
     return cursor;
+}
+
+function Manager_set_role(message, id_discord, casata) {
+    let member = message.guild.members.cache.get(id_discord);
+    let Role_select = message.guild.roles.cache.get(config.list_casate[casata])
+    if (!member.roles.cache.some(role => role === Role_select)) {
+        member.roles.add(Role_select).catch(console.error);
+    }
 }

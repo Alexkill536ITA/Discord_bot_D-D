@@ -105,7 +105,7 @@ module.exports = {
             message.channel.send(Container);
         } else if (args[0] == "pgcasata") {
             message_casata = ""
-            for (index of config.list_casate) {
+            for (index in config.list_casate) {
                 message_casata = message_casata + "• " + index + "\n"
             }
             Container.setColor([255, 0, 0])
@@ -184,7 +184,7 @@ module.exports = {
             Container.setColor([255, 0, 0])
                 .setTitle('Help Mission')
                 .setThumbnail(botavatar.displayAvatarURL())
-                .setDescription('Sintassi: **' + config.prefix + 'mission** [Opzione][ID_MISSIONE] \n\n**OPZIONI**\n init = inizilaizza misione\n response = chiudi missione\n unlock = sblcca player\n\n Opzione **init** per inizializare la missione con reaction role inserire [ID_MISSIONE]\n Opzione **response** Manda Il messagio di riepiloco della missione conclusa inserire [ID_MISSIONE]\n Opzione **unlock** Rimuove il blocco sul player che inpedisce di parttecipare a più missione in contemporanea inseire [@utente]');
+                .setDescription('Sintassi: **' + config.prefix + 'mission** [Opzione][ID_MISSIONE] \n\n**OPZIONI**\n init = inizilaizza misione\n allert = Crea Avviso Per i Giocatori\n\n  Opzione **init** per inizializare la missione con reaction role inserire [ID_MISSIONE]\n Opzione **allert** Manda Il messagio di avviso teggando i giocatori inserire [ID_MISSIONE]\n Opzione **close** Chiude la missione e la disabilita dal registro missioni inserire [ID_MISSIONE]');
             message.channel.send(Container);
         } else if (args[0] == "disprezzo") {
             Container.setColor([255, 0, 0])

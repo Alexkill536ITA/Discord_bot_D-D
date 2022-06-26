@@ -24,12 +24,12 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 if (args[0] == "start") {
-                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.id)) || message.author.id == config.owner) {
                         await connect_db("Event_config");
                         var config_timeskip = await methodDB.serachbyid_obj("1");
                         if (config_timeskip != null && config_timeskip != undefined) {
@@ -62,7 +62,7 @@ module.exports = {
                         emit_print_denied(message);
                     }
                 } else if (args[0] == "set") {
-                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.id)) || message.author.id == config.owner) {
                         await connect_db("Event_config");
                         var fiter_args = [
                             "event_chat",
@@ -117,7 +117,7 @@ module.exports = {
                         emit_print_denied(message);
                     }
                 } else if (args[0] == "show") {
-                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.id)) || message.author.id == config.owner) {
                         await connect_db("Event_config");
                         var config_timeskip = await methodDB.serachbyid_obj("1");
                         if (config_timeskip != null && config_timeskip != undefined) {
@@ -160,7 +160,7 @@ module.exports = {
                         emit_print_denied(message);
                     }
                 } else if (args[0] == "stop") {
-                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+                    if (message.member.roles.cache.some(r => config.role_admin.includes(r.id)) || message.author.id == config.owner) {
                         await connect_db("Schede_PG");
                         const cursor = methodDB.getAll_Object();
                         cursor.then(async function (result) {
@@ -911,7 +911,7 @@ module.exports = {
                                 var autore = message.mentions.users.first();
                                 var Scheda_pg = await get_Scheda_pg(autore.id);
                                 if (Scheda_pg != 1) {
-                                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                                         let member = message.guild.members.cache.get(Scheda_pg.Nome_Discord);
                                         if (Scheda_pg.Avatar == "Non Assegnata" || Scheda_pg.Avatar == undefined) {
                                             try {
@@ -1035,7 +1035,7 @@ module.exports = {
                         emit_print_err_internal(message);
                     }
                 } else if (args[0] == "set_token") {                // funtion 1 OK
-                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                         await connect_db("Event_config");
                         var config_timeskip = await methodDB.serachbyid_obj("1");
                         if (config_timeskip != null && config_timeskip != undefined) {

@@ -19,7 +19,7 @@ exports.mission_recovey = async function (client) {
         var fail = 0;
         cursor_ar.forEach(async (element) => {
             try {
-                Make_mission_message(client, element['ID'])
+                // Make_mission_message(client, element['ID'])
             } catch (error) {
                 console.log("[ " + color.red('ERROR') + " ] Recovery Mission Faill");
                 if (config.Debug_Level == 'DEBUG') {
@@ -186,12 +186,6 @@ async function Make_mission_message(client, args) {
         if (mission != null && mission != 1) {
             const avatar_DM = await client.users.fetch(mission['Master_id'])
 
-            print_call_allert(client, args, avatar_DM, check_limt_32bit(exspire_date(mission['Data_scadenza'])));
-
-            if (dateCompare(mission['Data_scadenza']) == 1) {
-                return;
-            }
-
             const emoji_check = '✅';
 
             var grado = [];
@@ -256,7 +250,7 @@ async function Make_mission_message(client, args) {
                 message.delete({ timeout: exspire_time });
             } catch (error) {
                 const myGuild = client.guilds.cache.get(config.Server_ID);
-                const myRole = myGuild.roles.cache.find(role => role.name === config.player_ping);
+                const myRole = myGuild.roles.cache.find(role => role.id === config.player_ping);
                 var message = await client.channels.cache.get(config.chat_missioni).send(myRole, Container);
                 message.react(emoji_check);
                 message.delete({ timeout: exspire_time });
@@ -387,54 +381,4 @@ async function Make_mission_message(client, args) {
     } catch (error) {
         console.log(error);
     }
-}
-
-async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
-    await sleep(exspire_time);
-    var mission = await get_Mission(mission_id);
-    var Container = new Discord.MessageEmbed();
-    var colrs_set = clor_gen.rand_Color();
-
-    var player = [];
-    var reserve = [];
-
-    if (mission['Player_list'] === null) {
-        return 1;
-    }
-
-    for (let index = 0; index < mission['Player_list'].length; index++) {
-        if (mission['Player_list'][index]['Status'] == 'Accettato') {
-            player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-            increment_pryority(mission['Player_list'][index]['ID_Discord']);
-            block_control(mission['Player_list'][index]['ID_Discord'], 1);
-        } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
-            reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-        }
-    }
-
-    if (player.length == 0) {
-        methodDB.settab_db("Registro_missioni");
-        methodDB.mission_update_status(mission['ID'], 'disable');
-        return;
-    }
-
-    Container.setColor(colrs_set)
-        .setTitle(mission['Nome'])
-        .setDescription(mission['Descrizione'])
-        .setThumbnail(avatar_DM.displayAvatarURL())
-        .addField("🏷 Tag", mission['Tag'], true)
-        .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
-        .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']))
-        .addField("👥 Player", player, true)
-        .setTimestamp()
-        .setFooter("ID:" + mission['ID']);
-
-    if (reserve.length > 0) {
-        Container.addField("Reserve", reserve, true);
-    }
-
-    methodDB.settab_db("Registro_missioni");
-    methodDB.mission_update_status(mission['ID'], 'execute');
-
-    client.channels.cache.get(config.chat_missioni_ping).send(Container);
 }

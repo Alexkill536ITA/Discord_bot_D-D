@@ -32,7 +32,7 @@ function check_date(client) {
     var ora = today.getHours();
     var minuti = today.getMinutes();
     var sec = today.getSeconds();
-    var set_event = config.set_event_meteo.split(':');
+    var set_event = config.set_event_ora.split(':');
     today = new Date(year, month, day, ora, minuti, sec);
     var event_day = new Date(year, month, day, set_event[0], set_event[1], 00);
 
@@ -66,9 +66,11 @@ function check_date(client) {
 
     if (result == 'Prossimo evento tra: ') {
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
-        out = meteo.set_meteo_out();
-        out.setThumbnail(botavatar.displayAvatarURL());
-        client.channels.cache.get(config.event_chat_meteo).send(out);
+        if (config.event_meteo_enable == true) {
+            out = meteo.set_meteo_out();
+            out.setThumbnail(botavatar.displayAvatarURL());
+            client.channels.cache.get(config.event_chat_output).send(out);
+        }
         console.log('[ ' + color.magenta('EVENT') + ' ] Compleate Send EVENT');
     } else {
         console.log('[ ' + color.magenta('EVENT') + ' ] ' + result);

@@ -20,9 +20,9 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute set_config');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_admin);
         try {
-            if (message.member.roles.cache.some(r => config.role_admin.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_admin.includes(r.id)) || message.author.id == config.owner) {
                 if (args[0] == "prefix") {
                     var myregexp = /^[a-zA-Z0-9]+$/;
                     if (myregexp.test(args[1]) == false) {

@@ -22,9 +22,9 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute show_pg');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 if (args[0]) {
                     var autore = message.mentions.users.first();
@@ -67,7 +67,7 @@ module.exports = {
                                         .addField("Multi Sotto Classe", js_result['Multi Sotto Classe'], true)
                                         .addField("Background", js_result['Background'], true)
                                         .addField("Casata", js_result['Casata'], true)
-                                        .addField("Punti Fama", js_result['Punti_Fama'], true)
+                                        .addField("Grado Casata", getgrado(js_result['Casata'], js_result['Punti_Fama']), true)
                                         .addField('\u200b', '**Statistiche:**')
                                         .addField("💪 Forza", js_result['Forza'], true)
                                         .addField("🤸‍♂️ Destrezza", js_result['Destrezza'], true)
@@ -118,6 +118,16 @@ module.exports = {
                 message.channel.send(Container);
                 console.log(error);
             }
+        }
+    }
+}
+
+function getgrado(casata, punti) {
+    casata = casata.toLowerCase();
+    var gradi = config.list_gradi[casata];
+    for (const key in gradi) {
+        if (punti >= gradi[key]['value_min'] && punti <= gradi[key]['value_max']) {
+            return gradi[key]['name'];
         }
     }
 }

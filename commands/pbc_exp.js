@@ -21,8 +21,8 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add PBC_Chat');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
-        if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
+        if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
             if (message.content.length >= config.Level_Chat_min_char) {
                 var Scheda = await get_Scheda_pg(message.author.id);
                 var Scheda_PG = Scheda[0];
@@ -159,10 +159,11 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
 function reset_frag(message, Scheda_PG, value) {
     var ogg_temp = {};
     if (value > config.Level_Chat_max) {
-        value = value - config.Level_Chat_max;
+        var value_fag = value - config.Level_Chat_max;
+        // var milestone = parseInt(value / config.Level_Chat_max);
     }
-    ogg_temp['Exp_get'] = 0;
-    ogg_temp['Frammento'] = value;
+    ogg_temp['Exp_get'] = 0; 
+    ogg_temp['Frammento'] = value_fag;
     ogg_temp['Data'] = new Date();
     methodDB.settab_db("Schede_PG");
     methodDB.inventory_pbc_frag(Scheda_PG._id, ogg_temp);

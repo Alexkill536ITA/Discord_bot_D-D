@@ -21,121 +21,63 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute mission');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_avance);
         if (message.author.bot) {
             if (message.author.id == config.webhooks || message.author.id == client.user.id) {
                 if (args[0] == 'init') {
                     if (args[1].length == 6) {
                         Make_mission_message(client, message, args);
                     }
-                } else if (args[0] == 'response') {
+                } else if (args[0] == 'allert') {
                     if (args[1].length == 6) {
-                        Make_mission_response(client, message, args);
+                        Make_mission_allert(client, message, args);
                     }
                 } else if (args[0] == 'edit') {
                     if (args[1].length == 6) {
                         Make_mission_message(client, message, args);
                     }
+                } else if (args[0] == 'close') {
+                    if (args[1].length == 6) {
+                        close_mission(client, message, args);
+                    }
                 }
             }
-        } else if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+        } else if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
             if (args[0] == 'init') {
                 if (args[1].length == 6) {
                     Make_mission_message(client, message, args);
                 } else {
                     Container.setColor([255, 0, 0])
                         .setAuthor(`Comando mission`)
-                        .setTitle('Sintassi **' + config.prefix + 'mission** [Opzione][ID_MISSIONE]');
+                        .setTitle('Sintassi **' + config.prefix + 'mission** init [ID_MISSIONE]');
                     message.channel.send(Container);
                 }
             } else if (args[0] == 'edit') {
-                if (message.author.id == config.owner) {
-                    if (args[1].length == 6) {
-                        Make_mission_message(client, message, args);
-                    }
-                }
-            } else if (args[0] == 'response') {
                 if (args[1].length == 6) {
-                    Make_mission_response(client, message, args);
+                    Make_mission_message(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando mission`)
+                        .setTitle('Sintassi **' + config.prefix + 'mission** edit [ID_MISSIONE]');
+                    message.channel.send(Container);
                 }
-                // } else if (args[0] == 'close') {
-                //     if (args[1].length == 6) {
-                //         if (args[2] && args[3]) {
-                //             close_mission(client, message, args);
-                //         } else {
-                //             Container.setColor([255, 0, 0])
-                //                 .setAuthor(`Comando mission`)
-                //                 .setTitle('Sintassi **' + config.prefix + 'mission close** [ID_MISSIONE]');
-                //             message.channel.send(Container);
-                //         }
-                //     } else {
-
-                //     }
-            } else if (args[0] == 'unlock') {
-                if (args[1]) {
-                    var autore = message.mentions.users.first();
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Utenti_web");
-                        var cursor = methodDB.serachbyid_user(autore.id);
-                        cursor.then(function (result) {
-                            if (result != null) {
-                                methodDB.block_reset(result._id);
-                                let member = message.guild.members.cache.get(result.Nome_Discord);
-                                if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                                    var avatar = member.user.displayAvatarURL();
-                                } else {
-                                    var avatar = result.Avatar;
-                                }
-                                Container = new Discord.MessageEmbed();
-                                Container.setColor(colrs_set)
-                                    .setDescription("Utente Sbloccato")
-                                    .setTitle('Utente: ' + autore.name)
-                                    .setThumbnail(avatar, true)
-                                    .setTimestamp()
-                                    .setFooter("Data", message.author.displayAvatarURL());
-                                message.channel.send(Container);
-                            }
-                        });
-                    } else {
-                        Container.setColor([255, 0, 0])
-                            .setAuthor(`Comando mission`)
-                            .setTitle('Sintassi **' + config.prefix + 'mission unlock** [@utente]');
-                        message.channel.send(Container);
-                    }
+            } else if (args[0] == 'allert') {
+                if (args[1].length == 6) {
+                    Make_mission_allert(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando mission`)
+                        .setTitle('Sintassi **' + config.prefix + 'mission** allert [ID_MISSIONE]');
+                    message.channel.send(Container);
                 }
-            } else if (args[0] == 'lock') {
-                if (args[1]) {
-                    var autore = message.mentions.users.first();
-                    var on_sevice_db = await methodDB.open_db();
-                    if (on_sevice_db != 1) {
-                        methodDB.settab_db("Utenti_web");
-                        var cursor = methodDB.serachbyid_user(autore.id);
-                        cursor.then(function (result) {
-                            if (result != null) {
-                                methodDB.block_control(result._id, 1);
-                                let member = message.guild.members.cache.get(result.Nome_Discord);
-                                if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                                    var avatar = member.user.displayAvatarURL();
-                                } else {
-                                    var avatar = result.Avatar;
-                                }
-                                Container = new Discord.MessageEmbed();
-                                Container.setColor(colrs_set)
-                                    .setDescription("Utente bloccato")
-                                    .setTitle('Utente: ' + autore.name)
-                                    .setThumbnail(avatar, true)
-                                    .setTimestamp()
-                                    .setFooter("Data", message.author.displayAvatarURL());
-                                message.channel.send(Container);
-                            }
-                        });
-                    } else {
-                        Container.setColor([255, 0, 0])
-                            .setAuthor(`Comando mission`)
-                            .setTitle('Sintassi **' + config.prefix + 'mission lock** [@utente]');
-                        message.channel.send(Container);
-                    }
+            } else if (args[0] == 'close') {
+                if (args[1].length == 6) {
+                    close_mission(client, message, args);
+                } else {
+                    Container.setColor([255, 0, 0])
+                        .setAuthor(`Comando mission`)
+                        .setTitle('Sintassi **' + config.prefix + 'mission** close [ID_MISSIONE]');
+                    message.channel.send(Container);
                 }
             } else {
                 Container.setColor([255, 0, 0])
@@ -159,16 +101,9 @@ async function Make_mission_message(client, message, args) {
     var colrs_set = clor_gen.rand_Color();
     var mission = await get_Mission(args[1]);
     if (mission != null && mission != 1) {
-        let role_ping = message.guild.roles.cache.find(role => role.name === config.player_ping);
+        let role_ping = message.guild.roles.cache.find(role => role.id === config.player_ping);
         const avatar_DM = await client.users.fetch(mission['Master_id'])
-        
-        print_call_allert(client, args[1], avatar_DM, check_limt_32bit(exspire_date(mission['Data_scadenza'])));
-        
-        if (dateCompare(mission['Data_scadenza']) == 1) {
-            message.delete();
-            return;
-        }
-        
+
         const emoji_check = '✅';
 
         var grado = [];
@@ -224,18 +159,15 @@ async function Make_mission_message(client, message, args) {
             .setImage(immage)
             .setTimestamp()
             .setFooter("ID: " + mission['ID']);
-        var exspire_time = check_limt_32bit(exspire_date(mission['Data_scadenza']));
         // let messageEmbed = await message.channel.send(role_ping, Container).then((msg) => msg.delete({ timeout: exspire_time }));
         if (args[0] == 'init') {
             var messageEmbed = await message.channel.send(role_ping, Container);
             messageEmbed.react(emoji_check);
-            messageEmbed.delete({ timeout: exspire_time });
             methodDB.mission_id_message_update(mission['ID'], messageEmbed.id);
         } else {
             var channel = await client.channels.fetch(config.chat_missioni);
             var message_old = await channel.messages.fetch(mission['Discord_id_message']);
             message_old.edit(Container);
-            message_old.delete({ timeout: exspire_time });
         }
 
         client.on('messageReactionAdd', async (reaction, user) => {
@@ -363,62 +295,10 @@ async function Make_mission_message(client, message, args) {
 }
 
 /*---------------------------------------------------------------------------------*/
-// Make Message Remainder Mission
-async function print_call_allert(client, mission_id, avatar_DM, exspire_time) {
-    await sleep(exspire_time);
-    var mission = await get_Mission(mission_id);
-    var Container = new Discord.MessageEmbed();
-    var colrs_set = clor_gen.rand_Color();
-
-    var player = [];
-    var reserve = [];
-
-    if (mission['Player_list'] === null) {
-        return 1;
-    }
-
-    for (let index = 0; index < mission['Player_list'].length; index++) {
-        if (mission['Player_list'][index]['Status'] == 'Accettato') {
-            player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-            increment_pryority(mission['Player_list'][index]['ID_Discord']);
-            block_control(mission['Player_list'][index]['ID_Discord'], 1);
-        } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
-            reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
-        }
-    }
-
-    if (player.length == 0) {
-        methodDB.settab_db("Registro_missioni");
-        methodDB.mission_update_status(mission['ID'], 'disable');
-        return;
-    }
-
-    Container.setColor(colrs_set)
-        .setTitle(mission['Nome'])
-        .setDescription(mission['Descrizione'])
-        .setThumbnail(avatar_DM.displayAvatarURL())
-        .addField("🏷 Tag", mission['Tag'], true)
-        .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
-        .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']))
-        .addField("👥 Player", player, true)
-        .setTimestamp()
-        .setFooter("ID:" + mission['ID']);
-
-    if (reserve.length > 0) {
-        Container.addField("Reserve", reserve, true);
-    }
-
-    methodDB.settab_db("Registro_missioni");
-    methodDB.mission_update_status(mission['ID'], 'execute');
-
-    client.channels.cache.get(config.chat_missioni_ping).send(Container);
-}
-
-/*---------------------------------------------------------------------------------*/
-// Make Message Response Mission
-async function Make_mission_response(client, message, args) {
-    message.delete();
+// Make Message Allert Mission
+async function Make_mission_allert(client, message, args) {
     try {
+        message.delete();
         var mission = await get_Mission(args[1]);
         const avatar_DM = await client.users.fetch(mission['Master_id'])
         var Container = new Discord.MessageEmbed();
@@ -426,10 +306,6 @@ async function Make_mission_response(client, message, args) {
 
         var player = [];
         var reserve = [];
-
-        if (mission['Player_list'] === null) {
-            return 1;
-        }
 
         for (let index = 0; index < mission['Player_list'].length; index++) {
             if (mission['Player_list'][index]['Status'] == 'Accettato') {
@@ -470,13 +346,18 @@ async function Make_mission_response(client, message, args) {
             }
         }
 
+        if (player.length == 0) {
+            player = ["Null"];
+        }
+
         Container.setColor(colrs_set)
-            .setTitle("Esito della Missione " + mission['Nome'])
-            .setDescription(mission['Esito_missione'])
+            .setTitle(mission['Nome'])
+            .setDescription(mission['Descrizione'])
             .setThumbnail(avatar_DM.displayAvatarURL())
             .addField("🏷 Tag", mission['Tag'], true)
             .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
             .addField("🎖 Grado", grado, true)
+            .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']))
             .addField("\u200b", "\u200b")
             .addField("👥 Player", player, true)
             .setTimestamp()
@@ -486,67 +367,95 @@ async function Make_mission_response(client, message, args) {
             Container.addField("Reserve", reserve, true);
         }
 
-        client.channels.cache.get(config.chat_missioni_esito).send(Container);
+        methodDB.settab_db("Registro_missioni");
+        methodDB.mission_update_status(mission['ID'], 'execute');
+
+        client.channels.cache.get(config.chat_missioni_allert).send(Container);
     } catch (error) {
         console.log(error);
     }
 }
 
 /*---------------------------------------------------------------------------------*/
-// Close mission and Unlcok player
+// Close mission
 async function close_mission(client, message, args) {
-    var mission = await get_Mission(args[1]);
-    for (let index = 0; index < mission['Player_list'].length; index++) {
-        if (mission['Player_list'][index]['Status'] == 'Accettato') {
-            block_control(mission['Player_list'][index]['ID_Discord'], 0);
-            var cursor = methodDB.load_pg(mission['Player_list'][index]['ID_Discord']);
-            cursor.then(function (result) {
-                if (result != null) {
-                    var old_value = result.Exp;
-                    var new_value = old_value + parseInt(args[2]);
-                    methodDB.exp_update(result._id, new_value);
-                    LevelUP_auto(message, result.Nome_Discord, result._id, new_value);
-                    let member = message.guild.members.cache.get(result.Nome_Discord);
-                    if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                        var avatar = member.user.displayAvatarURL();
-                    } else {
-                        var avatar = result.Avatar;
-                    }
-                    Container = new Discord.MessageEmbed();
-                    Container.setColor(colrs_set)
-                        .setTitle('Scheda: ' + result.Nome_PG)
-                        .setThumbnail(avatar, true)
-                        .addField("Milestone: ", new_value)
-                        .setTimestamp()
-                        .setFooter("Data", message.author.displayAvatarURL());
-                    message.channel.send(Container);
-                }
-            });
-            var cursor = methodDB.load_pg(autore.id);
-            cursor.then(function (result) {
-                if (result != null) {
-                    var old_value = parseFloat(result.Money);
-                    var new_value = old_value + parseFloat(args[1]);
-                    methodDB.money_update(result._id, new_value);
-                    let member = message.guild.members.cache.get(result.Nome_Discord);
-                    if (result.Avatar == "Non Assegnata" || result.Avatar == undefined) {
-                        var avatar = member.user.displayAvatarURL();
-                    } else {
-                        var avatar = result.Avatar;
-                    }
-                    Container = new Discord.MessageEmbed();
-                    Container.setColor(colrs_set)
-                        .setTitle('Scheda: ' + result.Nome_PG)
-                        .setThumbnail(avatar, true)
-                        .addField("💰 Money", new_value)
-                        .setTimestamp()
-                        .setFooter("Data", message.author.displayAvatarURL());
-                    message.channel.send(Container);
-                }
-            });
+    try {
+        message.delete();
+        var mission = await get_Mission(args[1]);
+        const avatar_DM = await client.users.fetch(mission['Master_id'])
+        var Container = new Discord.MessageEmbed();
+        var colrs_set = clor_gen.rand_Color();
+
+        var player = [];
+        var reserve = [];
+
+        for (let index = 0; index < mission['Player_list'].length; index++) {
+            if (mission['Player_list'][index]['Status'] == 'Accettato') {
+                player.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+            } else if (mission['Player_list'][index]['Status'] == 'Riserva') {
+                reserve.push("<@" + mission['Player_list'][index]['ID_Discord'] + ">");
+            }
         }
+
+        var grado = [];
+        for (let index = 0; index < mission['Grado'].length; index++) {
+            if (mission['Grado'][index] == "Rame") {
+                grado.push("<@&" + config.Level.Rame + ">")
+            }
+            if (mission['Grado'][index] == "Bronzo") {
+                grado.push("<@&" + config.Level.Bronzo + ">")
+            }
+            if (mission['Grado'][index] == "Ferro") {
+                grado.push("<@&" + config.Level.Ferro + ">")
+            }
+            if (mission['Grado'][index] == "Argento") {
+                grado.push("<@&" + config.Level.Argento + ">")
+            }
+            if (mission['Grado'][index] == "Electrum") {
+                grado.push("<@&" + config.Level.Electrum + ">")
+            }
+            if (mission['Grado'][index] == "Oro") {
+                grado.push("<@&" + config.Level.Oro + ">")
+            }
+            if (mission['Grado'][index] == "Platino") {
+                grado.push("<@&" + config.Level.Platino + ">")
+            }
+            if (mission['Grado'][index] == "Mithril") {
+                grado.push("<@&" + config.Level.Mithril + ">")
+            }
+            if (mission['Grado'][index] == "Adamantio") {
+                grado.push("<@&" + config.Level.Adamantio + ">")
+            }
+        }
+
+        if (player.length == 0) {
+            player = ["Null"];
+        }
+
+        Container.setColor(colrs_set)
+            .setTitle('Missione Conclusa: ' + mission['Nome'])
+            .setDescription(mission['Descrizione'])
+            .setThumbnail(avatar_DM.displayAvatarURL())
+            .addField("🏷 Tag", mission['Tag'], true)
+            .addField("👑 Master", "<@" + mission['Master_id'] + ">", true)
+            .addField("🎖 Grado", grado, true)
+            .addField("🕖 Data e Ora", format_date(mission['Data_ora_missione']))
+            .addField("\u200b", "\u200b")
+            .addField("👥 Player", player, true)
+            .setTimestamp()
+            .setFooter("ID:" + mission['ID']);
+
+        if (reserve.length > 0) {
+            Container.addField("Reserve", reserve, true);
+        }
+
+        methodDB.settab_db("Registro_missioni");
+        methodDB.mission_update_status(mission['ID'], "disabled");
+
+        client.channels.cache.get(config.chat_missioni_close).send(Container);
+    } catch (error) {
+        console.log(error);
     }
-    methodDB.mission_update_status(args[1], "disabled")
 }
 
 /*---------------------------------------------------------------------------------*/
@@ -667,7 +576,7 @@ function check_limt_32bit(ms) {
 
 function dateCompare(ms) {
     var preimpostata = new Date(ms);
-    var oggi = new Date(); 
+    var oggi = new Date();
     var diff = preimpostata.getTime() - oggi.getTime();
     if (diff <= 0) {
         return 1;
