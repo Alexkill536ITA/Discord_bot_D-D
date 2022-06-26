@@ -21,12 +21,12 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute consuma oggetto');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 var autore = message.mentions.users.first();
                 try {
-                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.name))) {
+                    if (message.member.roles.cache.some(r => config.role_avance.includes(r.id))) {
                         if (autore != null && args[1] && args[2]) {
                             if (isNaN(parseInt(args[1])) == false && parseInt(args[1]) > 0) {
                                 var nome = args[2];

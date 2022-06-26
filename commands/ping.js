@@ -19,9 +19,9 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_avance);
         try {
-            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 Container.setColor(colrs_set)
                     .setTitle('Ping BOT')

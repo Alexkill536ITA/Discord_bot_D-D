@@ -28,7 +28,7 @@ exports.set_ora_event = function (ora) {
       return;
     }
     // increase customer order count by 1
-    customer.set_event_meteo = ora;
+    customer.set_event_ora = ora;
     fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
       if (err) console.error("Error writing file:", err);
     });
@@ -42,7 +42,7 @@ exports.set_chat_event = function (id_chat) {
       return;
     }
     // increase customer order count by 1
-    customer.event_chat_meteo = id_chat;
+    customer.event_chat_output = id_chat;
     fs.writeFile("./config.json", JSON.stringify(customer, null, 4), err => {
       if (err) console.error("Error writing file:", err);
     });

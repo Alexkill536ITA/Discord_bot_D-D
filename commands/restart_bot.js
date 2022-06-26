@@ -19,7 +19,7 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute set_config');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_admin);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_admin);
         if (message.author.id == config.owner) {
             Container.setColor([255, 0, 0])
                 .setAuthor("Restart Bot")

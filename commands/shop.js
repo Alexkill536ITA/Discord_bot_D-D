@@ -22,10 +22,10 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute shop');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 if (args[0]) {
                     var autore = message.mentions.users.first();
                     var nome_shop = args[0];

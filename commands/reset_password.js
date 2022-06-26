@@ -23,7 +23,7 @@ module.exports = {
         }
         var Container = new Discord.MessageEmbed();
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 var on_sevice_db = await methodDB.open_db();
                 if (on_sevice_db != 1) {

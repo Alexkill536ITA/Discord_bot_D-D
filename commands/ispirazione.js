@@ -21,9 +21,9 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute add_sub_ispirazione');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_avance);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_avance);
         try {
-            if (message.member.roles.cache.some(r => config.role_avance.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_avance.includes(r.id)) || message.author.id == config.owner) {
                 var colrs_set = clor_gen.rand_Color();
                 if (args[0] == "add" || args[0] == "-a") {
                     if (args[2]) {
@@ -119,7 +119,7 @@ module.exports = {
                 } else {
                     emit_print(message);
                 }
-            } else if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            } else if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 if (args[0] == "sub" || args[0] == "-s") {
                     if (args[2]) {
                         var autore = message.mentions.users.first();

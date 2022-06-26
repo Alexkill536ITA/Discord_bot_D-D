@@ -23,10 +23,10 @@ module.exports = {
             console.log('[ ' + color.cyan('DEBUG') + ' ] Event Execute Scambio');
         }
         var Container = new Discord.MessageEmbed();
-        let myRole = message.guild.roles.cache.find(role => role.name === config.role_base);
+        let myRole = message.guild.roles.cache.find(role => role.id === config.role_base);
         let botavatar = client.users.cache.find(user => user.username == config.Nickname_Bot);
         try {
-            if (message.member.roles.cache.some(r => config.role_base.includes(r.name)) || message.author.id == config.owner) {
+            if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 if (args[0] == "vendi") {
                     if (args[1]) {
                         var user_call = getUserFromMention(args[1]);
@@ -99,7 +99,7 @@ module.exports = {
                                         .setTimestamp()
                                         .setFooter("Data", message.author.displayAvatarURL());
                                     message.channel.send(Container);
-                                    let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
+                                    let role_ping = message.guild.roles.cache.find(role => role.id === config.chat_scambi_ping);
                                     client.channels.cache.get(config.chat_scambi).send(Container.setDescription("<@&" + role_ping.id + ">"));
 
                                 } else {
@@ -430,7 +430,7 @@ module.exports = {
                                 for (let i = 0; i <= obj_string.length; i++) {
                                     embeds.push(new Discord.MessageEmbed().addField('Pagine', i, true));
                                 }
-                                let role_ping = message.guild.roles.cache.find(role => role.name === config.chat_scambi_ping);
+                                let role_ping = message.guild.roles.cache.find(role => role.id === config.chat_scambi_ping);
                                 const Embeds = new Pagination.Embeds()
                                     .setArray(embeds)
                                     .setAuthorizedUsers([message.author.id])

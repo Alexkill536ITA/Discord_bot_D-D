@@ -30,7 +30,7 @@ module.exports = {
             .setTitle('Patch Notes')
             .setDescription('Patch Notes Version: ' + vers.Create.Version + ' Data: ' + vers.Create["Date Check"])
             .addField('Aggunte Nuove', "• Aggiunto la possipilità aggiungere e togliere punti fama\n  Aggiunto la possipilità aggiungere e togliere Ispirazione ai PG")
-            .addField('Rework', "• System TimeSkip")
+            .addField('Rework', "• System Mission\n• All System role filter name role to id role\n• System punti fama e casata")
             .addField('Correzioni', "• Nel sistema di gestione missioni")
             .addField('Fix Bug Minori', '• Correzioni minori')
             .setThumbnail(botavatar.displayAvatarURL())
