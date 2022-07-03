@@ -64,7 +64,7 @@ module.exports = {
                                 return 1;
                             }
                         } else {
-                            reset_frag(message, Scheda_PG, Exp_get_attuale);
+                            reset_frag(message, Scheda_PG, frammenti_attuale);
                         }
                     } else {
                         add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
