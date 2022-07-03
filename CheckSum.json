@@ -1,43 +1,43 @@
 {
     "app-bot.js": {
         "name": "app-bot.js",
-        "SHA512": "0e427aa0f077b673278d05c001150fcbd2979cf3b6ce80227de49d8591e5993b0c764c1d663b3402e14c03417c49204e0be6d128ba043c22e078d449c8c26e97"
+        "SHA512": "7fd11e7c6e1c5a688e1e2957e5309a9f6ca94d1ba9f7faa76d7b573189e01bf379b8b204ca5498313170e8c5ebd2827fe5835e98918b266184b682940e5279e4"
     },
     "mongodb_controll.js": {
         "name": "mongodb_controll.js",
-        "SHA512": "7ec4b7736a96fb3d74db67b7842b8f4e89e86f11bec32c68566a204f1ed97a1ef70126ae77eb3694d9f97ab65487e94b6ef336803365cdf9e99394dc740628b5"
+        "SHA512": "0bfe9523b8724ed6b80868565625f8301ecc42667a38f187941fd484484f394038b53cfc8f9eaa08b8a10a71eebee2ccffa1369552a8f6204b6ab7678df5068d"
     },
     "add_sub_competenza.js": {
         "name": "add_sub_competenza.js",
-        "SHA512": "066336b427ab0c0093e313e0efebf3e72358543f550dc861dc7738254a7ba10fc57848f4bc0c801d202b66e50752a8499dd39e13f18791dbf5c2a85ce318d485"
+        "SHA512": "255e7420bd91e1bdc826f762a93ea545060eeb5a97e3a8204d6c3e6d77fd23318b3402fc4d599b629e295bbe9bb3e3c50fcc6aef5b06f2f72823c46b00d787ea"
     },
     "add_sub_custom_item.js": {
         "name": "add_sub_custom_item.js",
-        "SHA512": "0adf4464e601cf5ae97ceed5ca98cbff404598d7147bf0e39a3218aebca1ee2e1ca5f4c32ae3ba534d918e07a55cd7f7903c676956cfeb0f7e52a7ac5dc94ea2"
+        "SHA512": "eb45f67b4b7c807018e91f567bc46b87c46f33797f6445e84d301edae4faaade8262e705ea75c164884829f581cea7da504eef8eac55f110232d749dc8a13417"
     },
     "add_sub_item.js": {
         "name": "add_sub_item.js",
-        "SHA512": "084f9dfae720f539e7115496e6437e03d063ac05ced584e6aed1ce15c9b92c4c54d578359bc3c98de183d5e9f221674bd43798588281824351dd06cceb0ea71d"
+        "SHA512": "7d6ff1df41bb05368763c264493f21b0129367ab0e9d4696df13790f6eba00b8832b93cf0dfd390fcb4d67a16db6e8d73c935cd6d30734699e9b655d1bfdec81"
     },
     "avatar.js": {
         "name": "avatar.js",
-        "SHA512": "b426f05d458fc7894d77d10fbff522fb62321ec9d6ed44ab3b0ed04390c2b1b5c6e1f409ec8c65e3a29540d3171eead2a4225cca725a01bdb4a2b18124229711"
+        "SHA512": "85dcb487c06fd06366ce17b5525738b35c1933ed07e69ad9ad7c19eb46421fd358db8d953c7d5de5ea82285f1779bbc352aebe5e65ca7cb04ba4262b30b3106b"
     },
     "avatar_pg.js": {
         "name": "avatar_pg.js",
-        "SHA512": "8cd2766e89bc484cfc772eef73e001708e1bc892a733f306505c7ca03a83356bdd1bd8ea9f5217fda25b86a04ddc44d5f5b62596ea415022ca6188696600d67b"
+        "SHA512": "93c68af2564f65ac818e6cf97c00c5d96fe00e8a784e5240239748e2a623453a05d099c579f0769c65ed0988c7ac8da33f588540c4779fb77e21a28c570597b4"
     },
     "calculator.js": {
         "name": "calculator.js",
-        "SHA512": "f5df3b0ea079ceb71404279571c41b9f6e89c5d166c4b487094e36f28387f5b416786de604bcd8d52b2fb3ae4df71f7b106664384980d829498b53f2d7ddca41"
+        "SHA512": "5d1d2f7446f46ed46cd8673548a0305af70c9175f146a5d79ca4efc121e7dfdbe3ef59100303e7b31b2f02abac473964692ea2449c001edb9d093b77a671c225"
     },
     "checkpoint.js": {
         "name": "checkpoint.js",
-        "SHA512": "30c338be65feababf55cda18a6764cb1e5e607e27922b7785f4d088f993c4c8f5184c3be842398dc4e4b88b9f4ffbda5d791570525c0b6df6d213a01f809b6fc"
+        "SHA512": "4e271980683bacdba172fed440395f862792bbb14f19c462566a37fa6d669e935f18f2a66d9230acf1468251fac9734d9693347f9f12a9914b749d532bc551c6"
     },
     "crafting.js": {
         "name": "crafting.js",
-        "SHA512": "0f25f83faf1fe50222a6cfb2d1b34feaabbb58e7be70d68f003d1077eedd1d40a6df270547b4d2d3cd168497977ae859b1089c314213463a95f72d3a84bd04d4"
+        "SHA512": "28f7669c3c3662674638f91a2ee47f6dfdf9f39df35b674249561fb3487117559aabc8249925123303437b006dcacad5d1518acde2eae32ace99a4c8d6454354"
     },
     "debug_input.js": {
         "name": "debug_input.js",
@@ -45,135 +45,135 @@
     },
     "delete_message.js": {
         "name": "delete_message.js",
-        "SHA512": "2bfb92b76c28eddd5c76bc0c5cfe1d47f1caa6c537426a7150a103c045ece704dd9718f3717aaa4162c0ed55fb60be757ea618d06fa79867d28158617e825b54"
+        "SHA512": "2391621c0d2cdbe6b11e8c0cd817845156ba27c32da74107ce92f385afaa11631025077d0b7316e9fd74cb7f4441bad9062c29a5e23625b9b34c9ef9f40e8eda"
     },
     "disprezzo.js": {
         "name": "disprezzo.js",
-        "SHA512": "44c6ae667a858836ca1395a580c0f8c4af529f904692106ddea7b18f4e1c78a25c67e5218aded9d480ca6d89ea8d4aa73b402ac7e58915804e282d81544fe21f"
+        "SHA512": "8dc9a82eca83b4131ade2321b9e355009600c141d3ed854955edccef54179a4c6d191909e7b424aa4318171d7fe9d19198239d4d31282b684b91039f26073805"
     },
     "exp.js": {
         "name": "exp.js",
-        "SHA512": "3beb53e12caa83c0341775a3d06bbdc165168db0f550e7d77ae35c80d560679797c2ef009fde7a9dd0f00fb43d562ed12db8c2f5e75f96dbc0528b7116d2c347"
+        "SHA512": "ff9d4963d24bfa56fd1bcacfefec5539fcbae22aaef9a0625d87e2e82e1ed5e3bbabfc9f57edb3730fc546a8e5e7487574876034346e75806dd364141bcdc4ec"
     },
     "fama.js": {
         "name": "fama.js",
-        "SHA512": "9aedf71b44642f47dff9f012940c3fd1863ca51d834381775522c5f44e932344c2010d812d035280bdc5adcb633e6ef91ce14acde4f1c1943b47dc78fc6babb6"
+        "SHA512": "b643c9e354a1fef4cbe7c0c383da1ab17533c335fca13174048ea37856ab9c98461adad9059e8de240a5ec58a429dfa12c02798b5538abb1be0a1a9e2d9deaf1"
     },
     "fragment.js": {
         "name": "fragment.js",
-        "SHA512": "57f19a4d74dd49b4a567aa774fd8ad658e0808d6c80b1c6d1d35e0e1da4dfd0ffb72d71b131c60aaab0fb061ed909acde1c766489eed7d892ad6e3cb2ea1791d"
+        "SHA512": "001204ab743b6495f0974c2d709eb0d866502c45194e63a540b3fcc6038d8dd834a6a15dbd8eb81562d73f019784646093c64c8e6a721f0139c3164d3418ad6a"
     },
     "get_item_info.js": {
         "name": "get_item_info.js",
-        "SHA512": "94dc2e03a5aa25007be2052b3fa5067a379e470d562528092c12b8b69786c209d8d53cea215661663eb0a677a5e100fee322e665eba6802f847c0f8bc6941631"
+        "SHA512": "08809a8190fea951fecc9412e8f96965faa3e122329c6f0a498b53c11d483cb4676b4589862f9cfc08c1267a853704a7758f794892ec5532b72e5157f7329e7d"
     },
     "get_meteo.js": {
         "name": "get_meteo.js",
-        "SHA512": "3a5fae4033134153e3dfcf997f257deb7806512be0f6e7a6fc42524e40cd2cd1f47202844af2648bbc55d3b04c61911b69357d22b899a09cd8f0d8223e739b84"
+        "SHA512": "3406437e153a4664a2e9704bc873bbf5ec27747fd758e3b6e5b30c9ba3aa97b7e55cad7bac2fa7a7081d89ed6ed855d59751e8f8dca36fb3fd4b617a3a3ae421"
     },
     "help.js": {
         "name": "help.js",
-        "SHA512": "8473bce34a4ba5db5f67addf5e64e9c8b339b58e44e9e5f57fed15da7f0ff7d2cfb7bad37c5b5df08f624158fc71303193235c96e3cfcf13e283fef16807aa98"
+        "SHA512": "3610f3423282a7fb3bb079299d28255227bf4eca1c0593e57500f6537da917f6acba7a6af4cfb533ba6946c4ab2bf5a43307b54265331abe9c9554acf5e6e4a2"
     },
     "id.js": {
         "name": "id.js",
-        "SHA512": "c77ba4277b3d784dee3a8378b49de357d7fbbf2344e6d6526cfdd90f9aa2abeded1b016b7f58d51d7313c7e2a0a53c029f715237b9a03fa32b922c0f7108e821"
+        "SHA512": "1346bdd98e1f19e85622bcb8e5b8fdf57ec25dbfedaa2854ac171b2c9321c85d77bf49a0f6b4d3c321dc45bbd425194a5b163868af9f7c571a47de4786234f58"
     },
     "ispirazione.js": {
         "name": "ispirazione.js",
-        "SHA512": "e4992a2a7b0b6abddacd6ce5e385ff0d89874505153435c6a75190b3573c2ec84e25c65ef7ef32fa1b704979d8a735521882980936843dc542eb977bd75e9ede"
+        "SHA512": "823384d650986363303cca8004f82482b737c1aa2614c0625b75cc6b44cfa51223e8a393eba4ece2ccf730395b4ee1df8ca498c7047489ea776087d256028def"
     },
     "list_shede.js": {
         "name": "list_shede.js",
-        "SHA512": "2874a4db07c9085471931ab7745bc62828b7c32361b9e4aef127e83c9cb5dbb23560ae0494de905896e67cc8bd20b1bbb356def6f95d8a5b8423001d6a58e044"
+        "SHA512": "bddede78bfc3326b9c6efe9eefc2d5b88f40bb9e33e2ea0b6024ed1ec844ae91e1a1b17b8904dda7ac9d371bd94f7b371c90cf5680884790f9ff26420f02e70a"
     },
     "mission.js": {
         "name": "mission.js",
-        "SHA512": "3a8b48e2f8bc37f462ac2e7bbed18b34e729eef2a49d5879e7bc2dee041b6715c0b58264aebf451e3757c3b97701ddbc0f9a808cf8eb21893d36b9a7765f9c69"
+        "SHA512": "eead1b10e629239532903356e941660351eafe7b95ce55a8ce8a98a9cc96c23801a1b0ba483e54b7aa7aabc3e2f4a078882152b3b67946e5b4b9adc8a1d66848"
     },
     "money.js": {
         "name": "money.js",
-        "SHA512": "8b152bc41a6afc63e72f38c276c4f047a3e295ab6df181afda512a22b9ffeb9de61a6080535cf1e58c28c9e28000ce6edc0d7a798440eb9e109483b4fc6bb5f2"
+        "SHA512": "b4155c8b6ee026f6cefd7d57614f4f733853db549e7c98bd3f885d40b23d976292b71fcaf6941e32b99edb3392247954b514c4cad418232a56e591ca2b71c474"
     },
     "patch_notes.js": {
         "name": "patch_notes.js",
-        "SHA512": "a0681fa8aba20aab33eed0207c86de220c342760a2c2acab3d80d3a813555708265342958fde523155421d3eb97d9b2ae1b9c653b3bf5ed141e8dfc91058c3f2"
+        "SHA512": "e67b105b2565b172976ddad60e9b8fde5dbba355fc42329432b39cef8884fe576cdc96aa4ea413f5d1c6261f0d78e6005282787b9612724fc1719bd9188bedfa"
     },
     "pbc_exp.js": {
         "name": "pbc_exp.js",
-        "SHA512": "0437d4d3dd06e5fb9da198b57859a97ea92abb47a5ab2841aef83df645682498f26699b9bad86946a6f8c5ac77575fd11f0c46415400bad27c912885274d2b8c"
+        "SHA512": "a24646d4a59bb282a9234f1ce2e4c1a51e8caa68cce34326a1a0a2d0a4671c0d325f7fd99682677e8b59f13cc1e16676538a49e410dabcef69db769ee56e71e1"
     },
     "ping.js": {
         "name": "ping.js",
-        "SHA512": "0cabec8f345ebded1a1ae8a0ff55b16ace541c658d5365760a8e2cb81db981d8ef505866e90b1f219693789da11d330f924da320e6765cec41e35fa92251ea0b"
+        "SHA512": "4b37e70aa5c1b5291b3b92fb94f78ab43e1282b1328f4c2c220252698659dc301624a803e807aefbe1acd1005ce14831dc917dfb2c275a4b5c9378198de57aec"
     },
     "reset_password.js": {
         "name": "reset_password.js",
-        "SHA512": "652bea26d3bf9a3efdd3d78a784aaf2c9ce134d7939bd3f6c2b8645034de57cb35d67a578b7677d7015e823f016029a62c406f718e63c95b6e28fef8b4b0baf6"
+        "SHA512": "4bd74bd65ef44a91993628ec5d467c6830b7942884f876b8012cd27ad81202934de7e874a6e58856752a37ee83ad10048fe752016dc82bf7c65ee7931d512623"
     },
     "restart_bot.js": {
         "name": "restart_bot.js",
-        "SHA512": "bb1b90deac671dbd5d470b038a359a22633f9d92a65d9ef4f38af9e80a8ed3f4eadc331b242733111e60ba21096d9949aa0dc1876624e0c57d5d3899cc93ff70"
+        "SHA512": "f17c633a0bccad9228b4a70a5ab0c8d511595d407d070eaa9a8b169ee72016ebf673f9bf85725e3466dd957d0714f03ab3daff0afbc6bd35544600c321618c7a"
     },
     "roll_dice.js": {
         "name": "roll_dice.js",
-        "SHA512": "d680936306693529e3bd29ebd933f8750936b580d1a3b393f6a9c33dba867b7e651f3d3f0c6a78b8bdc4687eefd13bec296b8d287dec9deb83d1eddfd275909d"
+        "SHA512": "c8f0cc0e56ecbbb28194766f0c05dc9423d18e9851be6b1a1a52fe178b96ae71455232cae096ed146823be56915a7206fa89adfe89701ad85fa7303dbf31b8e3"
     },
     "scambio_item.js": {
         "name": "scambio_item.js",
-        "SHA512": "485aec6033625da294458258d4c527f6ce5102c47f3e924ccdb62e06f63cc2629415951df438c4022d7fae495746be4cdf5354fff4c5ec539c35d144bb6086a6"
+        "SHA512": "6316803ca73abbb9b9ec8dfbeeef535af266f54e00434ac4eeb4539d65af00d6203cc3a36a9f1b6aa68b4fa7e326c6d22de765686cb0b4c244a9d23052967e3e"
     },
     "set_casata.js": {
         "name": "set_casata.js",
-        "SHA512": "e277452ffe83370bf15608b2893cb933cadf842cb8ad029fbb521238c501fa2066a5e83d22941a8cda9b1202df1d1124335741efa8ad1d578d2d710574f09fee"
+        "SHA512": "e715e29a8aa0b121e4b6ad07eab268c1243c57d07e153921ebc240d1eecc32a6771a0698a44fc018e87b4f905cca6116c19cfdff2db1669fa3e5b982d767a29b"
     },
     "set_config.js": {
         "name": "set_config.js",
-        "SHA512": "e5658c59e3c7e57a22b5ca5e3bb369c692e3a20fbf63b1497da3d0e470ce4e37eea992b0b8e9faa82fab36860326196bf6d84d4d63a6731b49615a24509d89ba"
+        "SHA512": "6bd13fbb05958e37b5f4ae31855a4a647e29da7c141cb13b2d86ca66f56bf67cd2cdea5614a549bfe06a835cac0bb0d0a5defa480173bc597865d301cd89219b"
     },
     "shop.js": {
         "name": "shop.js",
-        "SHA512": "4d220b0696bb19644226d0b6c2145d9a061f1863e1d4fc316d797cbec7f23b738091d46c2e1e9b1ae1d8a710559f0103b73d17b4b097defec6ab2d6da7e37b7e"
+        "SHA512": "880db3e445c66fa3476935b34b07fc2334ba3d27bb6ed9c22127bc013b586238e17b4db7b833d9f5f1b25f07882f3cdebc67e9adfafe502e79792e19988f51dd"
     },
     "show_competenze.js": {
         "name": "show_competenze.js",
-        "SHA512": "8dd9d48266935127b56b4f97974246d841a6a484f266cb9e8409d1592d95256cfc15e74f6020fa001e32e9a204580d7d371f775b02e8569d6aa680030a350fed"
+        "SHA512": "1a3c5ba3cc9bf7698fd0c0ab2dd010fd06bc5e49f1db6c7a20b40f9542660ad956754fe6775e70cb4028cda785f6417170d8f09aedabafa6a20cdb7230883f27"
     },
     "show_descript.js": {
         "name": "show_descript.js",
-        "SHA512": "d687b9fbf17b97440a5bd11ba33d21c7958f056cba89d7951bb8763f9c58d5db79e9358ea206d13e30c5ad3804582a0ad5e3a27e212e46150d5d1157c86c150d"
+        "SHA512": "d0d85fb5468ffce58a0296f384aad8605f04d1cd6d3c47e7d99cbbbbc464abf6b6b96d0e648a9b769bd4fc9261850bcf3349a2bc2090d757108f0932b6964dc8"
     },
     "show_inventory.js": {
         "name": "show_inventory.js",
-        "SHA512": "e03463e50847445181183b53a662fb123495b0f9952c2371b216a94ba55a2b2fe28d33423bb3e2219a851d58a33b1e4e947bcf3efb9a30b059019261b8275b35"
+        "SHA512": "8451a5573fb2c300792a8b7034b6f9596bc19c4c5a43a52220ffd226db457735d4a9463c6e541042e5f4c64c2a3a4f6a4c9d98d91f991e5e293852f790d43b58"
     },
     "show_pg.js": {
         "name": "show_pg.js",
-        "SHA512": "8d46c86857a776a36a8ab7f1e0a320a3b7a1afefc1ec258e992155b36b6943c4c14c82ff36910687e7f45472a72e320ecd2d647a120b91e6a48a02aa610c24f4"
+        "SHA512": "7c71adb179e738bba9e0e2fc31c1f63cf6fd016c1069714ab762ff737559be3b5aab976985fcb41831083a76cf942c916a20bb5e67e401a0fc55d52e2cd111ce"
     },
     "show_register_link.js": {
         "name": "show_register_link.js",
-        "SHA512": "574404769bd9e4bf0748501c985138051f26c813bf4b6f0fec510d159004068bb9303e20d1ef36831359c9ef501b6263f1a7e30cda0934dfef382af6e47bf8e4"
+        "SHA512": "c7192df867a4bb29d0a8189774599d49b4de5324e13c6c59e9a332768ebc06751d21ae3496f3d4dfcf4b1b6be274f63012c1c550362152b6f7e0a501a10572fe"
     },
     "statsset.js": {
         "name": "statsset.js",
-        "SHA512": "07360919af33d940d28e438ad9969416d0151fc6dd26ffca39209b33e4ed0d14897db7063c33e0231b8a65b79ff5e7b99b00124fe8eb689f06e7874651940fe6"
+        "SHA512": "f391aad4d04b740a797e34c53d702db3e588fd18e402a57dbd3620263ea3b5e4bb25ddebdcc52c7c2bb3d9ab66b4950b26c9acfc21b3602fd78dfb4109f447a2"
     },
     "time_skip.js": {
         "name": "time_skip.js",
-        "SHA512": "901bf70873adab590047ab050b81ac7f9d403de4595a53e131c926c9af73f1fe7756b0817ea1fb85f6c98cab372154ac7de1be21ed67ec9e076cb8890910fd22"
+        "SHA512": "89b35de998f9af3070fd37498c552379f5d0cb179694e9b386b5ed4db31d55c5d743762b5bc4ff443ac6c9020ae9935d1b577f1d1bf0e0d005680280cd784e74"
     },
     "use_item.js": {
         "name": "use_item.js",
-        "SHA512": "64249c816bbc128f1070a14315559cb359014c1bcb8cd95fe9f6f10dbfdec0810edef2c6188c2cd67d3d26250e4779ff456e63af11082145f136b0f0164f5605"
+        "SHA512": "4c6a09ff929f3c4b37b960486e2a3894d9d58dd99c5d7b7692443c0674a4c0713c411a24fe61a0140698a2e39f6330579251212e2b9ebbed8186dbe7ce4f130f"
     },
     "version_run.js": {
         "name": "version_run.js",
-        "SHA512": "5e44b34eefa05d4093e386acf0919456c13b0a697cf3e7ad9210b67b0ddec9e558eed905cc332bb6cab6be345bd2ba99077b3d11de79390b551514aa34b2d270"
+        "SHA512": "2ec378ce96f05e26e415f83c76b527ff11da2b05531022c861a2c25c57abe4754619dc05ed01f3530ed5b3577bc54f3142e7608e85827a1ee51dbb2c860e793c"
     },
     "clock_timer_event.js": {
         "name": "clock_timer_event.js",
-        "SHA512": "f7c1d57cd666b62ec13b5bb9c25da84827e7ab80bfebec220967fc2a41127c67873f419bce00b504f176c54a97398b8cb9078a093006acb3bef58b6dd65cea31"
+        "SHA512": "be3655098279d9a4cbea0e68287bd24c2b85778bc41bd8456c0ab28589f48653102a3da881545714de2e072d07b43629539895294dd2cc741999b75674e9cfb4"
     },
     "color_gen.js": {
         "name": "color_gen.js",
@@ -185,7 +185,7 @@
     },
     "mission_recovery.js": {
         "name": "mission_recovery.js",
-        "SHA512": "f2a60790aeaac4e0d32745702de62751120e736f72a28df64e6d009cc09652437a5f7c2d3d4d84a58cdf2088bae988e092b697d1fc76c03342ff647ff82ea967"
+        "SHA512": "f63a23c54249125d665b49cdeae56f1af43b28814aa912da73571677ec370c1b56f0b7f3d3817af4caaf5983f7da7d9db7e09b298e64a76f83bd1662b1fdd3de"
     },
     "set_meteo.js": {
         "name": "set_meteo.js",
@@ -194,7 +194,7 @@
     "Create": {
         "Name": "Infinity Dice",
         "Author": "Alexkill536ITA",
-        "Version": "1.2.8",
-        "Date Check": "12/12/2021 21:40"
+        "Version": "1.3.0",
+        "Date Check": "01/07/2022 23:01"
     }
 }
