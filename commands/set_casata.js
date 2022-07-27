@@ -115,7 +115,8 @@ async function get_Scheda_pg(id_serach) {
 
 function Manager_set_role(message, id_discord, casata) {
     let member = message.guild.members.cache.get(id_discord);
-    let Role_select = message.guild.roles.cache.get(config.list_casate[casata])
+    let Role_select = message.guild.roles.cache.get(config.list_casate[casata]);
+    member.remove(message.guild.roles.cache.get(config.list_casate));
     if (!member.roles.cache.some(role => role === Role_select)) {
         member.roles.add(Role_select).catch(console.error);
     }
