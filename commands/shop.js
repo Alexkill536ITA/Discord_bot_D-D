@@ -62,7 +62,8 @@ module.exports = {
                                 nome = String(nome).toLowerCase();
                                 var on_sevice_db = await methodDB.open_db();
                                 if (on_sevice_db != 1) {
-                                    methodDB.settab_db("Oggeti_Di_Gioco");
+                                    // methodDB.settab_db("Oggeti_Di_Gioco");
+                                    methodDB.settab_db("Oggetti_Mondani");
                                     var result = await methodDB.serachbynome_obj(nome);
                                     if (result == null || result == undefined) {
                                         Container.setColor([255, 0, 0])
@@ -98,7 +99,8 @@ module.exports = {
                             } else {
                                 var on_sevice_db = await methodDB.open_db();
                                 if (on_sevice_db != 1) {
-                                    methodDB.settab_db("Oggeti_Di_Gioco");
+                                    // methodDB.settab_db("Oggeti_Di_Gioco");
+                                    methodDB.settab_db("Oggetti_Mondani");
                                     var cursor = methodDB.serachbyid_obj(args[2]);
                                     cursor.then(async function (result) {
                                         if (result) {
