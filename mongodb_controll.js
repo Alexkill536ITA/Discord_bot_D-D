@@ -82,8 +82,9 @@ exports.load_pg = async function (id_discord) {
     return cursor;
 }
 
-exports.serachbyid_obj = function (query) {
-    return collection.findOne({ 'Id': query });
+exports.serachbyid_obj = async function (query) {
+    var cursor = await collection.findOne({ 'Id': parseInt(query) });
+    return cursor;
 }
 
 exports.serachbynome_obj = async function (query) {
