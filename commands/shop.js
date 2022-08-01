@@ -28,13 +28,14 @@ module.exports = {
             if (message.member.roles.cache.some(r => config.role_base.includes(r.id)) || message.author.id == config.owner) {
                 if (args[0]) {
                     var autore = message.mentions.users.first();
-                    var nome_shop = args[0];
-                    for (let index = 1; index < args.length; index++) {
-                        nome_shop += " " + args[index];
-                    }
-                    var argos_0 = String(nome_shop).toLowerCase();
-                    if (config.shop_name.includes(argos_0)) {
-                        var cursor = get_List(argos_0);
+                    // var nome_shop = args[0];
+                    // for (let index = 1; index < args.length; index++) {
+                    //     nome_shop += " " + args[index];
+                    // }
+                    // var argos_0 = String(nome_shop).toLowerCase();
+                    // if (config.shop_name.includes(argos_0)) {
+                    if (args[0] == 'lista') {
+                        var cursor = get_List('Oggetti_Mondani');
                         cursor.then(async function (result) {
                             if (result) {
                                 if (result == null || result == undefined) {
@@ -169,15 +170,15 @@ module.exports = {
 
 function emit_print(message) {
     var Container = new Discord.MessageEmbed();
-    message_shop = ""
-    for (index of config.shop_name) {
-        message_shop = message_shop + "• " + index + "\n"
-    }
+    // message_shop = "-"
+    // for (index of config.shop_name) {
+    //     message_shop = message_shop + "• " + index + "\n"
+    // }
     Container.setColor([255, 0, 0])
         .setAuthor(`Comando pgoggetto`)
         // .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop **O** ID_Scheda][Quantità][Id/Nome oggetto]')
-        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [Nome Shop **O**  @utente][Quantità][Id/Nome oggetto]')
-        .addField('Lista nomi shop', message_shop);
+        .setTitle('Sintassi:\n **' + config.prefix + 'shop** [lista **O**  @utente][Quantità][Id/Nome oggetto]')
+        // .addField('Lista nomi shop', message_shop);
     message.channel.send(Container);
 }
 
@@ -185,7 +186,7 @@ function add_item(message, args, Scheda_PG, result) {
     var colrs_set = clor_gen.rand_Color();
     var qut = 0;
     var nome_var = result.nome;
-    var costo = parseFloat(result.costo);
+    var costo = parseFloat(result.prezzo_base);
     var id_sheda = Scheda_PG['_id'];
     var inventory = Scheda_PG['Inventory'];
     var money_pg = Scheda_PG['Money'];
@@ -204,7 +205,7 @@ function add_item(message, args, Scheda_PG, result) {
                 var ogg_temp = {};
                 ogg_temp['Nome'] = nome_var;
                 ogg_temp['Quantita'] = parseInt(args[1]);
-                ogg_temp['Sincronia'] = result.sincronia;
+                ogg_temp['Sincronia'] = result.sintonia;
                 oggetto[nome_var] = ogg_temp;
                 qut = parseInt(args[1]);
                 Object.assign(inventory, oggetto);
@@ -256,8 +257,9 @@ async function get_Scheda_pg(id_serach) {
 async function get_List(nome) {
     var on_sevice_db = await methodDB.open_db();
     if (on_sevice_db != 1) {
-        methodDB.settab_db("Shop_fissi");
-        var cursor = methodDB.serachbynome_shop(nome);
+        methodDB.settab_db(nome);
+        // var cursor = methodDB.serachbynome_shop(nome);
+        var cursor =  methodDB.getAll_Object();
     } else {
         return 1;
     }
@@ -270,8 +272,8 @@ function show_list(message, botavatar, row_list) {
     var x = 0;
     var j = 0;
     var obj_string = [];
-    for (i in row_list['Lista']) {
-        obj_string[j] += "**Nome:** " + row_list['Lista'][i]['Nome'] + " " + row_list['Lista'][i]['Value'] + "\n\n";
+    for (i in row_list) {
+        obj_string[j] += "**ID: **"+ row_list[i]['Id'] +"\n**Nome:** " + row_list[i]['nome'] + "\n**Prezzo:** " + row_list[i]['prezzo_base'] + "mo\n\n";
         obj_string[j] = obj_string[j].replace("undefined", "");
         x++
         if (x == 10) {
@@ -289,7 +291,8 @@ function show_list(message, botavatar, row_list) {
         .setChannel(message.channel)
         .setPageIndicator(false)
         .setColor(colrs_set)
-        .setTitle('Shop:' + row_list['Nome_shop'])
+        // .setTitle('Shop:' + row_list['Nome_shop'])
+        .setTitle('Shop:')
         .setThumbnail(botavatar.displayAvatarURL())
         .addField("N:", obj_string.length, true)
         .addField("Vetrina", obj_string[0])

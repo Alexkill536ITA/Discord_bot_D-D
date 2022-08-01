@@ -115,15 +115,16 @@ module.exports = {
                 .setDescription('Sintassi: **' + config.prefix + 'pgcasata** [@utente][Nome casata]\n\n **Nomi casate:**\n' + message_casata + '\nIl comando pgcasata permette di selezionare una casata a cuoi appartenere. Per usare il comando insereire [@utene] e il nome della casata [Nome casata]');
             message.channel.send(Container);
         } else if (args[0] == "shop") {
-            message_shop = ""
-            for (index of config.shop_name) {
-                message_shop = message_shop + "• " + index + "\n"
-            }
+            // message_shop = ""
+            // for (index of config.shop_name) {
+            //     message_shop = message_shop + "• " + index + "\n"
+            // }
             Container.setColor([255, 0, 0])
                 .setTitle('Help Shop')
                 .setThumbnail(botavatar.displayAvatarURL())
                 // .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o ID_Scheda][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [ID_Scheda] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
-                .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [@utente] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
+                // .setDescription('Sintassi: **' + config.prefix + 'Shop** [Nome Shop o @utente][Quantità][Id/Nome oggetto]\n\n **Nomi shop:**\n' + message_shop + '\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [Nome Shop] per visualizare la vetrina.\nPer comprare inserire [@utente] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
+                .setDescription('Sintassi: **' + config.prefix + 'Shop** [lista o @utente][Quantità][Id/Nome oggetto] \n\nLo shop permette di acquistare oggetti materiali pozzioni armi. Uso inserire [lista] per visualizare la vetrina.\nPer comprare inserire [@utente] dichiare la [Quantità] e inserire [ID/Nome Oggetto]');
             message.channel.send(Container);
             // } else if (args[0] == "scambio") {
             //     Container.setColor([255, 0, 0])
