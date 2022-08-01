@@ -207,7 +207,7 @@ function add_item(message, args, Scheda_PG, result) {
                 var ogg_temp = {};
                 ogg_temp['Nome'] = nome_var;
                 ogg_temp['Quantita'] = parseInt(args[1]);
-                ogg_temp['Sincronia'] = result.sintonia;
+                ogg_temp['Sincronia'] = result.sintonia == 0? "NO":"SI";
                 oggetto[nome_var] = ogg_temp;
                 qut = parseInt(args[1]);
                 Object.assign(inventory, oggetto);

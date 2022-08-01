@@ -1,64 +1,32 @@
 {
-    "Server_ID": "752571055461236747",
-    "Nickname_Bot": "Il maggiordomo",
+    "Server_ID": "208322124102762496",
+    ".Nickname_Bot": "Il maggiordomo",
+    "Nickname_Bot": "Bot D&D",
     "prefix": "&",
     "owner": "188587744140853251",
-    "webhooks": "901616598819950663",
+    "webhooks": "984189014728900618",
     "role_base": [
-        "🦝Capo gilda 🦝",
-        "Consiglieri",
-        "Moderatori",
-        "Helper",
-        "Dungeon Master",
-        "DM in Prova",
-        "Gildano"
+        "984030155422965790",
+        "981518714799280159"
     ],
     "role_avance": [
-        "🦝Capo gilda 🦝",
-        "Consiglieri",
-        "Moderatori",
-        "Helper",
-        "DM in Prova",
-        "Dungeon Master"
+        "981518714799280159"
     ],
     "role_admin": [
-        "🦝Capo gilda 🦝",
-        "Consiglieri"
+        "981518714799280159"
     ],
     "Level_Chat_Lissener": [
-        "864053775596257290",
-        "862433520710057984",
-        "862433831331692575",
-        "862433867968806932",
-        "796157287155630102",
-        "864177465060491295",
-        "795966054705790996",
-        "795966090664083466",
-        "796157341409476618",
-        "795966143906316288",
-        "795966233865748501",
-        "795966265779945473",
-        "860111806084677642",
-        "860111994908049428",
-        "860112497372299295",
-        "860112078844985354",
-        "860112547781017611",
-        "860112388695130142",
-        "860113710843166752",
-        "860113669559681064",
-        "860113767257210901",
-        "860113828192452638",
-        "876210039298351155",
-        "876210489712074752",
-        "883646836567605330",
-        "883646921154117632",
-        "910664136604651570",
-        "910664190610505748",
-        "910618143024611338",
-        "910618204676689960",
-        "910664962597335040",
-        "910800722038259732",
-        "941345996296835082"
+        "981527200471863376",
+        "981527249075437618",
+        "981527297494515802",
+        "990631790152646706",
+        "991397073708650537",
+        "992125012079280220",
+        "992180937184006214",
+        "992136305838403655",
+        "981527526247649321",
+        "981527571198013541",
+        "981527645529448459"
     ],
     "Level_Chat_min_char": 100,
     "Level_Chat_max": 100,
@@ -66,15 +34,15 @@
     "Level_Chat_reset": true,
     "Level_Chat_allert": 10,
     "Level": {
-        "Rame": "752574293224849539",
-        "Bronzo": "752574190565195877",
-        "Ferro": "808401242555809843",
-        "Argento": "752574137276432404",
-        "Electrum": "808401383741063168",
-        "Oro": "752574065847435345",
-        "Platino": "752573958506938428",
-        "Mithril": "753003889166647326",
-        "Adamantio": "752573613311393842"
+        "Rame": "984224159389323304",
+        "Bronzo": "984224981447753798",
+        "Ferro": "984225128940441650",
+        "Argento": "984225259454619748",
+        "Electrum": "984225458956693574",
+        "Oro": "984225626422665286",
+        "Platino": "984225717183217716",
+        "Mithril": "984225801417424926",
+        "Adamantio": "984225879372746782"
     },
     "event_day_list": [
         {
@@ -155,25 +123,107 @@
         }
     ],
     "event_meteo_enable": true,
-    "set_event_meteo": "10:00",
-    "event_chat_meteo": "784136487544553543",
-    "chat_missioni": "781221687675977788",
-    "chat_missioni_ping": "901596067680911390",
-    "chat_missioni_esito": "770795312356261908",
-    "chat_scambi": "770795462584041543",
-    "chat_scambi_ping": "Gildano",
-    "player_ping": "Gildano",
+    "set_event_ora": "10:00",
+    "event_chat_output": "",
+    "_chat_missioni": "981523177781989426",
+    "_chat_missioni_allert": "981523391536328745",
+    "_chat_missioni_close": "984223739992473651",
+    "chat_missioni": "904791627346894860",
+    "chat_missioni_allert": "223487445369356289",
+    "chat_missioni_close": "223487445369356289",
+    "chat_scambi": "",
+    "chat_scambi_ping": "",
+    "player_ping": "984030155422965790",
     "register_anonymous_enable": false,
-    "shop_name": [
-        "ampolla d'oro",
-        "incudine di godor",
-        "banco del kraken"
-    ],
-    "list_casate": [
-        "arcana",
-        "milizia",
-        "diplomatica"
-    ],
+    "shop_name": [],
+    "list_casate": {
+        "milizia": "984226945019559936",
+        "arcana": "984227011113386044",
+        "diplomazia": "984227115400568862"
+    },
+    "list_gradi": {
+        "milizia": {
+            "grado_1": {
+                "value_min": 1,
+                "value_max": 3,
+                "name": "Soldato"
+            },
+            "grado_2": {
+                "value_min": 4,
+                "value_max": 8,
+                "name": "Soldato scelto"
+            },
+            "grado_3": {
+                "value_min": 9,
+                "value_max": 13,
+                "name": "Generale"
+            },
+            "grado_4": {
+                "value_min": 14,
+                "value_max": 17,
+                "name": "Ammiraglio"
+            },
+            "grado_5": {
+                "value_min": 18,
+                "value_max": 999999,
+                "name": "Caporale"
+            }
+        },
+        "arcana": {
+            "grado_1": {
+                "value_min": 1,
+                "value_max": 3,
+                "name": "Membro della Casata"
+            },
+            "grado_2": {
+                "value_min": 4,
+                "value_max": 8,
+                "name": "Diplomatico"
+            },
+            "grado_3": {
+                "value_min": 9,
+                "value_max": 13,
+                "name": "Distinto"
+            },
+            "grado_4": {
+                "value_min": 14,
+                "value_max": 17,
+                "name": "Illustre"
+            },
+            "grado_5": {
+                "value_min": 18,
+                "value_max": 999999,
+                "name": "Influente"
+            }
+        },
+        "diplomazia": {
+            "grado_1": {
+                "value_min": 1,
+                "value_max": 3,
+                "name": "Membro della Casata"
+            },
+            "grado_2": {
+                "value_min": 4,
+                "value_max": 8,
+                "name": "Diplomatico"
+            },
+            "grado_3": {
+                "value_min": 9,
+                "value_max": 13,
+                "name": "Distinto"
+            },
+            "grado_4": {
+                "value_min": 14,
+                "value_max": 17,
+                "name": "Illustre"
+            },
+            "grado_5": {
+                "value_min": 18,
+                "value_max": 999999,
+                "name": "Influente"
+            }
+        }
+    },
     "random_color_enable": "true",
     "Debug_Level": "INFO"
 }
