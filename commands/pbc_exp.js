@@ -64,7 +64,7 @@ module.exports = {
                                 return 1;
                             }
                         } else {
-                            reset_frag(message, Scheda_PG, frammenti_attuale);
+                            reset_frag(message, Scheda_PG, parseInt(frammenti_attuale));
                         }
                     } else {
                         add_exp_frag(message, frammenti_attuale, Exp_get_attuale, Scheda_PG);
@@ -158,8 +158,9 @@ function add_exp_frag(message, frammenti, exp, Scheda_PG) {
 
 function reset_frag(message, Scheda_PG, value) {
     var ogg_temp = {};
-    if (value > config.Level_Chat_max) {
-        var value_fag = value - config.Level_Chat_max;
+    var value_temp = isNaN(value)? 1: value;
+    if (value_temp > config.Level_Chat_max) {
+        var value_fag = value_temp - config.Level_Chat_max;
         // var milestone = parseInt(value / config.Level_Chat_max);
     }
     ogg_temp['Exp_get'] = 0; 
